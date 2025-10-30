@@ -6,7 +6,7 @@ import { PixelCard } from "@/components/PixelCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import loginBg from "@/assets/login-bg.png";
+import loginBg from "@/assets/castle-dragon-login.png";
 
 type UserType = "player" | "master" | null;
 

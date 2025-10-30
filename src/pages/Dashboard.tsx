@@ -4,8 +4,8 @@ import { Home, Dices, ScrollText, Shield, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import caveBg from "@/assets/cave-bg.png";
-import forestBg from "@/assets/forest-bg.png";
+import castleDragonDark from "@/assets/castle-dragon-dark.png";
+import castleDragonLight from "@/assets/castle-dragon-light.png";
 import CharacterSheet from "./CharacterSheet";
 
 const Dashboard = () => {
@@ -49,7 +49,7 @@ const Dashboard = () => {
       {/* Background */}
       <div 
         className="fixed inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
-        style={{ backgroundImage: `url(${isDark ? caveBg : forestBg})` }}
+        style={{ backgroundImage: `url(${isDark ? castleDragonDark : castleDragonLight})` }}
       >
         <div className="absolute inset-0 bg-black/30" />
       </div>
