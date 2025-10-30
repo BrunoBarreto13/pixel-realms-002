@@ -1,0 +1,172 @@
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { PixelButton } from "@/components/PixelButton";
+import { PixelInput } from "@/components/PixelInput";
+import { PixelCard } from "@/components/PixelCard";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import loginBg from "@/assets/login-bg.png";
+
+type UserType = "player" | "master" | null;
+
+const Register = () => {
+  const navigate = useNavigate();
+  const [userType, setUserType] = useState<UserType>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    characterOrCampaign: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("As senhas não coincidem!");
+      return;
+    }
+    // TODO: Implementar registro real
+    navigate("/login");
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  return (
+    <div className="relative flex min-h-screen w-full items-center justify-center p-4 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${loginBg})` }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* Theme Toggle */}
+      <div className="absolute top-4 right-4 z-20">
+        <ThemeToggle />
+      </div>
+
+      {/* Register Card */}
+      <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
+        {/* Title */}
+        <div className="text-center animate-pixel-float">
+          <h1 className="font-pixel text-3xl md:text-4xl text-primary pixel-text-shadow mb-2 pixel-glow">
+            CADASTRO
+          </h1>
+          <p className="font-pixel text-xs text-secondary pixel-text-shadow animate-pixel-pulse">
+            Escolha seu papel
+          </p>
+        </div>
+
+        <PixelCard className="w-full">
+          {!userType ? (
+            /* User Type Selection */
+            <div className="flex flex-col gap-4">
+              <p className="font-pixel text-xs text-center text-foreground mb-4">
+                Você é um Mestre ou Jogador?
+              </p>
+              <PixelButton
+                variant="default"
+                onClick={() => setUserType("master")}
+                className="w-full"
+              >
+                MESTRE
+              </PixelButton>
+              <PixelButton
+                variant="secondary"
+                onClick={() => setUserType("player")}
+                className="w-full"
+              >
+                JOGADOR
+              </PixelButton>
+            </div>
+          ) : (
+            /* Registration Form */
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+              <PixelInput
+                label={userType === "master" ? "Nome do Mestre" : "Nome do Jogador"}
+                type="text"
+                name="name"
+                placeholder="Seu nome"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+
+              <PixelInput
+                label={userType === "master" ? "Nome da Campanha" : "Nome do Personagem"}
+                type="text"
+                name="characterOrCampaign"
+                placeholder={userType === "master" ? "Nome da sua campanha" : "Nome do seu personagem"}
+                value={formData.characterOrCampaign}
+                onChange={handleInputChange}
+                required
+              />
+
+              <PixelInput
+                label="Email"
+                type="email"
+                name="email"
+                placeholder="seu@email.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+
+              <PixelInput
+                label="Senha"
+                type="password"
+                name="password"
+                placeholder="********"
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+
+              <PixelInput
+                label="Repetir Senha"
+                type="password"
+                name="confirmPassword"
+                placeholder="********"
+                value={formData.confirmPassword}
+                onChange={handleInputChange}
+                required
+              />
+
+              <div className="flex gap-4">
+                <PixelButton
+                  type="button"
+                  variant="outline"
+                  onClick={() => setUserType(null)}
+                  className="flex-1"
+                >
+                  VOLTAR
+                </PixelButton>
+                <PixelButton type="submit" variant="default" className="flex-1">
+                  CRIAR CONTA
+                </PixelButton>
+              </div>
+            </form>
+          )}
+
+          {/* Login Link */}
+          <div className="mt-6 text-center">
+            <p className="font-pixel text-xs text-muted-foreground">
+              Já tem conta?{" "}
+              <Link to="/login" className="text-primary hover:text-accent transition-colors underline">
+                Entrar
+              </Link>
+            </p>
+          </div>
+        </PixelCard>
+      </div>
+    </div>
+  );
+};
+
+export default Register;
