@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { PixelCard } from "@/components/PixelCard";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dices, Save, Plus, Minus, FileDown, User } from "lucide-react";
+import { Dices, Save, Plus, Minus, FileDown, User, Upload, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { uploadCharacterImage, deleteCharacterImage } from "@/services/characterService";
 
 interface Attributes {
   strength: number;
@@ -60,6 +61,7 @@ interface Character {
   initiative: number;
   savingThrows: SavingThrows;
   proficiencies: Proficiency[];
+  imageUrl?: string;
 }
 
 const RACES = [
@@ -85,6 +87,7 @@ const CLASSES = [
 
 const CharacterSheet = () => {
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [character, setCharacter] = useState<Character>({
     name: "",
     playerName: "",
@@ -112,10 +115,12 @@ const CharacterSheet = () => {
       spell: 14,
     },
     proficiencies: [],
+    imageUrl: undefined,
   });
 
   const [newProficiency, setNewProficiency] = useState({ name: "", slots: 1 });
   const [isEditing, setIsEditing] = useState(false);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [weaponSkills, setWeaponSkills] = useState<WeaponSkill[]>([]);
   const [generalSkills, setGeneralSkills] = useState<GeneralSkill[]>([]);
 
@@ -263,14 +268,125 @@ const CharacterSheet = () => {
     setGeneralSkills(updated);
   };
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast({
+        title: "Arquivo muito grande",
+        description: "O arquivo deve ter no máximo 5MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const validTypes = ["image/jpeg", "image/png", "image/webp"];
+    if (!validTypes.includes(file.type)) {
+      toast({
+        title: "Tipo de arquivo inválido",
+        description: "Use JPG, PNG ou WebP",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsUploadingImage(true);
+    const characterId = character.name.toLowerCase().replace(/\s+/g, "-") || "novo-personagem";
+    const userId = "temp-user";
+
+    const imageUrl = await uploadCharacterImage(file, userId, characterId);
+
+    if (imageUrl) {
+      setCharacter({ ...character, imageUrl });
+      toast({
+        title: "Imagem carregada!",
+        description: "A imagem do personagem foi atualizada com sucesso.",
+      });
+    } else {
+      toast({
+        title: "Erro ao fazer upload",
+        description: "Não foi possível enviar a imagem. Tente novamente.",
+        variant: "destructive",
+      });
+    }
+
+    setIsUploadingImage(false);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const handleRemoveImage = async () => {
+    const characterId = character.name.toLowerCase().replace(/\s+/g, "-") || "novo-personagem";
+    const userId = "temp-user";
+
+    const success = await deleteCharacterImage(userId, characterId);
+
+    if (success) {
+      setCharacter({ ...character, imageUrl: undefined });
+      toast({
+        title: "Imagem removida",
+        description: "A imagem do personagem foi removida.",
+      });
+    } else {
+      toast({
+        title: "Erro ao remover imagem",
+        description: "Não foi possível remover a imagem. Tente novamente.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header com Avatar e Ações */}
       <PixelCard>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-20 h-20 pixel-border bg-muted/50 flex items-center justify-center">
-              <User className="w-12 h-12 text-muted-foreground" />
+            <div className="relative group">
+              <div className="w-20 h-20 pixel-border bg-muted/50 flex items-center justify-center overflow-hidden">
+                {character.imageUrl ? (
+                  <img
+                    src={character.imageUrl}
+                    alt={character.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <User className="w-12 h-12 text-muted-foreground" />
+                )}
+              </div>
+              {isEditing && (
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-1">
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isUploadingImage}
+                    className="p-1 hover:bg-primary/50 transition-colors"
+                    title="Upload de imagem"
+                  >
+                    <Upload className="h-4 w-4 text-white" />
+                  </button>
+                  {character.imageUrl && (
+                    <button
+                      onClick={handleRemoveImage}
+                      disabled={isUploadingImage}
+                      className="p-1 hover:bg-destructive/50 transition-colors"
+                      title="Remover imagem"
+                    >
+                      <X className="h-4 w-4 text-white" />
+                    </button>
+                  )}
+                </div>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={handleImageUpload}
+                disabled={isUploadingImage}
+                className="hidden"
+              />
             </div>
             <div>
               <h2 className="font-pixel text-xl text-primary pixel-glow">
