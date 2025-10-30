@@ -1,6 +1,6 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PixelButton } from "@/components/PixelButton";
-import { Home, Dices, ScrollText, Shield, LogOut, Menu, X } from "lucide-react";
+import { Home, Dices, ScrollText, Shield, LogOut } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -12,7 +12,6 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { user, loading, isMaster, signOut } = useAuth();
   const [activeSection, setActiveSection] = useState("home");
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const isDark = document.documentElement.classList.contains("dark");
 
   useEffect(() => {
@@ -56,23 +55,12 @@ const Dashboard = () => {
       </div>
 
       {/* Sidebar */}
-      <aside className={`relative z-10 bg-card/90 backdrop-blur-sm border-r-4 border-border flex flex-col transition-all duration-300 ${
-        sidebarCollapsed ? "w-20" : "w-80"
-      }`}>
+      <aside className="relative z-10 w-80 bg-card/90 backdrop-blur-sm border-r-4 border-border flex flex-col">
         {/* Logo */}
-        <div className="p-6 border-b-4 border-border flex items-center justify-between">
-          {!sidebarCollapsed && (
-            <h1 className="font-pixel text-xl text-primary pixel-glow">
-              PIXEL<br/>REALMS
-            </h1>
-          )}
-          <button
-            onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className="p-2 hover:bg-muted/50 transition-colors pixel-border bg-card/50"
-            title={sidebarCollapsed ? "Expandir menu" : "Recolher menu"}
-          >
-            {sidebarCollapsed ? <Menu className="h-4 w-4 text-primary" /> : <X className="h-4 w-4 text-primary" />}
-          </button>
+        <div className="p-6 border-b-4 border-border">
+          <h1 className="font-pixel text-xl text-primary pixel-glow">
+            PIXEL<br/>REALMS
+          </h1>
         </div>
 
         {/* Menu */}
@@ -86,11 +74,10 @@ const Dashboard = () => {
                     activeSection === item.id
                       ? "bg-primary text-primary-foreground"
                       : "bg-card/50 text-foreground hover:bg-muted"
-                  } ${sidebarCollapsed ? "justify-center" : ""}`}
-                  title={sidebarCollapsed ? item.label : ""}
+                  }`}
                 >
-                  <item.icon className="h-4 w-4 flex-shrink-0" />
-                  {!sidebarCollapsed && <span>{item.label}</span>}
+                  <item.icon className="h-4 w-4" />
+                  <span>{item.label}</span>
                 </button>
               </li>
             ))}
@@ -102,11 +89,10 @@ const Dashboard = () => {
           <PixelButton
             variant="destructive"
             onClick={handleLogout}
-            className={`w-full flex items-center gap-2 ${sidebarCollapsed ? "justify-center" : "justify-start"}`}
-            title={sidebarCollapsed ? "Sair" : ""}
+            className="w-full flex items-center gap-2 justify-start"
           >
-            <LogOut className="h-4 w-4 flex-shrink-0" />
-            {!sidebarCollapsed && <span>Sair</span>}
+            <LogOut className="h-4 w-4" />
+            <span>Sair</span>
           </PixelButton>
         </div>
       </aside>
