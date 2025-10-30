@@ -1,27 +1,48 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PixelButton } from "@/components/PixelButton";
 import { Home, Dices, ScrollText, Shield, LogOut } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
 import caveBg from "@/assets/cave-bg.png";
 import forestBg from "@/assets/forest-bg.png";
 import CharacterSheet from "./CharacterSheet";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user, loading, isMaster, signOut } = useAuth();
   const [activeSection, setActiveSection] = useState("home");
   const isDark = document.documentElement.classList.contains("dark");
 
-  const menuItems = [
+  useEffect(() => {
+    if (!user && !loading) {
+      navigate("/login");
+    }
+  }, [user, loading, navigate]);
+
+  const allMenuItems = [
     { id: "home", label: "Início", icon: Home },
     { id: "game-table", label: "Mesa de jogo", icon: Dices },
     { id: "character-sheet", label: "Ficha do Jogador", icon: ScrollText },
-    { id: "master-screen", label: "Divisória do Mestre", icon: Shield },
+    { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
   ];
 
-  const handleLogout = () => {
-    navigate("/login");
+  // Filter menu items based on user role
+  const menuItems = allMenuItems.filter(item => !item.masterOnly || isMaster);
+
+  const handleLogout = async () => {
+    await signOut();
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <p className="font-pixel text-sm text-muted-foreground animate-pixel-pulse">
+          CARREGANDO...
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex min-h-screen w-full overflow-hidden">

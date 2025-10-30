@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelCard } from "@/components/PixelCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 import loginBg from "@/assets/login-bg.png";
 
 type UserType = "player" | "master" | null;
 
 const Register = () => {
   const navigate = useNavigate();
+  const { signUp, user, loading } = useAuth();
+  const { toast } = useToast();
   const [userType, setUserType] = useState<UserType>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     characterOrCampaign: "",
@@ -19,14 +24,52 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user && !loading) {
+      navigate("/dashboard");
+    }
+  }, [user, loading, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
-      alert("As senhas não coincidem!");
+      toast({
+        variant: "destructive",
+        title: "Erro",
+        description: "As senhas não coincidem!",
+      });
       return;
     }
-    // TODO: Implementar registro real
-    navigate("/login");
+
+    if (!userType) return;
+
+    setIsSubmitting(true);
+
+    const { error } = await signUp(
+      formData.email,
+      formData.password,
+      formData.name,
+      userType,
+      formData.characterOrCampaign
+    );
+
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Erro no cadastro",
+        description: error.message === "User already registered"
+          ? "Este email já está cadastrado"
+          : error.message,
+      });
+      setIsSubmitting(false);
+    } else {
+      toast({
+        title: "Conta criada!",
+        description: "Você será redirecionado automaticamente.",
+      });
+      // Navigation happens automatically via useEffect when user state updates
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,11 +187,17 @@ const Register = () => {
                   variant="outline"
                   onClick={() => setUserType(null)}
                   className="flex-1"
+                  disabled={isSubmitting}
                 >
                   VOLTAR
                 </PixelButton>
-                <PixelButton type="submit" variant="default" className="flex-1">
-                  CRIAR CONTA
+                <PixelButton 
+                  type="submit" 
+                  variant="default" 
+                  className="flex-1"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "CRIANDO..." : "CRIAR CONTA"}
                 </PixelButton>
               </div>
             </form>

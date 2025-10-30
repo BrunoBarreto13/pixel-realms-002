@@ -1,20 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelCard } from "@/components/PixelCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useAuth } from "@/hooks/useAuth";
+import { useToast } from "@/hooks/use-toast";
 import loginBg from "@/assets/login-bg.png";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { signIn, user, loading } = useAuth();
+  const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    if (user && !loading) {
+      navigate("/dashboard");
+    }
+  }, [user, loading, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implementar autenticação real
-    navigate("/dashboard");
+    setIsSubmitting(true);
+
+    const { error } = await signIn(email, password);
+
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Erro no login",
+        description: error.message === "Invalid login credentials"
+          ? "Email ou senha incorretos"
+          : error.message,
+      });
+    } else {
+      navigate("/dashboard");
+    }
+
+    setIsSubmitting(false);
   };
 
   return (
@@ -65,8 +91,13 @@ const Login = () => {
               required
             />
 
-            <PixelButton type="submit" variant="default" className="w-full">
-              COMEÇAR AVENTURA
+            <PixelButton 
+              type="submit" 
+              variant="default" 
+              className="w-full"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "ENTRANDO..." : "COMEÇAR AVENTURA"}
             </PixelButton>
           </form>
 
