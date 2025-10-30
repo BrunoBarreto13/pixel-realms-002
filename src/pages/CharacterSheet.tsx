@@ -30,6 +30,22 @@ interface Proficiency {
   slots: number;
 }
 
+interface WeaponSkill {
+  weapon: string;
+  points: number;
+  ability: number;
+  modifier: number;
+  d20: number;
+}
+
+interface GeneralSkill {
+  skill: string;
+  points: number;
+  ability: number;
+  modifier: number;
+  d20: number;
+}
+
 interface Character {
   name: string;
   playerName: string;
@@ -100,6 +116,8 @@ const CharacterSheet = () => {
 
   const [newProficiency, setNewProficiency] = useState({ name: "", slots: 1 });
   const [isEditing, setIsEditing] = useState(false);
+  const [weaponSkills, setWeaponSkills] = useState<WeaponSkill[]>([]);
+  const [generalSkills, setGeneralSkills] = useState<GeneralSkill[]>([]);
 
   const rollAttribute = () => {
     const rolls = Array.from({ length: 4 }, () => Math.floor(Math.random() * 6) + 1);
@@ -209,6 +227,40 @@ const CharacterSheet = () => {
       ...character,
       proficiencies: character.proficiencies.filter((_, i) => i !== index),
     });
+  };
+
+  const addWeaponSkill = () => {
+    setWeaponSkills([
+      ...weaponSkills,
+      { weapon: "", points: 0, ability: 0, modifier: 0, d20: 0 }
+    ]);
+  };
+
+  const removeWeaponSkill = (index: number) => {
+    setWeaponSkills(weaponSkills.filter((_, i) => i !== index));
+  };
+
+  const updateWeaponSkill = (index: number, field: keyof WeaponSkill, value: string | number) => {
+    const updated = [...weaponSkills];
+    updated[index] = { ...updated[index], [field]: value };
+    setWeaponSkills(updated);
+  };
+
+  const addGeneralSkill = () => {
+    setGeneralSkills([
+      ...generalSkills,
+      { skill: "", points: 0, ability: 0, modifier: 0, d20: 0 }
+    ]);
+  };
+
+  const removeGeneralSkill = (index: number) => {
+    setGeneralSkills(generalSkills.filter((_, i) => i !== index));
+  };
+
+  const updateGeneralSkill = (index: number, field: keyof GeneralSkill, value: string | number) => {
+    const updated = [...generalSkills];
+    updated[index] = { ...updated[index], [field]: value };
+    setGeneralSkills(updated);
   };
 
   return (
@@ -772,10 +824,47 @@ const CharacterSheet = () => {
                 </div>
                 
                 <div className="min-h-[100px] space-y-2">
-                  {/* Placeholder para linhas de perícias */}
+                  {weaponSkills.map((skill, index) => (
+                    <div key={index} className="grid grid-cols-12 gap-2 items-center">
+                      <input
+                        type="text"
+                        value={skill.weapon}
+                        onChange={(e) => updateWeaponSkill(index, 'weapon', e.target.value)}
+                        placeholder="Nome da arma"
+                        className="col-span-4 h-8 pixel-border bg-card/50 px-2 font-pixel text-xs"
+                      />
+                      <input
+                        type="number"
+                        value={skill.points}
+                        onChange={(e) => updateWeaponSkill(index, 'points', parseInt(e.target.value) || 0)}
+                        className="col-span-2 h-8 pixel-border bg-card/50 px-1 font-pixel text-xs text-center"
+                      />
+                      <input
+                        type="number"
+                        value={skill.ability}
+                        onChange={(e) => updateWeaponSkill(index, 'ability', parseInt(e.target.value) || 0)}
+                        className="col-span-2 h-8 pixel-border bg-card/50 px-1 font-pixel text-xs text-center"
+                      />
+                      <input
+                        type="number"
+                        value={skill.modifier}
+                        onChange={(e) => updateWeaponSkill(index, 'modifier', parseInt(e.target.value) || 0)}
+                        className="col-span-2 h-8 pixel-border bg-card/50 px-1 font-pixel text-xs text-center"
+                      />
+                      <div className="col-span-1 h-8 pixel-border bg-muted/30 flex items-center justify-center font-pixel text-xs">
+                        {skill.d20}
+                      </div>
+                      <button
+                        onClick={() => removeWeaponSkill(index)}
+                        className="col-span-1 h-8 pixel-border bg-destructive/20 hover:bg-destructive/40 flex items-center justify-center transition-colors"
+                      >
+                        <Minus className="h-3 w-3 text-destructive" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
 
-                <PixelButton size="sm" variant="outline" className="w-full">
+                <PixelButton size="sm" variant="outline" className="w-full" onClick={addWeaponSkill}>
                   <Plus className="h-3 w-3 mr-1" />
                   Adicionar Linha
                 </PixelButton>
@@ -844,10 +933,47 @@ const CharacterSheet = () => {
                 </div>
                 
                 <div className="min-h-[100px] space-y-2">
-                  {/* Placeholder para linhas de perícias */}
+                  {generalSkills.map((skill, index) => (
+                    <div key={index} className="grid grid-cols-12 gap-2 items-center">
+                      <input
+                        type="text"
+                        value={skill.skill}
+                        onChange={(e) => updateGeneralSkill(index, 'skill', e.target.value)}
+                        placeholder="Nome da perícia"
+                        className="col-span-4 h-8 pixel-border bg-card/50 px-2 font-pixel text-xs"
+                      />
+                      <input
+                        type="number"
+                        value={skill.points}
+                        onChange={(e) => updateGeneralSkill(index, 'points', parseInt(e.target.value) || 0)}
+                        className="col-span-2 h-8 pixel-border bg-card/50 px-1 font-pixel text-xs text-center"
+                      />
+                      <input
+                        type="number"
+                        value={skill.ability}
+                        onChange={(e) => updateGeneralSkill(index, 'ability', parseInt(e.target.value) || 0)}
+                        className="col-span-2 h-8 pixel-border bg-card/50 px-1 font-pixel text-xs text-center"
+                      />
+                      <input
+                        type="number"
+                        value={skill.modifier}
+                        onChange={(e) => updateGeneralSkill(index, 'modifier', parseInt(e.target.value) || 0)}
+                        className="col-span-2 h-8 pixel-border bg-card/50 px-1 font-pixel text-xs text-center"
+                      />
+                      <div className="col-span-1 h-8 pixel-border bg-muted/30 flex items-center justify-center font-pixel text-xs">
+                        {skill.d20}
+                      </div>
+                      <button
+                        onClick={() => removeGeneralSkill(index)}
+                        className="col-span-1 h-8 pixel-border bg-destructive/20 hover:bg-destructive/40 flex items-center justify-center transition-colors"
+                      >
+                        <Minus className="h-3 w-3 text-destructive" />
+                      </button>
+                    </div>
+                  ))}
                 </div>
 
-                <PixelButton size="sm" variant="outline" className="w-full">
+                <PixelButton size="sm" variant="outline" className="w-full" onClick={addGeneralSkill}>
                   <Plus className="h-3 w-3 mr-1" />
                   Adicionar Linha
                 </PixelButton>
