@@ -1,12 +1,13 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PixelButton } from "@/components/PixelButton";
-import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight } from "lucide-react";
+import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight, BookMarked } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import castleDragonDark from "@/assets/castle-dragon-dark.png";
 import castleDragonLight from "@/assets/castle-dragon-light.png";
 import CharacterSheet from "./CharacterSheet";
+import Library from "./library";
 import {
   Collapsible,
   CollapsibleContent,
@@ -32,7 +33,10 @@ const Dashboard = () => {
       id: "campaign",
       label: "Campanha",
       icon: BookOpen,
-      children: [{ id: "game-table", label: "Mesa de jogo", icon: Dices }],
+      children: [
+        { id: "game-table", label: "Mesa de jogo", icon: Dices },
+        { id: "library", label: "Biblioteca", icon: BookMarked },
+      ],
     },
     { id: "character-sheet", label: "Ficha do Jogador", icon: ScrollText },
     { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
@@ -234,11 +238,15 @@ const Dashboard = () => {
               </div>
             )}
 
+            {activeSection === "library" && (
+              <Library />
+            )}
+
             {activeSection === "character-sheet" && (
               <CharacterSheet />
             )}
 
-            {activeSection !== "home" && activeSection !== "character-sheet" && (
+            {activeSection !== "home" && activeSection !== "character-sheet" && activeSection !== "library" && (
               <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
                 <h3 className="font-pixel text-xl text-primary mb-4 pixel-glow">
                   {getActiveLabel().toUpperCase()}
