@@ -5,6 +5,7 @@ import { PixelInput } from "@/components/PixelInput";
 import { PixelCard } from "@/components/PixelCard";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import loginBg from "@/assets/castle-dragon-login.png";
 
 type UserType = "player" | "master" | null;
 
@@ -78,8 +79,18 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center p-4 bg-background">
-      <div className="w-full max-w-md flex flex-col gap-8 items-center">
+    <div className="relative flex min-h-screen w-full items-center justify-center p-4 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${loginBg})` }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* Register Card */}
+      <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
+        {/* Title */}
         <div className="text-center">
           <h1 className="font-pixel text-3xl md:text-4xl text-primary pixel-text-shadow mb-2">
             CADASTRO
@@ -91,6 +102,7 @@ const Register = () => {
 
         <PixelCard className="w-full">
           {!userType ? (
+            /* User Type Selection */
             <div className="flex flex-col gap-4">
               <p className="font-pixel text-xs text-center text-foreground mb-4">
                 Você é um Mestre ou Jogador?
@@ -111,6 +123,7 @@ const Register = () => {
               </PixelButton>
             </div>
           ) : (
+            /* Registration Form */
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <PixelInput
                 label={userType === "master" ? "Nome do Mestre" : "Nome do Jogador"}
@@ -184,6 +197,7 @@ const Register = () => {
             </form>
           )}
 
+          {/* Login Link */}
           <div className="mt-6 text-center">
             <p className="font-pixel text-xs text-muted-foreground">
               Já tem conta?{" "}

@@ -4,36 +4,37 @@
 
 @layer base {
   :root {
-    --background: 28 44% 10%; /* Dark brown */
-    --foreground: 30 50% 70%; /* Muted orange/brown text */
+    /* Theme from user image */
+    --background: 200 15% 50%; /* Muted blue-gray */
+    --foreground: 40 40% 85%; /* Light cream text */
 
-    --card: 28 44% 16%; /* Panel background */
-    --card-foreground: 30 50% 70%;
+    --card: 30 25% 20%; /* Dark brown panel background */
+    --card-foreground: 40 40% 85%;
 
-    --popover: 28 50% 12%;
-    --popover-foreground: 30 50% 70%;
+    --popover: 30 25% 15%;
+    --popover-foreground: 40 40% 85%;
 
-    --primary: 27 48% 48%; /* Button color */
-    --primary-foreground: 30 20% 95%; /* Off-white button text */
+    --primary: 30 50% 45%; /* Medium brown for frames, buttons */
+    --primary-foreground: 40 40% 85%;
 
-    --secondary: 30 30% 30%;
-    --secondary-foreground: 30 40% 85%;
+    --secondary: 30 25% 30%; /* Lighter dark brown */
+    --secondary-foreground: 40 40% 85%;
 
     --muted: 30 25% 25%;
-    --muted-foreground: 30 30% 55%;
+    --muted-foreground: 40 20% 65%;
 
-    --accent: 48 89% 50%; /* Yellow link color */
-    --accent-foreground: 28 44% 10%;
+    --accent: 40 70% 60%; /* Yellowish-ochre for highlights */
+    --accent-foreground: 30 25% 15%;
 
     --destructive: 0 60% 50%;
-    --destructive-foreground: 30 40% 85%;
+    --destructive-foreground: 40 40% 85%;
 
-    --border: 28 43% 28%; /* Border color */
-    --input: 28 50% 12%; /* Input background */
-    --ring: 48 89% 50%;
+    --border: 30 50% 45%; /* Mapped to primary for consistency */
+    --input: 30 25% 25%;
+    --ring: 40 70% 60%; /* Mapped to accent */
     --radius: 0rem;
 
-    --brand-yellow: 48 89% 50%;
+    --brand-yellow: 40 70% 60%; /* Mapped to accent */
   }
 }
 
@@ -51,8 +52,35 @@
   }
 
   .pixel-border {
-    border: 2px solid hsl(var(--border));
-    box-shadow: 2px 2px 0px hsl(28 44% 8%);
+    border-style: solid;
+    border-width: 4px;
+    border-image-slice: 2;
+    border-image-width: 2;
+    border-image-repeat: stretch;
+    border-image-source: url('data:image/svg+xml;utf8,<svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 2h2v2H0zM2 0h2v2H2zM4 2h2v2H4zM2 4h2v2H2z" fill="%232f1b0c"/></svg>');
+    border-image-outset: 2;
+    position: relative;
+    background-clip: padding-box;
+  }
+
+  .pixel-border::after {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    content: '';
+    z-index: -1;
+    border-style: solid;
+    border-width: 4px;
+    border-image-slice: 2;
+    border-image-width: 2;
+    border-image-repeat: stretch;
+    border-image-source: url('data:image/svg+xml;utf8,<svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 2h2v2H0zM2 0h2v2H2zM4 2h2v2H4zM2 4h2v2H2z" fill="%23ac7339"/></svg>');
+  }
+
+  .text-shadow {
+    text-shadow: 2px 2px #2f1b0c;
   }
 
   .pixel-text-shadow {
@@ -66,11 +94,17 @@
 
 @layer components {
   .rpg-panel {
-    @apply bg-card p-6 pixel-border;
+    background-color: hsl(var(--card));
+    border: 4px solid hsl(var(--primary));
+    box-shadow: inset 0 0 0 2px hsl(var(--accent)), 2px 2px 0px hsl(30 25% 10%);
+    padding: 1.5rem;
   }
 
   .game-background {
-    @apply bg-background;
+    background-image: url('/src/assets/castle-dragon-login.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   
   .game-table-background {
@@ -80,6 +114,37 @@
     background-repeat: no-repeat;
   }
 
+  .pixelated-border {
+    box-shadow: 
+      inset 0 4px #42210b, 
+      inset 0 -4px #42210b, 
+      inset 4px 0 #42210b, 
+      inset -4px 0 #42210b,
+      0 4px #1a1a1a,
+      0 -4px #1a1a1a,
+      4px 0 #1a1a1a,
+      -4px 0 #1a1a1a;
+  }
+  .pixelated-input {
+      box-shadow: 
+      inset 0 2px #1f1f1f,
+      inset 0 -2px #1f1f1f,
+      inset 2px 0 #1f1f1f,
+      inset -2px 0 #1f1f1f;
+      image-rendering: pixelated;
+  }
+  .pixelated-button {
+    box-shadow: 
+      inset 0 4px #e59559,
+      inset 0 -4px #6e3a17,
+      inset 4px 0 #ad6e3a,
+      inset -4px 0 #ad6e3a;
+    transition: all 0.1s ease-in-out;
+  }
+  .pixelated-button:active {
+    box-shadow: inset 0 2px #6e3a17;
+    transform: translateY(2px);
+  }
   .text-outline {
       text-shadow: 
       -1px -1px 0 #000,  
@@ -98,14 +163,14 @@
     width: 12px;
   }
   ::-webkit-scrollbar-track {
-    background: hsl(var(--input));
-    border-left: 2px solid hsl(var(--border));
+    background: #3e3226;
+    border-left: 2px solid #2f1b0c;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--primary));
-    border: 2px solid hsl(var(--border));
+    background: #ac7339;
+    border: 2px solid #2f1b0c;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--accent));
+    background: #facc15;
   }
 }

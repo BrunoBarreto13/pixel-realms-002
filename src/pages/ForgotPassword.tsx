@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelCard } from "@/components/PixelCard";
+import loginBg from "@/assets/login-bg.png";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -16,8 +17,18 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center p-4 bg-background">
-      <div className="w-full max-w-md flex flex-col gap-8 items-center">
+    <div className="relative flex min-h-screen w-full items-center justify-center p-4 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${loginBg})` }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
+      {/* Forgot Password Card */}
+      <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
+        {/* Title */}
         <div className="text-center">
           <h1 className="font-pixel text-2xl md:text-3xl text-primary pixel-text-shadow mb-2">
             RECUPERAR SENHA
@@ -62,6 +73,7 @@ const ForgotPassword = () => {
             </div>
           )}
 
+          {/* Back Link */}
           <div className="mt-6 text-center">
             <Link 
               to="/login" 

@@ -60,24 +60,24 @@ const chatMessages = [
 const PartyMemberCard = ({ member }) => (
   <div className={cn("flex items-start gap-3", member.isDefeated && "opacity-60")}>
     <img 
-      className={cn("w-16 h-16 pixel-border bg-input", member.isDefeated && "filter grayscale")} 
+      className={cn("w-16 h-16 pixel-border bg-[#2f1b0c]", member.isDefeated && "filter grayscale")} 
       src={member.avatarUrl} 
       alt={`Avatar for ${member.name}`} 
     />
     <div className="flex-1">
       <div className="flex justify-between items-center mb-1">
-        <p className="text-sm font-semibold text-foreground">{member.name}</p>
-        <p className="text-xs text-muted-foreground">Lvl {member.level}</p>
+        <p className="text-sm font-semibold">{member.name}</p>
+        <p className="text-xs text-gray-400">Lvl {member.level}</p>
       </div>
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-xs text-brand-yellow font-bold">HP</span>
-        <div className="w-full h-4 bg-input pixel-border">
+        <span className="text-xs text-[#facc15] font-bold">HP</span>
+        <div className="w-full h-4 bg-[#2f1b0c] pixel-border">
           <div className={cn("h-full", member.hp > 25 ? "bg-green-500" : "bg-red-600")} style={{ width: `${member.hp}%` }}></div>
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <span className="text-xs text-brand-yellow font-bold">MP</span>
-        <div className="w-full h-4 bg-input pixel-border">
+        <span className="text-xs text-[#facc15] font-bold">MP</span>
+        <div className="w-full h-4 bg-[#2f1b0c] pixel-border">
           <div className="h-full bg-blue-500" style={{ width: `${member.mp}%` }}></div>
         </div>
       </div>
@@ -87,55 +87,55 @@ const PartyMemberCard = ({ member }) => (
 
 const GameTable = () => {
   return (
-    <div className="w-full max-w-7xl mx-auto grid grid-cols-12 grid-rows-6 gap-4 h-[calc(100vh-12rem)] text-foreground">
+    <div className="w-full max-w-7xl mx-auto grid grid-cols-12 grid-rows-6 gap-4 h-[calc(100vh-12rem)] text-white">
       {/* Party Panel */}
-      <div className="col-span-12 lg:col-span-3 row-span-2 lg:row-span-6 p-4 pixel-border bg-card flex flex-col gap-4 overflow-y-auto">
-        <h2 className="text-lg text-brand-yellow text-shadow">PARTY</h2>
+      <div className="col-span-12 lg:col-span-3 row-span-2 lg:row-span-6 p-4 pixel-border bg-[#3e3226] flex flex-col gap-4 overflow-y-auto">
+        <h2 className="text-lg text-[#facc15] text-shadow">PARTY</h2>
         {partyMembers.map(member => <PartyMemberCard key={member.name} member={member} />)}
       </div>
 
       {/* Map Panel */}
-      <div className="col-span-12 lg:col-span-9 row-span-4 lg:row-span-4 p-1 pixel-border bg-black overflow-hidden">
+      <div className="col-span-12 lg:col-span-9 row-span-4 lg:row-span-4 p-1 pixel-border bg-gray-600 overflow-hidden">
         <img className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDELmLYbuq6MjCMerLP7FJyuDj_mnGCVc6HvHrdnwMM0yfVxoPjj6cpR0QpyXiTvl-h6IkascxaRyvtcr16BXVuyWCqMDzRxeA3Eh-C0k0it7elxULKXvai6cCNNlEU2nOdIA39TKX6_EYspJj5VOk87OqNJRWXwU0P2b7QPMkK-m2MyTRz1Br3sUMJgLk6A_ipvmB_ChnO_1r97ZRIvAjSjkhdRpDvg0xFcL5-my2StsC9KjoQwo2Av21_sTuhlFwY6dI93DhlY7w" alt="A pixel art map of a dungeon." />
       </div>
 
       {/* Bottom Panels */}
       <div className="col-span-12 lg:col-span-9 row-span-2 lg:row-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Chat Box */}
-        <div className="md:col-span-2 p-4 pixel-border bg-card flex flex-col">
+        <div className="md:col-span-2 p-4 pixel-border bg-[#3e3226] flex flex-col">
           <div className="flex-1 text-xs leading-relaxed overflow-y-auto pr-2">
             {chatMessages.map((msg, index) => (
               <p key={index}>
-                <span className="text-muted-foreground">[{msg.time}]</span>{' '}
+                <span className="text-gray-400">[{msg.time}]</span>{' '}
                 <span className={cn(msg.color, "font-bold")}>{msg.sender}:</span>{' '}
                 <span dangerouslySetInnerHTML={{ __html: msg.message }} />
               </p>
             ))}
           </div>
           <div className="mt-2 flex">
-            <input className="flex-grow bg-input border-none focus:ring-0 text-foreground placeholder-muted-foreground text-xs p-2 pixel-border" placeholder="Type message..." type="text" />
+            <input className="flex-grow bg-[#2f1b0c] border-none focus:ring-0 text-white placeholder-gray-400 text-xs p-2 pixel-border" placeholder="Type message..." type="text" />
           </div>
         </div>
 
         {/* Actions & Dice */}
         <div className="md:col-span-1 grid grid-rows-2 gap-4">
           {/* Action Buttons */}
-          <div className="row-span-1 p-3 pixel-border bg-card grid grid-cols-2 gap-2 text-xs">
-            <button className="bg-input text-foreground p-2 pixel-border hover:bg-primary active:bg-accent active:text-accent-foreground">Attack</button>
-            <button className="bg-input text-foreground p-2 pixel-border hover:bg-primary active:bg-accent active:text-accent-foreground">Magic</button>
-            <button className="bg-input text-foreground p-2 pixel-border hover:bg-primary active:bg-accent active:text-accent-foreground">Item</button>
-            <button className="bg-input text-foreground p-2 pixel-border hover:bg-primary active:bg-accent active:text-accent-foreground">Flee</button>
+          <div className="row-span-1 p-3 pixel-border bg-[#3e3226] grid grid-cols-2 gap-2 text-xs">
+            <button className="bg-[#2f1b0c] text-white p-2 pixel-border hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">Attack</button>
+            <button className="bg-[#2f1b0c] text-white p-2 pixel-border hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">Magic</button>
+            <button className="bg-[#2f1b0c] text-white p-2 pixel-border hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">Item</button>
+            <button className="bg-[#2f1b0c] text-white p-2 pixel-border hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">Flee</button>
           </div>
           {/* Dice Roller */}
-          <div className="row-span-1 p-3 pixel-border bg-input">
-            <p className="text-center text-brand-yellow text-shadow text-xs mb-2">ROLL DICE</p>
+          <div className="row-span-1 p-3 pixel-border bg-[#2f1b0c]">
+            <p className="text-center text-[#facc15] text-shadow text-xs mb-2">ROLL DICE</p>
             <div className="grid grid-cols-3 gap-2">
-              <button className="p-2 pixel-border bg-card text-foreground hover:bg-primary active:bg-accent active:text-accent-foreground">d4</button>
-              <button className="p-2 pixel-border bg-card text-foreground hover:bg-primary active:bg-accent active:text-accent-foreground">d6</button>
-              <button className="p-2 pixel-border bg-card text-foreground hover:bg-primary active:bg-accent active:text-accent-foreground">d8</button>
-              <button className="p-2 pixel-border bg-card text-foreground hover:bg-primary active:bg-accent active:text-accent-foreground">d10</button>
-              <button className="p-2 pixel-border bg-primary text-primary-foreground hover:bg-accent hover:text-accent-foreground active:bg-card active:text-foreground">d20</button>
-              <button className="p-2 pixel-border bg-card text-foreground hover:bg-primary active:bg-accent active:text-accent-foreground">d100</button>
+              <button className="p-2 pixel-border bg-[#3e3226] text-white hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">d4</button>
+              <button className="p-2 pixel-border bg-[#3e3226] text-white hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">d6</button>
+              <button className="p-2 pixel-border bg-[#3e3226] text-white hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">d8</button>
+              <button className="p-2 pixel-border bg-[#3e3226] text-white hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">d10</button>
+              <button className="p-2 pixel-border bg-[#ac7339] text-white hover:bg-[#facc15] hover:text-[#2f1b0c] active:bg-[#3e3226] active:text-white">d20</button>
+              <button className="p-2 pixel-border bg-[#3e3226] text-white hover:bg-[#ac7339] active:bg-[#facc15] active:text-[#2f1b0c]">d100</button>
             </div>
           </div>
         </div>
