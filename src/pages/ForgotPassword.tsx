@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelCard } from "@/components/PixelCard";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import loginBg from "@/assets/login-bg.png";
 
 const ForgotPassword = () => {
@@ -25,11 +24,6 @@ const ForgotPassword = () => {
         style={{ backgroundImage: `url(${loginBg})` }}
       >
         <div className="absolute inset-0 bg-black/40" />
-      </div>
-
-      {/* Theme Toggle */}
-      <div className="absolute top-4 right-4 z-20">
-        <ThemeToggle />
       </div>
 
       {/* Forgot Password Card */}

@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelCard } from "@/components/PixelCard";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import loginBg from "@/assets/castle-dragon-login.png";
@@ -51,11 +50,6 @@ const Login = () => {
         style={{ backgroundImage: `url(${loginBg})` }}
       >
         <div className="absolute inset-0 bg-black/40" />
-      </div>
-
-      {/* Theme Toggle */}
-      <div className="absolute top-4 right-4 z-20">
-        <ThemeToggle />
       </div>
 
       {/* Login Card */}
