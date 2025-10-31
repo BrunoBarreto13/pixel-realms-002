@@ -39,7 +39,6 @@ const Dashboard = () => {
     { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
   ];
 
-  // When a child is selected, open the collapsible
   useEffect(() => {
     const activeItemParent = allMenuItems.find(item => item.children?.some(child => child.id === activeSection));
     if (activeItemParent) {
@@ -47,7 +46,6 @@ const Dashboard = () => {
     }
   }, [activeSection]);
 
-  // Filter menu items based on user role
   const menuItems = allMenuItems
     .map(item => {
       if (item.children) {
@@ -88,181 +86,119 @@ const Dashboard = () => {
     );
   }
 
+  const renderContent = () => {
+    switch (activeSection) {
+      case "home":
+        return (
+          <div className="space-y-8">
+            <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
+              <h3 className="font-pixel text-xl text-primary mb-4">
+                BEM-VINDO, AVENTUREIRO!
+              </h3>
+              <p className="font-pixel text-xs text-foreground leading-relaxed mb-6">
+                Sistema de RPG de Mesa Online baseado em AD&D 2e (Segunda Edição)
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-muted/50 p-6 pixel-border">
+                  <h4 className="font-pixel text-sm text-secondary mb-2">CAMPANHA ATUAL</h4>
+                  <p className="font-pixel text-xs text-foreground">Em desenvolvimento...</p>
+                </div>
+                <div className="bg-muted/50 p-6 pixel-border">
+                  <h4 className="font-pixel text-sm text-secondary mb-2">PRÓXIMA SESSÃO</h4>
+                  <p className="font-pixel text-xs text-foreground">A definir</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
+              <h3 className="font-pixel text-lg text-primary mb-4">RECURSOS DISPONÍVEIS</h3>
+              <ul className="space-y-3 font-pixel text-xs text-foreground">
+                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Sistema de Rolagem de Dados</li>
+                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Fichas de Personagem</li>
+                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Gestão de Grupo</li>
+                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Vídeo Chamada Integrada</li>
+              </ul>
+            </div>
+          </div>
+        );
+      case "library":
+        return <Library />;
+      case "character-sheet":
+        return <CharacterSheet />;
+      case "settings":
+        return <Settings />;
+      default:
+        return (
+          <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
+            <h3 className="font-pixel text-xl text-primary mb-4">{getActiveLabel().toUpperCase()}</h3>
+            <p className="font-pixel text-xs text-muted-foreground leading-relaxed">Esta seção está em desenvolvimento...</p>
+          </div>
+        );
+    }
+  };
+
   return (
-    <div className="flex min-h-screen w-full overflow-hidden bg-background">
-      {/* Sidebar */}
-      <aside className="relative z-10 w-80 bg-card/90 backdrop-blur-sm border-r-4 border-border flex flex-col">
-        {/* Logo */}
-        <div className="p-6 border-b-4 border-border">
-          <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow">
-            PIXEL<br/>REALMS
-          </h1>
-        </div>
-
-        {/* Menu */}
-        <nav className="flex-1 p-4">
-          <ul className="space-y-2">
-            {menuItems.map((item) => (
-              <li key={item.id}>
-                {item.children ? (
-                  <Collapsible open={isCampaignOpen} onOpenChange={setIsCampaignOpen}>
-                    <CollapsibleTrigger asChild>
-                      <button
-                        className={`w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
-                          item.children.some(child => child.id === activeSection)
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-card/50 text-foreground hover:bg-muted"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <item.icon className="h-4 w-4" />
-                          <span>{item.label}</span>
-                        </div>
-                        <ChevronRight className={`h-4 w-4 transition-transform ${isCampaignOpen ? 'rotate-90' : ''}`} />
-                      </button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="pt-2 pl-4">
-                      <ul className="space-y-2">
-                        {item.children.map((child) => (
-                          <li key={child.id}>
-                            <button
-                              onClick={() => setActiveSection(child.id)}
-                              className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
-                                activeSection === child.id
-                                  ? "bg-primary text-primary-foreground"
-                                  : "bg-card/50 text-foreground hover:bg-muted"
-                              }`}
-                            >
-                              <child.icon className="h-4 w-4" />
-                              <span>{child.label}</span>
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
-                    </CollapsibleContent>
-                  </Collapsible>
-                ) : (
-                  <button
-                    onClick={() => setActiveSection(item.id)}
-                    className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
-                      activeSection === item.id
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-card/50 text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    <item.icon className="h-4 w-4" />
-                    <span>{item.label}</span>
-                  </button>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        {/* Bottom Section */}
-        <div className="p-4 border-t-4 border-border space-y-2">
-          <button
-            onClick={() => setActiveSection("settings")}
-            className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
-              activeSection === "settings"
-                ? "bg-primary text-primary-foreground"
-                : "bg-card/50 text-foreground hover:bg-muted"
-            }`}
-          >
-            <SettingsIcon className="h-4 w-4" />
-            <span>Configurações</span>
-          </button>
-          <PixelButton
-            variant="destructive"
-            onClick={handleLogout}
-            className="w-full flex items-center gap-2 justify-start p-3"
-          >
-            <LogOut className="h-4 w-4" />
-            <span>Sair</span>
-          </PixelButton>
-        </div>
-      </aside>
-
-      {/* Main Content */}
-      <main className="relative z-10 flex-1 flex flex-col">
-        {/* Header */}
-        <header className="bg-card/90 backdrop-blur-sm border-b-4 border-border p-4 flex justify-between items-center">
-          <div>
-            <h2 className="font-pixel text-lg text-foreground">
-              {getActiveLabel()}
-            </h2>
+    <div className="game-background min-h-screen w-full flex items-center justify-center p-4 md:p-8">
+      <div className="w-full h-full max-w-[1400px] max-h-[900px] flex pixel-border bg-card/80 backdrop-blur-sm shadow-2xl">
+        {/* Sidebar */}
+        <aside className="w-64 bg-card/90 border-r-4 border-border flex flex-col">
+          <div className="p-6 border-b-4 border-border">
+            <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow">PIXEL<br/>REALMS</h1>
           </div>
-        </header>
-
-        {/* Content Area */}
-        <div className="flex-1 p-8 overflow-auto">
-          <div className="max-w-6xl mx-auto">
-            {activeSection === "home" && (
-              <div className="space-y-8">
-                <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
-                  <h3 className="font-pixel text-xl text-primary mb-4">
-                    BEM-VINDO, AVENTUREIRO!
-                  </h3>
-                  <p className="font-pixel text-xs text-foreground leading-relaxed mb-6">
-                    Sistema de RPG de Mesa Online baseado em AD&D 2e (Segunda Edição)
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="bg-muted/50 p-6 pixel-border">
-                      <h4 className="font-pixel text-sm text-secondary mb-2">CAMPANHA ATUAL</h4>
-                      <p className="font-pixel text-xs text-foreground">Em desenvolvimento...</p>
-                    </div>
-                    <div className="bg-muted/50 p-6 pixel-border">
-                      <h4 className="font-pixel text-sm text-secondary mb-2">PRÓXIMA SESSÃO</h4>
-                      <p className="font-pixel text-xs text-foreground">A definir</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
-                  <h3 className="font-pixel text-lg text-primary mb-4">RECURSOS DISPONÍVEIS</h3>
-                  <ul className="space-y-3 font-pixel text-xs text-foreground">
-                    <li className="flex items-center gap-2">
-                      <span className="text-accent">▸</span> Sistema de Rolagem de Dados
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-accent">▸</span> Fichas de Personagem
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-accent">▸</span> Gestão de Grupo
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-accent">▸</span> Vídeo Chamada Integrada
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            )}
-
-            {activeSection === "library" && (
-              <Library />
-            )}
-
-            {activeSection === "character-sheet" && (
-              <CharacterSheet />
-            )}
-
-            {activeSection === "settings" && (
-              <Settings />
-            )}
-
-            {activeSection !== "home" && activeSection !== "character-sheet" && activeSection !== "library" && activeSection !== "settings" && (
-              <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
-                <h3 className="font-pixel text-xl text-primary mb-4">
-                  {getActiveLabel().toUpperCase()}
-                </h3>
-                <p className="font-pixel text-xs text-muted-foreground leading-relaxed">
-                  Esta seção está em desenvolvimento...
-                </p>
-              </div>
-            )}
+          <nav className="flex-1 p-4 overflow-y-auto">
+            <ul className="space-y-2">
+              {menuItems.map((item) => (
+                <li key={item.id}>
+                  {item.children ? (
+                    <Collapsible open={isCampaignOpen} onOpenChange={setIsCampaignOpen}>
+                      <CollapsibleTrigger asChild>
+                        <button className={`w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs transition-all pixel-border ${item.children.some(child => child.id === activeSection) ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
+                          <div className="flex items-center gap-3"><item.icon className="h-4 w-4" /><span>{item.label}</span></div>
+                          <ChevronRight className={`h-4 w-4 transition-transform ${isCampaignOpen ? 'rotate-90' : ''}`} />
+                        </button>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="pt-2 pl-4">
+                        <ul className="space-y-2">
+                          {item.children.map((child) => (
+                            <li key={child.id}>
+                              <button onClick={() => setActiveSection(child.id)} className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${activeSection === child.id ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
+                                <child.icon className="h-4 w-4" /><span>{child.label}</span>
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  ) : (
+                    <button onClick={() => setActiveSection(item.id)} className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${activeSection === item.id ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
+                      <item.icon className="h-4 w-4" /><span>{item.label}</span>
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="p-4 border-t-4 border-border space-y-2">
+            <button onClick={() => setActiveSection("settings")} className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${activeSection === "settings" ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
+              <SettingsIcon className="h-4 w-4" /><span>Configurações</span>
+            </button>
+            <PixelButton variant="destructive" onClick={handleLogout} className="w-full flex items-center gap-2 justify-start p-3">
+              <LogOut className="h-4 w-4" /><span>Sair</span>
+            </PixelButton>
           </div>
-        </div>
-      </main>
+        </aside>
+
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col">
+          <header className="bg-card/90 border-b-4 border-border p-4 flex justify-between items-center">
+            <h2 className="font-pixel text-lg text-foreground">{getActiveLabel()}</h2>
+          </header>
+          <div className="flex-1 p-6 md:p-8 overflow-auto">
+            <div className="max-w-6xl mx-auto">
+              {renderContent()}
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
