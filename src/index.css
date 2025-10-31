@@ -4,38 +4,38 @@
 
 @layer base {
   :root {
-    /* Retro RPG Theme */
-    --background: 220 25% 15%; /* Very dark, deep blue */
-    --foreground: 210 40% 96%; /* Off-white, very light gray for text */
+    /* PIXEL ART UI FREE RPG RETRO Theme */
+    --background: 285 14% 16%; /* Dark desaturated purple/brown */
+    --foreground: 51 48% 85%; /* Light beige */
 
-    --card: 220 25% 22%; /* Slightly lighter dark blue for panels */
-    --card-foreground: 210 40% 96%;
+    --card: 312 11% 25%; /* Lighter brown/purple */
+    --card-foreground: 51 48% 85%;
 
-    --popover: 220 25% 15%;
-    --popover-foreground: 210 40% 96%;
+    --popover: 285 14% 12%;
+    --popover-foreground: 51 48% 85%;
 
-    --primary: 45 80% 60%; /* Bright, classic gold/yellow */
-    --primary-foreground: 30 50% 10%; /* Very dark brown for text on primary */
+    --primary: 26 56% 46%; /* Warm orange/brown for buttons */
+    --primary-foreground: 51 48% 85%;
 
-    --secondary: 220 15% 40%; /* Muted blue-gray for secondary elements */
-    --secondary-foreground: 210 40% 96%;
+    --secondary: 312 11% 35%; /* A slightly lighter card color */
+    --secondary-foreground: 51 48% 85%;
 
-    --muted: 220 15% 30%;
-    --muted-foreground: 220 10% 60%; /* Lighter gray for placeholder text */
+    --muted: 312 11% 20%;
+    --muted-foreground: 51 15% 65%;
 
-    --accent: 180 70% 60%; /* Bright Cyan for highlights */
-    --accent-foreground: 220 25% 15%;
+    --accent: 45 80% 60%; /* Gold for some highlights */
+    --accent-foreground: 285 14% 16%;
 
-    --destructive: 0 70% 55%; /* A classic, bright red */
-    --destructive-foreground: 210 40% 96%;
+    --destructive: 0 63% 44%; /* A slightly more desaturated red */
+    --destructive-foreground: 51 48% 85%;
 
-    --border: 45 80% 50%; /* A slightly darker gold for borders */
-    --input: 220 25% 18%;
-    --ring: 180 70% 60%; /* Cyan for focus rings */
-    --radius: 0rem; /* Sharp corners for pixel art */
+    --border: 22 40% 35%; /* Darker brown for borders */
+    --input: 285 14% 12%;
+    --ring: 26 56% 46%;
+    --radius: 0rem;
 
-    --brand-yellow: 45 80% 60%; /* Use the new primary gold for the brand */
-    --pixel-shadow: 2px 2px 0px hsl(0 0% 8%); /* A simple, almost black shadow */
+    --brand-yellow: 45 80% 60%;
+    --pixel-shadow: 2px 2px 0px hsl(285 20% 8%);
   }
 }
 
@@ -63,5 +63,16 @@
 
   .brand-text-shadow {
     text-shadow: 2px 2px 0px hsl(0 0% 8%);
+  }
+}
+
+@layer components {
+  .rpg-panel {
+    border-style: solid;
+    border-width: 24px;
+    border-image-source: url('/src/assets/ui-kit/character_panel.png');
+    border-image-slice: 24 fill;
+    border-image-repeat: stretch;
+    padding: 2rem;
   }
 }
