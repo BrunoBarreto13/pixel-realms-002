@@ -3,16 +3,16 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const pixelButtonVariants = cva(
-  "inline-flex items-center justify-center font-pixel text-xs leading-relaxed transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 pixel-border active:translate-y-1",
+  "inline-flex items-center justify-center font-pixel text-xs leading-relaxed transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 pixel-border shadow-md shadow-black/20 active:shadow-inner active:brightness-90",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:opacity-90",
-        secondary: "bg-secondary text-secondary-foreground hover:opacity-90",
-        accent: "bg-accent text-accent-foreground hover:opacity-90",
-        destructive: "bg-destructive text-destructive-foreground hover:opacity-90",
+        default: "bg-primary text-primary-foreground hover:brightness-110",
+        secondary: "bg-secondary text-secondary-foreground hover:brightness-110",
+        accent: "bg-accent text-accent-foreground hover:brightness-110",
+        destructive: "bg-destructive text-destructive-foreground hover:brightness-110",
         outline: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "shadow-none border-transparent hover:bg-accent hover:text-accent-foreground",
       },
       size: {
         default: "h-12 px-6 py-3",

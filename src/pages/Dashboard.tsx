@@ -4,8 +4,6 @@ import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight, BookMa
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import castleDragonDark from "@/assets/castle-dragon-dark.png";
-import castleDragonLight from "@/assets/castle-dragon-light.png";
 import CharacterSheet from "./CharacterSheet";
 import Library from "./library";
 import Settings from "./Settings";
@@ -20,7 +18,6 @@ const Dashboard = () => {
   const { user, loading, isMaster, signOut } = useAuth();
   const [activeSection, setActiveSection] = useState("home");
   const [isCampaignOpen, setIsCampaignOpen] = useState(false);
-  const isDark = document.documentElement.classList.contains("dark");
 
   useEffect(() => {
     if (!user && !loading) {
@@ -93,20 +90,12 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="relative flex min-h-screen w-full overflow-hidden">
-      {/* Background */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat transition-all duration-500"
-        style={{ backgroundImage: `url(${isDark ? castleDragonDark : castleDragonLight})` }}
-      >
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
-
+    <div className="flex min-h-screen w-full bg-background">
       {/* Sidebar */}
       <aside className="relative z-10 w-80 bg-card/90 backdrop-blur-sm border-r-4 border-border flex flex-col">
         {/* Logo */}
         <div className="p-6 border-b-4 border-border">
-          <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow">
+          <h1 className="font-pixel text-xl text-accent brand-text-shadow">
             PIXEL<br/>REALMS
           </h1>
         </div>
