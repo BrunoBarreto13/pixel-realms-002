@@ -10,7 +10,7 @@ const partyMembers = [
 const PartyStatus = () => (
   <div className="pixel-border bg-secondary p-2 flex-shrink-0">
     <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-      <h3 className="text-lg text-accent w-full sm:w-auto mb-2 sm:mb-0">PARTY</h3>
+      <h3 className="text-lg text-accent w-full sm:w-auto mb-2 sm:mb-0">GRUPO</h3>
       {partyMembers.map(member => (
         <div key={member.name} className="flex items-center gap-3">
           <img alt={`Pixel art portrait of ${member.name}.`} className="w-12 h-12 pixel-border" src={member.avatarUrl} />

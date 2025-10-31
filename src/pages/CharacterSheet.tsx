@@ -193,7 +193,7 @@ const CharacterSheet = () => {
       {/* Tabs */}
       <Tabs defaultValue="stats" className="w-full">
         <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
-          <TabsTrigger value="stats" className={tabTriggerClasses}>Info</TabsTrigger>
+          <TabsTrigger value="stats" className={tabTriggerClasses}>Informações</TabsTrigger>
           <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
           <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
           <TabsTrigger value="combate" className={tabTriggerClasses}>Combate</TabsTrigger>

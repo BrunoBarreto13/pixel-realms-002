@@ -5,10 +5,10 @@ const ActionsPanel = () => (
   <div className="pixel-border bg-secondary p-4">
     <h3 className="text-lg text-accent mb-4">AÇÕES</h3>
     <div className="grid grid-cols-2 gap-2 text-xs">
-      <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Attack</button>
-      <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Magic</button>
+      <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Atacar</button>
+      <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Magia</button>
       <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Item</button>
-      <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Flee</button>
+      <button className="p-3 bg-card hover:bg-card/80 pixel-border-inset text-center">Fugir</button>
     </div>
   </div>
 );

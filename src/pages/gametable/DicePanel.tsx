@@ -8,7 +8,7 @@ const DicePanel = () => {
 
   return (
     <div className="pixel-border-inset bg-card/50 p-4 mb-2">
-      <h3 className="text-lg text-accent mb-4">ROLL DICE</h3>
+      <h3 className="text-lg text-accent mb-4">ROLAR DADOS</h3>
       <div className="grid grid-cols-3 gap-2 text-xs">
         {dice.map(d => (
           <button 
