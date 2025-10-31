@@ -14,7 +14,7 @@ import {
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user, loading, isMaster, signOut } = useAuth();
+  const { user, loading, isMaster, signOut } from useAuth();
   const [activeSection, setActiveSection] = useState("home");
   const [isCampaignOpen, setIsCampaignOpen] = useState(false);
 
@@ -137,8 +137,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="game-background min-h-screen w-full flex items-center justify-center p-4">
-      <div className="w-full max-w-7xl aspect-video flex pixel-border bg-card/80 backdrop-blur-sm shadow-2xl">
+    <div className="game-background min-h-screen w-full flex">
+      <div className="w-full flex pixel-border bg-card/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
         <aside className="w-64 bg-card/90 border-r-4 border-border flex flex-col">
           <div className="p-6 border-b-4 border-border">
