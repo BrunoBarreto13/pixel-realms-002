@@ -1,6 +1,5 @@
 import { PixelCard } from "@/components/PixelCard";
 import { PixelButton } from "@/components/PixelButton";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { PixelInput } from "@/components/PixelInput";
@@ -18,18 +17,6 @@ const Settings = () => {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <PixelCard>
-        <h3 className="font-pixel text-lg text-primary mb-4 pixel-glow">
-          APARÊNCIA
-        </h3>
-        <div className="flex items-center justify-between">
-          <p className="font-pixel text-xs text-foreground">
-            Tema da Interface (Floresta / Caverna)
-          </p>
-          <ThemeToggle />
-        </div>
-      </PixelCard>
-
       <PixelCard>
         <h3 className="font-pixel text-lg text-primary mb-4 pixel-glow">
           CONTA
