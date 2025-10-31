@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Casino } from "lucide-react";
+import { Dices } from "lucide-react";
 import DicePanel from "./DicePanel";
 import { cn } from "@/lib/utils";
 
@@ -41,7 +41,7 @@ const GameChat = () => {
             aria-label="Toggle dice roller" 
             className="p-3 bg-primary text-primary-foreground pixel-border aspect-square flex items-center justify-center"
           >
-            <Casino className="h-5 w-5" />
+            <Dices className="h-5 w-5" />
           </button>
         </div>
       </div>
