@@ -5,7 +5,7 @@ import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dices, Save, Plus, Minus, FileDown, User, Sword, Bow } from "lucide-react";
+import { Dices, Save, Plus, Minus, FileDown, User, Sword, Crossbow } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import * as Rules from "@/lib/add-2e-rules";
 
@@ -345,7 +345,7 @@ const CharacterSheet = () => {
             <h3 className="font-pixel text-sm text-accent mb-4">ROLAGEM DE DADOS</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <PixelButton onClick={() => handleRoll(20, strengthBonuses.hit, "Ataque Corpo-a-Corpo")} className="flex items-center gap-2"><Sword className="h-4 w-4" /> Ataque C-a-C</PixelButton>
-              <PixelButton onClick={() => handleRoll(20, dexterityBonuses.missile, "Ataque à Distância")} className="flex items-center gap-2"><Bow className="h-4 w-4" /> Ataque Dist.</PixelButton>
+              <PixelButton onClick={() => handleRoll(20, dexterityBonuses.missile, "Ataque à Distância")} className="flex items-center gap-2"><Crossbow className="h-4 w-4" /> Ataque Dist.</PixelButton>
               <PixelButton onClick={() => handleRoll(20, 0, "d20")}>d20</PixelButton>
               <PixelButton onClick={() => handleRoll(100, 0, "d100")}>d100</PixelButton>
               <PixelButton onClick={() => handleRoll(12, 0, "d12")}>d12</PixelButton>
