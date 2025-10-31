@@ -25,11 +25,6 @@ interface SavingThrows {
   spell: number;
 }
 
-interface Proficiency {
-  name: string;
-  slots: number;
-}
-
 interface WeaponSkill {
   weapon: string;
   points: number;
@@ -59,7 +54,6 @@ interface Character {
   thac0: number;
   initiative: number;
   savingThrows: SavingThrows;
-  proficiencies: Proficiency[];
 }
 
 const RACES = [
@@ -111,10 +105,8 @@ const CharacterSheet = () => {
       breath: 14,
       spell: 14,
     },
-    proficiencies: [],
   });
 
-  const [newProficiency, setNewProficiency] = useState({ name: "", slots: 1 });
   const [isEditing, setIsEditing] = useState(false);
   const [weaponSkills, setWeaponSkills] = useState<WeaponSkill[]>([]);
   const [generalSkills, setGeneralSkills] = useState<GeneralSkill[]>([]);
@@ -206,26 +198,6 @@ const CharacterSheet = () => {
     toast({
       title: "Ficha exportada!",
       description: "Arquivo JSON baixado com sucesso.",
-    });
-  };
-
-  const addProficiency = () => {
-    if (!newProficiency.name) return;
-    setCharacter({
-      ...character,
-      proficiencies: [...character.proficiencies, { ...newProficiency }],
-    });
-    setNewProficiency({ name: "", slots: 1 });
-    toast({
-      title: "Proficiência adicionada!",
-      description: newProficiency.name,
-    });
-  };
-
-  const removeProficiency = (index: number) => {
-    setCharacter({
-      ...character,
-      proficiencies: character.proficiencies.filter((_, i) => i !== index),
     });
   };
 
@@ -322,7 +294,12 @@ const CharacterSheet = () => {
 
           {/* Informações Básicas */}
           <PixelCard>
-            <h3 className="font-pixel text-sm text-accent mb-4">INFORMAÇÕES BÁSICAS</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-pixel text-sm text-accent">INFORMAÇÕES BÁSICAS</h3>
+              <PixelButton onClick={calculateHP} size="sm" variant="secondary">
+                Calcular HP
+              </PixelButton>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <PixelInput
                 label="Nome do Personagem"
@@ -401,54 +378,6 @@ const CharacterSheet = () => {
                     <Plus className="h-4 w-4" />
                   </PixelButton>
                 </div>
-              </div>
-            </div>
-          </PixelCard>
-
-          {/* Proficiências */}
-          <PixelCard>
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-pixel text-sm text-accent">PROFICIÊNCIAS</h3>
-              <PixelButton onClick={calculateHP} size="sm" variant="secondary">
-                Calcular HP
-              </PixelButton>
-            </div>
-            
-            <div className="space-y-3">
-              {character.proficiencies.map((prof, index) => (
-                <div key={index} className="flex items-center justify-between bg-muted/30 p-3 pixel-border">
-                  <span className="font-pixel text-xs text-foreground">{prof.name}</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-pixel text-xs text-secondary">{prof.slots} Slot{prof.slots > 1 ? 's' : ''}</span>
-                    <PixelButton
-                      size="sm"
-                      variant="outline"
-                      onClick={() => removeProficiency(index)}
-                    >
-                      <Minus className="h-3 w-3" />
-                    </PixelButton>
-                  </div>
-                </div>
-              ))}
-              
-              <div className="flex gap-2 pt-2">
-                <input
-                  type="text"
-                  value={newProficiency.name}
-                  onChange={(e) => setNewProficiency({ ...newProficiency, name: e.target.value })}
-                  placeholder="Nome da proficiência..."
-                  className="flex-1 h-10 pixel-border bg-card/50 px-3 font-pixel text-xs"
-                />
-                <input
-                  type="number"
-                  value={newProficiency.slots}
-                  onChange={(e) => setNewProficiency({ ...newProficiency, slots: parseInt(e.target.value) || 1 })}
-                  className="w-16 h-10 pixel-border bg-card/50 px-2 font-pixel text-xs text-center"
-                  min={1}
-                />
-                <PixelButton onClick={addProficiency} size="sm">
-                  <Plus className="h-4 w-4" />
-                </PixelButton>
               </div>
             </div>
           </PixelCard>
