@@ -1,6 +1,6 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PixelButton } from "@/components/PixelButton";
-import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight, BookMarked } from "lucide-react";
+import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight, BookMarked, Settings as SettingsIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -8,6 +8,7 @@ import castleDragonDark from "@/assets/castle-dragon-dark.png";
 import castleDragonLight from "@/assets/castle-dragon-light.png";
 import CharacterSheet from "./CharacterSheet";
 import Library from "./library";
+import Settings from "./Settings";
 import {
   Collapsible,
   CollapsibleContent,
@@ -40,6 +41,7 @@ const Dashboard = () => {
     },
     { id: "character-sheet", label: "Ficha do Jogador", icon: ScrollText },
     { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
+    { id: "settings", label: "Configurações", icon: SettingsIcon },
   ];
 
   // When a child is selected, open the collapsible
@@ -246,7 +248,11 @@ const Dashboard = () => {
               <CharacterSheet />
             )}
 
-            {activeSection !== "home" && activeSection !== "character-sheet" && activeSection !== "library" && (
+            {activeSection === "settings" && (
+              <Settings />
+            )}
+
+            {activeSection !== "home" && activeSection !== "character-sheet" && activeSection !== "library" && activeSection !== "settings" && (
               <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
                 <h3 className="font-pixel text-xl text-primary mb-4 pixel-glow">
                   {getActiveLabel().toUpperCase()}
