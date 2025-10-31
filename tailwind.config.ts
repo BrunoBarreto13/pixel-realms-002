@@ -60,7 +60,7 @@ export default {
         'brand-yellow': 'hsl(var(--brand-yellow))',
       },
       fontFamily: {
-        pixel: ["'IM Fell English SC'", "serif"],
+        pixel: ["'Press Start 2P'", "cursive"],
       },
       borderRadius: {
         lg: "var(--radius)",
