@@ -13,6 +13,7 @@ export interface Spell {
 }
 
 export const arcaneSpells: Spell[] = [
+  // Level 1
   {
     name: "Magic Missile",
     level: 1,
@@ -40,6 +41,47 @@ export const arcaneSpells: Spell[] = [
     class: 'wizard',
   },
   {
+    name: "Sleep",
+    level: 1,
+    school: "Enchantment/Charm",
+    range: "30 yds",
+    duration: "5 rounds/level",
+    area_of_effect: "10-ft. radius",
+    components: "V, S, M",
+    casting_time: "1",
+    saving_throw: "None",
+    description: "Causes a magical slumber to come upon creatures. Affects 2d4 Hit Dice of creatures.",
+    class: 'wizard',
+  },
+  // Level 2
+  {
+    name: "Invisibility",
+    level: 2,
+    school: "Illusion/Phantasm",
+    range: "Touch",
+    duration: "Special",
+    area_of_effect: "1 creature",
+    components: "V, S, M",
+    casting_time: "2",
+    saving_throw: "None",
+    description: "The recipient of this spell becomes invisible to sight. The spell ends when the subject attacks any creature.",
+    class: 'wizard',
+  },
+  {
+    name: "Web",
+    level: 2,
+    school: "Evocation",
+    range: "10 yds/level",
+    duration: "2 turns/level",
+    area_of_effect: "Up to a 20-ft. cube",
+    components: "V, S, M",
+    casting_time: "2",
+    saving_throw: "Neg.",
+    description: "Creates a mass of strong, sticky strands. Creatures caught within it are entangled and may be unable to move.",
+    class: 'wizard',
+  },
+  // Level 3
+  {
     name: "Fireball",
     level: 3,
     school: "Evocation",
@@ -53,21 +95,22 @@ export const arcaneSpells: Spell[] = [
     class: 'wizard',
   },
   {
-    name: "Invisibility",
-    level: 2,
-    school: "Illusion/Phantasm",
-    range: "Touch",
-    duration: "Special",
-    area_of_effect: "1 creature",
+    name: "Lightning Bolt",
+    level: 3,
+    school: "Evocation",
+    range: "40 yds + 10 yds/level",
+    duration: "Instantaneous",
+    area_of_effect: "A bolt 5 ft. wide to its maximum range",
     components: "V, S, M",
-    casting_time: "2",
-    saving_throw: "None",
-    description: "The recipient of this spell becomes invisible to sight. The spell ends when the subject attacks any creature.",
+    casting_time: "3",
+    saving_throw: "Half",
+    description: "A powerful stroke of electrical energy that deals 1d6 damage per level of the caster.",
     class: 'wizard',
-  }
+  },
 ];
 
 export const divineSpells: Spell[] = [
+  // Level 1
   {
     name: "Cure Light Wounds",
     level: 1,
@@ -95,6 +138,20 @@ export const divineSpells: Spell[] = [
     class: 'priest',
   },
   {
+    name: "Detect Evil",
+    level: 1,
+    school: "Divination",
+    range: "0",
+    duration: "1 turn",
+    area_of_effect: "60-ft. path",
+    components: "V, S",
+    casting_time: "1 round",
+    saving_throw: "None",
+    description: "The caster can detect the presence of evil intentions or creatures.",
+    class: 'priest',
+  },
+  // Level 2
+  {
     name: "Hold Person",
     level: 2,
     school: "Enchantment/Charm",
@@ -119,5 +176,32 @@ export const divineSpells: Spell[] = [
     saving_throw: "None",
     description: "Creates a magical hammer that attacks a foe designated by the caster. It strikes as a magical weapon and deals 1d4+1 damage.",
     class: 'priest',
-  }
+  },
+  // Level 3
+  {
+    name: "Remove Curse",
+    level: 3,
+    school: "Abjuration",
+    range: "Touch",
+    duration: "Permanent",
+    area_of_effect: "1 creature or object",
+    components: "V, S",
+    casting_time: "1 turn",
+    saving_throw: "None",
+    description: "This spell removes a curse from a person or object. It does not remove the curse from a cursed shield, weapon, or suit of armor.",
+    class: 'priest',
+  },
+  {
+    name: "Cure Disease",
+    level: 3,
+    school: "Necromancy",
+    range: "Touch",
+    duration: "Permanent",
+    area_of_effect: "1 creature",
+    components: "V, S",
+    casting_time: "1 turn",
+    saving_throw: "None",
+    description: "Cures the target of any non-magical diseases. It does not affect magical diseases like lycanthropy.",
+    class: 'priest',
+  },
 ];
