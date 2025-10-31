@@ -4,38 +4,38 @@
 
 @layer base {
   :root {
-    /* PIXEL ART UI FREE RPG RETRO Theme */
-    --background: 285 14% 16%; /* Dark desaturated purple/brown */
-    --foreground: 51 48% 85%; /* Light beige */
+    /* Wood and Papyrus Theme */
+    --background: 30 25% 25%; /* Dark, desaturated wood brown */
+    --foreground: 45 50% 90%; /* Light, creamy papyrus for text on wood */
 
-    --card: 312 11% 25%; /* Lighter brown/purple */
-    --card-foreground: 51 48% 85%;
+    --card: 45 40% 85%; /* Papyrus/beige for panels */
+    --card-foreground: 30 30% 15%; /* Dark brown 'ink' for text on papyrus */
 
-    --popover: 285 14% 12%;
-    --popover-foreground: 51 48% 85%;
+    --popover: 30 25% 20%;
+    --popover-foreground: 45 50% 90%;
 
-    --primary: 26 56% 46%; /* Warm orange/brown for buttons */
-    --primary-foreground: 51 48% 85%;
+    --primary: 30 40% 40%; /* Rich, medium wood for buttons */
+    --primary-foreground: 45 50% 90%; /* Papyrus text on buttons */
 
-    --secondary: 312 11% 35%; /* A slightly lighter card color */
-    --secondary-foreground: 51 48% 85%;
+    --secondary: 30 30% 55%; /* Lighter, muted wood */
+    --secondary-foreground: 30 30% 15%; /* Dark ink text */
 
-    --muted: 312 11% 20%;
-    --muted-foreground: 51 15% 65%;
+    --muted: 45 20% 70%;
+    --muted-foreground: 30 20% 40%;
 
-    --accent: 45 80% 60%; /* Gold for some highlights */
-    --accent-foreground: 285 14% 16%;
+    --accent: 40 80% 60%; /* Gold/ochre for highlights */
+    --accent-foreground: 30 30% 15%;
 
-    --destructive: 0 63% 44%; /* A slightly more desaturated red */
-    --destructive-foreground: 51 48% 85%;
+    --destructive: 0 50% 45%; /* Deep red, like sealing wax */
+    --destructive-foreground: 45 50% 90%;
 
-    --border: 22 40% 35%; /* Darker brown for borders */
-    --input: 285 14% 12%;
-    --ring: 26 56% 46%;
+    --border: 30 30% 15%; /* Very dark wood for borders */
+    --input: 45 30% 80%; /* Slightly darker papyrus for inputs */
+    --ring: 40 80% 60%; /* Gold for focus rings */
     --radius: 0rem;
 
-    --brand-yellow: 45 80% 60%;
-    --pixel-shadow: 2px 2px 0px hsl(285 20% 8%);
+    --brand-yellow: 40 80% 60%;
+    --pixel-shadow: 2px 2px 0px hsl(30 40% 10%);
   }
 }
 
@@ -68,11 +68,9 @@
 
 @layer components {
   .rpg-panel {
-    border-style: solid;
-    border-width: 24px;
-    border-image-source: url('/src/assets/ui-kit/character_panel.png');
-    border-image-slice: 24 fill;
-    border-image-repeat: stretch;
-    padding: 2rem;
+    background-color: hsl(var(--card));
+    border: 4px solid hsl(var(--border));
+    box-shadow: var(--pixel-shadow);
+    padding: 1.5rem;
   }
 }
