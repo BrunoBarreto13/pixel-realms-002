@@ -6,6 +6,7 @@ import { PixelCard } from "@/components/PixelCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import loginBg from "@/assets/castle-dragon-login.png";
 
 type UserType = "player" | "master" | null;
 
@@ -79,7 +80,15 @@ const Register = () => {
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center p-4 bg-background">
+    <div className="relative flex min-h-screen w-full items-center justify-center p-4 overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${loginBg})` }}
+      >
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+
       {/* Theme Toggle */}
       <div className="absolute top-4 right-4 z-20">
         <ThemeToggle />
@@ -89,10 +98,10 @@ const Register = () => {
       <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
         {/* Title */}
         <div className="text-center">
-          <h1 className="font-pixel text-3xl md:text-4xl text-primary brand-text-shadow mb-2">
+          <h1 className="font-pixel text-3xl md:text-4xl text-primary pixel-text-shadow mb-2">
             CADASTRO
           </h1>
-          <p className="font-pixel text-xs text-secondary brand-text-shadow">
+          <p className="font-pixel text-xs text-secondary pixel-text-shadow">
             Escolha seu papel
           </p>
         </div>
