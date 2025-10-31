@@ -13,19 +13,25 @@ const LibraryIndex = ({ onNavigate }: { onNavigate: (view: 'arcane' | 'divine') 
         
         {/* Capítulo 1: Pontuações de habilidade */}
         <div>
-          <h3 className="font-pixel text-base text-accent border-b-2 border-border pb-2 mb-4">Cap. 1: Pontuações de habilidade do personagem do jogador</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+          <h3 className="font-pixel text-base text-accent border-b-2 border-border pb-2 mb-4">Cap. 1: Atributos do Personagem Jogador</h3>
+          <p className="mb-4 text-muted-foreground">
+            Para se aventurar nos mundos do jogo AD&D, primeiro você precisa criar um personagem. O personagem que você cria é o seu alter ego nos reinos fantásticos deste jogo, uma pessoa fictícia que está sob o seu controle e através da qual você explora indiretamente o mundo criado pelo Mestre de Jogo (MJ).
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 mb-4">
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Força</li>
-              <li>Destreza</li>
-              <li>Constituição</li>
+              <li>Força (For)</li>
+              <li>Destreza (Des)</li>
+              <li>Constituição (Con)</li>
             </ul>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Inteligência</li>
-              <li>Sabedoria</li>
-              <li>Carisma</li>
+              <li>Inteligência (Int)</li>
+              <li>Sabedoria (Sab)</li>
+              <li>Carisma (Car)</li>
             </ul>
           </div>
+          <p className="text-muted-foreground">
+            Os três primeiros atributos representam a natureza física do personagem, enquanto os três últimos quantificam seus traços mentais e de personalidade. Em vários trechos destas regras, as abreviações acima são usadas.
+          </p>
         </div>
 
         {/* Capítulo 3: Classes */}
