@@ -14,22 +14,20 @@ const PartyStatus = () => (
       {partyMembers.map(member => (
         <div key={member.name} className="flex items-center gap-3">
           <img alt={`Pixel art portrait of ${member.name}.`} className="w-12 h-12 pixel-border" src={member.avatarUrl} />
-          <div className="flex-1 text-xs">
+          <div className="flex-1 text-xs w-32">
             <div className="flex justify-between items-baseline">
               <p>{member.name}</p>
               <p className="text-foreground/80">Lvl {member.level}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-hp-red font-bold">HP</span>
-              <div className="w-24 h-4 bg-black pixel-border-inset p-0.5">
-                <div className="bg-hp-red h-full" style={{ width: `${member.hp}%` }}></div>
-              </div>
+            <div className="flex justify-between items-baseline">
+              <span className="text-hp-red font-bold">PV</span>
+              <span className="text-foreground/80">{member.hp}/{member.maxHp}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-mp-blue font-bold">MP</span>
-              <div className="w-24 h-4 bg-black pixel-border-inset p-0.5">
-                <div className="bg-mp-blue h-full" style={{ width: `${member.mp}%` }}></div>
-              </div>
+            <div className="w-full h-4 bg-black pixel-border-inset p-0.5">
+              <div 
+                className="bg-hp-red h-full" 
+                style={{ width: `${(member.hp / member.maxHp) * 100}%` }}
+              ></div>
             </div>
           </div>
         </div>
