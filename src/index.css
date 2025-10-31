@@ -4,74 +4,38 @@
 
 @layer base {
   :root {
-    /* Light Theme - Parchment */
-    --background: 48 33% 94%;
-    --foreground: 30 20% 15%;
-    --card: 48 33% 98%;
-    --card-foreground: 30 20% 15%;
-    --popover: 48 33% 98%;
-    --popover-foreground: 30 20% 15%;
-    --primary: 215 41% 45%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 30 15% 50%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 30 20% 88%;
-    --muted-foreground: 30 15% 40%;
-    --accent: 0 60% 45%;
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 30 20% 70%;
-    --input: 30 20% 70%;
-    --ring: 215 41% 45%;
-    --radius: 0.25rem;
+    /* PIXEL ART UI PACK Theme */
+    --background: 200 10% 35%; /* Muted blue-gray background */
+    --foreground: 40 50% 88%; /* Light beige text */
 
-    --sidebar-background: 48 33% 92%;
-    --sidebar-foreground: 30 20% 15%;
-    --sidebar-primary: 215 41% 45%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 30 20% 85%;
-    --sidebar-accent-foreground: 30 20% 15%;
-    --sidebar-border: 30 20% 70%;
-    --sidebar-ring: 215 41% 45%;
+    --card: 28 30% 20%; /* Dark brown for panels */
+    --card-foreground: 40 50% 88%;
 
-    --brand-yellow: 45 90% 55%;
-    --pixel-shadow: 2px 2px 0px hsl(var(--foreground) / 0.5);
-  }
+    --popover: 28 30% 20%;
+    --popover-foreground: 40 50% 88%;
 
-  .dark {
-    /* Dark Theme - Old Scroll */
-    --background: 30 20% 10%;
-    --foreground: 48 33% 90%;
-    --card: 30 20% 15%;
-    --card-foreground: 48 33% 90%;
-    --popover: 30 20% 15%;
-    --popover-foreground: 48 33% 90%;
-    --primary: 215 41% 65%;
-    --primary-foreground: 30 20% 10%;
-    --secondary: 30 15% 30%;
-    --secondary-foreground: 48 33% 90%;
-    --muted: 30 20% 20%;
-    --muted-foreground: 30 15% 60%;
-    --accent: 0 60% 60%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 70% 55%;
-    --destructive-foreground: 0 0% 0%;
-    --border: 30 20% 30%;
-    --input: 30 20% 30%;
-    --ring: 215 41% 65%;
+    --primary: 30 58% 50%; /* Orange-brown for buttons/borders */
+    --primary-foreground: 28 30% 15%; /* Darker brown for text on primary */
 
-    --sidebar-background: 30 20% 15%;
-    --sidebar-foreground: 48 33% 90%;
-    --sidebar-primary: 215 41% 65%;
-    --sidebar-primary-foreground: 30 20% 10%;
-    --sidebar-accent: 30 20% 25%;
-    --sidebar-accent-foreground: 48 33% 90%;
-    --sidebar-border: 30 20% 30%;
-    --sidebar-ring: 215 41% 65%;
+    --secondary: 28 30% 25%; /* Slightly lighter brown for secondary elements */
+    --secondary-foreground: 40 50% 88%;
 
-    --brand-yellow: 45 90% 55%;
-    --pixel-shadow: 2px 2px 0px hsl(0 0% 0% / 0.75);
+    --muted: 28 30% 25%;
+    --muted-foreground: 200 5% 60%; /* Muted gray for placeholder text */
+
+    --accent: 30 70% 65%; /* A brighter orange for highlights */
+    --accent-foreground: 28 30% 15%;
+
+    --destructive: 0 63% 45%;
+    --destructive-foreground: 40 50% 88%;
+
+    --border: 30 58% 40%; /* A slightly darker orange for borders */
+    --input: 28 30% 25%;
+    --ring: 30 70% 65%;
+    --radius: 0rem; /* Sharp corners for pixel art */
+
+    --brand-yellow: 40 50% 88%; /* Use the main text color for the brand */
+    --pixel-shadow: 2px 2px 0px hsl(28 30% 12%); /* A very dark brown shadow */
   }
 }
 
@@ -83,21 +47,21 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Press Start 2P', cursive;
+    /* Disable font smoothing for crisp pixel fonts */
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   .pixel-border {
     border: 2px solid hsl(var(--border));
+    box-shadow: var(--pixel-shadow);
   }
 
   .pixel-text-shadow {
-    text-shadow: 1px 1px 0 hsl(var(--background));
+    text-shadow: 1px 1px 0 hsl(28 30% 12%);
   }
 
   .brand-text-shadow {
-    text-shadow: 1px 1px 0px hsl(30 20% 10% / 0.5);
-  }
-
-  .dark .brand-text-shadow {
-    text-shadow: 1px 1px 0px hsl(0 0% 0%);
+    text-shadow: 2px 2px 0px hsl(28 30% 12%);
   }
 }

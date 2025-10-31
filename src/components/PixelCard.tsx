@@ -7,7 +7,7 @@ const PixelCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
       <div
         ref={ref}
         className={cn(
-          "pixel-border bg-card/80 backdrop-blur-sm p-8 shadow-pixel",
+          "pixel-border bg-card p-6",
           className
         )}
         {...props}
