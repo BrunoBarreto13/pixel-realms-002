@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { PixelButton } from "@/components/PixelButton";
-import { PixelInput } from "@/components/PixelInput";
-import { PixelCard } from "@/components/PixelCard";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import loginBg from "@/assets/castle-dragon-login.png";
@@ -43,7 +40,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative flex min-h-screen w-full items-center justify-center p-4 overflow-hidden">
+    <div className="relative flex min-h-screen w-full items-center justify-center p-4 font-pixel text-xs">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -53,65 +50,60 @@ const Login = () => {
       </div>
 
       {/* Login Card */}
-      <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
-        {/* Title */}
-        <div className="text-center">
-          <h1 className="font-pixel text-3xl md:text-4xl text-brand-yellow brand-text-shadow mb-2">
-            PIXEL REALMS
-          </h1>
-          <p className="font-pixel text-xs text-secondary pixel-text-shadow">
-            Sua Aventura Aguarda
-          </p>
+      <main className="relative z-10 w-full max-w-sm md:max-w-md text-center">
+        <div className="mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-yellow-400 text-outline">PIXEL REALMS</h1>
+          <p className="text-sm text-gray-300 mt-2 text-outline">SUA AVENTURA AGUARDA</p>
         </div>
-
-        {/* Login Form */}
-        <PixelCard className="w-full">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            <PixelInput
-              label="Email"
-              type="email"
-              placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-
-            <PixelInput
-              label="Senha"
-              type="password"
-              placeholder="********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-
-            <PixelButton 
-              type="submit" 
-              variant="default" 
-              className="w-full"
+        <div className="bg-[#2f1b0c] p-6 md:p-8 border-4 border-[#6e4321] pixelated-border">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-left text-[#e0a86a] mb-2" htmlFor="email">EMAIL</label>
+              <input 
+                className="w-full bg-[#1b1008] border-2 border-[#543219] text-[#f0c8a0] placeholder-[#a07850] p-3 focus:border-[#b86a32] focus:ring-0 pixelated-input" 
+                id="email" 
+                name="email" 
+                type="email" 
+                placeholder="seu@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-left text-[#e0a86a] mb-2" htmlFor="password">SENHA</label>
+              <input 
+                className="w-full bg-[#1b1008] border-2 border-[#543219] text-[#f0c8a0] placeholder-[#a07850] p-3 focus:border-[#b86a32] focus:ring-0 pixelated-input" 
+                id="password" 
+                name="password" 
+                type="password" 
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button 
+              className="w-full bg-[#b86a32] text-white py-4 font-bold tracking-wider pixelated-button disabled:opacity-50" 
+              type="submit"
               disabled={isSubmitting}
             >
               {isSubmitting ? "ENTRANDO..." : "COMEÇAR AVENTURA"}
-            </PixelButton>
+            </button>
           </form>
-
-          {/* Additional Links */}
-          <div className="mt-6 flex flex-col items-center gap-4">
-            <Link 
-              to="/forgot-password" 
-              className="font-pixel text-xs text-muted-foreground hover:text-accent transition-colors underline"
-            >
-              Esqueceu a senha?
+          <div className="mt-6 pt-6 border-t-2 border-[#543219] border-dashed space-y-4">
+            <Link to="/forgot-password" className="text-[#bba38a] hover:text-yellow-300 transition-colors duration-200">
+              ESQUECEU A SENHA?
             </Link>
-            <p className="font-pixel text-xs text-muted-foreground text-center">
-              Não tem conta?{" "}
-              <Link to="/register" className="text-primary hover:text-accent transition-colors underline">
-                Cadastre-se
+            <p className="text-[#bba38a]">
+              NÃO TEM CONTA?{" "}
+              <Link to="/register" className="text-yellow-400 hover:text-yellow-200 transition-colors duration-200 underline">
+                CADASTRE-SE
               </Link>
             </p>
           </div>
-        </PixelCard>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
