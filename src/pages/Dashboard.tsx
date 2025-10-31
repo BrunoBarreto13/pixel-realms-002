@@ -6,11 +6,13 @@ import { useAuth } from "@/hooks/useAuth";
 import CharacterSheet from "./CharacterSheet";
 import Library from "./library";
 import Settings from "./Settings";
+import GameTable from "./GameTable";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { cn } from "@/lib/utils";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -124,6 +126,8 @@ const Dashboard = () => {
         return <Library />;
       case "character-sheet":
         return <CharacterSheet />;
+      case "game-table":
+        return <GameTable />;
       case "settings":
         return <Settings />;
       default:
@@ -137,7 +141,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="game-background min-h-screen w-full flex">
+    <div className={cn(
+      "min-h-screen w-full flex",
+      activeSection === 'game-table' ? 'game-table-background' : 'game-background'
+    )}>
       <div className="w-full flex bg-card/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
         <aside className="w-64 bg-card/90 border-r-4 border-border flex flex-col">
