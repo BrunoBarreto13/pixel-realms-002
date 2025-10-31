@@ -45,6 +45,8 @@ const Dashboard = () => {
     const activeItemParent = allMenuItems.find(item => item.children?.some(child => child.id === activeSection));
     if (activeItemParent) {
       setIsCampaignOpen(true);
+    } else {
+      setIsCampaignOpen(false);
     }
   }, [activeSection]);
 
@@ -91,37 +93,7 @@ const Dashboard = () => {
   const renderContent = () => {
     switch (activeSection) {
       case "home":
-        return (
-          <div className="space-y-8">
-            <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
-              <h3 className="font-pixel text-xl text-primary mb-4">
-                BEM-VINDO, AVENTUREIRO!
-              </h3>
-              <p className="font-pixel text-xs text-foreground leading-relaxed mb-6">
-                Sistema de RPG de Mesa Online baseado em AD&D 2e (Segunda Edição)
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="bg-muted/50 p-6 pixel-border">
-                  <h4 className="font-pixel text-sm text-secondary mb-2">CAMPANHA ATUAL</h4>
-                  <p className="font-pixel text-xs text-foreground">Em desenvolvimento...</p>
-                </div>
-                <div className="bg-muted/50 p-6 pixel-border">
-                  <h4 className="font-pixel text-sm text-secondary mb-2">PRÓXIMA SESSÃO</h4>
-                  <p className="font-pixel text-xs text-foreground">A definir</p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
-              <h3 className="font-pixel text-lg text-primary mb-4">RECURSOS DISPONÍVEIS</h3>
-              <ul className="space-y-3 font-pixel text-xs text-foreground">
-                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Sistema de Rolagem de Dados</li>
-                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Fichas de Personagem</li>
-                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Gestão de Grupo</li>
-                <li className="flex items-center gap-2"><span className="text-accent">▸</span> Vídeo Chamada Integrada</li>
-              </ul>
-            </div>
-          </div>
-        );
+        return <p className="text-center">Seção Início em desenvolvimento.</p>;
       case "library":
         return <Library />;
       case "character-sheet":
@@ -132,7 +104,7 @@ const Dashboard = () => {
         return <Settings />;
       default:
         return (
-          <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
+          <div className="text-center">
             <h3 className="font-pixel text-xl text-primary mb-4">{getActiveLabel().toUpperCase()}</h3>
             <p className="font-pixel text-xs text-muted-foreground leading-relaxed">Esta seção está em desenvolvimento...</p>
           </div>
@@ -140,69 +112,93 @@ const Dashboard = () => {
     }
   };
 
+  const NavButton = ({ id, label, icon: Icon, isActive, onClick, hasChildren = false, isOpen = false }) => (
+    <button 
+      onClick={onClick}
+      className={cn(
+        "w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs transition-all text-left",
+        isActive ? "bg-primary text-primary-foreground pixel-border" : "bg-card/50 text-foreground hover:bg-muted pixel-border-inset"
+      )}
+    >
+      <div className="flex items-center gap-3">
+        <Icon className={cn("h-4 w-4", isActive ? "text-primary-foreground" : "text-accent")} />
+        <span>{label}</span>
+      </div>
+      {hasChildren && <ChevronRight className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />}
+    </button>
+  );
+
   return (
-    <div className={cn(
-      "min-h-screen w-full flex",
-      activeSection === 'game-table' ? 'game-table-background' : 'game-background'
-    )}>
-      <div className="w-full flex bg-card/80 backdrop-blur-sm shadow-2xl">
+    <div className={cn("min-h-screen w-full flex", activeSection === 'game-table' ? 'game-table-background' : 'game-background')}>
+      <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
-        <aside className="w-64 bg-card/90 border-r-4 border-border flex flex-col">
-          <div className="p-6 border-b-4 border-border">
-            <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow">PIXEL<br/>REALMS</h1>
+        <aside className="w-64 bg-secondary flex flex-col p-4 border-r-4 border-primary">
+          <div className="p-6">
+            <h1 className="font-pixel text-2xl text-accent brand-text-shadow text-center">PIXEL<br/>REALMS</h1>
           </div>
-          <nav className="flex-1 p-4 overflow-y-auto">
-            <ul className="space-y-2">
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  {item.children ? (
-                    <Collapsible open={isCampaignOpen} onOpenChange={setIsCampaignOpen}>
-                      <CollapsibleTrigger asChild>
-                        <button className={`w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs transition-all pixel-border ${item.children.some(child => child.id === activeSection) ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
-                          <div className="flex items-center gap-3"><item.icon className="h-4 w-4" /><span>{item.label}</span></div>
-                          <ChevronRight className={`h-4 w-4 transition-transform ${isCampaignOpen ? 'rotate-90' : ''}`} />
-                        </button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="pt-2 pl-4">
-                        <ul className="space-y-2">
-                          {item.children.map((child) => (
-                            <li key={child.id}>
-                              <button onClick={() => setActiveSection(child.id)} className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${activeSection === child.id ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
-                                <child.icon className="h-4 w-4" /><span>{child.label}</span>
-                              </button>
-                            </li>
-                          ))}
-                        </ul>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  ) : (
-                    <button onClick={() => setActiveSection(item.id)} className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${activeSection === item.id ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
-                      <item.icon className="h-4 w-4" /><span>{item.label}</span>
-                    </button>
-                  )}
-                </li>
-              ))}
-            </ul>
+          <nav className="flex-1 space-y-2">
+            {menuItems.map((item) => (
+              <div key={item.id}>
+                {item.children ? (
+                  <Collapsible open={isCampaignOpen} onOpenChange={setIsCampaignOpen}>
+                    <CollapsibleTrigger asChild>
+                      <NavButton 
+                        id={item.id}
+                        label={item.label}
+                        icon={item.icon}
+                        isActive={item.children.some(c => c.id === activeSection)}
+                        onClick={() => setIsCampaignOpen(!isCampaignOpen)}
+                        hasChildren
+                        isOpen={isCampaignOpen}
+                      />
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pt-2 pl-4 space-y-2">
+                      {item.children.map((child) => (
+                        <NavButton 
+                          key={child.id}
+                          id={child.id}
+                          label={child.label}
+                          icon={child.icon}
+                          isActive={activeSection === child.id}
+                          onClick={() => setActiveSection(child.id)}
+                        />
+                      ))}
+                    </CollapsibleContent>
+                  </Collapsible>
+                ) : (
+                  <NavButton 
+                    id={item.id}
+                    label={item.label}
+                    icon={item.icon}
+                    isActive={activeSection === item.id}
+                    onClick={() => setActiveSection(item.id)}
+                  />
+                )}
+              </div>
+            ))}
           </nav>
-          <div className="p-4 border-t-4 border-border space-y-2">
-            <button onClick={() => setActiveSection("settings")} className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${activeSection === "settings" ? "bg-primary text-primary-foreground" : "bg-card/50 text-foreground hover:bg-muted"}`}>
-              <SettingsIcon className="h-4 w-4" /><span>Configurações</span>
+          <div className="space-y-2">
+            <NavButton 
+              id="settings"
+              label="Configurações"
+              icon={SettingsIcon}
+              isActive={activeSection === "settings"}
+              onClick={() => setActiveSection("settings")}
+            />
+            <button onClick={handleLogout} className="w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all text-left bg-destructive text-destructive-foreground pixel-border">
+              <LogOut className="h-4 w-4" />
+              <span>SAIR</span>
             </button>
-            <PixelButton variant="destructive" onClick={handleLogout} className="w-full flex items-center gap-2 justify-start p-3">
-              <LogOut className="h-4 w-4" /><span>Sair</span>
-            </PixelButton>
           </div>
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col">
-          <header className="bg-card/90 border-b-4 border-border p-4 flex justify-between items-center">
-            <h2 className="font-pixel text-lg text-foreground">{getActiveLabel()}</h2>
+        <main className="flex-1 flex flex-col p-4 sm:p-6 lg:p-8 gap-4 sm:gap-6 lg:gap-8">
+          <header className="flex-shrink-0">
+            <h2 className="text-3xl text-accent">{getActiveLabel()}</h2>
           </header>
-          <div className="flex-1 p-6 md:p-8 overflow-auto">
-            <div className="max-w-6xl mx-auto">
-              {renderContent()}
-            </div>
+          <div className="flex-1 overflow-auto">
+            {renderContent()}
           </div>
         </main>
       </div>
