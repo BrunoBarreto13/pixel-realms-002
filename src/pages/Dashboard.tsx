@@ -41,7 +41,6 @@ const Dashboard = () => {
     },
     { id: "character-sheet", label: "Ficha do Jogador", icon: ScrollText },
     { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
-    { id: "settings", label: "Configurações", icon: SettingsIcon },
   ];
 
   // When a child is selected, open the collapsible
@@ -72,6 +71,7 @@ const Dashboard = () => {
   };
 
   const getActiveLabel = () => {
+    if (activeSection === "settings") return "Configurações";
     for (const item of allMenuItems) {
       if (item.id === activeSection) return item.label;
       if (item.children) {
@@ -173,10 +173,21 @@ const Dashboard = () => {
 
         {/* Bottom Section */}
         <div className="p-4 border-t-4 border-border space-y-2">
+          <button
+            onClick={() => setActiveSection("settings")}
+            className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
+              activeSection === "settings"
+                ? "bg-primary text-primary-foreground"
+                : "bg-card/50 text-foreground hover:bg-muted"
+            }`}
+          >
+            <SettingsIcon className="h-4 w-4" />
+            <span>Configurações</span>
+          </button>
           <PixelButton
             variant="destructive"
             onClick={handleLogout}
-            className="w-full flex items-center gap-2 justify-start"
+            className="w-full flex items-center gap-2 justify-start p-3"
           >
             <LogOut className="h-4 w-4" />
             <span>Sair</span>
