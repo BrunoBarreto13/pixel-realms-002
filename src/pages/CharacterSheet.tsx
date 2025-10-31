@@ -195,6 +195,7 @@ const CharacterSheet = () => {
         <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
           <TabsTrigger value="stats" className={tabTriggerClasses}>Info</TabsTrigger>
           <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
+          <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
           <TabsTrigger value="combate" className={tabTriggerClasses}>Combate</TabsTrigger>
           <TabsTrigger value="inventory" className={tabTriggerClasses}>Inventário</TabsTrigger>
           <TabsTrigger value="spells" className={tabTriggerClasses}>Magias</TabsTrigger>
@@ -309,6 +310,11 @@ const CharacterSheet = () => {
                 <div>AJUSTE DE REAÇÃO: <span className="text-accent">{charismaBonuses.reaction > 0 ? '+' : ''}{charismaBonuses.reaction}</span></div>
               </div>
             </div>
+          </TabsContent>
+
+          <TabsContent value="skills" className="mt-0">
+            <h3 className="font-pixel text-sm text-accent mb-4">PERÍCIAS</h3>
+            <p className="font-pixel text-xs text-muted-foreground text-center py-8">Sistema de perícias em desenvolvimento...</p>
           </TabsContent>
 
           <TabsContent value="combate" className="mt-0 space-y-6">
