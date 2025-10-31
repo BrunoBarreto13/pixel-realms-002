@@ -51,6 +51,23 @@ const Settings = () => {
       </PixelCard>
 
       <PixelCard>
+        <h3 className="font-pixel text-lg text-primary mb-4 pixel-glow">
+          LIVROS E RECURSOS
+        </h3>
+        <div className="space-y-4">
+           <p className="font-pixel text-xs text-muted-foreground leading-relaxed">
+            Anexe seus próprios livros de regras, aventuras ou outros recursos em formato PDF para fácil acesso durante o jogo.
+          </p>
+          <PixelButton
+            variant="secondary"
+            onClick={() => toast({ title: "Função em desenvolvimento", description: "O upload de PDFs ainda não foi implementado."})}
+          >
+            + ADICIONAR LIVRO
+          </PixelButton>
+        </div>
+      </PixelCard>
+
+      <PixelCard>
         <h3 className="font-pixel text-lg text-destructive mb-4">
           ZONA DE PERIGO
         </h3>
