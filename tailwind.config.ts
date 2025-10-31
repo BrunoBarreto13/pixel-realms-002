@@ -60,7 +60,7 @@ export default {
         'brand-yellow': 'hsl(var(--brand-yellow))',
       },
       fontFamily: {
-        pixel: ["'Press Start 2P'", "cursive"],
+        pixel: ["'Silkscreen'", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
