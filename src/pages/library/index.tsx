@@ -8,9 +8,26 @@ const LibraryIndex = ({ onNavigate }: { onNavigate: (view: 'arcane' | 'divine') 
   
   return (
     <PixelCard>
-      <h2 className="font-pixel text-2xl text-primary mb-6 pixel-glow">Manual do Jogador</h2>
+      <h2 className="font-pixel text-2xl text-primary mb-6 pixel-glow">Livro do Jogador</h2>
       <div className="space-y-8 font-pixel text-xs leading-relaxed">
         
+        {/* Capítulo 1: Pontuações de habilidade */}
+        <div>
+          <h3 className="font-pixel text-base text-accent border-b-2 border-border pb-2 mb-4">Cap. 1: Pontuações de habilidade do personagem do jogador</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+              <li>Força</li>
+              <li>Destreza</li>
+              <li>Constituição</li>
+            </ul>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+              <li>Inteligência</li>
+              <li>Sabedoria</li>
+              <li>Carisma</li>
+            </ul>
+          </div>
+        </div>
+
         {/* Capítulo 3: Classes */}
         <div>
           <h3 className="font-pixel text-base text-accent border-b-2 border-border pb-2 mb-4">Cap. 3: Classes de personagens do jogador</h3>
