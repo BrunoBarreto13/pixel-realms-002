@@ -1,17 +1,23 @@
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { PixelButton } from "@/components/PixelButton";
-import { Home, Dices, ScrollText, Shield, LogOut } from "lucide-react";
+import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import castleDragonDark from "@/assets/castle-dragon-dark.png";
 import castleDragonLight from "@/assets/castle-dragon-light.png";
 import CharacterSheet from "./CharacterSheet";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, loading, isMaster, signOut } = useAuth();
   const [activeSection, setActiveSection] = useState("home");
+  const [isCampaignOpen, setIsCampaignOpen] = useState(false);
   const isDark = document.documentElement.classList.contains("dark");
 
   useEffect(() => {
@@ -22,16 +28,52 @@ const Dashboard = () => {
 
   const allMenuItems = [
     { id: "home", label: "Início", icon: Home },
-    { id: "game-table", label: "Mesa de jogo", icon: Dices },
+    {
+      id: "campaign",
+      label: "Campanha",
+      icon: BookOpen,
+      children: [{ id: "game-table", label: "Mesa de jogo", icon: Dices }],
+    },
     { id: "character-sheet", label: "Ficha do Jogador", icon: ScrollText },
     { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
   ];
 
+  // When a child is selected, open the collapsible
+  useEffect(() => {
+    const activeItemParent = allMenuItems.find(item => item.children?.some(child => child.id === activeSection));
+    if (activeItemParent) {
+      setIsCampaignOpen(true);
+    }
+  }, [activeSection]);
+
   // Filter menu items based on user role
-  const menuItems = allMenuItems.filter(item => !item.masterOnly || isMaster);
+  const menuItems = allMenuItems
+    .map(item => {
+      if (item.children) {
+        const visibleChildren = item.children.filter(child => !child.masterOnly || isMaster);
+        return { ...item, children: visibleChildren };
+      }
+      return item;
+    })
+    .filter(item => {
+      if (item.masterOnly && !isMaster) return false;
+      if (item.children && item.children.length === 0) return false;
+      return true;
+    });
 
   const handleLogout = async () => {
     await signOut();
+  };
+
+  const getActiveLabel = () => {
+    for (const item of allMenuItems) {
+      if (item.id === activeSection) return item.label;
+      if (item.children) {
+        const child = item.children.find(c => c.id === activeSection);
+        if (child) return child.label;
+      }
+    }
+    return "Início";
   };
 
   if (loading) {
@@ -68,17 +110,56 @@ const Dashboard = () => {
           <ul className="space-y-2">
             {menuItems.map((item) => (
               <li key={item.id}>
-                <button
-                  onClick={() => setActiveSection(item.id)}
-                  className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
-                    activeSection === item.id
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-card/50 text-foreground hover:bg-muted"
-                  }`}
-                >
-                  <item.icon className="h-4 w-4" />
-                  <span>{item.label}</span>
-                </button>
+                {item.children ? (
+                  <Collapsible open={isCampaignOpen} onOpenChange={setIsCampaignOpen}>
+                    <CollapsibleTrigger asChild>
+                      <button
+                        className={`w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
+                          item.children.some(child => child.id === activeSection)
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-card/50 text-foreground hover:bg-muted"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <item.icon className="h-4 w-4" />
+                          <span>{item.label}</span>
+                        </div>
+                        <ChevronRight className={`h-4 w-4 transition-transform ${isCampaignOpen ? 'rotate-90' : ''}`} />
+                      </button>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pt-2 pl-4">
+                      <ul className="space-y-2">
+                        {item.children.map((child) => (
+                          <li key={child.id}>
+                            <button
+                              onClick={() => setActiveSection(child.id)}
+                              className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
+                                activeSection === child.id
+                                  ? "bg-primary text-primary-foreground"
+                                  : "bg-card/50 text-foreground hover:bg-muted"
+                              }`}
+                            >
+                              <child.icon className="h-4 w-4" />
+                              <span>{child.label}</span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </CollapsibleContent>
+                  </Collapsible>
+                ) : (
+                  <button
+                    onClick={() => setActiveSection(item.id)}
+                    className={`w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all pixel-border ${
+                      activeSection === item.id
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-card/50 text-foreground hover:bg-muted"
+                    }`}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    <span>{item.label}</span>
+                  </button>
+                )}
               </li>
             ))}
           </ul>
@@ -103,7 +184,7 @@ const Dashboard = () => {
         <header className="bg-card/90 backdrop-blur-sm border-b-4 border-border p-4 flex justify-between items-center">
           <div>
             <h2 className="font-pixel text-lg text-foreground">
-              {menuItems.find(item => item.id === activeSection)?.label}
+              {getActiveLabel()}
             </h2>
           </div>
           <ThemeToggle />
@@ -160,7 +241,7 @@ const Dashboard = () => {
             {activeSection !== "home" && activeSection !== "character-sheet" && (
               <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
                 <h3 className="font-pixel text-xl text-primary mb-4 pixel-glow">
-                  {menuItems.find(item => item.id === activeSection)?.label.toUpperCase()}
+                  {getActiveLabel().toUpperCase()}
                 </h3>
                 <p className="font-pixel text-xs text-muted-foreground leading-relaxed">
                   Esta seção está em desenvolvimento...
