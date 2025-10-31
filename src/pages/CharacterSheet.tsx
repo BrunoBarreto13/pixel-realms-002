@@ -168,7 +168,7 @@ const CharacterSheet = () => {
               <User className="w-12 h-12 text-muted-foreground" />
             </div>
             <div>
-              <h2 className="font-pixel text-xl text-primary pixel-glow">{character.name || "Novo Personagem"}</h2>
+              <h2 className="font-pixel text-xl text-primary">{character.name || "Novo Personagem"}</h2>
               <p className="font-pixel text-xs text-secondary">
                 Nível {character.level} {RACES.find(r => r.value === character.race)?.label || "---"} {CLASSES.find(c => c.value === character.class)?.label || "---"}
               </p>
@@ -241,7 +241,7 @@ const CharacterSheet = () => {
         <TabsContent value="attributes" className="space-y-2 mt-6">
           <div className="bg-card/80 backdrop-blur-sm p-4 pixel-border">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-pixel text-sm text-blue-500 pixel-glow">FORÇA</h3>
+              <h3 className="font-pixel text-sm text-blue-500">FORÇA</h3>
               <input type="number" value={character.attributes.strength} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, strength: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-muted/50 px-2 font-pixel text-xs text-center" min={3} max={20} disabled={!isEditing} />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
@@ -254,7 +254,7 @@ const CharacterSheet = () => {
           </div>
           <div className="bg-card/80 backdrop-blur-sm p-4 pixel-border">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-pixel text-sm text-blue-500 pixel-glow">DESTREZA</h3>
+              <h3 className="font-pixel text-sm text-blue-500">DESTREZA</h3>
               <input type="number" value={character.attributes.dexterity} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, dexterity: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-muted/50 px-2 font-pixel text-xs text-center" min={3} max={18} disabled={!isEditing} />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
@@ -265,7 +265,7 @@ const CharacterSheet = () => {
           </div>
           <div className="bg-card/80 backdrop-blur-sm p-4 pixel-border">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-pixel text-sm text-blue-500 pixel-glow">CONSTITUIÇÃO</h3>
+              <h3 className="font-pixel text-sm text-blue-500">CONSTITUIÇÃO</h3>
               <input type="number" value={character.attributes.constitution} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, constitution: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-muted/50 px-2 font-pixel text-xs text-center" min={3} max={19} disabled={!isEditing} />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
@@ -276,7 +276,7 @@ const CharacterSheet = () => {
           </div>
           <div className="bg-card/80 backdrop-blur-sm p-4 pixel-border">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-pixel text-sm text-blue-500 pixel-glow">INTELIGÊNCIA</h3>
+              <h3 className="font-pixel text-sm text-blue-500">INTELIGÊNCIA</h3>
               <input type="number" value={character.attributes.intelligence} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, intelligence: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-muted/50 px-2 font-pixel text-xs text-center" min={3} max={19} disabled={!isEditing} />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
@@ -288,7 +288,7 @@ const CharacterSheet = () => {
           </div>
           <div className="bg-card/80 backdrop-blur-sm p-4 pixel-border">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-pixel text-sm text-blue-500 pixel-glow">SABEDORIA</h3>
+              <h3 className="font-pixel text-sm text-blue-500">SABEDORIA</h3>
               <input type="number" value={character.attributes.wisdom} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, wisdom: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-muted/50 px-2 font-pixel text-xs text-center" min={3} max={18} disabled={!isEditing} />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
@@ -299,7 +299,7 @@ const CharacterSheet = () => {
           </div>
           <div className="bg-card/80 backdrop-blur-sm p-4 pixel-border">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-pixel text-sm text-primary pixel-glow">CARISMA</h3>
+              <h3 className="font-pixel text-sm text-primary">CARISMA</h3>
               <input type="number" value={character.attributes.charisma} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, charisma: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-muted/50 px-2 font-pixel text-xs text-center" min={3} max={18} disabled={!isEditing} />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">

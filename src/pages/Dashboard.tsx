@@ -85,7 +85,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
-        <p className="font-pixel text-sm text-muted-foreground animate-pixel-pulse">
+        <p className="font-pixel text-sm text-muted-foreground">
           CARREGANDO...
         </p>
       </div>
@@ -106,7 +106,7 @@ const Dashboard = () => {
       <aside className="relative z-10 w-80 bg-card/90 backdrop-blur-sm border-r-4 border-border flex flex-col">
         {/* Logo */}
         <div className="p-6 border-b-4 border-border">
-          <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow brand-glow">
+          <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow">
             PIXEL<br/>REALMS
           </h1>
         </div>
@@ -213,7 +213,7 @@ const Dashboard = () => {
             {activeSection === "home" && (
               <div className="space-y-8">
                 <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border">
-                  <h3 className="font-pixel text-xl text-primary mb-4 pixel-glow">
+                  <h3 className="font-pixel text-xl text-primary mb-4">
                     BEM-VINDO, AVENTUREIRO!
                   </h3>
                   <p className="font-pixel text-xs text-foreground leading-relaxed mb-6">
@@ -265,7 +265,7 @@ const Dashboard = () => {
 
             {activeSection !== "home" && activeSection !== "character-sheet" && activeSection !== "library" && activeSection !== "settings" && (
               <div className="bg-card/80 backdrop-blur-sm p-8 pixel-border text-center">
-                <h3 className="font-pixel text-xl text-primary mb-4 pixel-glow">
+                <h3 className="font-pixel text-xl text-primary mb-4">
                   {getActiveLabel().toUpperCase()}
                 </h3>
                 <p className="font-pixel text-xs text-muted-foreground leading-relaxed">

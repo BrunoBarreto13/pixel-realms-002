@@ -37,7 +37,7 @@ const SpellListView = ({ spells, title, onBack }: SpellListViewProps) => {
         <PixelButton onClick={onBack} variant="outline" size="icon" aria-label="Voltar">
           <ArrowLeft className="h-4 w-4" />
         </PixelButton>
-        <h2 className="font-pixel text-xl text-primary pixel-glow">{title}</h2>
+        <h2 className="font-pixel text-xl text-primary">{title}</h2>
       </div>
 
       <div className="space-y-4">

@@ -60,7 +60,7 @@ export default {
         'brand-yellow': 'hsl(var(--brand-yellow))',
       },
       fontFamily: {
-        pixel: ["'Press Start 2P'", "cursive"],
+        pixel: ["'IM Fell English SC'", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -80,20 +80,10 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "pixel-pulse": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.7" },
-        },
-        "pixel-float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pixel-pulse": "pixel-pulse 2s ease-in-out infinite",
-        "pixel-float": "pixel-float 3s ease-in-out infinite",
       },
     },
   },

@@ -97,11 +97,11 @@ const Register = () => {
       {/* Register Card */}
       <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
         {/* Title */}
-        <div className="text-center animate-pixel-float">
-          <h1 className="font-pixel text-3xl md:text-4xl text-primary pixel-text-shadow mb-2 pixel-glow">
+        <div className="text-center">
+          <h1 className="font-pixel text-3xl md:text-4xl text-primary pixel-text-shadow mb-2">
             CADASTRO
           </h1>
-          <p className="font-pixel text-xs text-secondary pixel-text-shadow animate-pixel-pulse">
+          <p className="font-pixel text-xs text-secondary pixel-text-shadow">
             Escolha seu papel
           </p>
         </div>

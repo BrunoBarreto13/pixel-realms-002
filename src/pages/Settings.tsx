@@ -18,7 +18,7 @@ const Settings = () => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <PixelCard>
-        <h3 className="font-pixel text-lg text-primary mb-4 pixel-glow">
+        <h3 className="font-pixel text-lg text-primary mb-4">
           CONTA
         </h3>
         <div className="space-y-4">
@@ -38,7 +38,7 @@ const Settings = () => {
       </PixelCard>
 
       <PixelCard>
-        <h3 className="font-pixel text-lg text-primary mb-4 pixel-glow">
+        <h3 className="font-pixel text-lg text-primary mb-4">
           LIVROS E RECURSOS
         </h3>
         <div className="space-y-4">
