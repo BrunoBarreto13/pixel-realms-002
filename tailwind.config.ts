@@ -57,6 +57,7 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        'brand-yellow': 'hsl(var(--brand-yellow))',
       },
       fontFamily: {
         pixel: ["'Press Start 2P'", "cursive"],

@@ -48,6 +48,9 @@ All colors MUST be HSL.
     --sidebar-border: 0 0% 75%;
     --sidebar-ring: 0 0% 45%;
 
+    /* Brand Colors */
+    --brand-yellow: 54 90% 50%;
+
     /* Pixel shadows and effects */
     --pixel-shadow: 4px 4px 0px hsl(0 0% 12%);
     --pixel-glow: 0 0 10px hsl(0 0% 45%);
@@ -93,6 +96,9 @@ All colors MUST be HSL.
     --sidebar-border: 0 0% 25%;
     --sidebar-ring: 0 0% 55%;
 
+    /* Brand Colors */
+    --brand-yellow: 54 90% 50%;
+
     --pixel-shadow: 4px 4px 0px hsl(0 0% 0%);
     --pixel-glow: 0 0 15px hsl(0 0% 60%);
   }
@@ -124,8 +130,20 @@ All colors MUST be HSL.
     text-shadow: 2px 2px 0 hsl(var(--background));
   }
 
+  .brand-text-shadow {
+    text-shadow: 2px 2px 0px hsl(0 0% 8%);
+  }
+
+  .dark .brand-text-shadow {
+    text-shadow: 2px 2px 0px hsl(0 0% 0%);
+  }
+
   .pixel-glow {
     filter: drop-shadow(0 0 8px hsl(var(--primary)));
+  }
+
+  .brand-glow {
+    filter: drop-shadow(0 0 8px hsl(var(--brand-yellow)));
   }
 
   /* Animations */

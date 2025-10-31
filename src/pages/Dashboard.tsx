@@ -100,7 +100,7 @@ const Dashboard = () => {
       <aside className="relative z-10 w-80 bg-card/90 backdrop-blur-sm border-r-4 border-border flex flex-col">
         {/* Logo */}
         <div className="p-6 border-b-4 border-border">
-          <h1 className="font-pixel text-xl text-primary pixel-glow">
+          <h1 className="font-pixel text-xl text-brand-yellow brand-text-shadow brand-glow">
             PIXEL<br/>REALMS
           </h1>
         </div>
