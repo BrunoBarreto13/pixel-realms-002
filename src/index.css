@@ -4,38 +4,38 @@
 
 @layer base {
   :root {
-    /* PIXEL ART UI KIT Theme */
-    --background: 28 28% 15%; /* Dark brown */
-    --foreground: 38 55% 85%; /* Light beige */
+    /* Retro RPG Theme */
+    --background: 220 25% 15%; /* Very dark, deep blue */
+    --foreground: 210 40% 96%; /* Off-white, very light gray for text */
 
-    --card: 34 30% 35%; /* Medium brown */
-    --card-foreground: 38 55% 85%;
+    --card: 220 25% 22%; /* Slightly lighter dark blue for panels */
+    --card-foreground: 210 40% 96%;
 
-    --popover: 28 28% 15%;
-    --popover-foreground: 38 55% 85%;
+    --popover: 220 25% 15%;
+    --popover-foreground: 210 40% 96%;
 
-    --primary: 152 45% 58%; /* Greenish-teal */
-    --primary-foreground: 152 50% 15%; /* Dark teal */
+    --primary: 45 80% 60%; /* Bright, classic gold/yellow */
+    --primary-foreground: 30 50% 10%; /* Very dark brown for text on primary */
 
-    --secondary: 38 55% 85%; /* Light beige */
-    --secondary-foreground: 34 30% 35%; /* Medium brown */
+    --secondary: 220 15% 40%; /* Muted blue-gray for secondary elements */
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 34 30% 25%; /* Darker brown */
-    --muted-foreground: 34 15% 60%; /* Grayish brown */
+    --muted: 220 15% 30%;
+    --muted-foreground: 220 10% 60%; /* Lighter gray for placeholder text */
 
-    --accent: 152 45% 58%; /* Greenish-teal */
-    --accent-foreground: 152 50% 15%;
+    --accent: 180 70% 60%; /* Bright Cyan for highlights */
+    --accent-foreground: 220 25% 15%;
 
-    --destructive: 0 70% 55%; /* Classic red */
-    --destructive-foreground: 38 55% 85%;
+    --destructive: 0 70% 55%; /* A classic, bright red */
+    --destructive-foreground: 210 40% 96%;
 
-    --border: 28 28% 10%; /* Almost black */
-    --input: 34 30% 28%; /* Darker brown for inputs */
-    --ring: 152 45% 58%; /* Teal for focus */
-    --radius: 0rem;
+    --border: 45 80% 50%; /* A slightly darker gold for borders */
+    --input: 220 25% 18%;
+    --ring: 180 70% 60%; /* Cyan for focus rings */
+    --radius: 0rem; /* Sharp corners for pixel art */
 
-    --brand-yellow: 38 55% 85%; /* Light beige for brand text */
-    --pixel-shadow: 2px 2px 0px hsl(28 28% 10%);
+    --brand-yellow: 45 80% 60%; /* Use the new primary gold for the brand */
+    --pixel-shadow: 2px 2px 0px hsl(0 0% 8%); /* A simple, almost black shadow */
   }
 }
 
