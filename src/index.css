@@ -75,23 +75,11 @@
   }
 
   .rpg-main-content {
-    @apply p-4 sm:p-6 lg:p-8;
-    background-color: hsl(var(--card) / 0.9);
-    border: 4px solid hsl(var(--border));
-    background-image: 
-      url('/src/assets/ui-kit/Decorative_cracks.png'),
-      url('/src/assets/ui-kit/Decorative_cracks.png'),
-      url('/src/assets/ui-kit/Decorative_cracks.png'),
-      url('/src/assets/ui-kit/Decorative_cracks.png'),
-      url('/src/assets/ui-kit/Text1.png');
-    background-position: 
-      top 8px left 8px,
-      top 8px right 8px,
-      bottom 8px left 8px,
-      bottom 8px right 8px,
-      center;
-    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
-    background-size: 64px, 64px, 64px, 64px, auto;
+    @apply p-8;
+    background-color: hsl(var(--card));
+    border: 8px solid hsl(var(--primary));
+    outline: 4px solid hsl(var(--accent));
+    outline-offset: -8px;
   }
 
   .pixel-border {
