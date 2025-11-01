@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
-import { PixelCard } from "@/components/PixelCard";
+import { PixelPanel } from "@/components/PixelPanel";
 import loginBg from "@/assets/login-bg.png";
 
 const ForgotPassword = () => {
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
           </p>
         </div>
 
-        <PixelCard className="w-full">
+        <PixelPanel className="w-full">
           {!submitted ? (
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <p className="font-pixel text-xs text-muted-foreground text-center leading-relaxed">
@@ -82,7 +82,7 @@ const ForgotPassword = () => {
               Voltar ao login
             </Link>
           </div>
-        </PixelCard>
+        </PixelPanel>
       </div>
     </div>
   );

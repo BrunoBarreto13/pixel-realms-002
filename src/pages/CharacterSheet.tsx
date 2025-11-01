@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { PixelCard } from "@/components/PixelCard";
+import { PixelPanel } from "@/components/PixelPanel";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
@@ -163,15 +163,15 @@ const CharacterSheet = () => {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       {/* Header */}
-      <PixelCard>
+      <PixelPanel>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 pixel-border bg-muted/50 flex items-center justify-center">
               <User className="w-12 h-12 text-muted-foreground" />
             </div>
             <div>
-              <h2 className="font-pixel text-xl text-primary">{character.name || "Novo Personagem"}</h2>
-              <p className="font-pixel text-xs text-secondary">
+              <h2 className="font-pixel text-xl text-primary pixel-text-shadow">{character.name || "Novo Personagem"}</h2>
+              <p className="font-pixel text-xs text-secondary-foreground">
                 Nível {character.level} {RACES.find(r => r.value === character.race)?.label || "---"} {CLASSES.find(c => c.value === character.class)?.label || "---"}
               </p>
               <p className="font-pixel text-xs text-muted-foreground">Jogador: {character.playerName || "---"}</p>
@@ -188,7 +188,7 @@ const CharacterSheet = () => {
             )}
           </div>
         </div>
-      </PixelCard>
+      </PixelPanel>
 
       {/* Tabs */}
       <Tabs defaultValue="stats" className="w-full">
@@ -205,7 +205,7 @@ const CharacterSheet = () => {
         <div className="rpg-panel relative">
           <TabsContent value="stats" className="mt-0 space-y-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="font-pixel text-sm text-accent">INFORMAÇÕES BÁSICAS</h3>
+              <h3 className="font-pixel text-sm text-accent pixel-text-shadow">INFORMAÇÕES BÁSICAS</h3>
               <PixelButton onClick={calculateHP} size="sm" variant="secondary">Calcular HP</PixelButton>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -313,13 +313,13 @@ const CharacterSheet = () => {
           </TabsContent>
 
           <TabsContent value="skills" className="mt-0">
-            <h3 className="font-pixel text-sm text-accent mb-4">PERÍCIAS</h3>
+            <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">PERÍCIAS</h3>
             <p className="font-pixel text-xs text-muted-foreground text-center py-8">Sistema de perícias em desenvolvimento...</p>
           </TabsContent>
 
           <TabsContent value="combate" className="mt-0 space-y-6">
             <div className="bg-muted/30 p-4 pixel-border">
-              <h3 className="font-pixel text-sm text-accent mb-4">ESTATÍSTICAS DE COMBATE</h3>
+              <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ESTATÍSTICAS DE COMBATE</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="bg-input p-4 pixel-border text-center">
                   <Label className="font-pixel text-xs text-secondary mb-2 block">CA</Label>
@@ -349,7 +349,7 @@ const CharacterSheet = () => {
             </div>
 
             <div className="bg-muted/30 p-4 pixel-border">
-              <h3 className="font-pixel text-sm text-accent mb-4">ROLAGEM DE DADOS</h3>
+              <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ROLAGEM DE DADOS</h3>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <PixelButton onClick={() => handleRoll(20, strengthBonuses.hit, "Ataque Corpo-a-Corpo")} className="flex items-center gap-2"><Sword className="h-4 w-4" /> Ataque C-a-C</PixelButton>
                 <PixelButton onClick={() => handleRoll(20, dexterityBonuses.missile, "Ataque à Distância")} className="flex items-center gap-2"><Target className="h-4 w-4" /> Ataque Dist.</PixelButton>
@@ -365,15 +365,15 @@ const CharacterSheet = () => {
           </TabsContent>
 
           <TabsContent value="inventory" className="mt-0">
-            <h3 className="font-pixel text-sm text-accent mb-4">INVENTÁRIO</h3>
+            <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">INVENTÁRIO</h3>
             <p className="font-pixel text-xs text-muted-foreground text-center py-8">Sistema de inventário em desenvolvimento...</p>
           </TabsContent>
           <TabsContent value="spells" className="mt-0">
-            <h3 className="font-pixel text-sm text-accent mb-4">MAGIAS</h3>
+            <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">MAGIAS</h3>
             <p className="font-pixel text-xs text-muted-foreground text-center py-8">Sistema de magias em desenvolvimento...</p>
           </TabsContent>
           <TabsContent value="notes" className="mt-0">
-            <h3 className="font-pixel text-sm text-accent mb-4">NOTAS</h3>
+            <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">NOTAS</h3>
             <textarea className="w-full min-h-[200px] pixel-border bg-input p-4 font-pixel text-xs resize-none" placeholder="Escreva suas anotações sobre o personagem..." />
           </TabsContent>
         </div>

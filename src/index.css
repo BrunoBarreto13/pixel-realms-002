@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 24 10% 20%; /* background-dark */
-    --foreground: 30 20% 85%; /* text-light */
+    --background: 220 15% 12%; /* A bit more blueish dark */
+    --foreground: 220 10% 90%;
 
-    --card: 26 10% 15%; /* ui-dark */
-    --card-foreground: 30 20% 85%;
+    --card: 220 15% 20%;
+    --card-foreground: 220 10% 90%;
 
-    --popover: 26 10% 15%;
-    --popover-foreground: 30 20% 85%;
+    --popover: 220 15% 15%;
+    --popover-foreground: 220 10% 90%;
 
-    --primary: 20 50% 45%; /* primary */
-    --primary-foreground: 30 20% 95%;
+    --primary: 210 60% 55%; /* Brighter blue */
+    --primary-foreground: 220 10% 98%;
 
-    --secondary: 26 10% 25%; /* ui-light */
-    --secondary-foreground: 30 20% 85%;
+    --secondary: 220 15% 25%;
+    --secondary-foreground: 220 10% 90%;
 
-    --muted: 26 10% 25%;
-    --muted-foreground: 30 15% 65%;
+    --muted: 220 15% 25%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 40 75% 60%; /* accent-yellow */
-    --accent-foreground: 24 10% 10%;
+    --accent: 45 80% 60%; /* Brighter yellow */
+    --accent-foreground: 45 100% 5%;
 
-    --destructive: 0 60% 50%;
-    --destructive-foreground: 30 20% 85%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 25 25% 40%; /* border-dark */
-    --input: 24 10% 10%;
-    --ring: 40 75% 60%;
+    --border: 210 40% 40%;
+    --input: 220 15% 10%;
+    --ring: 210 60% 55%;
     --radius: 0rem;
   }
 }
@@ -47,22 +47,31 @@
     -moz-osx-font-smoothing: grayscale;
     image-rendering: pixelated;
   }
-
-  .brand-text-shadow {
-    text-shadow: 2px 2px 0px hsl(0 0% 8%);
-  }
 }
 
 @layer components {
   .game-background {
-    background-image: url('/src/assets/castle-dragon-login.png');
+    background-image: url('/src/assets/forest-bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
   }
   
   .game-table-background {
-    background-color: hsl(var(--background));
+    background-image: url('/src/assets/cave-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .rpg-panel {
+    padding: 1.5rem;
+    background-color: hsl(var(--card));
+    border: 12px solid;
+    border-image-slice: 8;
+    border-image-width: 12px;
+    border-image-repeat: repeat;
+    border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="%232a3e6b"><path d="M0,0 h8 v8 h-8 z M16,0 h8 v8 h-8 z M0,16 h8 v8 h-8 z M16,16 h8 v8 h-8 z" /></g><g fill="%235a83c2"><path d="M8,0 h8 v8 h-8 z M0,8 h8 v8 h-8 z M16,8 h8 v8 h-8 z M8,16 h8 v8 h-8 z" /></g><g fill="%231e2a4a"><path d="M8,8 h8 v8 h-8 z" /></g></svg>');
   }
 
   .pixel-border {
@@ -70,7 +79,7 @@
     border-image-slice: 2;
     border-image-width: 4px;
     border-image-repeat: stretch;
-    border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="6" height="6"><g fill="%23ad5e38"><path d="M0,0 h2 v2 h-2 z M2,2 h2 v2 h-2 z M4,4 h2 v2 h-2 z" /></g><g fill="%23463d35"><path d="M2,0 h2 v2 h-2 z M4,2 h2 v2 h-2 z" /></g></svg>');
+    border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="6" height="6"><g fill="%235a83c2"><path d="M0,0 h2 v2 h-2 z M2,2 h2 v2 h-2 z M4,4 h2 v2 h-2 z" /></g><g fill="%232a3e6b"><path d="M2,0 h2 v2 h-2 z M4,2 h2 v2 h-2 z" /></g></svg>');
   }
 
   .pixel-border-inset {
@@ -78,11 +87,15 @@
     border-image-slice: 2;
     border-image-width: 4px;
     border-image-repeat: stretch;
-    border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="6" height="6"><g fill="%23463d35"><path d="M0,0 h2 v2 h-2 z M2,2 h2 v2 h-2 z M4,4 h2 v2 h-2 z" /></g><g fill="%23ad5e38"><path d="M2,0 h2 v2 h-2 z M4,2 h2 v2 h-2 z" /></g></svg>');
+    border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="6" height="6"><g fill="%232a3e6b"><path d="M0,0 h2 v2 h-2 z M2,2 h2 v2 h-2 z M4,4 h2 v2 h-2 z" /></g><g fill="%235a83c2"><path d="M2,0 h2 v2 h-2 z M4,2 h2 v2 h-2 z" /></g></svg>');
   }
 }
 
 @layer utilities {
+  .pixel-text-shadow {
+    text-shadow: 2px 2px 0px hsl(var(--background) / 0.8);
+  }
+
   ::-webkit-scrollbar {
     width: 12px;
   }

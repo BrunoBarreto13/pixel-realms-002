@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PixelCard } from "@/components/PixelCard";
+import { PixelPanel } from "@/components/PixelPanel";
 import { arcaneSpells, divineSpells } from "@/lib/spells";
 import SpellListView from "./SpellListView";
 
@@ -7,8 +7,8 @@ const LibraryIndex = ({ onNavigate }: { onNavigate: (view: 'arcane' | 'divine') 
   const linkStyle = "text-left text-foreground hover:underline hover:text-accent transition-colors";
   
   return (
-    <PixelCard>
-      <h2 className="font-pixel text-2xl text-primary mb-6">Livro do Jogador</h2>
+    <PixelPanel>
+      <h2 className="font-pixel text-2xl text-primary pixel-text-shadow mb-6">Livro do Jogador</h2>
       <div className="space-y-8 font-pixel text-xs leading-relaxed">
         
         {/* Capítulo 1: Pontuações de habilidade */}
@@ -91,7 +91,7 @@ const LibraryIndex = ({ onNavigate }: { onNavigate: (view: 'arcane' | 'divine') 
         </div>
 
       </div>
-    </PixelCard>
+    </PixelPanel>
   );
 };
 

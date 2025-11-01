@@ -6,7 +6,7 @@ import { Spell } from "@/lib/spells";
 import { SpellCard } from "./SpellCard";
 import { PixelButton } from "@/components/PixelButton";
 import { ArrowLeft } from "lucide-react";
-import { PixelCard } from "@/components/PixelCard";
+import { PixelPanel } from "@/components/PixelPanel";
 
 interface SpellListViewProps {
   spells: Spell[];
@@ -32,12 +32,12 @@ const SpellListView = ({ spells, title, onBack }: SpellListViewProps) => {
   }, [spells]);
 
   return (
-    <PixelCard>
+    <PixelPanel>
       <div className="flex items-center gap-4 mb-6">
         <PixelButton onClick={onBack} variant="outline" size="icon" aria-label="Voltar">
           <ArrowLeft className="h-4 w-4" />
         </PixelButton>
-        <h2 className="font-pixel text-xl text-primary">{title}</h2>
+        <h2 className="font-pixel text-xl text-primary pixel-text-shadow">{title}</h2>
       </div>
 
       <div className="space-y-4">
@@ -83,7 +83,7 @@ const SpellListView = ({ spells, title, onBack }: SpellListViewProps) => {
           </p>
         )}
       </div>
-    </PixelCard>
+    </PixelPanel>
   );
 };
 

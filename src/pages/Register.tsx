@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
-import { PixelCard } from "@/components/PixelCard";
+import { PixelPanel } from "@/components/PixelPanel";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import loginBg from "@/assets/castle-dragon-login.png";
@@ -100,7 +100,7 @@ const Register = () => {
           </p>
         </div>
 
-        <PixelCard className="w-full">
+        <PixelPanel className="w-full">
           {!userType ? (
             /* User Type Selection */
             <div className="flex flex-col gap-4">
@@ -206,7 +206,7 @@ const Register = () => {
               </Link>
             </p>
           </div>
-        </PixelCard>
+        </PixelPanel>
       </div>
     </div>
   );

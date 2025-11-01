@@ -1,7 +1,7 @@
 import { HTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-const PixelCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+const PixelPanel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => {
     return (
       <div
@@ -15,6 +15,6 @@ const PixelCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     );
   }
 );
-PixelCard.displayName = "PixelCard";
+PixelPanel.displayName = "PixelPanel";
 
-export { PixelCard };
+export { PixelPanel };

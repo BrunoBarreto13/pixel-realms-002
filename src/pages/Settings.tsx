@@ -1,4 +1,4 @@
-import { PixelCard } from "@/components/PixelCard";
+import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
@@ -17,8 +17,8 @@ const Settings = () => {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <PixelCard>
-        <h3 className="font-pixel text-lg text-primary mb-4">
+      <PixelPanel>
+        <h3 className="font-pixel text-lg text-primary pixel-text-shadow mb-4">
           CONTA
         </h3>
         <div className="space-y-4">
@@ -35,10 +35,10 @@ const Settings = () => {
             ALTERAR SENHA
           </PixelButton>
         </div>
-      </PixelCard>
+      </PixelPanel>
 
-      <PixelCard>
-        <h3 className="font-pixel text-lg text-primary mb-4">
+      <PixelPanel>
+        <h3 className="font-pixel text-lg text-primary pixel-text-shadow mb-4">
           LIVROS E RECURSOS
         </h3>
         <div className="space-y-4">
@@ -52,10 +52,10 @@ const Settings = () => {
             + ADICIONAR LIVRO
           </PixelButton>
         </div>
-      </PixelCard>
+      </PixelPanel>
 
-      <PixelCard>
-        <h3 className="font-pixel text-lg text-destructive mb-4">
+      <PixelPanel>
+        <h3 className="font-pixel text-lg text-destructive pixel-text-shadow mb-4">
           ZONA DE PERIGO
         </h3>
         <div className="space-y-4">
@@ -69,7 +69,7 @@ const Settings = () => {
             DELETAR CONTA
           </PixelButton>
         </div>
-      </PixelCard>
+      </PixelPanel>
     </div>
   );
 };

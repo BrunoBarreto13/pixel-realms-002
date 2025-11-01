@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import useSound from "@/hooks/useSound";
+import { PixelPanel } from "@/components/PixelPanel";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -139,9 +140,9 @@ const Dashboard = () => {
     <div className={cn("min-h-screen w-full flex", activeSection === 'game-table' ? 'game-table-background' : 'game-background')}>
       <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
-        <aside className="w-64 bg-secondary flex flex-col p-4 border-r-4 border-primary">
+        <aside className="w-64 bg-secondary/80 flex flex-col p-4 border-r-4 border-primary">
           <div className="p-6">
-            <h1 className="font-pixel text-2xl text-accent brand-text-shadow text-center">PIXEL<br/>REALMS</h1>
+            <h1 className="font-pixel text-2xl text-accent pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
           </div>
           <nav className="flex-1 space-y-2">
             {menuItems.map((item) => (
@@ -205,7 +206,7 @@ const Dashboard = () => {
         {/* Main Content */}
         <main className="flex-1 flex flex-col p-4 sm:p-6 lg:p-8 gap-4 sm:gap-6 lg:gap-8">
           <header className="flex-shrink-0">
-            <h2 className="text-3xl text-accent">{getActiveLabel()}</h2>
+            <h2 className="text-3xl text-accent pixel-text-shadow">{getActiveLabel()}</h2>
           </header>
           <div className="flex-1 overflow-auto">
             {renderContent()}
