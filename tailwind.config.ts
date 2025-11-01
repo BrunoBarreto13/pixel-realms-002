@@ -49,6 +49,16 @@ export default {
         },
         "hp-red": "#c74747",
         "mp-blue": "#4789c7",
+        parchment: {
+          DEFAULT: '#e6d5a8',
+          border: '#7d6c50',
+        },
+        'menu-button': {
+          DEFAULT: '#64a856',
+          hover: '#548f48',
+          border: '#3e7a3e',
+          text: '#212e21',
+        },
       },
       fontFamily: {
         sans: ["'Press Start 2P'", "cursive"],

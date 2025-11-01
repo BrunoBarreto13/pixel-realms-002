@@ -124,12 +124,14 @@ const Dashboard = () => {
     <button 
       onClick={onClick}
       className={cn(
-        "w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs transition-all text-left",
-        isActive ? "bg-primary text-primary-foreground pixel-border" : "bg-card/50 text-foreground hover:bg-muted pixel-border-inset"
+        "w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2",
+        isActive 
+          ? "bg-menu-button-hover text-menu-button-text border-menu-button-border" 
+          : "bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover"
       )}
     >
       <div className="flex items-center gap-3">
-        <Icon className={cn("h-4 w-4", isActive ? "text-primary-foreground" : "text-accent")} />
+        <Icon className="h-4 w-4 text-menu-button-text" />
         <span>{label}</span>
       </div>
       {hasChildren && <ChevronRight className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />}
@@ -140,9 +142,9 @@ const Dashboard = () => {
     <div className={cn("min-h-screen w-full flex", activeSection === 'game-table' ? 'game-table-background' : 'game-background')}>
       <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
-        <aside className="w-64 bg-secondary/80 flex flex-col p-4 border-r-4 border-primary">
+        <aside className="w-64 bg-parchment flex flex-col p-4 border-r-4 border-parchment-border">
           <div className="p-6">
-            <h1 className="font-pixel text-2xl text-accent pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
+            <h1 className="font-pixel text-2xl text-parchment-border pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
           </div>
           <nav className="flex-1 space-y-2">
             {menuItems.map((item) => (
@@ -196,8 +198,11 @@ const Dashboard = () => {
               isActive={activeSection === "settings"}
               onClick={() => handleSectionChange("settings")}
             />
-            <button onClick={handleLogout} className="w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all text-left bg-destructive text-destructive-foreground pixel-border">
-              <LogOut className="h-4 w-4" />
+            <button 
+              onClick={handleLogout} 
+              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover"
+            >
+              <LogOut className="h-4 w-4 text-menu-button-text" />
               <span>SAIR</span>
             </button>
           </div>
