@@ -113,7 +113,7 @@
 
 @layer utilities {
   .pixel-text-shadow {
-    text-shadow: 2px 2px 0px hsl(var(--background) / 0.8);
+    text-shadow: 2px 2px 0px hsl(var(--card));
   }
 
   ::-webkit-scrollbar {
