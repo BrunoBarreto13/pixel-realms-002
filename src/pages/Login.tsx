@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import loginBg from "@/assets/castle-dragon-login.png";
+import animatedBg from "@/assets/dungeon-animated-bg.gif";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const Login = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${loginBg})` }}
+        style={{ backgroundImage: `url(${animatedBg})` }}
       >
         <div className="absolute inset-0 bg-black/40" />
       </div>
