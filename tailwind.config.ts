@@ -54,10 +54,10 @@ export default {
           border: '#7d6c50',
         },
         'menu-button': {
-          DEFAULT: '#64a856',
-          hover: '#548f48',
-          border: '#3e7a3e',
-          text: '#212e21',
+          DEFAULT: '#8c6d46',
+          hover: '#7a5f3b',
+          border: '#5a452a',
+          text: '#f0e6d2',
         },
       },
       fontFamily: {
