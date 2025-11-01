@@ -7,8 +7,13 @@ import { AuthProvider } from "./hooks/useAuth";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword";
-import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
+import DashboardLayout from "./pages/DashboardLayout";
+import DashboardHome from "./pages/dashboard/Home";
+import CharacterSheet from "./pages/dashboard/CharacterSheet";
+import Library from "./pages/dashboard/library";
+import GameTable from "./pages/dashboard/GameTable";
+import Settings from "./pages/dashboard/Settings";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +30,15 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              
+              <Route path="/dashboard" element={<DashboardLayout />}>
+                <Route index element={<DashboardHome />} />
+                <Route path="character-sheet" element={<CharacterSheet />} />
+                <Route path="library" element={<Library />} />
+                <Route path="game-table" element={<GameTable />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

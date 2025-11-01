@@ -1,12 +1,8 @@
 import { PixelButton } from "@/components/PixelButton";
 import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight, BookMarked, Settings as SettingsIcon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import CharacterSheet from "./CharacterSheet";
-import Library from "./library";
-import Settings from "./Settings";
-import GameTable from "./GameTable";
 import {
   Collapsible,
   CollapsibleContent,
@@ -14,12 +10,11 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import useSound from "@/hooks/useSound";
-import { PixelPanel } from "@/components/PixelPanel";
 
-const Dashboard = () => {
+const DashboardLayout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { user, loading, isMaster, signOut } = useAuth();
-  const [activeSection, setActiveSection] = useState("home");
   const [isCampaignOpen, setIsCampaignOpen] = useState(false);
   const playNavigateSound = useSound("/sounds/navigate.mp3");
 
@@ -30,28 +25,26 @@ const Dashboard = () => {
   }, [user, loading, navigate]);
 
   const allMenuItems = [
-    { id: "home", label: "Início", icon: Home },
+    { id: "/dashboard", label: "Início", icon: Home },
     {
       id: "campaign",
       label: "Campanha",
       icon: BookOpen,
       children: [
-        { id: "game-table", label: "Mesa de jogo", icon: Dices },
-        { id: "library", label: "Biblioteca", icon: BookMarked },
+        { id: "/dashboard/game-table", label: "Mesa de jogo", icon: Dices },
+        { id: "/dashboard/library", label: "Biblioteca", icon: BookMarked },
       ],
     },
-    { id: "character-sheet", label: "Ficha do Jogador", icon: ScrollText },
-    { id: "master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
+    { id: "/dashboard/character-sheet", label: "Ficha do Jogador", icon: ScrollText },
+    { id: "/dashboard/master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
   ];
 
   useEffect(() => {
-    const activeItemParent = allMenuItems.find(item => item.children?.some(child => child.id === activeSection));
+    const activeItemParent = allMenuItems.find(item => item.children?.some(child => location.pathname.startsWith(child.id)));
     if (activeItemParent) {
       setIsCampaignOpen(true);
-    } else {
-      setIsCampaignOpen(false);
     }
-  }, [activeSection]);
+  }, [location.pathname]);
 
   const menuItems = allMenuItems
     .map(item => {
@@ -71,17 +64,18 @@ const Dashboard = () => {
     await signOut();
   };
 
-  const handleSectionChange = (sectionId: string) => {
+  const handleSectionChange = (path: string) => {
     playNavigateSound();
-    setActiveSection(sectionId);
+    navigate(path);
   };
 
   const getActiveLabel = () => {
-    if (activeSection === "settings") return "Configurações";
+    const currentPath = location.pathname;
+    if (currentPath.startsWith("/dashboard/settings")) return "Configurações";
     for (const item of allMenuItems) {
-      if (item.id === activeSection) return item.label;
+      if (item.id === currentPath) return item.label;
       if (item.children) {
-        const child = item.children.find(c => c.id === activeSection);
+        const child = item.children.find(c => currentPath.startsWith(c.id));
         if (child) return child.label;
       }
     }
@@ -97,28 +91,6 @@ const Dashboard = () => {
       </div>
     );
   }
-
-  const renderContent = () => {
-    switch (activeSection) {
-      case "home":
-        return <p className="text-center">Seção Início em desenvolvimento.</p>;
-      case "library":
-        return <Library />;
-      case "character-sheet":
-        return <CharacterSheet />;
-      case "game-table":
-        return <GameTable />;
-      case "settings":
-        return <Settings />;
-      default:
-        return (
-          <div className="text-center">
-            <h3 className="font-pixel text-xl text-primary mb-4">{getActiveLabel().toUpperCase()}</h3>
-            <p className="font-pixel text-xs text-muted-foreground leading-relaxed">Esta seção está em desenvolvimento...</p>
-          </div>
-        );
-    }
-  };
 
   const NavButton = ({ id, label, icon: Icon, isActive, onClick, hasChildren = false, isOpen = false }) => (
     <button 
@@ -139,7 +111,7 @@ const Dashboard = () => {
   );
 
   return (
-    <div className={cn("min-h-screen w-full flex", activeSection === 'game-table' ? 'game-table-background' : 'game-background')}>
+    <div className={cn("min-h-screen w-full flex", location.pathname.startsWith('/dashboard/game-table') ? 'game-table-background' : 'game-background')}>
       <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
         <aside className="w-64 bg-parchment flex flex-col p-4 border-r-4 border-parchment-border">
@@ -156,7 +128,7 @@ const Dashboard = () => {
                         id={item.id}
                         label={item.label}
                         icon={item.icon}
-                        isActive={item.children.some(c => c.id === activeSection)}
+                        isActive={item.children.some(c => location.pathname.startsWith(c.id))}
                         onClick={() => {
                           playNavigateSound();
                           setIsCampaignOpen(!isCampaignOpen);
@@ -172,7 +144,7 @@ const Dashboard = () => {
                           id={child.id}
                           label={child.label}
                           icon={child.icon}
-                          isActive={activeSection === child.id}
+                          isActive={location.pathname.startsWith(child.id)}
                           onClick={() => handleSectionChange(child.id)}
                         />
                       ))}
@@ -183,7 +155,7 @@ const Dashboard = () => {
                     id={item.id}
                     label={item.label}
                     icon={item.icon}
-                    isActive={activeSection === item.id}
+                    isActive={location.pathname === item.id}
                     onClick={() => handleSectionChange(item.id)}
                   />
                 )}
@@ -192,11 +164,11 @@ const Dashboard = () => {
           </nav>
           <div className="space-y-2">
             <NavButton 
-              id="settings"
+              id="/dashboard/settings"
               label="Configurações"
               icon={SettingsIcon}
-              isActive={activeSection === "settings"}
-              onClick={() => handleSectionChange("settings")}
+              isActive={location.pathname.startsWith("/dashboard/settings")}
+              onClick={() => handleSectionChange("/dashboard/settings")}
             />
             <button 
               onClick={handleLogout} 
@@ -214,7 +186,7 @@ const Dashboard = () => {
             <h2 className="text-3xl text-accent pixel-text-shadow">{getActiveLabel()}</h2>
           </header>
           <div className="flex-1 overflow-auto rpg-main-content">
-            {renderContent()}
+            <Outlet />
           </div>
         </main>
       </div>
@@ -222,4 +194,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardLayout;
