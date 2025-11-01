@@ -62,7 +62,7 @@ const CLASSES = [
   { value: "bard", label: "Bardo", hitDie: 6 },
 ];
 
-const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 pixel-border bg-secondary text-secondary-foreground rounded-none shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[2px] z-10";
+const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 pixel-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[2px] z-10";
 
 const CharacterSheet = () => {
   const { toast } = useToast();
