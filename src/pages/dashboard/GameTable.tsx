@@ -69,7 +69,7 @@ const ActionsAndDicePanel = () => {
             <button
               key={d.label}
               onClick={() => handleRoll(d.sides)}
-              className="p-2 uppercase transition-colors border-2 bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover"
+              className="p-2 uppercase transition-colors border-2 bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover rounded-lg"
             >
               {d.label}
             </button>
