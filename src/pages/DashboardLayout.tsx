@@ -172,9 +172,9 @@ const DashboardLayout = () => {
             />
             <button 
               onClick={handleLogout} 
-              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover"
+              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-destructive text-destructive-foreground border-destructive/80 hover:bg-destructive/90"
             >
-              <LogOut className="h-4 w-4 text-menu-button-text" />
+              <LogOut className="h-4 w-4 text-destructive-foreground" />
               <span>SAIR</span>
             </button>
           </div>
