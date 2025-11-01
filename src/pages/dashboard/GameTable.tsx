@@ -41,10 +41,10 @@ const ActionsAndDicePanel = () => {
       <div>
         <h3 className="text-lg text-accent mb-4">AÇÕES</h3>
         <div className="grid grid-cols-2 gap-2 text-xs">
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41]">Atacar</button>
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41]">Magia</button>
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41]">Item</button>
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41]">Fugir/Esconder</button>
+          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Atacar</button>
+          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Magia</button>
+          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Item</button>
+          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Fugir/Esconder</button>
         </div>
       </div>
 
