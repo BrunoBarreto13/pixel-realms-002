@@ -1,6 +1,4 @@
-import { useState } from "react";
-import { Dices } from "lucide-react";
-import DicePanel from "./DicePanel";
+import { Send } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const chatMessages = [
@@ -15,8 +13,6 @@ const chatMessages = [
 ];
 
 const GameChat = () => {
-  const [isDicePanelOpen, setIsDicePanelOpen] = useState(false);
-
   return (
     <div className="flex-1 flex flex-col pixel-border bg-secondary p-4 min-h-0">
       <div className="flex-1 overflow-y-auto pr-2 mb-4 space-y-2 text-xs">
@@ -29,7 +25,6 @@ const GameChat = () => {
         ))}
       </div>
       <div className="mt-auto">
-        {isDicePanelOpen && <DicePanel />}
         <div className="flex gap-2">
           <input 
             className="flex-1 bg-card text-foreground placeholder:text-foreground/50 p-3 pixel-border-inset border-none focus:ring-0 text-xs" 
@@ -37,11 +32,10 @@ const GameChat = () => {
             type="text"
           />
           <button 
-            onClick={() => setIsDicePanelOpen(!isDicePanelOpen)} 
-            aria-label="Toggle dice roller" 
+            aria-label="Enviar mensagem" 
             className="p-3 bg-primary text-primary-foreground pixel-border aspect-square flex items-center justify-center"
           >
-            <Dices className="h-5 w-5" />
+            <Send className="h-5 w-5" />
           </button>
         </div>
       </div>
