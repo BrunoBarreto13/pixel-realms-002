@@ -4,16 +4,16 @@ import { cva, type VariantProps } from "class-variance-authority";
 import useSound from "@/hooks/useSound";
 
 const pixelButtonVariants = cva(
-  "inline-flex items-center justify-center font-pixel text-xs uppercase tracking-wider transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 pixel-border active:translate-y-0.5 active:shadow-none",
+  "inline-flex items-center justify-center font-pixel text-xs uppercase tracking-wider transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 border-2 active:translate-y-0.5 rounded-lg",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
-        accent: "bg-accent text-accent-foreground hover:opacity-90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
-        ghost: "border-0 shadow-none hover:bg-accent hover:text-accent-foreground",
+        default: "bg-[#7a5f3b] border-[#433a2d] text-[#f0e6d2] hover:bg-[#8c6d46]",
+        secondary: "bg-[#433a2d] border-[#7a5f3b] text-[#f0e6d2] hover:bg-[#5a4f41]",
+        accent: "bg-accent border-accent/80 text-accent-foreground hover:opacity-90",
+        destructive: "bg-destructive border-destructive/80 text-destructive-foreground hover:bg-destructive/90",
+        outline: "bg-transparent border-[#7a5f3b] text-[#f0e6d2] hover:bg-[#433a2d]",
+        ghost: "border-transparent hover:bg-accent hover:text-accent-foreground",
       },
       size: {
         default: "h-10 px-4 py-2",

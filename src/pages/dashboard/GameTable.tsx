@@ -2,6 +2,7 @@ import { useState } from "react";
 import PartyStatus from "./gametable/PartyStatus";
 import GameChat from "./gametable/GameChat";
 import { useToast } from "@/hooks/use-toast";
+import { PixelButton } from "@/components/PixelButton";
 
 const ActionsAndDicePanel = () => {
   const [diceQuantity, setDiceQuantity] = useState(1);
@@ -41,10 +42,10 @@ const ActionsAndDicePanel = () => {
       <div>
         <h3 className="text-lg text-accent mb-4">AÇÕES</h3>
         <div className="grid grid-cols-2 gap-2 text-xs">
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Atacar</button>
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Magia</button>
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Item</button>
-          <button className="p-3 text-center uppercase transition-colors bg-[#433a2d] text-menu-button-text border-2 border-[#7a5f3b] hover:bg-[#5a4f41] rounded-lg">Fugir/Esconder</button>
+          <PixelButton variant="secondary">Atacar</PixelButton>
+          <PixelButton variant="secondary">Magia</PixelButton>
+          <PixelButton variant="secondary">Item</PixelButton>
+          <PixelButton variant="secondary">Fugir/Esconder</PixelButton>
         </div>
       </div>
 
@@ -66,13 +67,14 @@ const ActionsAndDicePanel = () => {
         </div>
         <div className="grid grid-cols-4 gap-2 text-xs">
           {dice.map(d => (
-            <button
+            <PixelButton
               key={d.label}
               onClick={() => handleRoll(d.sides)}
-              className="p-2 uppercase transition-colors border-2 bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover rounded-lg"
+              variant="default"
+              size="sm"
             >
               {d.label}
-            </button>
+            </PixelButton>
           ))}
         </div>
       </div>
