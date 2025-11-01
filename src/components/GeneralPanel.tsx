@@ -13,7 +13,7 @@ const GeneralPanel: React.FC<GeneralPanelProps> = ({ children, className }) => {
       className
     )}>
       <div className="absolute -top-[36px] left-4 bg-[#8B5A3C] text-white font-pixel text-xs uppercase px-4 py-2 border-t-4 border-x-4 border-[#9B6B4B]">
-        GENERAL
+        Início
       </div>
       {children}
     </div>
