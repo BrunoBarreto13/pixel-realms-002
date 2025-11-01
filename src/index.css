@@ -22,15 +22,15 @@
     --muted: 35 25% 30%;
     --muted-foreground: 40 20% 65%;
 
-    --accent: 45 80% 60%; /* Brighter yellow, kept from before */
-    --accent-foreground: 45 100% 10%;
+    --accent: 34 65% 72%; /* #E6B88A - Golden */
+    --accent-foreground: 34 100% 10%;
 
     --destructive: 0 60% 50%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 35 36% 26%; /* #5a452a menu-button-border */
     --input: 35 20% 18%;
-    --ring: 45 80% 60%; /* Accent yellow for focus */
+    --ring: 34 65% 72%;
     --radius: 0.5rem;
   }
 }
