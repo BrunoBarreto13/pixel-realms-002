@@ -51,7 +51,7 @@
 
 @layer components {
   .game-background {
-    background-image: url('/src/assets/dragon-sky-dark.png');
+    background-image: url('/src/assets/castle-dragon-dark.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

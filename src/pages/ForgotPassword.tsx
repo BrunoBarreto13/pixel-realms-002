@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelPanel } from "@/components/PixelPanel";
-import loginBg from "@/assets/castle-dragon-login.png";
+import loginBg from "@/assets/castle-dragon-dark.png";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();

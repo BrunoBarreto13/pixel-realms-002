@@ -5,7 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelPanel } from "@/components/PixelPanel";
-import loginBg from "@/assets/castle-dragon-login.png";
+import loginBg from "@/assets/castle-dragon-dark.png";
 
 const Login = () => {
   const navigate = useNavigate();

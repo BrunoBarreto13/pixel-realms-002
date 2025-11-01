@@ -5,7 +5,7 @@ import { PixelInput } from "@/components/PixelInput";
 import { PixelPanel } from "@/components/PixelPanel";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import loginBg from "@/assets/castle-dragon-login.png";
+import loginBg from "@/assets/castle-dragon-dark.png";
 
 type UserType = "player" | "master" | null;
 
