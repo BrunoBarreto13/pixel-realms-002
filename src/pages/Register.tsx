@@ -5,7 +5,7 @@ import { PixelInput } from "@/components/PixelInput";
 import { PixelPanel } from "@/components/PixelPanel";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
-import animatedBg from "@/assets/dungeon-animated-bg.gif";
+import loginBg from "@/assets/castle-dragon-login.png";
 
 type UserType = "player" | "master" | null;
 
@@ -83,7 +83,7 @@ const Register = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${animatedBg})` }}
+        style={{ backgroundImage: `url(${loginBg})` }}
       >
         <div className="absolute inset-0 bg-black/40" />
       </div>

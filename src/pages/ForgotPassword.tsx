@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelPanel } from "@/components/PixelPanel";
-import animatedBg from "@/assets/dungeon-animated-bg.gif";
+import loginBg from "@/assets/castle-dragon-login.png";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const ForgotPassword = () => {
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${animatedBg})` }}
+        style={{ backgroundImage: `url(${loginBg})` }}
       >
         <div className="absolute inset-0 bg-black/40" />
       </div>
