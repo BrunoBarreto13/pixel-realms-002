@@ -124,14 +124,14 @@ const Dashboard = () => {
     <button 
       onClick={onClick}
       className={cn(
-        "w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2",
+        "w-full flex items-center justify-between gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 border-primary",
         isActive 
-          ? "bg-menu-button-hover text-menu-button-text border-menu-button-border" 
-          : "bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover"
+          ? "bg-primary/80 text-foreground" 
+          : "bg-primary text-foreground hover:bg-primary/90"
       )}
     >
       <div className="flex items-center gap-3">
-        <Icon className="h-4 w-4 text-menu-button-text" />
+        <Icon className="h-4 w-4 text-foreground" />
         <span>{label}</span>
       </div>
       {hasChildren && <ChevronRight className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />}
@@ -142,7 +142,7 @@ const Dashboard = () => {
     <div className={cn("min-h-screen w-full flex", activeSection === 'game-table' ? 'game-table-background' : 'game-background')}>
       <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
-        <aside className="w-64 bg-parchment flex flex-col p-4 border-r-4 border-parchment-border">
+        <aside className="w-64 bg-background flex flex-col p-4 border-r-4 border-primary">
           <div className="p-6">
             <h1 className="font-pixel text-2xl text-accent pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
           </div>
@@ -200,9 +200,9 @@ const Dashboard = () => {
             />
             <button 
               onClick={handleLogout} 
-              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-menu-button text-menu-button-text border-menu-button-border hover:bg-menu-button-hover"
+              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 border-primary bg-primary text-foreground hover:bg-primary/90"
             >
-              <LogOut className="h-4 w-4 text-menu-button-text" />
+              <LogOut className="h-4 w-4 text-foreground" />
               <span>SAIR</span>
             </button>
           </div>
