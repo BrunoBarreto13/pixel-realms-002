@@ -44,7 +44,7 @@ const DashboardLayout = () => {
     if (activeItemParent) {
       setIsCampaignOpen(true);
     }
-  }, [location.pathname]);
+  }, [location.pathname, allMenuItems]);
 
   const menuItems = allMenuItems
     .map(item => {
@@ -67,19 +67,6 @@ const DashboardLayout = () => {
   const handleSectionChange = (path: string) => {
     playNavigateSound();
     navigate(path);
-  };
-
-  const getActiveLabel = () => {
-    const currentPath = location.pathname;
-    if (currentPath.startsWith("/dashboard/settings")) return "Configurações";
-    for (const item of allMenuItems) {
-      if (item.id === currentPath) return item.label;
-      if (item.children) {
-        const child = item.children.find(c => currentPath.startsWith(c.id));
-        if (child) return child.label;
-      }
-    }
-    return "Início";
   };
 
   if (loading) {
@@ -181,10 +168,7 @@ const DashboardLayout = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col m-4 sm:m-6 lg:m-8 gap-4 sm:gap-6 lg:gap-8">
-          <header className="flex-shrink-0 px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl text-accent pixel-text-shadow">{getActiveLabel()}</h2>
-          </header>
+        <main className="flex-1 flex flex-col m-4 sm:m-6 lg:m-8">
           <div className="flex-1 overflow-auto rpg-main-content">
             <Outlet />
           </div>
