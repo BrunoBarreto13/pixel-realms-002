@@ -84,12 +84,8 @@ const ActionsAndDicePanel = () => {
 
 
 const MapPanel = () => (
-  <div className="flex-1 pixel-border bg-black min-h-0">
-    <img 
-      alt="Pixel art top-down view of a stone dungeon map." 
-      className="w-full h-full object-cover" 
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCS-61RF5zkHl4Z4ri-882iDU4b5SPX8AkfAYyBU4uJGHXqGEDqAwNXCW4k0SyxvRs4KhfVsiDP4-ar-5LSBAIwBtEgOAyg2OcaFr23AFjfp2ezw9gP5oof0f8snBLulR0uz5jPHQ3vfQhtbLyZiRblk49RybhKLR4uHjlh6E_i_ADh9uh_tX4DBzJkKQ-_E0mvD1yWEoCFtdyISnRWlNu_zdF1ounCBy77Wqzg_hG1Nl5DD2IqEr6BjKvlLCL1Jp4aG3FpMTN9tRA"
-    />
+  <div className="flex-1 pixel-border bg-black min-h-0 flex items-center justify-center">
+    <p className="font-pixel text-lg text-muted-foreground">Em construção</p>
   </div>
 );
 
