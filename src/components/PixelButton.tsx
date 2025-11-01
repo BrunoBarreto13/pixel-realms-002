@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import useSound from "@/hooks/useSound";
 
 const pixelButtonVariants = cva(
   "inline-flex items-center justify-center font-pixel text-xs uppercase tracking-wider transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 pixel-border active:translate-y-0.5 active:shadow-none",
@@ -30,14 +31,26 @@ const pixelButtonVariants = cva(
 
 export interface PixelButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof pixelButtonVariants> {}
+    VariantProps<typeof pixelButtonVariants> {
+      soundOnClick?: string;
+    }
 
 const PixelButton = forwardRef<HTMLButtonElement, PixelButtonProps>(
-  ({ className, variant, size, ...props }, ref) => {
+  ({ className, variant, size, soundOnClick = "/sounds/click.mp3", onClick, ...props }, ref) => {
+    const playSound = useSound(soundOnClick);
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+      playSound();
+      if (onClick) {
+        onClick(e);
+      }
+    };
+
     return (
       <button
         className={cn(pixelButtonVariants({ variant, size, className }))}
         ref={ref}
+        onClick={handleClick}
         {...props}
       />
     );

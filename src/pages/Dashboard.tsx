@@ -13,12 +13,14 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import useSound from "@/hooks/useSound";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, loading, isMaster, signOut } = useAuth();
   const [activeSection, setActiveSection] = useState("home");
   const [isCampaignOpen, setIsCampaignOpen] = useState(false);
+  const playNavigateSound = useSound("/sounds/navigate.mp3");
 
   useEffect(() => {
     if (!user && !loading) {
@@ -66,6 +68,11 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     await signOut();
+  };
+
+  const handleSectionChange = (sectionId: string) => {
+    playNavigateSound();
+    setActiveSection(sectionId);
   };
 
   const getActiveLabel = () => {
@@ -147,7 +154,10 @@ const Dashboard = () => {
                         label={item.label}
                         icon={item.icon}
                         isActive={item.children.some(c => c.id === activeSection)}
-                        onClick={() => setIsCampaignOpen(!isCampaignOpen)}
+                        onClick={() => {
+                          playNavigateSound();
+                          setIsCampaignOpen(!isCampaignOpen);
+                        }}
                         hasChildren
                         isOpen={isCampaignOpen}
                       />
@@ -160,7 +170,7 @@ const Dashboard = () => {
                           label={child.label}
                           icon={child.icon}
                           isActive={activeSection === child.id}
-                          onClick={() => setActiveSection(child.id)}
+                          onClick={() => handleSectionChange(child.id)}
                         />
                       ))}
                     </CollapsibleContent>
@@ -171,7 +181,7 @@ const Dashboard = () => {
                     label={item.label}
                     icon={item.icon}
                     isActive={activeSection === item.id}
-                    onClick={() => setActiveSection(item.id)}
+                    onClick={() => handleSectionChange(item.id)}
                   />
                 )}
               </div>
@@ -183,7 +193,7 @@ const Dashboard = () => {
               label="Configurações"
               icon={SettingsIcon}
               isActive={activeSection === "settings"}
-              onClick={() => setActiveSection("settings")}
+              onClick={() => handleSectionChange("settings")}
             />
             <button onClick={handleLogout} className="w-full flex items-center gap-3 p-3 font-pixel text-xs transition-all text-left bg-destructive text-destructive-foreground pixel-border">
               <LogOut className="h-4 w-4" />
