@@ -56,7 +56,7 @@ const Login = () => {
       <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
         {/* Title */}
         <div className="text-center">
-          <h1 className="font-pixel text-4xl md:text-5xl text-[#ffce08] pixel-text-shadow mb-2">
+          <h1 className="font-pixel text-4xl md:text-5xl text-[#e2ac3b] pixel-text-shadow mb-2">
             PIXEL REALMS
           </h1>
           <p className="font-pixel text-sm text-white pixel-text-shadow">
