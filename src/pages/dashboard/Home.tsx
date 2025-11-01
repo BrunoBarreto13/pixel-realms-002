@@ -1,10 +1,10 @@
-import GeneralPanel from "@/components/GeneralPanel";
+import PagePanel from "@/components/PagePanel";
 
 const DashboardHome = () => {
   return (
-    <GeneralPanel>
+    <PagePanel title="Início">
       {/* O conteúdo do dashboard, como cards, pode ser adicionado aqui no futuro. */}
-    </GeneralPanel>
+    </PagePanel>
   );
 };
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { PixelPanel } from "@/components/PixelPanel";
 import { arcaneSpells, divineSpells } from "@/lib/spells";
 import SpellListView from "./SpellListView";
+import PagePanel from "@/components/PagePanel";
 
 const LibraryIndex = ({ onNavigate }: { onNavigate: (view: 'arcane' | 'divine') => void }) => {
   const linkStyle = "text-left text-foreground hover:underline hover:text-accent transition-colors";
@@ -99,14 +100,14 @@ const Library = () => {
   const [activeView, setActiveView] = useState<'index' | 'arcane' | 'divine'>('index');
 
   if (activeView === 'arcane') {
-    return <SpellListView spells={arcaneSpells} title="Magias Arcanas" onBack={() => setActiveView('index')} />;
+    return <PagePanel title="Biblioteca"><SpellListView spells={arcaneSpells} title="Magias Arcanas" onBack={() => setActiveView('index')} /></PagePanel>;
   }
 
   if (activeView === 'divine') {
-    return <SpellListView spells={divineSpells} title="Magias Divinas" onBack={() => setActiveView('index')} />;
+    return <PagePanel title="Biblioteca"><SpellListView spells={divineSpells} title="Magias Divinas" onBack={() => setActiveView('index')} /></PagePanel>;
   }
 
-  return <LibraryIndex onNavigate={setActiveView} />;
+  return <PagePanel title="Biblioteca"><LibraryIndex onNavigate={setActiveView} /></PagePanel>;
 };
 
 export default Library;
