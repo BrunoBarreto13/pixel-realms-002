@@ -204,11 +204,11 @@ const Dashboard = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col p-4 sm:p-6 lg:p-8 gap-4 sm:gap-6 lg:gap-8">
-          <header className="flex-shrink-0">
+        <main className="flex-1 flex flex-col m-4 sm:m-6 lg:m-8 gap-4 sm:gap-6 lg:gap-8">
+          <header className="flex-shrink-0 px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl text-accent pixel-text-shadow">{getActiveLabel()}</h2>
           </header>
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-auto rpg-main-content">
             {renderContent()}
           </div>
         </main>

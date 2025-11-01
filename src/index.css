@@ -74,6 +74,26 @@
     border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="%232a3e6b"><path d="M0,0 h8 v8 h-8 z M16,0 h8 v8 h-8 z M0,16 h8 v8 h-8 z M16,16 h8 v8 h-8 z" /></g><g fill="%235a83c2"><path d="M8,0 h8 v8 h-8 z M0,8 h8 v8 h-8 z M16,8 h8 v8 h-8 z M8,16 h8 v8 h-8 z" /></g><g fill="%231e2a4a"><path d="M8,8 h8 v8 h-8 z" /></g></svg>');
   }
 
+  .rpg-main-content {
+    @apply p-4 sm:p-6 lg:p-8;
+    background-color: hsl(var(--card) / 0.9);
+    border: 4px solid hsl(var(--border));
+    background-image: 
+      url('/src/assets/ui-kit/Decorative_cracks.png'),
+      url('/src/assets/ui-kit/Decorative_cracks.png'),
+      url('/src/assets/ui-kit/Decorative_cracks.png'),
+      url('/src/assets/ui-kit/Decorative_cracks.png'),
+      url('/src/assets/ui-kit/Text1.png');
+    background-position: 
+      top 8px left 8px,
+      top 8px right 8px,
+      bottom 8px left 8px,
+      bottom 8px right 8px,
+      center;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+    background-size: 64px, 64px, 64px, 64px, auto;
+  }
+
   .pixel-border {
     border: 4px solid;
     border-image-slice: 2;
