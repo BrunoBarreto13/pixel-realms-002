@@ -97,6 +97,8 @@ const DashboardLayout = () => {
     </button>
   );
 
+  const isHomePage = location.pathname === '/dashboard' || location.pathname === '/dashboard/';
+
   return (
     <div className={cn("min-h-screen w-full flex", location.pathname.startsWith('/dashboard/game-table') ? 'game-table-background' : 'game-background')}>
       <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
@@ -169,7 +171,7 @@ const DashboardLayout = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col m-4 sm:m-6 lg:m-8">
-          <div className="flex-1 overflow-auto rpg-main-content">
+          <div className={cn("flex-1 overflow-auto", !isHomePage && "rpg-main-content")}>
             <Outlet />
           </div>
         </main>
