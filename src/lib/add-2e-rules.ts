@@ -2,23 +2,72 @@
 
 // --- ATTRIBUTE TABLES ---
 
-export const getStrengthBonuses = (score: number) => {
-  if (score <= 1) return { hit: -5, dmg: -4, weight: 0, press: 0, openDoors: 1, bendBars: 0 };
-  if (score === 2) return { hit: -3, dmg: -2, weight: 1, press: 0, openDoors: 1, bendBars: 0 };
-  if (score === 3) return { hit: -3, dmg: -1, weight: 5, press: 3, openDoors: 2, bendBars: 0 };
-  if (score <= 5) return { hit: -2, dmg: -1, weight: 10, press: 5, openDoors: 3, bendBars: 0 };
-  if (score <= 7) return { hit: -1, dmg: 0, weight: 20, press: 10, openDoors: 4, bendBars: 0 };
-  if (score <= 9) return { hit: 0, dmg: 0, weight: 35, press: 25, openDoors: 5, bendBars: 1 };
-  if (score <= 11) return { hit: 0, dmg: 0, weight: 40, press: 35, openDoors: 6, bendBars: 2 };
-  if (score <= 13) return { hit: 0, dmg: 0, weight: 45, press: 45, openDoors: 7, bendBars: 4 };
-  if (score === 14) return { hit: 0, dmg: 0, weight: 55, press: 65, openDoors: 8, bendBars: 7 };
-  if (score === 15) return { hit: 0, dmg: 0, weight: 60, press: 75, openDoors: 9, bendBars: 10 };
-  if (score === 16) return { hit: 0, dmg: 1, weight: 70, press: 95, openDoors: 10, bendBars: 13 };
-  if (score === 17) return { hit: 1, dmg: 1, weight: 85, press: 115, openDoors: 11, bendBars: 16 };
-  if (score === 18) return { hit: 1, dmg: 2, weight: 110, press: 155, openDoors: 12, bendBars: 20 };
-  if (score === 19) return { hit: 3, dmg: 7, weight: 280, press: 480, openDoors: 14, bendBars: 40 };
-  if (score >= 20) return { hit: 3, dmg: 8, weight: 320, press: 530, openDoors: 15, bendBars: 45 };
-  return { hit: 0, dmg: 0, weight: 0, press: 0, openDoors: 0, bendBars: 0 };
+const STRENGTH_TABLE = [
+  { valor: 3,  chance_acertar: -3, ajuste_dano: -1, carga_permitida: 15,  sustentacao_max: 30,   abrir_portas: "1 em 20",  barras_portais: "0%" },
+  { valor: 4,  chance_acertar: -2, ajuste_dano: -1, carga_permitida: 20,  sustentacao_max: 45,   abrir_portas: "1 em 20",  barras_portais: "0%" },
+  { valor: 5,  chance_acertar: -2, ajuste_dano: -1, carga_permitida: 25,  sustentacao_max: 60,   abrir_portas: "1 em 20",  barras_portais: "0%" },
+  { valor: 6,  chance_acertar: -1, ajuste_dano: 0,  carga_permitida: 30,  sustentacao_max: 70,   abrir_portas: "2 em 20",  barras_portais: "0%" },
+  { valor: 7,  chance_acertar: -1, ajuste_dano: 0,  carga_permitida: 35,  sustentacao_max: 85,   abrir_portas: "2 em 20",  barras_portais: "1%" },
+  { valor: 8,  chance_acertar: -1, ajuste_dano: 0,  carga_permitida: 40,  sustentacao_max: 100,  abrir_portas: "2 em 20",  barras_portais: "1%" },
+  { valor: 9,  chance_acertar: 0,  ajuste_dano: 0,  carga_permitida: 45,  sustentacao_max: 115,  abrir_portas: "3 em 20",  barras_portais: "2%" },
+  { valor: 10, chance_acertar: 0,  ajuste_dano: 0,  carga_permitida: 50,  sustentacao_max: 125,  abrir_portas: "3 em 20",  barras_portais: "4%" },
+  { valor: 11, chance_acertar: 0,  ajuste_dano: 0,  carga_permitida: 55,  sustentacao_max: 140,  abrir_portas: "4 em 20",  barras_portais: "6%" },
+  { valor: 12, chance_acertar: 0,  ajuste_dano: 0,  carga_permitida: 60,  sustentacao_max: 155,  abrir_portas: "4 em 20",  barras_portais: "9%" },
+  { valor: 13, chance_acertar: 0,  ajuste_dano: 0,  carga_permitida: 65,  sustentacao_max: 170,  abrir_portas: "5 em 20",  barras_portais: "13%" },
+  { valor: 14, chance_acertar: 0,  ajuste_dano: 0,  carga_permitida: 70,  sustentacao_max: 185,  abrir_portas: "5 em 20",  barras_portais: "16%" },
+  { valor: 15, chance_acertar: 0,  ajuste_dano: 1,  carga_permitida: 80,  sustentacao_max: 195,  abrir_portas: "6 em 20",  barras_portais: "20%" },
+  { valor: 16, chance_acertar: 0,  ajuste_dano: 1,  carga_permitida: 90,  sustentacao_max: 205,  abrir_portas: "7 em 20",  barras_portais: "25%" },
+  { valor: 17, chance_acertar: 1,  ajuste_dano: 1,  carga_permitida: 100, sustentacao_max: 220,  abrir_portas: "8 em 20",  barras_portais: "33%" },
+  { valor: 18,
+    normal: { chance_acertar: 1, ajuste_dano: 2, carga_permitida: 110, sustentacao_max: 255, abrir_portas: "10 em 20", barras_portais: "50%" },
+    extraordinaria: [
+      { faixa: "18/01-50", chance_acertar: 1, ajuste_dano: 3, carga_permitida: 135, sustentacao_max: 280, abrir_portas: "12 em 20", barras_portais: "60%" },
+      { faixa: "18/51-75", chance_acertar: 2, ajuste_dano: 4, carga_permitida: 160, sustentacao_max: 305, abrir_portas: "14 em 20", barras_portais: "70%" },
+      { faixa: "18/76-90", chance_acertar: 2, ajuste_dano: 5, carga_permitida: 185, sustentacao_max: 330, abrir_portas: "16 em 20", barras_portais: "80%" },
+      { faixa: "18/91-99", chance_acertar: 3, ajuste_dano: 6, carga_permitida: 235, sustentacao_max: 380, abrir_portas: "18 em 20", barras_portais: "90%" },
+      { faixa: "18/00", chance_acertar: 3, ajuste_dano: 7, carga_permitida: 335, sustentacao_max: 480, abrir_portas: "20 em 20", barras_portais: "100%" }
+    ]
+  },
+  { valor: 19, chance_acertar: 3, ajuste_dano: 7, carga_permitida: 485, sustentacao_max: 640, abrir_portas: "20 em 20", barras_portais: "100%" },
+  { valor: 20, chance_acertar: 3, ajuste_dano: 8, carga_permitida: 535, sustentacao_max: 700, abrir_portas: "20 em 20", barras_portais: "100%" },
+  { valor: 21, chance_acertar: 4, ajuste_dano: 9, carga_permitida: 635, sustentacao_max: 810, abrir_portas: "20 em 20", barras_portais: "100%" },
+  { valor: 22, chance_acertar: 4, ajuste_dano: 10, carga_permitida: 785, sustentacao_max: 970, abrir_portas: "20 em 20", barras_portais: "100%" },
+  { valor: 23, chance_acertar: 5, ajuste_dano: 11, carga_permitida: 935, sustentacao_max: 1130, abrir_portas: "20 em 20", barras_portais: "100%" },
+  { valor: 24, chance_acertar: 6, ajuste_dano: 12, carga_permitida: 1235, sustentacao_max: 1450, abrir_portas: "20 em 20", barras_portais: "100%" },
+  { valor: 25, chance_acertar: 7, ajuste_dano: 14, carga_permitida: 1535, sustentacao_max: 1770, abrir_portas: "20 em 20", barras_portais: "100%" }
+];
+
+export const getStrengthBonuses = (score: number, percentile: number = 0) => {
+  const defaultBonuses = { hit: 0, dmg: 0, weight: 0, press: 0, openDoors: "0 em 20", bendBars: "0%" };
+
+  const clampedScore = Math.max(3, Math.min(25, score));
+  const entry = STRENGTH_TABLE.find(e => e.valor === clampedScore);
+
+  if (!entry) return defaultBonuses;
+
+  let bonuses;
+  if (clampedScore === 18) {
+    if (percentile > 0 && entry.extraordinaria) {
+      if (percentile <= 50) bonuses = entry.extraordinaria[0];
+      else if (percentile <= 75) bonuses = entry.extraordinaria[1];
+      else if (percentile <= 90) bonuses = entry.extraordinaria[2];
+      else if (percentile <= 99) bonuses = entry.extraordinaria[3];
+      else bonuses = entry.extraordinaria[4]; // 18/00
+    } else {
+      bonuses = entry.normal;
+    }
+  } else {
+    bonuses = entry;
+  }
+
+  return {
+    hit: bonuses.chance_acertar,
+    dmg: bonuses.ajuste_dano,
+    weight: bonuses.carga_permitida,
+    press: bonuses.sustentacao_max,
+    openDoors: bonuses.abrir_portas,
+    bendBars: bonuses.barras_portais,
+  };
 };
 
 export const getDexterityBonuses = (score: number) => {
