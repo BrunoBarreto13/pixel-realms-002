@@ -9,6 +9,7 @@ import CharacterSheet from "./pages/dashboard/CharacterSheet";
 import Library from "./pages/dashboard/library";
 import GameTable from "./pages/dashboard/GameTable";
 import Settings from "./pages/dashboard/Settings";
+import MasterScreen from "./pages/dashboard/MasterScreen";
 
 const App = () => (
   <div className="font-pixel">
@@ -24,6 +25,7 @@ const App = () => (
         <Route path="library" element={<Library />} />
         <Route path="game-table" element={<GameTable />} />
         <Route path="settings" element={<Settings />} />
+        <Route path="master-screen" element={<MasterScreen />} />
       </Route>
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -74,7 +74,7 @@ const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 borde
 
 const CharacterSheet = () => {
   const { toast } = useToast();
-  const { profile } = useAuth();
+  const { profile, isMaster } = useAuth();
   const [character, setCharacter] = useState<Character>({
     name: "",
     playerName: "",
@@ -116,11 +116,11 @@ const CharacterSheet = () => {
     if (profile) {
       setCharacter(prevCharacter => ({
         ...prevCharacter,
-        name: profile.character_or_campaign || "",
+        name: isMaster ? "" : profile.character_or_campaign || "",
         playerName: profile.name || "",
       }));
     }
-  }, [profile]);
+  }, [profile, isMaster]);
 
   // --- DERIVED STATS CALCULATIONS ---
   const strengthBonuses = useMemo(() => Rules.getStrengthBonuses(character.attributes.strength), [character.attributes.strength]);
