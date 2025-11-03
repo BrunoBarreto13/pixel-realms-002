@@ -1,14 +1,18 @@
 import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
-import { Sword, Target } from "lucide-react";
-import { Character } from "./types";
+import { Sword, Target, Shield } from "lucide-react";
+import { Character, Armament } from "./types";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CombatTabProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
-  isEditing: boolean;
-  calculatedAc: number;
+  calculatedCaDetails: {
+    ca_base: number;
+    ajustes: { fonte: string; valor: number; item?: string }[];
+    ca_final: number;
+  };
   calculatedThac0: number;
   damageInput: string;
   setDamageInput: React.Dispatch<React.SetStateAction<string>>;
@@ -21,8 +25,7 @@ interface CombatTabProps {
 export const CombatTab = ({
   character,
   setCharacter,
-  isEditing,
-  calculatedAc,
+  calculatedCaDetails,
   calculatedThac0,
   damageInput,
   setDamageInput,
@@ -31,22 +34,42 @@ export const CombatTab = ({
   strengthBonuses,
   dexterityBonuses,
 }: CombatTabProps) => {
+
+  const getAttackBonus = (weapon: Armament) => {
+    if (weapon.categoria === 'corpo-a-corpo') return strengthBonuses.hit;
+    if (weapon.categoria === 'a-distancia' || weapon.categoria === 'arremesso') return dexterityBonuses.missile;
+    return 0;
+  };
+
+  const getDamageBonus = (weapon: Armament) => {
+    if (weapon.categoria === 'corpo-a-corpo') return strengthBonuses.dmg;
+    return 0;
+  };
+
   return (
     <div className="mt-0 space-y-6">
       <div className="bg-muted/30 p-4 pixel-border">
         <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ESTATÍSTICAS DE COMBATE</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div className="bg-input p-4 pixel-border text-center cursor-help">
+                  <Label className="font-pixel text-xs text-secondary mb-2 block">CA</Label>
+                  <div className="w-full h-12 flex items-center justify-center font-pixel text-lg text-accent">{calculatedCaDetails.ca_final}</div>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent className="bg-card border-2 border-border font-pixel text-xs">
+                <p>Base: {calculatedCaDetails.ca_base}</p>
+                {calculatedCaDetails.ajustes.map((adj, i) => (
+                  <p key={i}>{adj.fonte} ({adj.item || 'Bônus'}): {adj.valor > 0 ? `+${adj.valor}` : adj.valor}</p>
+                ))}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
           <div className="bg-input p-4 pixel-border text-center">
-            <Label className="font-pixel text-xs text-secondary mb-2 block">CA</Label>
-            <div className="w-full h-12 flex items-center justify-center font-pixel text-lg text-accent">{calculatedAc}</div>
-          </div>
-          <div className="bg-input p-4 pixel-border text-center">
-            <Label className="font-pixel text-xs text-secondary mb-2 block">THAC0</Label>
+            <Label className="font-pixel text-xs text-secondary mb-2 block">THAC0 Base</Label>
             <div className="w-full h-12 flex items-center justify-center font-pixel text-lg text-primary">{calculatedThac0}</div>
-          </div>
-          <div className="bg-input p-4 pixel-border text-center">
-            <Label className="font-pixel text-xs text-secondary mb-2 block">Iniciativa</Label>
-            <input type="number" value={character.initiative} onChange={(e) => setCharacter({ ...character, initiative: parseInt(e.target.value) || 0 })} className="w-full h-12 pixel-border bg-input px-2 font-pixel text-lg text-center text-foreground" disabled={!isEditing} />
           </div>
           <div className="bg-input p-4 pixel-border text-center">
             <Label className="font-pixel text-xs text-secondary mb-2 block">HP</Label>
@@ -62,18 +85,29 @@ export const CombatTab = ({
           <PixelButton onClick={onApplyDamage}>Aplicar Dano</PixelButton>
         </div>
       </div>
+      
       <div className="bg-muted/30 p-4 pixel-border">
-        <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ROLAGEM DE DADOS</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <PixelButton onClick={() => onRoll(20, strengthBonuses.hit, "Ataque Corpo-a-Corpo")} className="flex items-center gap-2"><Sword className="h-4 w-4" /> Ataque C-a-C</PixelButton>
-          <PixelButton onClick={() => onRoll(20, dexterityBonuses.missile, "Ataque à Distância")} className="flex items-center gap-2"><Target className="h-4 w-4" /> Ataque Dist.</PixelButton>
-          <PixelButton onClick={() => onRoll(20, 0, "d20")}>d20</PixelButton>
-          <PixelButton onClick={() => onRoll(100, 0, "d100")}>d100</PixelButton>
-          <PixelButton onClick={() => onRoll(12, 0, "d12")}>d12</PixelButton>
-          <PixelButton onClick={() => onRoll(10, 0, "d10")}>d10</PixelButton>
-          <PixelButton onClick={() => onRoll(8, 0, "d8")}>d8</PixelButton>
-          <PixelButton onClick={() => onRoll(6, 0, "d6")}>d6</PixelButton>
-          <PixelButton onClick={() => onRoll(4, 0, "d4")}>d4</PixelButton>
+        <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ATAQUES</h3>
+        <div className="space-y-2">
+          {character.armaments.map((weapon, index) => {
+            const attackBonus = getAttackBonus(weapon);
+            const damageBonus = getDamageBonus(weapon);
+            const finalThac0 = calculatedThac0 - attackBonus;
+            const damageString = `${weapon.dano}${damageBonus > 0 ? `+${damageBonus}` : damageBonus < 0 ? damageBonus : ''}`;
+
+            return (
+              <div key={index} className="bg-input p-3 pixel-border grid grid-cols-3 md:grid-cols-5 gap-x-4 gap-y-2 items-center text-xs">
+                <p className="col-span-3 md:col-span-1 font-bold text-foreground">{weapon.nome}</p>
+                <p><span className="text-muted-foreground">THAC0:</span> {finalThac0}</p>
+                <p><span className="text-muted-foreground">Dano:</span> {damageString}</p>
+                <p><span className="text-muted-foreground">Ataques:</span> {weapon.num_ataques}</p>
+                <PixelButton size="sm" variant="secondary" onClick={() => onRoll(20, attackBonus, `Ataque com ${weapon.nome}`)}>Atacar</PixelButton>
+              </div>
+            );
+          })}
+          {character.armaments.length === 0 && (
+            <p className="text-center text-muted-foreground text-xs py-4">Nenhum armamento adicionado.</p>
+          )}
         </div>
       </div>
     </div>

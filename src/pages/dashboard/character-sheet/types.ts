@@ -1,3 +1,5 @@
+import { WeaponItem } from "@/lib/items";
+
 export interface Attributes {
   strength: number;
   strengthPercentile: number;
@@ -16,10 +18,9 @@ export interface SavingThrows {
   spell: number;
 }
 
-export interface WeaponProficiency {
-  name: string;
-  proficiency: string;
-  notes: string;
+export interface Armament extends WeaponItem {
+  // We can add character-specific properties here later, like custom notes or magical bonuses
+  munition?: number;
 }
 
 export interface GeneralSkill {
@@ -27,6 +28,13 @@ export interface GeneralSkill {
   category: string;
   level: string;
   notes: string;
+}
+
+export interface Equipment {
+  armor: string | null; // Stores the ID of the equipped armor
+  shield: string | null;
+  helm: string | null;
+  // We can add slots for rings, cloaks, etc. later
 }
 
 export interface Character {
@@ -38,7 +46,7 @@ export interface Character {
   attributes: Attributes;
   hp: number;
   maxHp: number;
-  ac: number; // Base AC from armor
+  equipment: Equipment;
   initiative: number;
   savingThrows: SavingThrows;
   alignment: string;
@@ -48,7 +56,7 @@ export interface Character {
   height: string;
   age: number;
   color: string;
-  weaponProficiencies: WeaponProficiency[];
+  armaments: Armament[];
   generalSkills: GeneralSkill[];
 }
 

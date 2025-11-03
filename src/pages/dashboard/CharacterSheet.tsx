@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import * as Rules from "@/lib/add-2e-rules";
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
-import { Character, WeaponProficiency, GeneralSkill, calculateProficiencyPoints, CLASSES, proficiencyConfig } from "./character-sheet/types";
+import { Character, Armament, GeneralSkill, calculateProficiencyPoints, CLASSES, proficiencyConfig } from "./character-sheet/types";
 import { CharacterHeader } from "./character-sheet/CharacterHeader";
 import { InfoTab } from "./character-sheet/InfoTab";
 import { AttributesTab } from "./character-sheet/AttributesTab";
@@ -13,6 +13,7 @@ import { CombatTab } from "./character-sheet/CombatTab";
 import { InventoryTab } from "./character-sheet/InventoryTab";
 import { SpellsTab } from "./character-sheet/SpellsTab";
 import { NotesTab } from "./character-sheet/NotesTab";
+import { ARMOR_LIST, SHIELD_LIST, HELM_LIST } from "@/lib/items";
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
@@ -36,7 +37,7 @@ const CharacterSheet = () => {
     },
     hp: 0,
     maxHp: 0,
-    ac: 10,
+    equipment: { armor: null, shield: null, helm: null },
     initiative: 0,
     savingThrows: { poison: 13, petrification: 12, rod: 11, breath: 14, spell: 14 },
     alignment: "",
@@ -46,7 +47,7 @@ const CharacterSheet = () => {
     height: "",
     age: 20,
     color: "#4789c7",
-    weaponProficiencies: [],
+    armaments: [],
     generalSkills: [],
   });
 
@@ -71,9 +72,29 @@ const CharacterSheet = () => {
   const wisdomBonuses = useMemo(() => Rules.getWisdomBonuses(character.attributes.wisdom), [character.attributes.wisdom]);
   const charismaBonuses = useMemo(() => Rules.getCharismaBonuses(character.attributes.charisma), [character.attributes.charisma]);
   const calculatedThac0 = useMemo(() => Rules.getThac0(character.class, character.level), [character.class, character.level]);
-  const calculatedAc = useMemo(() => character.ac + dexterityBonuses.defense, [character.ac, dexterityBonuses.defense]);
+  
+  const calculatedCaDetails = useMemo(() => {
+    const ca_base = 10;
+    const ajustes = [];
+    
+    ajustes.push({ fonte: "Destreza", valor: dexterityBonuses.defense });
+
+    const equippedArmor = ARMOR_LIST.find(a => a.id === character.equipment.armor);
+    ajustes.push({ fonte: "Armadura", valor: equippedArmor?.mod_ca || 0, item: equippedArmor?.name || "Nenhuma" });
+
+    const equippedShield = SHIELD_LIST.find(s => s.id === character.equipment.shield);
+    ajustes.push({ fonte: "Escudo", valor: equippedShield?.mod_ca || 0, item: equippedShield?.name || "Nenhum" });
+
+    const equippedHelm = HELM_LIST.find(h => h.id === character.equipment.helm);
+    ajustes.push({ fonte: "Elmo", valor: equippedHelm?.mod_ca || 0, item: equippedHelm?.name || "Nenhum" });
+
+    const ca_final = ca_base + ajustes.reduce((sum, adj) => sum + adj.valor, 0);
+
+    return { ca_base, ajustes, ca_final };
+  }, [character.equipment, dexterityBonuses.defense]);
+
   const totalWeaponProficiencyPoints = useMemo(() => calculateProficiencyPoints(character.class, character.level), [character.class, character.level]);
-  const usedWeaponProficiencyPoints = character.weaponProficiencies.length;
+  const usedWeaponProficiencyPoints = character.armaments.length;
   const proficiencyRuleText = useMemo(() => {
     const config = proficiencyConfig[character.class];
     if (!config) return "Selecione uma classe para ver as regras de perícia.";
@@ -124,22 +145,24 @@ const CharacterSheet = () => {
     });
   };
 
-  const handleAddWeapon = () => {
+  const handleAddArmament = () => {
     if (usedWeaponProficiencyPoints >= totalWeaponProficiencyPoints) {
       toast({ title: "Pontos insuficientes!", description: "Você não tem pontos de perícia com arma disponíveis.", variant: "destructive" });
       return;
     }
-    setCharacter(prev => ({ ...prev, weaponProficiencies: [...prev.weaponProficiencies, { name: "", proficiency: "", notes: "" }] }));
+    // For simplicity, adding a default weapon. A selection modal would be a future improvement.
+    const newWeapon: Armament = { id: 'custom', nome: 'Nova Arma', num_ataques: '1/1', dano: '1d6/1d6', tipo: 'P/C', peso: 1, tam: 'M', vel: 5, categoria: 'corpo-a-corpo' };
+    setCharacter(prev => ({ ...prev, armaments: [...prev.armaments, newWeapon] }));
   };
 
-  const handleRemoveWeapon = (index: number) => {
-    setCharacter(prev => ({ ...prev, weaponProficiencies: prev.weaponProficiencies.filter((_, i) => i !== index) }));
+  const handleRemoveArmament = (index: number) => {
+    setCharacter(prev => ({ ...prev, armaments: prev.armaments.filter((_, i) => i !== index) }));
   };
 
-  const handleWeaponChange = (index: number, field: keyof WeaponProficiency, value: string) => {
-    const updated = [...character.weaponProficiencies];
-    updated[index] = { ...updated[index], [field]: value };
-    setCharacter(prev => ({ ...prev, weaponProficiencies: updated }));
+  const handleArmamentChange = (index: number, field: keyof Armament, value: string | number) => {
+    const updated = [...character.armaments];
+    (updated[index] as any)[field] = value;
+    setCharacter(prev => ({ ...prev, armaments: updated }));
   };
 
   const handleAddSkill = () => {
@@ -175,9 +198,9 @@ const CharacterSheet = () => {
           <div className="rpg-panel relative">
             <TabsContent value="stats"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
-            <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddWeapon={handleAddWeapon} onRemoveWeapon={handleRemoveWeapon} onWeaponChange={handleWeaponChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
-            <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} isEditing={isEditing} calculatedAc={calculatedAc} calculatedThac0={calculatedThac0} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
-            <TabsContent value="inventory"><InventoryTab /></TabsContent>
+            <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddWeapon={handleAddArmament} onRemoveWeapon={handleRemoveArmament} onWeaponChange={handleArmamentChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
+            <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
+            <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>
             <TabsContent value="notes"><NotesTab /></TabsContent>
           </div>
