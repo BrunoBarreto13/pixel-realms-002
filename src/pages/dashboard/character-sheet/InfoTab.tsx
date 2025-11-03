@@ -3,16 +3,19 @@ import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Minus, Plus } from "lucide-react";
-import { Character, RACES, CLASSES } from "./types";
+import { Character } from "./types";
+import { Race, CharacterClass } from "@/lib/players-handbook";
 
 interface InfoTabProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   isEditing: boolean;
   onCalculateHP: () => void;
+  races: Race[];
+  classes: CharacterClass[];
 }
 
-export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP }: InfoTabProps) => {
+export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, races, classes }: InfoTabProps) => {
   return (
     <div className="mt-0 space-y-6">
       <div className="flex items-center justify-between mb-4">
@@ -35,7 +38,7 @@ export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP }: I
           <Select value={character.race} onValueChange={(value) => setCharacter({ ...character, race: value })} disabled={!isEditing}>
             <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12"><SelectValue placeholder="Selecione..." /></SelectTrigger>
             <SelectContent className="bg-card border-2 border-border z-50">
-              {RACES.map(race => <SelectItem key={race.value} value={race.value} className="font-pixel text-xs">{race.label}</SelectItem>)}
+              {races.map(race => <SelectItem key={race.value} value={race.value} className="font-pixel text-xs">{race.name}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>
@@ -44,7 +47,7 @@ export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP }: I
           <Select value={character.class} onValueChange={(value) => setCharacter({ ...character, class: value })} disabled={!isEditing}>
             <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12"><SelectValue placeholder="Selecione..." /></SelectTrigger>
             <SelectContent className="bg-card border-2 border-border z-50">
-              {CLASSES.map(cls => <SelectItem key={cls.value} value={cls.value} className="font-pixel text-xs">{cls.label}</SelectItem>)}
+              {classes.map(cls => <SelectItem key={cls.value} value={cls.value} className="font-pixel text-xs">{cls.name}</SelectItem>)}
             </SelectContent>
           </Select>
         </div>

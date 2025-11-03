@@ -1,4 +1,4 @@
-import { WeaponItem } from "@/lib/items";
+import { Weapon } from "@/lib/players-handbook";
 
 export interface Attributes {
   strength: number;
@@ -18,7 +18,7 @@ export interface SavingThrows {
   spell: number;
 }
 
-export interface Armament extends WeaponItem {
+export interface Armament extends Weapon {
   bonus_ataque?: number;
   bonus_dano?: number;
   observacoes?: string;
@@ -36,7 +36,6 @@ export interface Equipment {
   armor: string | null; // Stores the ID of the equipped armor
   shield: string | null;
   helm: string | null;
-  // We can add slots for rings, cloaks, etc. later
 }
 
 export interface Character {
@@ -61,27 +60,6 @@ export interface Character {
   armaments: Armament[];
   generalSkills: GeneralSkill[];
 }
-
-export const RACES = [
-  { value: "human", label: "Humano", modifiers: {} },
-  { value: "elf", label: "Elfo", modifiers: { dexterity: 1, constitution: -1 } },
-  { value: "dwarf", label: "Anão", modifiers: { constitution: 1, charisma: -1 } },
-  { value: "halfling", label: "Halfling", modifiers: { dexterity: 1, strength: -1 } },
-  { value: "gnome", label: "Gnomo", modifiers: { intelligence: 1, wisdom: -1 } },
-  { value: "half-elf", label: "Meio-Elfo", modifiers: {} },
-  { value: "half-orc", label: "Meio-Orc", modifiers: { strength: 1, charisma: -2, constitution: 1 } },
-];
-
-export const CLASSES = [
-  { value: "fighter", label: "Guerreiro", hitDie: 10 },
-  { value: "wizard", label: "Mago", hitDie: 4 },
-  { value: "cleric", label: "Clérigo", hitDie: 8 },
-  { value: "thief", label: "Ladrão", hitDie: 6 },
-  { value: "ranger", label: "Patrulheiro", hitDie: 10 },
-  { value: "paladin", label: "Paladino", hitDie: 10 },
-  { value: "druid", label: "Druida", hitDie: 8 },
-  { value: "bard", label: "Bardo", hitDie: 6 },
-];
 
 // --- AD&D 2e Proficiency Rules ---
 export const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {

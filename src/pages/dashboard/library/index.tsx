@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { PixelPanel } from "@/components/PixelPanel";
-import { arcaneSpells, divineSpells } from "@/lib/spells";
+import { PHB_SPELLS } from "@/lib/players-handbook";
 import SpellListView from "./SpellListView";
 import PagePanel from "@/components/PagePanel";
 
@@ -100,11 +100,11 @@ const Library = () => {
   const [activeView, setActiveView] = useState<'index' | 'arcane' | 'divine'>('index');
 
   if (activeView === 'arcane') {
-    return <PagePanel title="Biblioteca"><SpellListView spells={arcaneSpells} title="Magias Arcanas" onBack={() => setActiveView('index')} /></PagePanel>;
+    return <PagePanel title="Biblioteca"><SpellListView spells={PHB_SPELLS.arcane} title="Magias Arcanas" onBack={() => setActiveView('index')} /></PagePanel>;
   }
 
   if (activeView === 'divine') {
-    return <PagePanel title="Biblioteca"><SpellListView spells={divineSpells} title="Magias Divinas" onBack={() => setActiveView('index')} /></PagePanel>;
+    return <PagePanel title="Biblioteca"><SpellListView spells={PHB_SPELLS.divine} title="Magias Divinas" onBack={() => setActiveView('index')} /></PagePanel>;
   }
 
   return <PagePanel title="Biblioteca"><LibraryIndex onNavigate={setActiveView} /></PagePanel>;

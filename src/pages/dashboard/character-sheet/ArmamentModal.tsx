@@ -4,7 +4,7 @@ import { PixelInput } from "@/components/PixelInput";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Armament } from "./types";
-import { WEAPON_LIST } from "@/lib/items";
+import { Weapon } from "@/lib/players-handbook";
 import { useState, useEffect } from "react";
 
 interface ArmamentModalProps {
@@ -12,56 +12,49 @@ interface ArmamentModalProps {
   onClose: () => void;
   onSave: (armament: Armament) => void;
   armament: Armament | null;
+  weaponList: Weapon[];
 }
 
-const initialArmamentState: Armament = {
-  id: 'custom',
-  nome: '',
-  num_ataques: '1/1',
-  dano: '1d6/1d6',
-  tipo: 'P/C',
-  peso: 1,
-  tam: 'M',
-  vel: 5,
-  categoria: 'corpo-a-corpo',
+const initialArmamentState: Omit<Armament, keyof Weapon> = {
   bonus_ataque: 0,
   bonus_dano: 0,
   observacoes: '',
 };
 
-export const ArmamentModal = ({ isOpen, onClose, onSave, armament }: ArmamentModalProps) => {
-  const [currentArmament, setCurrentArmament] = useState<Armament>(initialArmamentState);
+export const ArmamentModal = ({ isOpen, onClose, onSave, armament, weaponList }: ArmamentModalProps) => {
+  const [currentArmament, setCurrentArmament] = useState<Armament | null>(null);
 
   useEffect(() => {
-    if (armament) {
-      setCurrentArmament(armament);
-    } else {
-      setCurrentArmament(initialArmamentState);
+    if (isOpen) {
+      setCurrentArmament(armament ? { ...armament } : { ...weaponList[0], ...initialArmamentState, name: "" });
     }
-  }, [armament, isOpen]);
+  }, [armament, isOpen, weaponList]);
 
   const handleBaseWeaponChange = (weaponId: string) => {
-    const baseWeapon = WEAPON_LIST.find(w => w.id === weaponId);
-    if (baseWeapon) {
+    const baseWeapon = weaponList.find(w => w.id === weaponId);
+    if (baseWeapon && currentArmament) {
       setCurrentArmament(prev => ({
-        ...prev,
+        ...(prev as Armament),
         ...baseWeapon,
-        nome: baseWeapon.nome, // Reset name to base weapon name
-        bonus_ataque: prev.bonus_ataque || 0,
-        bonus_dano: prev.bonus_dano || 0,
-        observacoes: prev.observacoes || '',
+        name: baseWeapon.name,
       }));
     }
   };
 
   const handleInputChange = (field: keyof Armament, value: string | number) => {
-    setCurrentArmament(prev => ({ ...prev, [field]: value }));
+    if (currentArmament) {
+      setCurrentArmament(prev => ({ ...prev!, [field]: value }));
+    }
   };
 
   const handleSaveClick = () => {
-    onSave(currentArmament);
-    onClose();
+    if (currentArmament) {
+      onSave(currentArmament);
+      onClose();
+    }
   };
+
+  if (!currentArmament) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -73,20 +66,20 @@ export const ArmamentModal = ({ isOpen, onClose, onSave, armament }: ArmamentMod
         </DialogHeader>
         <div className="space-y-4 py-4">
           <div className="flex flex-col gap-2">
-            <Label className="font-pixel text-xs text-foreground">Arma Base (Opcional)</Label>
-            <Select onValueChange={handleBaseWeaponChange}>
+            <Label className="font-pixel text-xs text-foreground">Arma Base</Label>
+            <Select onValueChange={handleBaseWeaponChange} value={currentArmament.id}>
               <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12">
                 <SelectValue placeholder="Selecione uma arma base..." />
               </SelectTrigger>
               <SelectContent className="bg-card border-2 border-border z-50">
-                {WEAPON_LIST.map(w => <SelectItem key={w.id} value={w.id} className="font-pixel text-xs">{w.nome}</SelectItem>)}
+                {weaponList.map(w => <SelectItem key={w.id} value={w.id} className="font-pixel text-xs">{w.name}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
           <PixelInput
             label="Nome Customizado"
-            value={currentArmament.nome}
-            onChange={(e) => handleInputChange('nome', e.target.value)}
+            value={currentArmament.name}
+            onChange={(e) => handleInputChange('name', e.target.value)}
             placeholder="Ex: Espada Longa +1"
           />
           <div className="grid grid-cols-2 gap-4">

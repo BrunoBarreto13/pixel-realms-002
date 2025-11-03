@@ -1,8 +1,8 @@
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ARMOR_LIST, SHIELD_LIST, HELM_LIST } from "@/lib/items";
 import { Character, Equipment } from "./types";
 import { cn } from "@/lib/utils";
+import { Armor } from "@/lib/players-handbook";
 
 interface InventoryTabProps {
   character: Character;
@@ -10,9 +10,21 @@ interface InventoryTabProps {
   isEditing: boolean;
   totalWeight: number;
   allowedWeight: number;
+  armorList: Armor[];
+  shieldList: Armor[];
+  helmList: Armor[];
 }
 
-export const InventoryTab = ({ character, setCharacter, isEditing, totalWeight, allowedWeight }: InventoryTabProps) => {
+export const InventoryTab = ({
+  character,
+  setCharacter,
+  isEditing,
+  totalWeight,
+  allowedWeight,
+  armorList,
+  shieldList,
+  helmList,
+}: InventoryTabProps) => {
   const handleEquipmentChange = (slot: keyof Equipment, itemId: string) => {
     setCharacter(prev => ({
       ...prev,
@@ -41,7 +53,7 @@ export const InventoryTab = ({ character, setCharacter, isEditing, totalWeight, 
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
               <SelectContent className="bg-card border-2 border-border z-50">
-                {ARMOR_LIST.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
+                {armorList.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
@@ -56,7 +68,7 @@ export const InventoryTab = ({ character, setCharacter, isEditing, totalWeight, 
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
               <SelectContent className="bg-card border-2 border-border z-50">
-                {SHIELD_LIST.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
+                {shieldList.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
@@ -71,7 +83,7 @@ export const InventoryTab = ({ character, setCharacter, isEditing, totalWeight, 
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
               <SelectContent className="bg-card border-2 border-border z-50">
-                {HELM_LIST.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
+                {helmList.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>

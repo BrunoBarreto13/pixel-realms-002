@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import * as Rules from "@/lib/add-2e-rules";
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
-import { Character, Armament, GeneralSkill, calculateProficiencyPoints, CLASSES, proficiencyConfig } from "./character-sheet/types";
+import { Character, Armament, GeneralSkill, calculateProficiencyPoints, proficiencyConfig } from "./character-sheet/types";
 import { CharacterHeader } from "./character-sheet/CharacterHeader";
 import { InfoTab } from "./character-sheet/InfoTab";
 import { AttributesTab } from "./character-sheet/AttributesTab";
@@ -13,8 +13,8 @@ import { CombatTab } from "./character-sheet/CombatTab";
 import { InventoryTab } from "./character-sheet/InventoryTab";
 import { SpellsTab } from "./character-sheet/SpellsTab";
 import { NotesTab } from "./character-sheet/NotesTab";
-import { ARMOR_LIST, SHIELD_LIST, HELM_LIST } from "@/lib/items";
 import { ArmamentModal } from "./character-sheet/ArmamentModal";
+import { PHB_RACES, PHB_CLASSES, PHB_ARMOR_LIST, PHB_SHIELD_LIST, PHB_HELM_LIST, PHB_WEAPONS } from "@/lib/players-handbook";
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
@@ -83,16 +83,22 @@ const CharacterSheet = () => {
     
     ajustes.push({ fonte: "Destreza", valor: dexterityBonuses.defense });
 
-    const equippedArmor = ARMOR_LIST.find(a => a.id === character.equipment.armor);
-    ajustes.push({ fonte: "Armadura", valor: equippedArmor?.mod_ca || 0, item: equippedArmor?.name || "Nenhuma" });
+    const equippedArmor = PHB_ARMOR_LIST.find(a => a.id === character.equipment.armor);
+    if (equippedArmor && equippedArmor.id !== 'nenhuma') {
+      ajustes.push({ fonte: "Armadura", valor: equippedArmor.armor_class - 10, item: equippedArmor.name });
+    }
 
-    const equippedShield = SHIELD_LIST.find(s => s.id === character.equipment.shield);
-    ajustes.push({ fonte: "Escudo", valor: equippedShield?.mod_ca || 0, item: equippedShield?.name || "Nenhum" });
+    const equippedShield = PHB_SHIELD_LIST.find(s => s.id === character.equipment.shield);
+    if (equippedShield && equippedShield.id !== 'nenhum') {
+      ajustes.push({ fonte: "Escudo", valor: equippedShield.armor_class - 10, item: equippedShield.name });
+    }
 
-    const equippedHelm = HELM_LIST.find(h => h.id === character.equipment.helm);
-    ajustes.push({ fonte: "Elmo", valor: equippedHelm?.mod_ca || 0, item: equippedHelm?.name || "Nenhum" });
+    const equippedHelm = PHB_HELM_LIST.find(h => h.id === character.equipment.helm);
+    if (equippedHelm && equippedHelm.id !== 'nenhum') {
+      ajustes.push({ fonte: "Elmo", valor: equippedHelm.armor_class - 10, item: equippedHelm.name });
+    }
 
-    const ca_final = ca_base + ajustes.reduce((sum, adj) => sum + adj.valor, 0);
+    const ca_final = ajustes.reduce((sum, adj) => sum + adj.valor, ca_base);
 
     return { ca_base, ajustes, ca_final };
   }, [character.equipment, dexterityBonuses.defense]);
@@ -101,17 +107,17 @@ const CharacterSheet = () => {
     let weight = 0;
     const { armor, shield, helm } = character.equipment;
     
-    const equippedArmor = ARMOR_LIST.find(a => a.id === armor);
-    if (equippedArmor) weight += equippedArmor.peso;
+    const equippedArmor = PHB_ARMOR_LIST.find(a => a.id === armor);
+    if (equippedArmor) weight += equippedArmor.weight;
 
-    const equippedShield = SHIELD_LIST.find(s => s.id === shield);
-    if (equippedShield) weight += equippedShield.peso;
+    const equippedShield = PHB_SHIELD_LIST.find(s => s.id === shield);
+    if (equippedShield) weight += equippedShield.weight;
 
-    const equippedHelm = HELM_LIST.find(h => h.id === helm);
-    if (equippedHelm) weight += equippedHelm.peso;
+    const equippedHelm = PHB_HELM_LIST.find(h => h.id === helm);
+    if (equippedHelm) weight += equippedHelm.weight;
 
     character.armaments.forEach(weapon => {
-      weight += weapon.peso;
+      weight += weapon.weight;
     });
 
     return weight;
@@ -120,10 +126,12 @@ const CharacterSheet = () => {
   const totalWeaponProficiencyPoints = useMemo(() => calculateProficiencyPoints(character.class, character.level), [character.class, character.level]);
   const usedWeaponProficiencyPoints = character.armaments.length;
   const proficiencyRuleText = useMemo(() => {
-    const config = proficiencyConfig[character.class];
-    if (!config) return "Selecione uma classe para ver as regras de perícia.";
+    const classData = PHB_CLASSES.find(c => c.value === character.class);
+    if (!classData) return "Selecione uma classe para ver as regras de perícia.";
+    const config = proficiencyConfig[classData.value];
+    if (!config) return "Classe sem regras de perícia definidas.";
     return `Você possui ${config.initial} pontos de perícia inicial em armas. +1 ponto a cada ${config.progression} níveis.`;
-  }, [character.class]);
+  }, [character.class, character.level]);
 
   // --- HANDLERS ---
   const handleSave = () => {
@@ -136,15 +144,15 @@ const CharacterSheet = () => {
   };
 
   const handleCalculateHP = () => {
-    const classData = CLASSES.find(c => c.value === character.class);
+    const classData = PHB_CLASSES.find(c => c.value === character.class);
     if (!classData || character.level < 1) {
       toast({ title: "Erro", description: "Selecione uma classe para calcular o HP.", variant: "destructive" });
       return;
     }
     const conMod = constitutionBonuses.hp;
-    let totalHP = classData.hitDie + conMod;
+    let totalHP = classData.hit_die + conMod;
     for (let i = 2; i <= character.level; i++) {
-      const roll = Math.floor(Math.random() * classData.hitDie) + 1;
+      const roll = Math.floor(Math.random() * classData.hit_die) + 1;
       totalHP += Math.max(1, roll + conMod);
     }
     setCharacter(prev => ({ ...prev, maxHp: totalHP, hp: totalHP }));
@@ -185,12 +193,10 @@ const CharacterSheet = () => {
 
   const handleSaveArmament = (armament: Armament) => {
     if (editingArmamentIndex !== null) {
-      // Update existing armament
       const updatedArmaments = [...character.armaments];
       updatedArmaments[editingArmamentIndex] = armament;
       setCharacter(prev => ({ ...prev, armaments: updatedArmaments }));
     } else {
-      // Add new armament
       setCharacter(prev => ({ ...prev, armaments: [...prev.armaments, armament] }));
     }
   };
@@ -236,11 +242,11 @@ const CharacterSheet = () => {
           </TabsList>
 
           <div className="rpg-panel relative">
-            <TabsContent value="stats"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} /></TabsContent>
+            <TabsContent value="stats"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} races={PHB_RACES} classes={PHB_CLASSES} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
             <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddArmament={handleAddArmamentClick} onEditArmament={handleEditArmamentClick} onRemoveArmament={handleRemoveArmament} onArmamentChange={handleArmamentChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
             <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
-            <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} /></TabsContent>
+            <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>
             <TabsContent value="notes"><NotesTab /></TabsContent>
           </div>
@@ -251,6 +257,7 @@ const CharacterSheet = () => {
         onClose={() => setIsArmamentModalOpen(false)}
         onSave={handleSaveArmament}
         armament={editingArmamentIndex !== null ? character.armaments[editingArmamentIndex] : null}
+        weaponList={PHB_WEAPONS}
       />
     </PagePanel>
   );

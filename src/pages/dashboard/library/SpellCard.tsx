@@ -1,4 +1,4 @@
-import { Spell } from "@/lib/spells";
+import { Spell } from "@/lib/players-handbook";
 import { Label } from "@/components/ui/label";
 
 interface SpellCardProps {

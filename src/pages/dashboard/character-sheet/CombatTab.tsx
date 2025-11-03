@@ -1,7 +1,6 @@
 import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
-import { Sword, Target, Shield } from "lucide-react";
 import { Character, Armament, SavingThrows } from "./types";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -39,14 +38,14 @@ export const CombatTab = ({
 
   const getAttackBonus = (weapon: Armament) => {
     let totalBonus = weapon.bonus_ataque || 0;
-    if (weapon.categoria === 'corpo-a-corpo') totalBonus += strengthBonuses.hit;
-    if (weapon.categoria === 'a-distancia' || weapon.categoria === 'arremesso') totalBonus += dexterityBonuses.missile;
+    if (weapon.category === 'corpo-a-corpo') totalBonus += strengthBonuses.hit;
+    if (weapon.category === 'a-distancia' || weapon.category === 'arremesso') totalBonus += dexterityBonuses.missile;
     return totalBonus;
   };
 
   const getDamageBonus = (weapon: Armament) => {
     let totalBonus = weapon.bonus_dano || 0;
-    if (weapon.categoria === 'corpo-a-corpo') totalBonus += strengthBonuses.dmg;
+    if (weapon.category === 'corpo-a-corpo') totalBonus += strengthBonuses.dmg;
     return totalBonus;
   };
 
@@ -123,15 +122,15 @@ export const CombatTab = ({
             const attackBonus = getAttackBonus(weapon);
             const damageBonus = getDamageBonus(weapon);
             const finalThac0 = calculatedThac0 - attackBonus;
-            const damageString = `${weapon.dano}${damageBonus > 0 ? `+${damageBonus}` : damageBonus < 0 ? damageBonus : ''}`;
+            const damageString = `${weapon.damage.small_medium}${damageBonus > 0 ? `+${damageBonus}` : damageBonus < 0 ? damageBonus : ''}`;
 
             return (
               <div key={index} className="bg-input p-3 pixel-border grid grid-cols-3 md:grid-cols-5 gap-x-4 gap-y-2 items-center text-xs">
-                <p className="col-span-3 md:col-span-1 font-bold text-foreground">{weapon.nome}</p>
+                <p className="col-span-3 md:col-span-1 font-bold text-foreground">{weapon.name}</p>
                 <p><span className="text-muted-foreground">THAC0:</span> {finalThac0}</p>
                 <p><span className="text-muted-foreground">Dano:</span> {damageString}</p>
                 <p><span className="text-muted-foreground">Ataques:</span> {weapon.num_ataques}</p>
-                <PixelButton size="sm" variant="secondary" onClick={() => onRoll(20, attackBonus, `Ataque com ${weapon.nome}`)}>Atacar</PixelButton>
+                <PixelButton size="sm" variant="secondary" onClick={() => onRoll(20, attackBonus, `Ataque com ${weapon.name}`)}>Atacar</PixelButton>
               </div>
             );
           })}
