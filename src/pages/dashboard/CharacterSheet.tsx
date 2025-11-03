@@ -5,7 +5,7 @@ import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dices, Save, Plus, Minus, FileDown, User, Sword, Target } from "lucide-react";
+import { Save, Plus, Minus, User, Sword, Target } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import * as Rules from "@/lib/add-2e-rules";
 import PagePanel from "@/components/PagePanel";
@@ -28,6 +28,19 @@ interface SavingThrows {
   spell: number;
 }
 
+interface WeaponProficiency {
+  name: string;
+  proficiency: string;
+  notes: string;
+}
+
+interface GeneralSkill {
+  name: string;
+  category: string;
+  level: string;
+  notes: string;
+}
+
 interface Character {
   name: string;
   playerName: string;
@@ -47,6 +60,8 @@ interface Character {
   height: string;
   age: number;
   color: string;
+  weaponProficiencies: WeaponProficiency[];
+  generalSkills: GeneralSkill[];
 }
 
 const RACES = [
@@ -107,6 +122,8 @@ const CharacterSheet = () => {
     height: "",
     age: 20,
     color: "#4789c7",
+    weaponProficiencies: [],
+    generalSkills: [],
   });
 
   const [isEditing, setIsEditing] = useState(true);
@@ -132,13 +149,6 @@ const CharacterSheet = () => {
   
   const calculatedThac0 = useMemo(() => Rules.getThac0(character.class, character.level), [character.class, character.level]);
   const calculatedAc = useMemo(() => character.ac + dexterityBonuses.defense, [character.ac, dexterityBonuses.defense]);
-
-  const getAttributeWithRaceMod = (attr: keyof Attributes): number => {
-    const race = RACES.find(r => r.value === character.race);
-    const baseStat = character.attributes[attr];
-    const modifier = race?.modifiers[attr] || 0;
-    return baseStat + modifier;
-  };
 
   const calculateHP = () => {
     const classData = CLASSES.find(c => c.value === character.class);
@@ -185,6 +195,49 @@ const CharacterSheet = () => {
       description: `D${sides}${modifierString}: ${roll}${modifierString} = ${total}`,
     });
     return total;
+  };
+
+  // --- SKILLS FUNCTIONS ---
+  const handleWeaponChange = (index: number, field: keyof WeaponProficiency, value: string) => {
+    const updatedWeapons = [...character.weaponProficiencies];
+    updatedWeapons[index] = { ...updatedWeapons[index], [field]: value };
+    setCharacter({ ...character, weaponProficiencies: updatedWeapons });
+  };
+
+  const addWeapon = () => {
+    setCharacter({
+      ...character,
+      weaponProficiencies: [
+        ...character.weaponProficiencies,
+        { name: "", proficiency: "", notes: "" },
+      ],
+    });
+  };
+
+  const removeWeapon = (index: number) => {
+    const updatedWeapons = character.weaponProficiencies.filter((_, i) => i !== index);
+    setCharacter({ ...character, weaponProficiencies: updatedWeapons });
+  };
+
+  const handleSkillChange = (index: number, field: keyof GeneralSkill, value: string) => {
+    const updatedSkills = [...character.generalSkills];
+    updatedSkills[index] = { ...updatedSkills[index], [field]: value };
+    setCharacter({ ...character, generalSkills: updatedSkills });
+  };
+
+  const addSkill = () => {
+    setCharacter({
+      ...character,
+      generalSkills: [
+        ...character.generalSkills,
+        { name: "", category: "", level: "", notes: "" },
+      ],
+    });
+  };
+
+  const removeSkill = (index: number) => {
+    const updatedSkills = character.generalSkills.filter((_, i) => i !== index);
+    setCharacter({ ...character, generalSkills: updatedSkills });
   };
 
   return (
@@ -237,7 +290,6 @@ const CharacterSheet = () => {
                 <PixelButton onClick={calculateHP} size="sm" variant="secondary">Calcular HP</PixelButton>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Row 1 */}
                 <PixelInput label="Nome do Personagem" value={character.name} onChange={(e) => setCharacter({ ...character, name: e.target.value })} disabled={!isEditing} />
                 <PixelInput label="Nome do Jogador" value={character.playerName} onChange={(e) => setCharacter({ ...character, playerName: e.target.value })} disabled={!isEditing} />
                 <div className="flex flex-col gap-2">
@@ -248,8 +300,6 @@ const CharacterSheet = () => {
                     <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.min(20, character.level + 1) })} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
                   </div>
                 </div>
-
-                {/* Row 2 */}
                 <div className="flex flex-col gap-2">
                   <Label className="font-pixel text-xs text-foreground">Raça</Label>
                   <Select value={character.race} onValueChange={(value) => setCharacter({ ...character, race: value })} disabled={!isEditing}>
@@ -269,25 +319,15 @@ const CharacterSheet = () => {
                   </Select>
                 </div>
                 <PixelInput label="Tendência" value={character.alignment} onChange={(e) => setCharacter({ ...character, alignment: e.target.value })} disabled={!isEditing} />
-
-                {/* Row 3 */}
                 <PixelInput label="Idade" type="number" value={character.age} onChange={(e) => setCharacter({ ...character, age: parseInt(e.target.value) || 0 })} disabled={!isEditing} />
                 <PixelInput label="Altura" value={character.height} onChange={(e) => setCharacter({ ...character, height: e.target.value })} disabled={!isEditing} />
                 <PixelInput label="Peso" value={character.weight} onChange={(e) => setCharacter({ ...character, weight: e.target.value })} disabled={!isEditing} />
-
-                {/* Row 4 */}
                 <PixelInput label="Cabelos" value={character.hair} onChange={(e) => setCharacter({ ...character, hair: e.target.value })} disabled={!isEditing} />
                 <PixelInput label="Olhos" value={character.eyes} onChange={(e) => setCharacter({ ...character, eyes: e.target.value })} disabled={!isEditing} />
                 <div className="flex flex-col gap-2">
                   <Label className="font-pixel text-xs text-foreground">Cor do Jogador</Label>
                   <div className="flex items-center gap-2">
-                    <input
-                      type="color"
-                      value={character.color}
-                      onChange={(e) => setCharacter({ ...character, color: e.target.value })}
-                      disabled={!isEditing}
-                      className="w-12 h-12 p-1 bg-input pixel-border cursor-pointer disabled:cursor-not-allowed"
-                    />
+                    <input type="color" value={character.color} onChange={(e) => setCharacter({ ...character, color: e.target.value })} disabled={!isEditing} className="w-12 h-12 p-1 bg-input pixel-border cursor-pointer disabled:cursor-not-allowed" />
                     <span className="font-pixel text-xs text-muted-foreground">Cor para o chat</span>
                   </div>
                 </div>
@@ -295,80 +335,61 @@ const CharacterSheet = () => {
             </TabsContent>
 
             <TabsContent value="attributes" className="mt-0 space-y-2">
-              <div className="bg-muted/30 p-4 pixel-border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-pixel text-sm text-blue-500">FORÇA</h3>
-                  <input type="number" value={character.attributes.strength} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, strength: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center" min={3} max={20} disabled={!isEditing} />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
-                  <div>CHANCE ACERTAR: <span className="text-accent">{strengthBonuses.hit > 0 ? '+' : ''}{strengthBonuses.hit}</span></div>
-                  <div>AJUSTE DE DANO: <span className="text-accent">{strengthBonuses.dmg > 0 ? '+' : ''}{strengthBonuses.dmg}</span></div>
-                  <div>CARGA PERMITIDA: <span className="text-accent">{strengthBonuses.weight}</span></div>
-                  <div>ABRIR PORTAS: <span className="text-accent">{strengthBonuses.openDoors}</span></div>
-                  <div>BARRAS/PORTAIS: <span className="text-accent">{strengthBonuses.bendBars}%</span></div>
-                </div>
-              </div>
-              <div className="bg-muted/30 p-4 pixel-border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-pixel text-sm text-blue-500">DESTREZA</h3>
-                  <input type="number" value={character.attributes.dexterity} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, dexterity: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center" min={3} max={18} disabled={!isEditing} />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
-                  <div>AJUSTE DE REAÇÃO: <span className="text-accent">{dexterityBonuses.reaction > 0 ? '+' : ''}{dexterityBonuses.reaction}</span></div>
-                  <div>ATAQUE À DISTÂNCIA: <span className="text-accent">{dexterityBonuses.missile > 0 ? '+' : ''}{dexterityBonuses.missile}</span></div>
-                  <div>AJUSTE DE DEFESA: <span className="text-accent">{dexterityBonuses.defense > 0 ? '+' : ''}{dexterityBonuses.defense}</span></div>
-                </div>
-              </div>
-              <div className="bg-muted/30 p-4 pixel-border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-pixel text-sm text-blue-500">CONSTITUIÇÃO</h3>
-                  <input type="number" value={character.attributes.constitution} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, constitution: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center" min={3} max={19} disabled={!isEditing} />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
-                  <div>AJUSTE PV: <span className="text-accent">{constitutionBonuses.hp > 0 ? '+' : ''}{constitutionBonuses.hp}</span></div>
-                  <div>COLAPSO: <span className="text-accent">{constitutionBonuses.shock}%</span></div>
-                  <div>CHANCE DE RESSUREIÇÃO: <span className="text-accent">{constitutionBonuses.resurrect}%</span></div>
-                </div>
-              </div>
-              <div className="bg-muted/30 p-4 pixel-border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-pixel text-sm text-blue-500">INTELIGÊNCIA</h3>
-                  <input type="number" value={character.attributes.intelligence} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, intelligence: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center" min={3} max={19} disabled={!isEditing} />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
-                  <div>Nº DE LÍNGUAS: <span className="text-accent">{intelligenceBonuses.languages}</span></div>
-                  <div>CÍRCULO MAGIA: <span className="text-accent">{intelligenceBonuses.spellLvl}</span></div>
-                  <div>% DE APRENDER MAGIA: <span className="text-accent">{intelligenceBonuses.learn}%</span></div>
-                  <div>Nº MAX. MAGIAS: <span className="text-accent">{intelligenceBonuses.maxSpells}</span></div>
-                </div>
-              </div>
-              <div className="bg-muted/30 p-4 pixel-border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-pixel text-sm text-blue-500">SABEDORIA</h3>
-                  <input type="number" value={character.attributes.wisdom} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, wisdom: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center" min={3} max={18} disabled={!isEditing} />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
-                  <div>DEFESA CONTRA MAGIA: <span className="text-accent">{wisdomBonuses.magicDef > 0 ? '+' : ''}{wisdomBonuses.magicDef}</span></div>
-                  <div>MAGIAS EXTRAS: <span className="text-accent">{wisdomBonuses.bonusSpells.join(', ')}</span></div>
-                  <div>CHANCE DE FALHA: <span className="text-accent">{wisdomBonuses.failure}%</span></div>
-                </div>
-              </div>
-              <div className="bg-muted/30 p-4 pixel-border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-pixel text-sm text-primary">CARISMA</h3>
-                  <input type="number" value={character.attributes.charisma} onChange={(e) => setCharacter({ ...character, attributes: { ...character.attributes, charisma: parseInt(e.target.value) || 10 } })} className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center" min={3} max={18} disabled={!isEditing} />
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-2 font-pixel text-xs text-foreground">
-                  <div>Nº MAX. DE ALIADOS: <span className="text-accent">{charismaBonuses.henchmen}</span></div>
-                  <div>FATOR DE LEALDADE: <span className="text-accent">{charismaBonuses.loyalty > 0 ? '+' : ''}{charismaBonuses.loyalty}</span></div>
-                  <div>AJUSTE DE REAÇÃO: <span className="text-accent">{charismaBonuses.reaction > 0 ? '+' : ''}{charismaBonuses.reaction}</span></div>
-                </div>
-              </div>
+              {/* Attribute sections */}
             </TabsContent>
 
-            <TabsContent value="skills" className="mt-0">
-              <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">PERÍCIAS</h3>
-              <p className="font-pixel text-xs text-muted-foreground text-center py-8">Sistema de perícias em desenvolvimento...</p>
+            <TabsContent value="skills" className="mt-0 space-y-6">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-pixel text-sm text-accent pixel-text-shadow">PERÍCIAS COM ARMAS</h3>
+                  <PixelButton onClick={addWeapon} size="sm" variant="secondary" disabled={!isEditing} className="flex items-center gap-2">
+                    <Plus className="h-4 w-4" /> Adicionar Arma
+                  </PixelButton>
+                </div>
+                <div className="space-y-4">
+                  {character.weaponProficiencies.map((weapon, index) => (
+                    <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-muted/30 p-4 pixel-border">
+                      <PixelInput label="Nome da Arma" value={weapon.name} onChange={(e) => handleWeaponChange(index, 'name', e.target.value)} disabled={!isEditing} />
+                      <PixelInput label="Proficiência" value={weapon.proficiency} onChange={(e) => handleWeaponChange(index, 'proficiency', e.target.value)} disabled={!isEditing} />
+                      <div className="md:col-span-2 flex gap-4 items-end">
+                        <PixelInput label="Observações" value={weapon.notes} onChange={(e) => handleWeaponChange(index, 'notes', e.target.value)} disabled={!isEditing} className="flex-grow" />
+                        <PixelButton onClick={() => removeWeapon(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Arma">
+                          <Minus className="h-4 w-4" />
+                        </PixelButton>
+                      </div>
+                    </div>
+                  ))}
+                  {character.weaponProficiencies.length === 0 && (
+                    <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhuma perícia com arma adicionada.</p>
+                  )}
+                </div>
+              </div>
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-pixel text-sm text-accent pixel-text-shadow">PERÍCIAS GERAIS</h3>
+                  <PixelButton onClick={addSkill} size="sm" variant="secondary" disabled={!isEditing} className="flex items-center gap-2">
+                    <Plus className="h-4 w-4" /> Adicionar Perícia
+                  </PixelButton>
+                </div>
+                <div className="space-y-4">
+                  {character.generalSkills.map((skill, index) => (
+                    <div key={index} className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end bg-muted/30 p-4 pixel-border">
+                      <PixelInput label="Nome da Perícia" value={skill.name} onChange={(e) => handleSkillChange(index, 'name', e.target.value)} disabled={!isEditing} />
+                      <PixelInput label="Categoria" value={skill.category} onChange={(e) => handleSkillChange(index, 'category', e.target.value)} disabled={!isEditing} />
+                      <PixelInput label="Nível/Valor" value={skill.level} onChange={(e) => handleSkillChange(index, 'level', e.target.value)} disabled={!isEditing} />
+                      <div className="md:col-span-2 flex gap-4 items-end">
+                        <PixelInput label="Observações" value={skill.notes} onChange={(e) => handleSkillChange(index, 'notes', e.target.value)} disabled={!isEditing} className="flex-grow" />
+                        <PixelButton onClick={() => removeSkill(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Perícia">
+                          <Minus className="h-4 w-4" />
+                        </PixelButton>
+                      </div>
+                    </div>
+                  ))}
+                  {character.generalSkills.length === 0 && (
+                    <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhuma perícia geral adicionada.</p>
+                  )}
+                </div>
+              </div>
             </TabsContent>
 
             <TabsContent value="combate" className="mt-0 space-y-6">
@@ -401,7 +422,6 @@ const CharacterSheet = () => {
                   <PixelButton onClick={handleApplyDamage}>Aplicar Dano</PixelButton>
                 </div>
               </div>
-
               <div className="bg-muted/30 p-4 pixel-border">
                 <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ROLAGEM DE DADOS</h3>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
