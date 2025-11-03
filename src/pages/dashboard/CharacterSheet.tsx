@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { PixelPanel } from "@/components/PixelPanel";
 import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
@@ -9,6 +9,7 @@ import { Dices, Save, Plus, Minus, FileDown, User, Sword, Target } from "lucide-
 import { useToast } from "@/hooks/use-toast";
 import * as Rules from "@/lib/add-2e-rules";
 import PagePanel from "@/components/PagePanel";
+import { useAuth } from "@/hooks/useAuth";
 
 interface Attributes {
   strength: number;
@@ -73,6 +74,7 @@ const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 borde
 
 const CharacterSheet = () => {
   const { toast } = useToast();
+  const { profile } = useAuth();
   const [character, setCharacter] = useState<Character>({
     name: "",
     playerName: "",
@@ -109,6 +111,16 @@ const CharacterSheet = () => {
 
   const [isEditing, setIsEditing] = useState(true);
   const [damageInput, setDamageInput] = useState("");
+
+  useEffect(() => {
+    if (profile) {
+      setCharacter(prevCharacter => ({
+        ...prevCharacter,
+        name: profile.character_or_campaign || "",
+        playerName: profile.name || "",
+      }));
+    }
+  }, [profile]);
 
   // --- DERIVED STATS CALCULATIONS ---
   const strengthBonuses = useMemo(() => Rules.getStrengthBonuses(character.attributes.strength), [character.attributes.strength]);

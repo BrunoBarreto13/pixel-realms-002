@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState, ReactNode } from 'react
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
+import { Tables } from '@/integrations/supabase/types';
 
 type UserRole = 'master' | 'player';
 
@@ -9,6 +10,7 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   userRole: UserRole | null;
+  profile: Tables<'profiles'> | null;
   loading: boolean;
   signIn: (email: string, password: string) => Promise<{ error: Error | null }>;
   signUp: (email: string, password: string, name: string, role: UserRole, characterOrCampaign: string) => Promise<{ error: Error | null }>;
@@ -22,60 +24,73 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [userRole, setUserRole] = useState<UserRole | null>(null);
+  const [profile, setProfile] = useState<Tables<'profiles'> | null>(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set up auth state listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
+    const fetchUserData = async (userId: string) => {
+      setLoading(true);
+      try {
+        const rolePromise = supabase
+          .from('user_roles')
+          .select('role')
+          .eq('user_id', userId)
+          .maybeSingle();
         
-        // Fetch user role after state updates
-        if (session?.user) {
-          setTimeout(() => {
-            fetchUserRole(session.user.id);
-          }, 0);
-        } else {
-          setUserRole(null);
-          setLoading(false);
-        }
-      }
-    );
+        const profilePromise = supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', userId)
+          .single();
 
-    // THEN check for existing session
+        const [
+          { data: roleData, error: roleError }, 
+          { data: profileData, error: profileError }
+        ] = await Promise.all([rolePromise, profilePromise]);
+
+        if (roleError) throw roleError;
+        setUserRole(roleData?.role as UserRole || null);
+
+        if (profileError) throw profileError;
+        setProfile(profileData);
+
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+        setUserRole(null);
+        setProfile(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
-      
       if (session?.user) {
-        fetchUserRole(session.user.id);
+        fetchUserData(session.user.id);
       } else {
         setLoading(false);
       }
     });
 
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          fetchUserData(session.user.id);
+        } else {
+          setUserRole(null);
+          setProfile(null);
+          setLoading(false);
+        }
+      }
+    );
+
     return () => subscription.unsubscribe();
   }, []);
-
-  const fetchUserRole = async (userId: string) => {
-    try {
-      const { data, error } = await supabase
-        .from('user_roles')
-        .select('role')
-        .eq('user_id', userId)
-        .maybeSingle();
-
-      if (error) throw error;
-      setUserRole(data?.role as UserRole || null);
-    } catch (error) {
-      console.error('Error fetching user role:', error);
-      setUserRole(null);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const signIn = async (email: string, password: string) => {
     try {
@@ -126,6 +141,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setUser(null);
     setSession(null);
     setUserRole(null);
+    setProfile(null);
     navigate('/login');
   };
 
@@ -137,6 +153,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         user,
         session,
         userRole,
+        profile,
         loading,
         signIn,
         signUp,
