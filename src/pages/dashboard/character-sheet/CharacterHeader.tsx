@@ -1,7 +1,8 @@
 import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
 import { User, Save } from "lucide-react";
-import { Character, RACES, CLASSES } from "./types";
+import { Character } from "./types";
+import { PHB_RACES, PHB_CLASSES } from "@/lib/players-handbook";
 
 interface CharacterHeaderProps {
   character: Character;
@@ -21,7 +22,7 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit }: Charac
           <div>
             <h2 className="font-pixel text-xl text-primary pixel-text-shadow">{character.name || "Novo Personagem"}</h2>
             <p className="font-pixel text-xs text-secondary-foreground">
-              Nível {character.level} {RACES.find(r => r.value === character.race)?.label || "---"} {CLASSES.find(c => c.value === character.class)?.label || "---"}
+              Nível {character.level} {PHB_RACES.find(r => r.value === character.race)?.name || "---"} {PHB_CLASSES.find(c => c.value === character.class)?.name || "---"}
             </p>
             <p className="font-pixel text-xs text-muted-foreground">Jogador: {character.playerName || "---"}</p>
           </div>
