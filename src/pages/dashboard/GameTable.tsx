@@ -4,6 +4,7 @@ import GameChat from "./gametable/GameChat";
 import { useToast } from "@/hooks/use-toast";
 import { PixelButton } from "@/components/PixelButton";
 import { PixelPanel } from "@/components/PixelPanel";
+import PagePanel from "@/components/PagePanel";
 
 const ActionsAndDicePanel = () => {
   const [diceQuantity, setDiceQuantity] = useState(1);
@@ -92,20 +93,20 @@ const MapPanel = () => (
 
 const GameTable = () => {
   return (
-    <div className="h-[calc(100vh-10rem)]">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
+    <PagePanel title="Mesa de Jogo" className="flex flex-col h-full">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 flex-1">
         {/* Left Column */}
-        <div className="lg:col-span-2 flex flex-col gap-6 h-full">
+        <div className="lg:col-span-2 flex flex-col gap-6">
           <PartyStatus />
           <MapPanel />
         </div>
         {/* Right Column */}
-        <div className="lg:col-span-1 flex flex-col gap-6 h-full">
+        <div className="lg:col-span-1 flex flex-col gap-6">
           <ActionsAndDicePanel />
           <GameChat />
         </div>
       </div>
-    </div>
+    </PagePanel>
   );
 };
 
