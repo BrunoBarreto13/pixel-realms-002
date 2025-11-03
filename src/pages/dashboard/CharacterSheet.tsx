@@ -11,6 +11,25 @@ import * as Rules from "@/lib/add-2e-rules";
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
 
+// --- AD&D 2e Proficiency Rules ---
+const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {
+  fighter: { initial: 4, progression: 3 },
+  paladin: { initial: 4, progression: 3 },
+  ranger: { initial: 3, progression: 3 },
+  thief: { initial: 2, progression: 4 },
+  bard: { initial: 2, progression: 4 },
+  cleric: { initial: 2, progression: 4 },
+  druid: { initial: 2, progression: 4 },
+  wizard: { initial: 1, progression: 6 },
+};
+
+const calculateProficiencyPoints = (className: string, level: number): number => {
+  const config = proficiencyConfig[className];
+  if (!config) return 0;
+  return config.initial + Math.floor((level - 1) / config.progression);
+};
+// --- End of Rules ---
+
 interface Attributes {
   strength: number;
   dexterity: number;
@@ -139,16 +158,18 @@ const CharacterSheet = () => {
     }
   }, [profile, isMaster]);
 
-  // --- DERIVED STATS CALCULATIONS ---
+  // --- DERIVED STATS & POINTS CALCULATIONS ---
   const strengthBonuses = useMemo(() => Rules.getStrengthBonuses(character.attributes.strength), [character.attributes.strength]);
   const dexterityBonuses = useMemo(() => Rules.getDexterityBonuses(character.attributes.dexterity), [character.attributes.dexterity]);
   const constitutionBonuses = useMemo(() => Rules.getConstitutionBonuses(character.attributes.constitution), [character.attributes.constitution]);
-  const intelligenceBonuses = useMemo(() => Rules.getIntelligenceBonuses(character.attributes.intelligence), [character.attributes.intelligence]);
-  const wisdomBonuses = useMemo(() => Rules.getWisdomBonuses(character.attributes.wisdom), [character.attributes.wisdom]);
-  const charismaBonuses = useMemo(() => Rules.getCharismaBonuses(character.attributes.charisma), [character.attributes.charisma]);
   
   const calculatedThac0 = useMemo(() => Rules.getThac0(character.class, character.level), [character.class, character.level]);
   const calculatedAc = useMemo(() => character.ac + dexterityBonuses.defense, [character.ac, dexterityBonuses.defense]);
+
+  const totalWeaponProficiencyPoints = useMemo(() => {
+    return calculateProficiencyPoints(character.class, character.level);
+  }, [character.class, character.level]);
+  const usedWeaponProficiencyPoints = character.weaponProficiencies.length;
 
   const calculateHP = () => {
     const classData = CLASSES.find(c => c.value === character.class);
@@ -205,6 +226,14 @@ const CharacterSheet = () => {
   };
 
   const addWeapon = () => {
+    if (usedWeaponProficiencyPoints >= totalWeaponProficiencyPoints) {
+      toast({
+        title: "Pontos insuficientes!",
+        description: "Você não tem pontos de perícia com arma disponíveis para adicionar uma nova.",
+        variant: "destructive",
+      });
+      return;
+    }
     setCharacter({
       ...character,
       weaponProficiencies: [
@@ -239,6 +268,12 @@ const CharacterSheet = () => {
     const updatedSkills = character.generalSkills.filter((_, i) => i !== index);
     setCharacter({ ...character, generalSkills: updatedSkills });
   };
+
+  const proficiencyRuleText = useMemo(() => {
+    const config = proficiencyConfig[character.class];
+    if (!config) return "Selecione uma classe para ver as regras de perícia.";
+    return `Você possui ${config.initial} pontos de perícia inicial em armas. +1 ponto a cada ${config.progression} níveis.`;
+  }, [character.class]);
 
   return (
     <PagePanel title="Ficha do Jogador">
@@ -345,6 +380,13 @@ const CharacterSheet = () => {
                   <PixelButton onClick={addWeapon} size="sm" variant="secondary" disabled={!isEditing} className="flex items-center gap-2">
                     <Plus className="h-4 w-4" /> Adicionar Arma
                   </PixelButton>
+                </div>
+                <div className="bg-muted/30 p-4 pixel-border mb-4 space-y-2">
+                  <div className="flex justify-between items-center font-pixel text-xs">
+                    <Label>Pontos de Perícia com Armas</Label>
+                    <span className="text-accent font-bold">{usedWeaponProficiencyPoints} / {totalWeaponProficiencyPoints}</span>
+                  </div>
+                  <p className="text-muted-foreground text-xs font-pixel">{proficiencyRuleText}</p>
                 </div>
                 <div className="space-y-4">
                   {character.weaponProficiencies.map((weapon, index) => (
