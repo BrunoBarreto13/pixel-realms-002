@@ -2,16 +2,18 @@ import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
 import { User, Save } from "lucide-react";
 import { Character } from "./types";
-import { PHB_RACES, PHB_CLASSES } from "@/lib/players-handbook";
+import { Race, CharacterClass } from "@/lib/players-handbook";
 
 interface CharacterHeaderProps {
   character: Character;
   isEditing: boolean;
   onSave: () => void;
   onEdit: () => void;
+  races: Race[];
+  classes: CharacterClass[];
 }
 
-export const CharacterHeader = ({ character, isEditing, onSave, onEdit }: CharacterHeaderProps) => {
+export const CharacterHeader = ({ character, isEditing, onSave, onEdit, races, classes }: CharacterHeaderProps) => {
   return (
     <PixelPanel>
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -22,7 +24,7 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit }: Charac
           <div>
             <h2 className="font-pixel text-xl text-primary pixel-text-shadow">{character.name || "Novo Personagem"}</h2>
             <p className="font-pixel text-xs text-secondary-foreground">
-              Nível {character.level} {PHB_RACES.find(r => r.value === character.race)?.name || "---"} {PHB_CLASSES.find(c => c.value === character.class)?.name || "---"}
+              Nível {character.level} {races.find(r => r.value === character.race)?.name || "---"} {classes.find(c => c.value === character.class)?.name || "---"}
             </p>
             <p className="font-pixel text-xs text-muted-foreground">Jogador: {character.playerName || "---"}</p>
           </div>

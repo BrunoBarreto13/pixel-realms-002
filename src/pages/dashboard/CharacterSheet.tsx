@@ -228,7 +228,14 @@ const CharacterSheet = () => {
   return (
     <PagePanel title="Ficha do Jogador">
       <div className="space-y-6 max-w-5xl mx-auto">
-        <CharacterHeader character={character} isEditing={isEditing} onSave={handleSave} onEdit={() => setIsEditing(true)} />
+        <CharacterHeader 
+          character={character} 
+          isEditing={isEditing} 
+          onSave={handleSave} 
+          onEdit={() => setIsEditing(true)}
+          races={PHB_RACES}
+          classes={PHB_CLASSES}
+        />
 
         <Tabs defaultValue="stats" className="w-full">
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
