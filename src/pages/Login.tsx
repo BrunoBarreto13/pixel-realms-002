@@ -56,10 +56,10 @@ const Login = () => {
       <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
         {/* Title */}
         <div className="text-center">
-          <h1 className="font-pixel text-4xl md:text-5xl text-[#FDE306] pixel-text-shadow mb-2">
+          <h1 className="font-pixel text-4xl md:text-5xl text-[#FDE306] pixel-text-shadow-black mb-2">
             PIXEL REALMS
           </h1>
-          <p className="font-pixel text-sm text-white pixel-text-shadow">
+          <p className="font-pixel text-sm text-white pixel-text-shadow-black">
             SUA AVENTURA AGUARDA
           </p>
         </div>
@@ -96,12 +96,12 @@ const Login = () => {
           <div className="mt-6 text-center space-y-2">
             <p className="font-pixel text-xs text-muted-foreground">
               Não tem conta?{" "}
-              <Link to="/register" className="text-primary hover:text-accent transition-colors underline">
+              <Link to="/register" className="text-[#4789c7] hover:text-[#6a9fd7] transition-colors pixel-text-shadow-blue">
                 Cadastre-se
               </Link>
             </p>
             <p className="font-pixel text-xs text-muted-foreground">
-              <Link to="/forgot-password" className="hover:text-accent transition-colors underline">
+              <Link to="/forgot-password" className="text-[#4789c7] hover:text-[#6a9fd7] transition-colors pixel-text-shadow-blue">
                 Esqueceu a senha?
               </Link>
             </p>

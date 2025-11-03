@@ -103,6 +103,12 @@
   .pixel-text-shadow {
     text-shadow: 2px 2px 0px hsl(var(--background) / 0.8);
   }
+  .pixel-text-shadow-black {
+    text-shadow: 2px 2px 0px #000;
+  }
+  .pixel-text-shadow-blue {
+    text-shadow: 1px 1px 0px #2c5a84;
+  }
 
   ::-webkit-scrollbar {
     width: 12px;

@@ -30,10 +30,10 @@ const ForgotPassword = () => {
       <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
         {/* Title */}
         <div className="text-center">
-          <h1 className="font-pixel text-2xl md:text-3xl text-primary pixel-text-shadow mb-2">
+          <h1 className="font-pixel text-2xl md:text-3xl text-[#FDE306] pixel-text-shadow-black mb-2">
             RECUPERAR SENHA
           </h1>
-          <p className="font-pixel text-xs text-secondary pixel-text-shadow">
+          <p className="font-pixel text-xs text-white pixel-text-shadow-black">
             {submitted ? "Verifique seu email" : "Digite seu email"}
           </p>
         </div>
@@ -77,7 +77,7 @@ const ForgotPassword = () => {
           <div className="mt-6 text-center">
             <Link 
               to="/login" 
-              className="font-pixel text-xs text-muted-foreground hover:text-accent transition-colors underline"
+              className="font-pixel text-xs text-[#4789c7] hover:text-[#6a9fd7] transition-colors pixel-text-shadow-blue"
             >
               Voltar ao login
             </Link>

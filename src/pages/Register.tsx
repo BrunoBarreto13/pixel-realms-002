@@ -92,10 +92,10 @@ const Register = () => {
       <div className="relative z-10 w-full max-w-md flex flex-col gap-8 items-center">
         {/* Title */}
         <div className="text-center">
-          <h1 className="font-pixel text-3xl md:text-4xl text-primary pixel-text-shadow mb-2">
+          <h1 className="font-pixel text-3xl md:text-4xl text-[#FDE306] pixel-text-shadow-black mb-2">
             CADASTRO
           </h1>
-          <p className="font-pixel text-xs text-secondary pixel-text-shadow">
+          <p className="font-pixel text-xs text-white pixel-text-shadow-black">
             Escolha seu papel
           </p>
         </div>
@@ -201,7 +201,7 @@ const Register = () => {
           <div className="mt-6 text-center">
             <p className="font-pixel text-xs text-muted-foreground">
               Já tem conta?{" "}
-              <Link to="/login" className="text-primary hover:text-accent transition-colors underline">
+              <Link to="/login" className="text-[#4789c7] hover:text-[#6a9fd7] transition-colors pixel-text-shadow-blue">
                 Entrar
               </Link>
             </p>
