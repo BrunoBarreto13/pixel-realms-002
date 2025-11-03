@@ -1,1 +1,79 @@
-$$DYAD_ATTACHMENT_0$$
+{
+  "races": [
+    {
+      "name": "Humano",
+      "ability_modifiers": {}
+    },
+    {
+      "name": "Elfo",
+      "ability_modifiers": { "dexterity": 1, "constitution": -1 }
+    }
+  ],
+  "classes": [
+    {
+      "name": "Guerreiro",
+      "hit_die": 10
+    },
+    {
+      "name": "Mago",
+      "hit_die": 4
+    }
+  ],
+  "spells": {
+    "arcane": [
+      {
+        "name": "Mísseis Mágicos",
+        "level": 1,
+        "school": "Evocação",
+        "range": "150 jardas",
+        "duration": "Instantânea",
+        "area_of_effect": "1 criatura",
+        "components": "V, S",
+        "casting_time": "1",
+        "saving_throw": "Nenhum",
+        "description": "Cria mísseis de energia mágica que atingem automaticamente o alvo.",
+        "class": "wizard"
+      }
+    ],
+    "divine": [
+      {
+        "name": "Curar Ferimentos Leves",
+        "level": 1,
+        "school": "Necromancia",
+        "range": "Toque",
+        "duration": "Permanente",
+        "area_of_effect": "1 criatura",
+        "components": "V, S",
+        "casting_time": "4",
+        "saving_throw": "Nenhum",
+        "description": "Cura 1d8 pontos de dano em uma criatura tocada.",
+        "class": "priest"
+      }
+    ]
+  },
+  "equipment": {
+    "weapons": [
+      {
+        "name": "Espada Longa",
+        "cost": "15 po",
+        "weight": 2,
+        "size": "M",
+        "type": "Corte",
+        "speed_factor": 5,
+        "damage": {
+          "small_medium": "1d8",
+          "large": "1d12"
+        },
+        "category": "corpo-a-corpo"
+      }
+    ],
+    "armor": [
+      {
+        "name": "Cota de Malha",
+        "cost": "75 po",
+        "weight": 20,
+        "armor_class": 5
+      }
+    ]
+  }
+}
