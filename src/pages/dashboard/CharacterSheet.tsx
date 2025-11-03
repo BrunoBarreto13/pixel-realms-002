@@ -94,6 +94,26 @@ const CharacterSheet = () => {
     return { ca_base, ajustes, ca_final };
   }, [character.equipment, dexterityBonuses.defense]);
 
+  const totalWeight = useMemo(() => {
+    let weight = 0;
+    const { armor, shield, helm } = character.equipment;
+    
+    const equippedArmor = ARMOR_LIST.find(a => a.id === armor);
+    if (equippedArmor) weight += equippedArmor.peso;
+
+    const equippedShield = SHIELD_LIST.find(s => s.id === shield);
+    if (equippedShield) weight += equippedShield.peso;
+
+    const equippedHelm = HELM_LIST.find(h => h.id === helm);
+    if (equippedHelm) weight += equippedHelm.peso;
+
+    character.armaments.forEach(weapon => {
+      weight += weapon.peso;
+    });
+
+    return weight;
+  }, [character.equipment, character.armaments]);
+
   const totalWeaponProficiencyPoints = useMemo(() => calculateProficiencyPoints(character.class, character.level), [character.class, character.level]);
   const usedWeaponProficiencyPoints = character.armaments.length;
   const proficiencyRuleText = useMemo(() => {
@@ -201,7 +221,7 @@ const CharacterSheet = () => {
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
             <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddArmament={handleAddArmament} onRemoveArmament={handleRemoveArmament} onArmamentChange={handleArmamentChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
             <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
-            <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} /></TabsContent>
+            <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>
             <TabsContent value="notes"><NotesTab /></TabsContent>
           </div>

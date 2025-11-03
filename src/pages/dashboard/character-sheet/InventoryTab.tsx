@@ -2,14 +2,17 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ARMOR_LIST, SHIELD_LIST, HELM_LIST } from "@/lib/items";
 import { Character, Equipment } from "./types";
+import { cn } from "@/lib/utils";
 
 interface InventoryTabProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   isEditing: boolean;
+  totalWeight: number;
+  allowedWeight: number;
 }
 
-export const InventoryTab = ({ character, setCharacter, isEditing }: InventoryTabProps) => {
+export const InventoryTab = ({ character, setCharacter, isEditing, totalWeight, allowedWeight }: InventoryTabProps) => {
   const handleEquipmentChange = (slot: keyof Equipment, itemId: string) => {
     setCharacter(prev => ({
       ...prev,
@@ -19,6 +22,8 @@ export const InventoryTab = ({ character, setCharacter, isEditing }: InventoryTa
       },
     }));
   };
+
+  const isOverburdened = totalWeight > allowedWeight;
 
   return (
     <div className="mt-0 space-y-6">
@@ -70,6 +75,20 @@ export const InventoryTab = ({ character, setCharacter, isEditing }: InventoryTa
               </SelectContent>
             </Select>
           </div>
+        </div>
+      </div>
+      <div>
+        <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">CARGA</h3>
+        <div className="bg-muted/30 p-4 pixel-border text-center">
+          <Label className="font-pixel text-xs text-muted-foreground">Peso Carregado / Permitido</Label>
+          <p className={cn("font-pixel text-lg mt-2", isOverburdened ? "text-destructive" : "text-primary")}>
+            {totalWeight.toFixed(1)} / {allowedWeight} kg
+          </p>
+          {isOverburdened && (
+            <p className="font-pixel text-xs text-destructive mt-2">
+              SOBRECARREGADO! (Penalidades de movimento podem ser aplicadas)
+            </p>
+          )}
         </div>
       </div>
       <div>
