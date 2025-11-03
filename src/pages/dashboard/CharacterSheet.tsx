@@ -39,6 +39,13 @@ interface Character {
   ac: number; // Base AC from armor
   initiative: number;
   savingThrows: SavingThrows;
+  alignment: string;
+  hair: string;
+  eyes: string;
+  weight: string;
+  height: string;
+  age: number;
+  color: string;
 }
 
 const RACES = [
@@ -91,6 +98,13 @@ const CharacterSheet = () => {
       breath: 14,
       spell: 14,
     },
+    alignment: "",
+    hair: "",
+    eyes: "",
+    weight: "",
+    height: "",
+    age: 20,
+    color: "#4789c7",
   });
 
   const [isEditing, setIsEditing] = useState(true);
@@ -210,9 +224,20 @@ const CharacterSheet = () => {
                 <h3 className="font-pixel text-sm text-accent pixel-text-shadow">INFORMAÇÕES BÁSICAS</h3>
                 <PixelButton onClick={calculateHP} size="sm" variant="secondary">Calcular HP</PixelButton>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Row 1 */}
                 <PixelInput label="Nome do Personagem" value={character.name} onChange={(e) => setCharacter({ ...character, name: e.target.value })} disabled={!isEditing} />
                 <PixelInput label="Nome do Jogador" value={character.playerName} onChange={(e) => setCharacter({ ...character, playerName: e.target.value })} disabled={!isEditing} />
+                <div className="flex flex-col gap-2">
+                  <Label className="font-pixel text-xs text-foreground">Nível</Label>
+                  <div className="flex items-center gap-2">
+                    <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.max(1, character.level - 1) })} disabled={!isEditing}><Minus className="h-4 w-4" /></PixelButton>
+                    <input type="number" value={character.level} onChange={(e) => setCharacter({ ...character, level: parseInt(e.target.value) || 1 })} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground" min={1} max={20} disabled={!isEditing} />
+                    <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.min(20, character.level + 1) })} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
+                  </div>
+                </div>
+
+                {/* Row 2 */}
                 <div className="flex flex-col gap-2">
                   <Label className="font-pixel text-xs text-foreground">Raça</Label>
                   <Select value={character.race} onValueChange={(value) => setCharacter({ ...character, race: value })} disabled={!isEditing}>
@@ -231,12 +256,27 @@ const CharacterSheet = () => {
                     </SelectContent>
                   </Select>
                 </div>
+                <PixelInput label="Tendência" value={character.alignment} onChange={(e) => setCharacter({ ...character, alignment: e.target.value })} disabled={!isEditing} />
+
+                {/* Row 3 */}
+                <PixelInput label="Idade" type="number" value={character.age} onChange={(e) => setCharacter({ ...character, age: parseInt(e.target.value) || 0 })} disabled={!isEditing} />
+                <PixelInput label="Altura" value={character.height} onChange={(e) => setCharacter({ ...character, height: e.target.value })} disabled={!isEditing} />
+                <PixelInput label="Peso" value={character.weight} onChange={(e) => setCharacter({ ...character, weight: e.target.value })} disabled={!isEditing} />
+
+                {/* Row 4 */}
+                <PixelInput label="Cabelos" value={character.hair} onChange={(e) => setCharacter({ ...character, hair: e.target.value })} disabled={!isEditing} />
+                <PixelInput label="Olhos" value={character.eyes} onChange={(e) => setCharacter({ ...character, eyes: e.target.value })} disabled={!isEditing} />
                 <div className="flex flex-col gap-2">
-                  <Label className="font-pixel text-xs text-foreground">Nível</Label>
+                  <Label className="font-pixel text-xs text-foreground">Cor do Jogador</Label>
                   <div className="flex items-center gap-2">
-                    <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.max(1, character.level - 1) })} disabled={!isEditing}><Minus className="h-4 w-4" /></PixelButton>
-                    <input type="number" value={character.level} onChange={(e) => setCharacter({ ...character, level: parseInt(e.target.value) || 1 })} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground" min={1} max={20} disabled={!isEditing} />
-                    <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.min(20, character.level + 1) })} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
+                    <input
+                      type="color"
+                      value={character.color}
+                      onChange={(e) => setCharacter({ ...character, color: e.target.value })}
+                      disabled={!isEditing}
+                      className="w-12 h-12 p-1 bg-input pixel-border cursor-pointer disabled:cursor-not-allowed"
+                    />
+                    <span className="font-pixel text-xs text-muted-foreground">Cor para o chat</span>
                   </div>
                 </div>
               </div>
