@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { PixelPanel } from "@/components/PixelPanel";
 
 const partyMembers = [
   { name: "Kael", level: 12, hp: 90, maxHp: 100, mp: 75, maxMp: 100, avatarUrl: "https://lh3.googleusercontent.com/aida-public/AB6AXuCU8Pk_i4EnJg2I6l6kew1FeMUHehbxzrZIe-UF4QfARnSwxazPlOrdCbHLUkQ1eZ-icEOqPjFFwo7xBt4YxKF3LVe8CL4M4ZIvUNIW-xmNv9tpmS_uqcSxBe-HZyYEvSkoUkrYu5svwyFDdy5VqXHQ2PS8i4zJrnhizmV6-wFDPd62Ufi0AKtuYNyA7AXyMaT7Bx3rAZNokWvZJqQezopWCvt1mfQcyof8zPb4YGQ4tcUh_hdLxi8T-eMdHqr1z5YJANP92YtbMGE" },
@@ -8,7 +8,7 @@ const partyMembers = [
 ];
 
 const PartyStatus = () => (
-  <div className="pixel-border bg-secondary p-2 flex-shrink-0">
+  <PixelPanel className="flex-shrink-0">
     <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
       <h3 className="text-lg text-accent w-full sm:w-auto mb-2 sm:mb-0">GRUPO</h3>
       {partyMembers.map(member => (
@@ -33,7 +33,7 @@ const PartyStatus = () => (
         </div>
       ))}
     </div>
-  </div>
+  </PixelPanel>
 );
 
 export default PartyStatus;

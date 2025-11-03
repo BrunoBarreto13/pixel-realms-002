@@ -1,5 +1,6 @@
 import { Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PixelPanel } from "@/components/PixelPanel";
 
 const chatMessages = [
     { time: "19:42", sender: "MESTRE", color: "text-green-400", message: "Um Goblin ameaçador embosca o grupo!" },
@@ -14,7 +15,7 @@ const chatMessages = [
 
 const GameChat = () => {
   return (
-    <div className="flex-1 flex flex-col pixel-border bg-secondary p-4 min-h-0">
+    <PixelPanel className="flex-1 flex flex-col min-h-0">
       <div className="flex-1 overflow-y-auto pr-2 mb-4 space-y-2 text-xs">
         {chatMessages.map((msg, index) => (
           <p key={index}>
@@ -39,7 +40,7 @@ const GameChat = () => {
           </button>
         </div>
       </div>
-    </div>
+    </PixelPanel>
   );
 };
 

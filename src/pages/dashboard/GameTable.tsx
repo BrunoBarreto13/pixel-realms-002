@@ -3,6 +3,7 @@ import PartyStatus from "./gametable/PartyStatus";
 import GameChat from "./gametable/GameChat";
 import { useToast } from "@/hooks/use-toast";
 import { PixelButton } from "@/components/PixelButton";
+import { PixelPanel } from "@/components/PixelPanel";
 
 const ActionsAndDicePanel = () => {
   const [diceQuantity, setDiceQuantity] = useState(1);
@@ -37,7 +38,7 @@ const ActionsAndDicePanel = () => {
   ];
 
   return (
-    <div className="pixel-border bg-secondary p-4 space-y-6">
+    <PixelPanel className="space-y-6">
       {/* Actions */}
       <div>
         <h3 className="text-lg text-accent mb-4">AÇÕES</h3>
@@ -78,15 +79,15 @@ const ActionsAndDicePanel = () => {
           ))}
         </div>
       </div>
-    </div>
+    </PixelPanel>
   );
 };
 
 
 const MapPanel = () => (
-  <div className="flex-1 pixel-border bg-black min-h-0 flex items-center justify-center">
+  <PixelPanel className="flex-1 min-h-0 flex items-center justify-center">
     <p className="font-pixel text-lg text-muted-foreground">Em construção</p>
-  </div>
+  </PixelPanel>
 );
 
 const GameTable = () => {
