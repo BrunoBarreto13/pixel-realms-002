@@ -2,7 +2,7 @@ import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Sword, Target, Shield } from "lucide-react";
-import { Character, Armament } from "./types";
+import { Character, Armament, SavingThrows } from "./types";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CombatTabProps {
@@ -14,6 +14,7 @@ interface CombatTabProps {
     ca_final: number;
   };
   calculatedThac0: number;
+  calculatedSaves: SavingThrows;
   damageInput: string;
   setDamageInput: React.Dispatch<React.SetStateAction<string>>;
   onApplyDamage: () => void;
@@ -27,6 +28,7 @@ export const CombatTab = ({
   setCharacter,
   calculatedCaDetails,
   calculatedThac0,
+  calculatedSaves,
   damageInput,
   setDamageInput,
   onApplyDamage,
@@ -86,6 +88,32 @@ export const CombatTab = ({
         </div>
       </div>
       
+      <div className="bg-muted/30 p-4 pixel-border">
+        <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">JOGADAS DE PROTEÇÃO</h3>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-center font-pixel text-xs">
+          <div className="bg-input p-2 pixel-border">
+            <p className="text-muted-foreground">Paral./Veneno</p>
+            <p className="text-lg text-primary">{calculatedSaves.poison}</p>
+          </div>
+          <div className="bg-input p-2 pixel-border">
+            <p className="text-muted-foreground">Petrif./Polim.</p>
+            <p className="text-lg text-primary">{calculatedSaves.petrification}</p>
+          </div>
+          <div className="bg-input p-2 pixel-border">
+            <p className="text-muted-foreground">Bastão/Varinha</p>
+            <p className="text-lg text-primary">{calculatedSaves.rod}</p>
+          </div>
+          <div className="bg-input p-2 pixel-border">
+            <p className="text-muted-foreground">Sopro de Dragão</p>
+            <p className="text-lg text-primary">{calculatedSaves.breath}</p>
+          </div>
+          <div className="bg-input p-2 pixel-border">
+            <p className="text-muted-foreground">Magia</p>
+            <p className="text-lg text-primary">{calculatedSaves.spell}</p>
+          </div>
+        </div>
+      </div>
+
       <div className="bg-muted/30 p-4 pixel-border">
         <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ATAQUES</h3>
         <div className="space-y-2">

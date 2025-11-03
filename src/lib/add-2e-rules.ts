@@ -171,3 +171,96 @@ export const getThac0 = (className: string, level: number): number => {
       return 20;
   }
 };
+
+// --- SAVING THROWS ---
+
+const SAVING_THROW_TABLES = {
+  warrior: [
+    { level: 0, poison: 14, petrification: 16, rod: 15, breath: 17, spell: 17 },
+    { level: 1, poison: 14, petrification: 16, rod: 15, breath: 17, spell: 17 },
+    { level: 2, poison: 13, petrification: 15, rod: 14, breath: 16, spell: 16 },
+    { level: 3, poison: 13, petrification: 15, rod: 14, breath: 16, spell: 16 },
+    { level: 4, poison: 13, petrification: 15, rod: 14, breath: 16, spell: 16 },
+    { level: 5, poison: 11, petrification: 13, rod: 12, breath: 14, spell: 14 },
+    { level: 6, poison: 11, petrification: 13, rod: 12, breath: 14, spell: 14 },
+    { level: 7, poison: 11, petrification: 13, rod: 12, breath: 14, spell: 14 },
+    { level: 8, poison: 10, petrification: 12, rod: 11, breath: 13, spell: 13 },
+    { level: 9, poison: 10, petrification: 12, rod: 11, breath: 13, spell: 13 },
+    { level: 10, poison: 10, petrification: 12, rod: 11, breath: 13, spell: 13 },
+    { level: 11, poison: 8, petrification: 10, rod: 9, breath: 11, spell: 11 },
+    { level: 12, poison: 8, petrification: 10, rod: 9, breath: 11, spell: 11 },
+    { level: 13, poison: 8, petrification: 10, rod: 9, breath: 11, spell: 11 },
+    { level: 14, poison: 7, petrification: 9, rod: 8, breath: 10, spell: 10 },
+  ],
+  priest: [
+    { level: 0, poison: 10, petrification: 13, rod: 12, breath: 14, spell: 15 },
+    { level: 1, poison: 10, petrification: 13, rod: 12, breath: 14, spell: 15 },
+    { level: 2, poison: 10, petrification: 13, rod: 12, breath: 14, spell: 15 },
+    { level: 3, poison: 10, petrification: 13, rod: 12, breath: 14, spell: 15 },
+    { level: 4, poison: 9, petrification: 12, rod: 11, breath: 13, spell: 14 },
+    { level: 5, poison: 9, petrification: 12, rod: 11, breath: 13, spell: 14 },
+    { level: 6, poison: 9, petrification: 12, rod: 11, breath: 13, spell: 14 },
+    { level: 7, poison: 7, petrification: 10, rod: 9, breath: 11, spell: 12 },
+    { level: 8, poison: 7, petrification: 10, rod: 9, breath: 11, spell: 12 },
+    { level: 9, poison: 7, petrification: 10, rod: 9, breath: 11, spell: 12 },
+    { level: 10, poison: 6, petrification: 9, rod: 8, breath: 10, spell: 11 },
+  ],
+  rogue: [
+    { level: 0, poison: 13, petrification: 12, rod: 14, breath: 16, spell: 15 },
+    { level: 1, poison: 13, petrification: 12, rod: 14, breath: 16, spell: 15 },
+    { level: 2, poison: 13, petrification: 12, rod: 14, breath: 16, spell: 15 },
+    { level: 3, poison: 13, petrification: 12, rod: 14, breath: 16, spell: 15 },
+    { level: 4, poison: 13, petrification: 12, rod: 14, breath: 16, spell: 15 },
+    { level: 5, poison: 12, petrification: 11, rod: 13, breath: 15, spell: 14 },
+    { level: 6, poison: 12, petrification: 11, rod: 13, breath: 15, spell: 14 },
+    { level: 7, poison: 12, petrification: 11, rod: 13, breath: 15, spell: 14 },
+    { level: 8, poison: 12, petrification: 11, rod: 13, breath: 15, spell: 14 },
+    { level: 9, poison: 11, petrification: 10, rod: 12, breath: 14, spell: 13 },
+  ],
+  wizard: [
+    { level: 0, poison: 14, petrification: 13, rod: 11, breath: 15, spell: 12 },
+    { level: 1, poison: 14, petrification: 13, rod: 11, breath: 15, spell: 12 },
+    { level: 2, poison: 14, petrification: 13, rod: 11, breath: 15, spell: 12 },
+    { level: 3, poison: 14, petrification: 13, rod: 11, breath: 15, spell: 12 },
+    { level: 4, poison: 14, petrification: 13, rod: 11, breath: 15, spell: 12 },
+    { level: 5, poison: 14, petrification: 13, rod: 11, breath: 15, spell: 12 },
+    { level: 6, poison: 13, petrification: 11, rod: 9, breath: 13, spell: 10 },
+  ],
+};
+
+export const getSavingThrows = (className: string, level: number) => {
+  let group: keyof typeof SAVING_THROW_TABLES;
+
+  switch (className) {
+    case "fighter":
+    case "paladin":
+    case "ranger":
+      group = "warrior";
+      break;
+    case "cleric":
+    case "druid":
+      group = "priest";
+      break;
+    case "thief":
+    case "bard":
+      group = "rogue";
+      break;
+    case "wizard":
+      group = "wizard";
+      break;
+    default:
+      // Default to warrior for unselected class
+      group = "warrior";
+  }
+
+  const table = SAVING_THROW_TABLES[group];
+  const saves = table.slice().reverse().find(row => level >= row.level) || table[0];
+  
+  return {
+    poison: saves.poison,
+    petrification: saves.petrification,
+    rod: saves.rod,
+    breath: saves.breath,
+    spell: saves.spell,
+  };
+};
