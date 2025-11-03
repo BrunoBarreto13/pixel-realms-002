@@ -2,7 +2,7 @@ import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Plus, Minus } from "lucide-react";
-import { Character, WeaponProficiency, GeneralSkill } from "./types";
+import { Character, Armament, GeneralSkill } from "./types";
 
 interface SkillsTabProps {
   character: Character;
@@ -10,9 +10,9 @@ interface SkillsTabProps {
   totalWeaponProficiencyPoints: number;
   usedWeaponProficiencyPoints: number;
   proficiencyRuleText: string;
-  onAddWeapon: () => void;
-  onRemoveWeapon: (index: number) => void;
-  onWeaponChange: (index: number, field: keyof WeaponProficiency, value: string) => void;
+  onAddArmament: () => void;
+  onRemoveArmament: (index: number) => void;
+  onArmamentChange: (index: number, field: keyof Armament, value: string | number) => void;
   onAddSkill: () => void;
   onRemoveSkill: (index: number) => void;
   onSkillChange: (index: number, field: keyof GeneralSkill, value: string) => void;
@@ -24,9 +24,9 @@ export const SkillsTab = ({
   totalWeaponProficiencyPoints,
   usedWeaponProficiencyPoints,
   proficiencyRuleText,
-  onAddWeapon,
-  onRemoveWeapon,
-  onWeaponChange,
+  onAddArmament,
+  onRemoveArmament,
+  onArmamentChange,
   onAddSkill,
   onRemoveSkill,
   onSkillChange,
@@ -35,8 +35,8 @@ export const SkillsTab = ({
     <div className="mt-0 space-y-6">
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-pixel text-sm text-accent pixel-text-shadow">PERÍCIAS COM ARMAS</h3>
-          <PixelButton onClick={onAddWeapon} size="sm" variant="secondary" disabled={!isEditing} className="flex items-center gap-2">
+          <h3 className="font-pixel text-sm text-accent pixel-text-shadow">ARMAMENTOS</h3>
+          <PixelButton onClick={onAddArmament} size="sm" variant="secondary" disabled={!isEditing} className="flex items-center gap-2">
             <Plus className="h-4 w-4" /> Adicionar Arma
           </PixelButton>
         </div>
@@ -48,20 +48,20 @@ export const SkillsTab = ({
           <p className="text-muted-foreground text-xs font-pixel">{proficiencyRuleText}</p>
         </div>
         <div className="space-y-4">
-          {character.weaponProficiencies.map((weapon, index) => (
+          {character.armaments.map((weapon, index) => (
             <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-muted/30 p-4 pixel-border">
-              <PixelInput label="Nome da Arma" value={weapon.name} onChange={(e) => onWeaponChange(index, 'name', e.target.value)} disabled={!isEditing} />
-              <PixelInput label="Proficiência" value={weapon.proficiency} onChange={(e) => onWeaponChange(index, 'proficiency', e.target.value)} disabled={!isEditing} />
+              <PixelInput label="Nome da Arma" value={weapon.nome} onChange={(e) => onArmamentChange(index, 'nome', e.target.value)} disabled={!isEditing} />
+              <PixelInput label="Dano" value={weapon.dano} disabled />
               <div className="md:col-span-2 flex gap-4 items-end">
-                <PixelInput label="Observações" value={weapon.notes} onChange={(e) => onWeaponChange(index, 'notes', e.target.value)} disabled={!isEditing} className="flex-grow" />
-                <PixelButton onClick={() => onRemoveWeapon(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Arma">
+                <PixelInput label="Tipo" value={weapon.tipo} disabled className="flex-grow" />
+                <PixelButton onClick={() => onRemoveArmament(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Arma">
                   <Minus className="h-4 w-4" />
                 </PixelButton>
               </div>
             </div>
           ))}
-          {character.weaponProficiencies.length === 0 && (
-            <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhuma perícia com arma adicionada.</p>
+          {character.armaments.length === 0 && (
+            <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhum armamento adicionado.</p>
           )}
         </div>
       </div>
