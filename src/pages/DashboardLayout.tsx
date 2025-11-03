@@ -103,7 +103,7 @@ const DashboardLayout = () => {
         {/* Sidebar */}
         <aside className="w-64 bg-parchment flex flex-col p-4 border-r-4 border-parchment-border">
           <div className="p-6">
-            <h1 className="font-pixel text-2xl text-accent pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
+            <h1 className="font-pixel text-2xl text-[#FDE306] pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
           </div>
           <nav className="flex-1 space-y-2">
             {menuItems.map((item) => (
