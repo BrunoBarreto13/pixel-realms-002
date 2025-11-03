@@ -38,14 +38,16 @@ export const CombatTab = ({
 }: CombatTabProps) => {
 
   const getAttackBonus = (weapon: Armament) => {
-    if (weapon.categoria === 'corpo-a-corpo') return strengthBonuses.hit;
-    if (weapon.categoria === 'a-distancia' || weapon.categoria === 'arremesso') return dexterityBonuses.missile;
-    return 0;
+    let totalBonus = weapon.bonus_ataque || 0;
+    if (weapon.categoria === 'corpo-a-corpo') totalBonus += strengthBonuses.hit;
+    if (weapon.categoria === 'a-distancia' || weapon.categoria === 'arremesso') totalBonus += dexterityBonuses.missile;
+    return totalBonus;
   };
 
   const getDamageBonus = (weapon: Armament) => {
-    if (weapon.categoria === 'corpo-a-corpo') return strengthBonuses.dmg;
-    return 0;
+    let totalBonus = weapon.bonus_dano || 0;
+    if (weapon.categoria === 'corpo-a-corpo') totalBonus += strengthBonuses.dmg;
+    return totalBonus;
   };
 
   return (

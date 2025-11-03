@@ -19,7 +19,9 @@ export interface SavingThrows {
 }
 
 export interface Armament extends WeaponItem {
-  // We can add character-specific properties here later, like custom notes or magical bonuses
+  bonus_ataque?: number;
+  bonus_dano?: number;
+  observacoes?: string;
   munition?: number;
 }
 

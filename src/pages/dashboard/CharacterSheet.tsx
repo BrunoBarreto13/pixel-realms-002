@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import * as Rules from "@/lib/add-2e-rules";
+import * as Rules from "@/lib/add-2-rules";
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
 import { Character, Armament, GeneralSkill, calculateProficiencyPoints, CLASSES, proficiencyConfig } from "./character-sheet/types";
@@ -14,6 +14,7 @@ import { InventoryTab } from "./character-sheet/InventoryTab";
 import { SpellsTab } from "./character-sheet/SpellsTab";
 import { NotesTab } from "./character-sheet/NotesTab";
 import { ARMOR_LIST, SHIELD_LIST, HELM_LIST } from "@/lib/items";
+import { ArmamentModal } from "./character-sheet/ArmamentModal";
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
@@ -53,6 +54,8 @@ const CharacterSheet = () => {
 
   const [isEditing, setIsEditing] = useState(true);
   const [damageInput, setDamageInput] = useState("");
+  const [isArmamentModalOpen, setIsArmamentModalOpen] = useState(false);
+  const [editingArmamentIndex, setEditingArmamentIndex] = useState<number | null>(null);
 
   useEffect(() => {
     if (profile) {
@@ -166,14 +169,30 @@ const CharacterSheet = () => {
     });
   };
 
-  const handleAddArmament = () => {
+  const handleAddArmamentClick = () => {
     if (usedWeaponProficiencyPoints >= totalWeaponProficiencyPoints) {
       toast({ title: "Pontos insuficientes!", description: "Você não tem pontos de perícia com arma disponíveis.", variant: "destructive" });
       return;
     }
-    // For simplicity, adding a default weapon. A selection modal would be a future improvement.
-    const newWeapon: Armament = { id: 'custom', nome: 'Nova Arma', num_ataques: '1/1', dano: '1d6/1d6', tipo: 'P/C', peso: 1, tam: 'M', vel: 5, categoria: 'corpo-a-corpo' };
-    setCharacter(prev => ({ ...prev, armaments: [...prev.armaments, newWeapon] }));
+    setEditingArmamentIndex(null);
+    setIsArmamentModalOpen(true);
+  };
+
+  const handleEditArmamentClick = (index: number) => {
+    setEditingArmamentIndex(index);
+    setIsArmamentModalOpen(true);
+  };
+
+  const handleSaveArmament = (armament: Armament) => {
+    if (editingArmamentIndex !== null) {
+      // Update existing armament
+      const updatedArmaments = [...character.armaments];
+      updatedArmaments[editingArmamentIndex] = armament;
+      setCharacter(prev => ({ ...prev, armaments: updatedArmaments }));
+    } else {
+      // Add new armament
+      setCharacter(prev => ({ ...prev, armaments: [...prev.armaments, armament] }));
+    }
   };
 
   const handleRemoveArmament = (index: number) => {
@@ -219,7 +238,7 @@ const CharacterSheet = () => {
           <div className="rpg-panel relative">
             <TabsContent value="stats"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
-            <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddArmament={handleAddArmament} onRemoveArmament={handleRemoveArmament} onArmamentChange={handleArmamentChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
+            <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddArmament={handleAddArmamentClick} onEditArmament={handleEditArmamentClick} onRemoveArmament={handleRemoveArmament} onArmamentChange={handleArmamentChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
             <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>
@@ -227,6 +246,12 @@ const CharacterSheet = () => {
           </div>
         </Tabs>
       </div>
+      <ArmamentModal
+        isOpen={isArmamentModalOpen}
+        onClose={() => setIsArmamentModalOpen(false)}
+        onSave={handleSaveArmament}
+        armament={editingArmamentIndex !== null ? character.armaments[editingArmamentIndex] : null}
+      />
     </PagePanel>
   );
 };

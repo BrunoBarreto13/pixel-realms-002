@@ -1,7 +1,7 @@
 import { PixelInput } from "@/components/PixelInput";
 import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
-import { Plus, Minus } from "lucide-react";
+import { Plus, Minus, Edit } from "lucide-react";
 import { Character, Armament, GeneralSkill } from "./types";
 
 interface SkillsTabProps {
@@ -11,6 +11,7 @@ interface SkillsTabProps {
   usedWeaponProficiencyPoints: number;
   proficiencyRuleText: string;
   onAddArmament: () => void;
+  onEditArmament: (index: number) => void;
   onRemoveArmament: (index: number) => void;
   onArmamentChange: (index: number, field: keyof Armament, value: string | number) => void;
   onAddSkill: () => void;
@@ -25,6 +26,7 @@ export const SkillsTab = ({
   usedWeaponProficiencyPoints,
   proficiencyRuleText,
   onAddArmament,
+  onEditArmament,
   onRemoveArmament,
   onArmamentChange,
   onAddSkill,
@@ -50,10 +52,13 @@ export const SkillsTab = ({
         <div className="space-y-4">
           {character.armaments.map((weapon, index) => (
             <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-muted/30 p-4 pixel-border">
-              <PixelInput label="Nome da Arma" value={weapon.nome} onChange={(e) => onArmamentChange(index, 'nome', e.target.value)} disabled={!isEditing} />
+              <PixelInput label="Nome da Arma" value={weapon.nome} disabled />
               <PixelInput label="Dano" value={weapon.dano} disabled />
               <div className="md:col-span-2 flex gap-4 items-end">
                 <PixelInput label="Tipo" value={weapon.tipo} disabled className="flex-grow" />
+                <PixelButton onClick={() => onEditArmament(index)} variant="outline" size="icon" disabled={!isEditing} aria-label="Editar Arma">
+                  <Edit className="h-4 w-4" />
+                </PixelButton>
                 <PixelButton onClick={() => onRemoveArmament(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Arma">
                   <Minus className="h-4 w-4" />
                 </PixelButton>
