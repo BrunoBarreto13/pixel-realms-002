@@ -4,7 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 import * as Rules from "@/lib/add-2e-rules";
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
-import { Character, WeaponProficiency, GeneralSkill, calculateProficiencyPoints, CLASSES } from "./character-sheet/types";
+import { Character, WeaponProficiency, GeneralSkill, calculateProficiencyPoints, CLASSES, proficiencyConfig } from "./character-sheet/types";
 import { CharacterHeader } from "./character-sheet/CharacterHeader";
 import { InfoTab } from "./character-sheet/InfoTab";
 import { AttributesTab } from "./character-sheet/AttributesTab";
