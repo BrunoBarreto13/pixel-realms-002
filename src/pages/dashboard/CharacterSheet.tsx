@@ -15,18 +15,20 @@ import { SpellsTab } from "./character-sheet/SpellsTab";
 import { NotesTab } from "./character-sheet/NotesTab";
 import { ArmamentModal } from "./character-sheet/ArmamentModal";
 import { PHB_RACES, PHB_CLASSES, PHB_ARMOR_LIST, PHB_SHIELD_LIST, PHB_HELM_LIST, PHB_WEAPONS } from "@/lib/players-handbook";
+import { supabase } from "@/integrations/supabase/client";
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
 const CharacterSheet = () => {
   const { toast } = useToast();
-  const { profile, isMaster } = useAuth();
+  const { profile, isMaster, user } = useAuth();
   const [character, setCharacter] = useState<Character>({
     name: "",
     playerName: "",
     race: "",
     class: "",
     level: 1,
+    avatarUrl: null,
     attributes: {
       strength: 10,
       strengthPercentile: 0,
@@ -134,6 +136,50 @@ const CharacterSheet = () => {
   }, [character.class, character.level]);
 
   // --- HANDLERS ---
+  const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.files || event.target.files.length === 0) {
+      return;
+    }
+    if (!user) {
+        toast({ title: "Erro", description: "Você precisa estar logado para fazer upload.", variant: "destructive" });
+        return;
+    }
+
+    const file = event.target.files[0];
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+    const filePath = `${fileName}`;
+
+    toast({ title: "Enviando avatar...", description: "Aguarde um momento." });
+
+    try {
+        const { error: uploadError } = await supabase.storage
+            .from('avatars')
+            .upload(filePath, file, {
+              cacheControl: '3600',
+              upsert: false
+            });
+
+        if (uploadError) {
+            throw uploadError;
+        }
+
+        const { data } = supabase.storage
+            .from('avatars')
+            .getPublicUrl(filePath);
+
+        if (!data.publicUrl) {
+            throw new Error("Não foi possível obter a URL pública do avatar.");
+        }
+
+        setCharacter(prev => ({ ...prev, avatarUrl: data.publicUrl }));
+        toast({ title: "Sucesso!", description: "Avatar atualizado." });
+
+    } catch (error: any) {
+        toast({ title: "Erro no Upload", description: error.message, variant: "destructive" });
+    }
+  };
+
   const handleSave = () => {
     if (!character.name || !character.race || !character.class) {
       toast({ title: "Campos obrigatórios", description: "Preencha nome, raça e classe", variant: "destructive" });
@@ -235,6 +281,7 @@ const CharacterSheet = () => {
           onEdit={() => setIsEditing(true)}
           races={PHB_RACES}
           classes={PHB_CLASSES}
+          onAvatarUpload={handleAvatarUpload}
         />
 
         <Tabs defaultValue="stats" className="w-full">

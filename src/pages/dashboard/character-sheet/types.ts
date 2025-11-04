@@ -92,6 +92,7 @@ export interface Character {
   race: string;
   class: string;
   level: number;
+  avatarUrl: string | null;
   attributes: Attributes;
   hp: number;
   maxHp: number;
