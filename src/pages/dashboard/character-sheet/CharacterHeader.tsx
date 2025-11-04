@@ -1,8 +1,7 @@
 import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
 import { User, Save } from "lucide-react";
-import { Character } from "./types";
-import { Race, CharacterClass } from "@/lib/players-handbook";
+import { Character, Race, CharacterClass } from "./types";
 
 interface CharacterHeaderProps {
   character: Character;

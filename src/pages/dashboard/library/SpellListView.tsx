@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { PixelInput } from "@/components/PixelInput";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Spell } from "@/lib/players-handbook";
+import { Spell } from "@/pages/dashboard/character-sheet/types";
 import { SpellCard } from "./SpellCard";
 import { PixelButton } from "@/components/PixelButton";
 import { ArrowLeft } from "lucide-react";

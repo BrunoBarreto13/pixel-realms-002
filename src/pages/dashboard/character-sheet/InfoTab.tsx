@@ -3,8 +3,7 @@ import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Minus, Plus } from "lucide-react";
-import { Character } from "./types";
-import { Race, CharacterClass } from "@/lib/players-handbook";
+import { Character, Race, CharacterClass } from "./types";
 
 interface InfoTabProps {
   character: Character;

@@ -1,58 +1,5 @@
 import handbookData from './players-handbook.json';
-
-// --- TYPE DEFINITIONS ---
-
-export interface Spell {
-  name: string;
-  level: number;
-  school: string;
-  range: string;
-  duration: string;
-  area_of_effect: string;
-  components: string;
-  casting_time: string;
-  saving_throw: string;
-  description: string;
-  class: 'wizard' | 'priest';
-}
-
-export interface Race {
-  name: string;
-  value: string;
-  ability_modifiers: { [key: string]: number };
-}
-
-export interface CharacterClass {
-  name: string;
-  value: string;
-  hit_die: number;
-}
-
-export interface Weapon {
-  name: string;
-  cost: string;
-  weight: number;
-  size: 'S' | 'M' | 'L';
-  type: string;
-  speed_factor: number;
-  damage: {
-    small_medium: string;
-    large: string;
-  };
-  category: 'corpo-a-corpo' | 'a-distancia' | 'arremesso';
-  id: string;
-}
-
-export interface Armor {
-  name: string;
-  cost: string;
-  weight: number;
-  armor_class: number;
-  id: string;
-  type: 'Armadura' | 'Escudo' | 'Elmo';
-}
-
-// --- EXPORTED DATA ---
+import type { Spell, Race, CharacterClass, Weapon, Armor } from '@/pages/dashboard/character-sheet/types';
 
 export const PHB_SPELLS: { arcane: Spell[], divine: Spell[] } = handbookData.spells;
 

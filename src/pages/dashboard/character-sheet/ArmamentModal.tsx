@@ -3,8 +3,7 @@ import { PixelButton } from "@/components/PixelButton";
 import { PixelInput } from "@/components/PixelInput";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Armament } from "./types";
-import { Weapon } from "@/lib/players-handbook";
+import { Armament, Weapon } from "./types";
 import { useState, useEffect } from "react";
 
 interface ArmamentModalProps {

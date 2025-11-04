@@ -1,8 +1,7 @@
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Character, Equipment } from "./types";
+import { Character, Equipment, Armor } from "./types";
 import { cn } from "@/lib/utils";
-import { Armor } from "@/lib/players-handbook";
 
 interface InventoryTabProps {
   character: Character;
