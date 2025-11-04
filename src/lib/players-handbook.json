@@ -5,8 +5,24 @@
       "ability_modifiers": {}
     },
     {
+      "name": "Anão",
+      "ability_modifiers": { "constitution": 1, "charisma": -1 }
+    },
+    {
       "name": "Elfo",
       "ability_modifiers": { "dexterity": 1, "constitution": -1 }
+    },
+    {
+      "name": "Gnomo",
+      "ability_modifiers": { "intelligence": 1, "wisdom": -1 }
+    },
+    {
+      "name": "Halfling",
+      "ability_modifiers": { "dexterity": 1, "strength": -1 }
+    },
+    {
+      "name": "Meio-Elfo",
+      "ability_modifiers": {}
     }
   ],
   "classes": [
@@ -68,12 +84,14 @@
       }
     ],
     "armor": [
-      {
-        "name": "Cota de Malha",
-        "cost": "75 po",
-        "weight": 20,
-        "armor_class": 5
-      }
+      { "name": "Couro Acolchoado", "cost": "5 po", "weight": 7.5, "armor_class": 8 },
+      { "name": "Couro Batido", "cost": "20 po", "weight": 10, "armor_class": 7 },
+      { "name": "Loriga de Escamas", "cost": "45 po", "weight": 20, "armor_class": 6 },
+      { "name": "Cota de Malha", "cost": "75 po", "weight": 20, "armor_class": 5 },
+      { "name": "Loriga Segmentada", "cost": "90 po", "weight": 17.5, "armor_class": 4 },
+      { "name": "Armadura de Placas", "cost": "400 po", "weight": 22.5, "armor_class": 3 },
+      { "name": "Armadura de Batalha", "cost": "2000 po", "weight": 25, "armor_class": 2 },
+      { "name": "Armadura Completa", "cost": "4000 po", "weight": 30, "armor_class": 1 }
     ]
   }
 }
