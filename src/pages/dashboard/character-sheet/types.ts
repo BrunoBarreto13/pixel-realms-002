@@ -76,8 +76,9 @@ export interface Armament extends Weapon {
 
 export interface GeneralSkill {
   name: string;
-  category: string;
-  level: string;
+  points: number;
+  ability: 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma' | '';
+  modifier: number;
   notes: string;
 }
 

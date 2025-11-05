@@ -152,7 +152,7 @@ const CharacterSheet = () => {
 
   const baseGeneralSkillPoints = useMemo(() => Rules.calculateGeneralSkillPoints(character.class, character.level), [character.class, character.level]);
   const totalGeneralSkillPoints = baseGeneralSkillPoints + remainingLanguageSlots;
-  const usedGeneralSkillPoints = character.generalSkills.length;
+  const usedGeneralSkillPoints = character.generalSkills.reduce((sum, skill) => sum + (skill.points || 0), 0);
 
   // --- HANDLERS ---
   const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -275,14 +275,14 @@ const CharacterSheet = () => {
       toast({ title: "Pontos insuficientes!", description: "Você não tem pontos de perícia geral disponíveis.", variant: "destructive" });
       return;
     }
-    setCharacter(prev => ({ ...prev, generalSkills: [...prev.generalSkills, { name: "", category: "", level: "", notes: "" }] }));
+    setCharacter(prev => ({ ...prev, generalSkills: [...prev.generalSkills, { name: "", points: 1, ability: "", modifier: 0, notes: "" }] }));
   };
 
   const handleRemoveSkill = (index: number) => {
     setCharacter(prev => ({ ...prev, generalSkills: prev.generalSkills.filter((_, i) => i !== index) }));
   };
 
-  const handleSkillChange = (index: number, field: keyof GeneralSkill, value: string) => {
+  const handleSkillChange = (index: number, field: keyof GeneralSkill, value: string | number) => {
     const updated = [...character.generalSkills];
     updated[index] = { ...updated[index], [field]: value };
     setCharacter(prev => ({ ...prev, generalSkills: updated }));

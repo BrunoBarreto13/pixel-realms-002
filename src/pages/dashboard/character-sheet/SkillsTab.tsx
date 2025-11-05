@@ -3,6 +3,7 @@ import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
 import { Plus, Minus, Edit } from "lucide-react";
 import { Character, GeneralSkill } from "./types";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface SkillsTabProps {
   character: Character;
@@ -15,7 +16,7 @@ interface SkillsTabProps {
   onRemoveArmament: (index: number) => void;
   onAddSkill: () => void;
   onRemoveSkill: (index: number) => void;
-  onSkillChange: (index: number, field: keyof GeneralSkill, value: string) => void;
+  onSkillChange: (index: number, field: keyof GeneralSkill, value: string | number) => void;
   automaticLanguages: string[];
   remainingLanguageSlots: number;
   onAddLanguage: () => void;
@@ -24,6 +25,15 @@ interface SkillsTabProps {
   totalGeneralSkillPoints: number;
   usedGeneralSkillPoints: number;
 }
+
+const abilityOptions = [
+  { value: 'strength', label: 'Força' },
+  { value: 'dexterity', label: 'Destreza' },
+  { value: 'constitution', label: 'Constituição' },
+  { value: 'intelligence', label: 'Inteligência' },
+  { value: 'wisdom', label: 'Sabedoria' },
+  { value: 'charisma', label: 'Carisma' },
+];
 
 export const SkillsTab = ({
   character,
@@ -137,20 +147,38 @@ export const SkillsTab = ({
           </div>
           <p className="text-muted-foreground text-xs font-pixel">Pontos base de classe + pontos de idiomas não utilizados.</p>
         </div>
-        <div className="space-y-4">
-          {character.generalSkills.map((skill, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end bg-muted/30 p-4 pixel-border">
-              <PixelInput label="Nome da Perícia" value={skill.name} onChange={(e) => onSkillChange(index, 'name', e.target.value)} disabled={!isEditing} />
-              <PixelInput label="Categoria" value={skill.category} onChange={(e) => onSkillChange(index, 'category', e.target.value)} disabled={!isEditing} />
-              <PixelInput label="Nível/Valor" value={skill.level} onChange={(e) => onSkillChange(index, 'level', e.target.value)} disabled={!isEditing} />
-              <div className="md:col-span-2 flex gap-4 items-end">
-                <PixelInput label="Observações" value={skill.notes} onChange={(e) => onSkillChange(index, 'notes', e.target.value)} disabled={!isEditing} className="flex-grow" />
-                <PixelButton onClick={() => onRemoveSkill(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Perícia">
-                  <Minus className="h-4 w-4" />
-                </PixelButton>
+        <div className="space-y-2">
+          {character.generalSkills.map((skill, index) => {
+            const targetValue = skill.ability && character.attributes[skill.ability]
+              ? character.attributes[skill.ability] + skill.modifier
+              : 'N/A';
+
+            return (
+              <div key={index} className="bg-muted/30 p-4 pixel-border space-y-4">
+                <div className="grid grid-cols-2 md:grid-cols-12 gap-4 items-end">
+                  <div className="col-span-2 md:col-span-3"><PixelInput label="Nome da Perícia" value={skill.name} onChange={(e) => onSkillChange(index, 'name', e.target.value)} disabled={!isEditing} /></div>
+                  <div className="col-span-1"><PixelInput label="Pontos" type="number" value={skill.points} onChange={(e) => onSkillChange(index, 'points', parseInt(e.target.value) || 0)} disabled={!isEditing} /></div>
+                  <div className="col-span-2">
+                    <Label className="font-pixel text-xs text-foreground">Habilidade</Label>
+                    <Select value={skill.ability} onValueChange={(value) => onSkillChange(index, 'ability', value)} disabled={!isEditing}>
+                      <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-10 mt-2"><SelectValue placeholder="Selecione..." /></SelectTrigger>
+                      <SelectContent className="bg-card border-2 border-border z-50">
+                        {abilityOptions.map(opt => <SelectItem key={opt.value} value={opt.value} className="font-pixel text-xs">{opt.label}</SelectItem>)}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="col-span-1"><PixelInput label="Mod." type="number" value={skill.modifier} onChange={(e) => onSkillChange(index, 'modifier', parseInt(e.target.value) || 0)} disabled={!isEditing} /></div>
+                  <div className="col-span-1"><PixelInput label="Alvo" value={targetValue} disabled /></div>
+                  <div className="col-span-2 md:col-span-3"><PixelInput label="Observações" value={skill.notes} onChange={(e) => onSkillChange(index, 'notes', e.target.value)} disabled={!isEditing} /></div>
+                  <div className="col-span-2 md:col-span-1 flex justify-end">
+                    <PixelButton onClick={() => onRemoveSkill(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Perícia">
+                      <Minus className="h-4 w-4" />
+                    </PixelButton>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           {character.generalSkills.length === 0 && (
             <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhuma perícia geral adicionada.</p>
           )}
