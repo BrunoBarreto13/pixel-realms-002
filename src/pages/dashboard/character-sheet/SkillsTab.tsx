@@ -37,9 +37,9 @@ export const SkillsTab = ({
     <div className="mt-0 space-y-6">
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-pixel text-sm text-accent pixel-text-shadow">ARMAMENTOS</h3>
+          <h3 className="font-pixel text-sm text-accent pixel-text-shadow">PERÍCIAS COM ARMAS</h3>
           <PixelButton onClick={onAddArmament} size="sm" variant="secondary" disabled={!isEditing} className="flex items-center gap-2">
-            <Plus className="h-4 w-4" /> Adicionar Arma
+            <Plus className="h-4 w-4" /> Adicionar Perícia
           </PixelButton>
         </div>
         <div className="bg-muted/30 p-4 pixel-border mb-4 space-y-2">
@@ -56,17 +56,17 @@ export const SkillsTab = ({
               <PixelInput label="Dano" value={weapon.dano} disabled />
               <div className="md:col-span-2 flex gap-4 items-end">
                 <PixelInput label="Tipo" value={weapon.tipo} disabled className="flex-grow" />
-                <PixelButton onClick={() => onEditArmament(index)} variant="outline" size="icon" disabled={!isEditing} aria-label="Editar Arma">
+                <PixelButton onClick={() => onEditArmament(index)} variant="outline" size="icon" disabled={!isEditing} aria-label="Editar Perícia">
                   <Edit className="h-4 w-4" />
                 </PixelButton>
-                <PixelButton onClick={() => onRemoveArmament(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Arma">
+                <PixelButton onClick={() => onRemoveArmament(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Perícia">
                   <Minus className="h-4 w-4" />
                 </PixelButton>
               </div>
             </div>
           ))}
           {character.armaments.length === 0 && (
-            <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhum armamento adicionado.</p>
+            <p className="font-pixel text-xs text-muted-foreground text-center py-4">Nenhuma perícia com arma adicionada.</p>
           )}
         </div>
       </div>

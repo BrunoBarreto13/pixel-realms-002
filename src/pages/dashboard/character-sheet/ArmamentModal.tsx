@@ -60,7 +60,7 @@ export const ArmamentModal = ({ isOpen, onClose, onSave, armament, weaponList }:
       <DialogContent className="bg-card pixel-border max-w-md">
         <DialogHeader>
           <DialogTitle className="font-pixel text-lg text-primary pixel-text-shadow">
-            {armament ? "Editar Armamento" : "Adicionar Armamento"}
+            {armament ? "Editar Perícia com Arma" : "Adicionar Perícia com Arma"}
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4 py-4">
