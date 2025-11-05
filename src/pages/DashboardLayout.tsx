@@ -1,5 +1,3 @@
-import { PixelButton } from "@/components/PixelButton";
-import { Home, Dices, ScrollText, Shield, LogOut, BookOpen, ChevronRight, BookMarked, Settings as SettingsIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -10,6 +8,15 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import useSound from "@/hooks/useSound";
+import { PixelHomeIcon } from "@/components/icons/PixelHomeIcon";
+import { PixelDicesIcon } from "@/components/icons/PixelDicesIcon";
+import { PixelScrollTextIcon } from "@/components/icons/PixelScrollTextIcon";
+import { PixelShieldIcon } from "@/components/icons/PixelShieldIcon";
+import { PixelLogOutIcon } from "@/components/icons/PixelLogOutIcon";
+import { PixelBookOpenIcon } from "@/components/icons/PixelBookOpenIcon";
+import { PixelChevronRightIcon } from "@/components/icons/PixelChevronRightIcon";
+import { PixelBookMarkedIcon } from "@/components/icons/PixelBookMarkedIcon";
+import { PixelSettingsIcon } from "@/components/icons/PixelSettingsIcon";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -25,18 +32,18 @@ const DashboardLayout = () => {
   }, [user, loading, navigate]);
 
   const allMenuItems = [
-    { id: "/dashboard", label: "Início", icon: Home },
+    { id: "/dashboard", label: "Início", icon: PixelHomeIcon },
     {
       id: "campaign",
       label: "Campanha",
-      icon: BookOpen,
+      icon: PixelBookOpenIcon,
       children: [
-        { id: "/dashboard/game-table", label: "Mesa de jogo", icon: Dices },
-        { id: "/dashboard/library", label: "Biblioteca", icon: BookMarked },
+        { id: "/dashboard/game-table", label: "Mesa de jogo", icon: PixelDicesIcon },
+        { id: "/dashboard/library", label: "Biblioteca", icon: PixelBookMarkedIcon },
       ],
     },
-    { id: "/dashboard/character-sheet", label: "Ficha do Jogador", icon: ScrollText },
-    { id: "/dashboard/master-screen", label: "Divisória do Mestre", icon: Shield, masterOnly: true },
+    { id: "/dashboard/character-sheet", label: "Ficha do Jogador", icon: PixelScrollTextIcon },
+    { id: "/dashboard/master-screen", label: "Divisória do Mestre", icon: PixelShieldIcon, masterOnly: true },
   ];
 
   useEffect(() => {
@@ -93,7 +100,7 @@ const DashboardLayout = () => {
         <Icon className="h-4 w-4 text-menu-button-text" />
         <span>{label}</span>
       </div>
-      {hasChildren && <ChevronRight className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />}
+      {hasChildren && <PixelChevronRightIcon className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />}
     </button>
   );
 
@@ -153,7 +160,7 @@ const DashboardLayout = () => {
             <NavButton 
               id="/dashboard/settings"
               label="Configurações"
-              icon={SettingsIcon}
+              icon={PixelSettingsIcon}
               isActive={location.pathname.startsWith("/dashboard/settings")}
               onClick={() => handleSectionChange("/dashboard/settings")}
             />
@@ -161,7 +168,7 @@ const DashboardLayout = () => {
               onClick={handleLogout} 
               className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-destructive text-destructive-foreground border-destructive/80 hover:bg-destructive/90"
             >
-              <LogOut className="h-4 w-4 text-destructive-foreground" />
+              <PixelLogOutIcon className="h-4 w-4 text-destructive-foreground" />
               <span>SAIR</span>
             </button>
           </div>
