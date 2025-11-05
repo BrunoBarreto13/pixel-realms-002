@@ -16,6 +16,7 @@ export interface Race {
   name: string;
   value: string;
   ability_modifiers: { [key: string]: number };
+  racial_language?: string;
 }
 
 export interface CharacterClass {
@@ -108,6 +109,7 @@ export interface Character {
   color: string;
   armaments: Armament[];
   generalSkills: GeneralSkill[];
+  languages: string[];
 }
 
 export const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {

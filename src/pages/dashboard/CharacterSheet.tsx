@@ -52,6 +52,7 @@ const CharacterSheet = () => {
     color: "#4789c7",
     armaments: [],
     generalSkills: [],
+    languages: [],
   });
 
   const [isEditing, setIsEditing] = useState(true);
@@ -125,6 +126,7 @@ const CharacterSheet = () => {
     return weight;
   }, [character.equipment, character.armaments]);
 
+  // --- PROFICIENCIES & SKILLS ---
   const totalWeaponProficiencyPoints = useMemo(() => calculateProficiencyPoints(character.class, character.level), [character.class, character.level]);
   const usedWeaponProficiencyPoints = character.armaments.length;
   const proficiencyRuleText = useMemo(() => {
@@ -134,6 +136,23 @@ const CharacterSheet = () => {
     if (!config) return "Classe sem regras de perícia definidas.";
     return `Você possui ${config.initial} pontos de perícia inicial em armas. +1 ponto a cada ${config.progression} níveis.`;
   }, [character.class, character.level]);
+
+  const automaticLanguages = useMemo(() => {
+    const languages = ["Comum"];
+    const raceData = PHB_RACES.find(r => r.value === character.race);
+    if (raceData?.racial_language) {
+      languages.push(raceData.racial_language);
+    }
+    return languages;
+  }, [character.race]);
+
+  const totalLanguageSlots = useMemo(() => intelligenceBonuses.languages, [intelligenceBonuses]);
+  const usedLanguageSlots = character.languages.length;
+  const remainingLanguageSlots = totalLanguageSlots - usedLanguageSlots;
+
+  const baseGeneralSkillPoints = useMemo(() => Rules.calculateGeneralSkillPoints(character.class, character.level), [character.class, character.level]);
+  const totalGeneralSkillPoints = baseGeneralSkillPoints + remainingLanguageSlots;
+  const usedGeneralSkillPoints = character.generalSkills.length;
 
   // --- HANDLERS ---
   const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -251,13 +270,11 @@ const CharacterSheet = () => {
     setCharacter(prev => ({ ...prev, armaments: prev.armaments.filter((_, i) => i !== index) }));
   };
 
-  const handleArmamentChange = (index: number, field: keyof Armament, value: string | number) => {
-    const updated = [...character.armaments];
-    (updated[index] as any)[field] = value;
-    setCharacter(prev => ({ ...prev, armaments: updated }));
-  };
-
   const handleAddSkill = () => {
+    if (usedGeneralSkillPoints >= totalGeneralSkillPoints) {
+      toast({ title: "Pontos insuficientes!", description: "Você não tem pontos de perícia geral disponíveis.", variant: "destructive" });
+      return;
+    }
     setCharacter(prev => ({ ...prev, generalSkills: [...prev.generalSkills, { name: "", category: "", level: "", notes: "" }] }));
   };
 
@@ -269,6 +286,22 @@ const CharacterSheet = () => {
     const updated = [...character.generalSkills];
     updated[index] = { ...updated[index], [field]: value };
     setCharacter(prev => ({ ...prev, generalSkills: updated }));
+  };
+
+  const handleAddLanguage = () => {
+    if (remainingLanguageSlots > 0) {
+      setCharacter(prev => ({ ...prev, languages: [...prev.languages, ""] }));
+    }
+  };
+
+  const handleRemoveLanguage = (index: number) => {
+    setCharacter(prev => ({ ...prev, languages: prev.languages.filter((_, i) => i !== index) }));
+  };
+
+  const handleLanguageChange = (index: number, value: string) => {
+    const updated = [...character.languages];
+    updated[index] = value;
+    setCharacter(prev => ({ ...prev, languages: updated }));
   };
 
   return (
@@ -298,7 +331,28 @@ const CharacterSheet = () => {
           <div className="rpg-panel relative">
             <TabsContent value="stats"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} races={PHB_RACES} classes={PHB_CLASSES} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
-            <TabsContent value="skills"><SkillsTab character={character} isEditing={isEditing} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddArmament={handleAddArmamentClick} onEditArmament={handleEditArmamentClick} onRemoveArmament={handleRemoveArmament} onArmamentChange={handleArmamentChange} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} /></TabsContent>
+            <TabsContent value="skills">
+              <SkillsTab 
+                character={character} 
+                isEditing={isEditing} 
+                totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} 
+                usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} 
+                proficiencyRuleText={proficiencyRuleText} 
+                onAddArmament={handleAddArmamentClick} 
+                onEditArmament={handleEditArmamentClick} 
+                onRemoveArmament={handleRemoveArmament} 
+                onAddSkill={handleAddSkill} 
+                onRemoveSkill={handleRemoveSkill} 
+                onSkillChange={handleSkillChange}
+                automaticLanguages={automaticLanguages}
+                remainingLanguageSlots={remainingLanguageSlots}
+                onAddLanguage={handleAddLanguage}
+                onRemoveLanguage={handleRemoveLanguage}
+                onLanguageChange={handleLanguageChange}
+                totalGeneralSkillPoints={totalGeneralSkillPoints}
+                usedGeneralSkillPoints={usedGeneralSkillPoints}
+              />
+            </TabsContent>
             <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>

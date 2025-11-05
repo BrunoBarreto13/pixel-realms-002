@@ -3,10 +3,21 @@ import type { Spell, Race, CharacterClass, Weapon, Armor } from '@/pages/dashboa
 
 export const PHB_SPELLS: { arcane: Spell[], divine: Spell[] } = handbookData.spells;
 
-export const PHB_RACES: Race[] = handbookData.races.map(race => ({
-  ...race,
-  value: race.name.toLowerCase().replace(/ /g, '_'),
-}));
+export const PHB_RACES: Race[] = handbookData.races.map(race => {
+  const racialLanguages: { [key: string]: string } = {
+    "Anão": "Anão",
+    "Elfo": "Elfo",
+    "Gnomo": "Gnomo",
+    "Halfling": "Halfling",
+    "Meio-Elfo": "Elfo",
+  };
+
+  return {
+    ...race,
+    value: race.name.toLowerCase().replace(/ /g, '_'),
+    racial_language: racialLanguages[race.name],
+  };
+});
 
 export const PHB_CLASSES: CharacterClass[] = handbookData.classes.map(cls => ({
   ...cls,

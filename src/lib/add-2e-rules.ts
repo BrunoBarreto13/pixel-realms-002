@@ -316,3 +316,43 @@ export const getSavingThrows = (className: string, level: number) => {
     spell: saves.spell,
   };
 };
+
+// --- GENERAL SKILLS (NON-WEAPON PROFICIENCIES) ---
+
+const GENERAL_SKILL_PROGRESSION: { [key: string]: { initial: number; progression: number } } = {
+  warrior: { initial: 3, progression: 3 },
+  wizard: { initial: 4, progression: 3 },
+  priest: { initial: 4, progression: 3 },
+  rogue: { initial: 4, progression: 4 },
+};
+
+export const calculateGeneralSkillPoints = (className: string, level: number): number => {
+  let group: keyof typeof GENERAL_SKILL_PROGRESSION;
+
+  switch (className) {
+    case "fighter":
+    case "paladin":
+    case "ranger":
+      group = "warrior";
+      break;
+    case "wizard":
+      group = "wizard";
+      break;
+    case "cleric":
+    case "druid":
+      group = "priest";
+      break;
+    case "thief":
+    case "bard":
+      group = "rogue";
+      break;
+    default:
+      return 0; // No class selected, no points
+  }
+
+  const config = GENERAL_SKILL_PROGRESSION[group];
+  if (!config) return 0;
+
+  const levelBonus = Math.floor((level - 1) / config.progression);
+  return config.initial + levelBonus;
+};
