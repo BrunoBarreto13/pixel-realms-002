@@ -79,7 +79,6 @@ export interface GeneralSkill {
   points: number;
   ability: 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma' | '';
   modifier: number;
-  notes: string;
 }
 
 export interface Equipment {

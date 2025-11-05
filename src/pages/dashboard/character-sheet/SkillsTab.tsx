@@ -156,7 +156,7 @@ export const SkillsTab = ({
             return (
               <div key={index} className="bg-muted/30 p-4 pixel-border space-y-4">
                 <div className="grid grid-cols-2 md:grid-cols-12 gap-4 items-end">
-                  <div className="col-span-2 md:col-span-3"><PixelInput label="Nome da Perícia" value={skill.name} onChange={(e) => onSkillChange(index, 'name', e.target.value)} disabled={!isEditing} /></div>
+                  <div className="col-span-2 md:col-span-6"><PixelInput label="Nome da Perícia" value={skill.name} onChange={(e) => onSkillChange(index, 'name', e.target.value)} disabled={!isEditing} /></div>
                   <div className="col-span-1"><PixelInput label="Pontos" type="number" value={skill.points} onChange={(e) => onSkillChange(index, 'points', parseInt(e.target.value) || 0)} disabled={!isEditing} /></div>
                   <div className="col-span-2">
                     <Label className="font-pixel text-xs text-foreground">Habilidade</Label>
@@ -169,7 +169,6 @@ export const SkillsTab = ({
                   </div>
                   <div className="col-span-1"><PixelInput label="Mod." type="number" value={skill.modifier} onChange={(e) => onSkillChange(index, 'modifier', parseInt(e.target.value) || 0)} disabled={!isEditing} /></div>
                   <div className="col-span-1"><PixelInput label="Alvo" value={targetValue} disabled /></div>
-                  <div className="col-span-2 md:col-span-3"><PixelInput label="Observações" value={skill.notes} onChange={(e) => onSkillChange(index, 'notes', e.target.value)} disabled={!isEditing} /></div>
                   <div className="col-span-2 md:col-span-1 flex justify-end">
                     <PixelButton onClick={() => onRemoveSkill(index)} variant="destructive" size="icon" disabled={!isEditing} aria-label="Remover Perícia">
                       <Minus className="h-4 w-4" />

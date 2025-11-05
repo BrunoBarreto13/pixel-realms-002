@@ -275,7 +275,7 @@ const CharacterSheet = () => {
       toast({ title: "Pontos insuficientes!", description: "Você não tem pontos de perícia geral disponíveis.", variant: "destructive" });
       return;
     }
-    setCharacter(prev => ({ ...prev, generalSkills: [...prev.generalSkills, { name: "", points: 1, ability: "", modifier: 0, notes: "" }] }));
+    setCharacter(prev => ({ ...prev, generalSkills: [...prev.generalSkills, { name: "", points: 1, ability: "", modifier: 0 }] }));
   };
 
   const handleRemoveSkill = (index: number) => {
