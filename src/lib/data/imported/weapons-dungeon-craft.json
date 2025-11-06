@@ -1,0 +1,4496 @@
+[
+  {
+    "name": "Awl Pike",
+    "cost": "1 po",
+    "weight": 8,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "1d12+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "awl_pike"
+  },
+  {
+    "name": "Bardiche",
+    "cost": "7 po",
+    "weight": 12,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "2d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "bardiche"
+  },
+  {
+    "name": "Bastard Sword",
+    "cost": "25 po",
+    "weight": 10,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "2d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "bastard_sword"
+  },
+  {
+    "name": "Battle Axe",
+    "cost": "5 po",
+    "weight": 7,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "battle_axe"
+  },
+  {
+    "name": "Bec de Corbin",
+    "cost": "8 po",
+    "weight": 10,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "bec_de_corbin"
+  },
+  {
+    "name": "Bill-guisarme",
+    "cost": "7 po",
+    "weight": 15,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d10+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "bill_guisarme"
+  },
+  {
+    "name": "Broad Sword",
+    "cost": "10 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d6+1"
+    },
+    "category": "corpo-a-corpo",
+    "id": "broad_sword"
+  },
+  {
+    "name": "Club",
+    "cost": "0 po",
+    "weight": 3,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d3+0"
+    },
+    "category": "arremesso",
+    "id": "club"
+  },
+  {
+    "name": "Cutlass",
+    "cost": "10 po",
+    "weight": 3,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "cutlass"
+  },
+  {
+    "name": "Dagger",
+    "cost": "2 po",
+    "weight": 1,
+    "size": "S",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+0",
+      "large": "1d3+0"
+    },
+    "category": "arremesso",
+    "id": "dagger"
+  },
+  {
+    "name": "Drow Long Sword",
+    "cost": "0 po",
+    "weight": 6,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d12+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "drow_long_sword"
+  },
+  {
+    "name": "Falchion",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "2d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "falchion"
+  },
+  {
+    "name": "Fauchard-fork",
+    "cost": "8 po",
+    "weight": 9,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d10+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "fauchard_fork"
+  },
+  {
+    "name": "Fauchard",
+    "cost": "5 po",
+    "weight": 7,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "fauchard"
+  },
+  {
+    "name": "Glaive-guisarme",
+    "cost": "10 po",
+    "weight": 10,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "2d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "glaive_guisarme"
+  },
+  {
+    "name": "Glaive",
+    "cost": "6 po",
+    "weight": 8,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d10+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "glaive"
+  },
+  {
+    "name": "Guisarme-voulge",
+    "cost": "8 po",
+    "weight": 15,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "2d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "guisarme_voulge"
+  },
+  {
+    "name": "Guisarme",
+    "cost": "5 po",
+    "weight": 8,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "guisarme"
+  },
+  {
+    "name": "Halberd",
+    "cost": "2 po",
+    "weight": 17.5,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d10+0",
+      "large": "2d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "halberd"
+  },
+  {
+    "name": "Hand Axe",
+    "cost": "1 po",
+    "weight": 5,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d4+0"
+    },
+    "category": "arremesso",
+    "id": "hand_axe"
+  },
+  {
+    "name": "Hook Fauchard",
+    "cost": "10 po",
+    "weight": 8,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+0",
+      "large": "1d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "hook_fauchard"
+  },
+  {
+    "name": "Katana",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d10+0",
+      "large": "1d12+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "katana"
+  },
+  {
+    "name": "Khopesh",
+    "cost": "10 po",
+    "weight": 7,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "khopesh"
+  },
+  {
+    "name": "Knife",
+    "cost": "5 po",
+    "weight": 0.5,
+    "size": "S",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d3+0",
+      "large": "1d1+0"
+    },
+    "category": "arremesso",
+    "id": "knife"
+  },
+  {
+    "name": "Long Sword",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d12+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "long_sword"
+  },
+  {
+    "name": "Lucern Hammer",
+    "cost": "7 po",
+    "weight": 15,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "lucern_hammer"
+  },
+  {
+    "name": "Mace",
+    "cost": "5 po",
+    "weight": 6,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "mace"
+  },
+  {
+    "name": "Maul of the Titans",
+    "cost": "2 po",
+    "weight": 75,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "7d6+0",
+      "large": "7d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "maul_of_the_titans"
+  },
+  {
+    "name": "Military Fork",
+    "cost": "5 po",
+    "weight": 7,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "2d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "military_fork"
+  },
+  {
+    "name": "Military Pick",
+    "cost": "5 po",
+    "weight": 6,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "2d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "military_pick"
+  },
+  {
+    "name": "Morning Star",
+    "cost": "10 po",
+    "weight": 12,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d6+1"
+    },
+    "category": "corpo-a-corpo",
+    "id": "morning_star"
+  },
+  {
+    "name": "Ninja-to",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "ninja_to"
+  },
+  {
+    "name": "Partisan",
+    "cost": "12 po",
+    "weight": 8,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+1"
+    },
+    "category": "corpo-a-corpo",
+    "id": "partisan"
+  },
+  {
+    "name": "Quarterstaff",
+    "cost": "0 po",
+    "weight": 4,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "quarterstaff"
+  },
+  {
+    "name": "Ranseur",
+    "cost": "6 po",
+    "weight": 7,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "2d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "ranseur"
+  },
+  {
+    "name": "Sabre",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "1d8+1"
+    },
+    "category": "corpo-a-corpo",
+    "id": "sabre"
+  },
+  {
+    "name": "Scimitar",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "scimitar"
+  },
+  {
+    "name": "Shillelagh",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "1d4+1"
+    },
+    "category": "arremesso",
+    "id": "shillelagh"
+  },
+  {
+    "name": "Short Sword",
+    "cost": "10 po",
+    "weight": 3,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "short_sword"
+  },
+  {
+    "name": "Sickle",
+    "cost": "1 po",
+    "weight": 3,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+1",
+      "large": "1d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "sickle"
+  },
+  {
+    "name": "Silver Dagger",
+    "cost": "15 po",
+    "weight": 1,
+    "size": "S",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+0",
+      "large": "1d3+0"
+    },
+    "category": "arremesso",
+    "id": "silver_dagger"
+  },
+  {
+    "name": "Spear",
+    "cost": "1 po",
+    "weight": 5,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d8+0"
+    },
+    "category": "arremesso",
+    "id": "spear"
+  },
+  {
+    "name": "Spetum",
+    "cost": "5 po",
+    "weight": 7,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "2d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "spetum"
+  },
+  {
+    "name": "Trident",
+    "cost": "1 po",
+    "weight": 5,
+    "size": "L",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "3d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "trident"
+  },
+  {
+    "name": "Two-Handed Sword",
+    "cost": "50 po",
+    "weight": 15,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d10+0",
+      "large": "3d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "two_handed_sword"
+  },
+  {
+    "name": "Voulge",
+    "cost": "5 po",
+    "weight": 12,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d4+0",
+      "large": "2d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "voulge"
+  },
+  {
+    "name": "Wakazashi",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "wakazashi"
+  },
+  {
+    "name": "Warhammer",
+    "cost": "2 po",
+    "weight": 6,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+1",
+      "large": "1d4+0"
+    },
+    "category": "arremesso",
+    "id": "warhammer"
+  },
+  {
+    "name": "Whip",
+    "cost": "1 po",
+    "weight": 2,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d1+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "whip"
+  },
+  {
+    "name": "Boulder",
+    "cost": "0 po",
+    "weight": 100,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d8+0",
+      "large": "2d8+0"
+    },
+    "category": "arremesso",
+    "id": "boulder"
+  },
+  {
+    "name": "Composite Long Bow",
+    "cost": "25 po",
+    "weight": 5,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "a-distancia",
+    "id": "composite_long_bow"
+  },
+  {
+    "name": "Composite Short Bow",
+    "cost": "15 po",
+    "weight": 8,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "a-distancia",
+    "id": "composite_short_bow"
+  },
+  {
+    "name": "Dart",
+    "cost": "0 po",
+    "weight": 0.5,
+    "size": "S",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d3+0",
+      "large": "1d2+0"
+    },
+    "category": "arremesso",
+    "id": "dart"
+  },
+  {
+    "name": "Fine Long Bow",
+    "cost": "2000 po",
+    "weight": 10,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "a-distancia",
+    "id": "fine_long_bow"
+  },
+  {
+    "name": "Javelin",
+    "cost": "0 po",
+    "weight": 2,
+    "size": "M",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+1",
+      "large": "1d6+1"
+    },
+    "category": "arremesso",
+    "id": "javelin"
+  },
+  {
+    "name": "Light Crossbow",
+    "cost": "2 po",
+    "weight": 5,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "a-distancia",
+    "id": "light_crossbow"
+  },
+  {
+    "name": "Long Bow",
+    "cost": "12 po",
+    "weight": 10,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "a-distancia",
+    "id": "long_bow"
+  },
+  {
+    "name": "Short Bow",
+    "cost": "3 po",
+    "weight": 5,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "a-distancia",
+    "id": "short_bow"
+  },
+  {
+    "name": "Sling",
+    "cost": "1 po",
+    "weight": 1,
+    "size": "S",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+0",
+      "large": "1d4+0"
+    },
+    "category": "a-distancia",
+    "id": "sling"
+  },
+  {
+    "name": "Staff Sling",
+    "cost": "1 po",
+    "weight": 6,
+    "size": "L",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "2d4+0"
+    },
+    "category": "a-distancia",
+    "id": "staff_sling"
+  },
+  {
+    "name": "Arrow",
+    "cost": "0 po",
+    "weight": 0.2,
+    "size": "S",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "arrow"
+  },
+  {
+    "name": "Bolt",
+    "cost": "0 po",
+    "weight": 0.1,
+    "size": "S",
+    "type": "Perfuração",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d4+0",
+      "large": "1d4+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "bolt"
+  },
+  {
+    "name": "Vial",
+    "cost": "5 po",
+    "weight": 1,
+    "size": "S",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "arremesso",
+    "id": "vial"
+  },
+  {
+    "name": "monsterClericAid",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericaid"
+  },
+  {
+    "name": "monsterClericAnimal Summoning I",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericanimal_summoning_i"
+  },
+  {
+    "name": "monsterClericAnimal Summoning II",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericanimal_summoning_ii"
+  },
+  {
+    "name": "monsterClericAnimal Summoning III",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericanimal_summoning_iii"
+  },
+  {
+    "name": "monsterClericBarkskin",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericbarkskin"
+  },
+  {
+    "name": "monsterClericBestow Curse",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericbestow_curse"
+  },
+  {
+    "name": "monsterClericBlade Barrier",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericblade_barrier"
+  },
+  {
+    "name": "monsterClericBless",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericbless"
+  },
+  {
+    "name": "monsterClericCause Blindness",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcause_blindness"
+  },
+  {
+    "name": "monsterClericCause Critical Wounds",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcause_critical_wounds"
+  },
+  {
+    "name": "monsterClericCause Disease",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcause_disease"
+  },
+  {
+    "name": "monsterClericCause Light Wounds",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcause_light_wounds"
+  },
+  {
+    "name": "monsterClericCause Serious Wounds",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcause_serious_wounds"
+  },
+  {
+    "name": "monsterClericCharm Person or Mammal",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcharm_person_or_mammal"
+  },
+  {
+    "name": "monsterClericCommand",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcommand"
+  },
+  {
+    "name": "monsterClericConfusion",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericconfusion"
+  },
+  {
+    "name": "monsterClericConjure Earth Elemental",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericconjure_earth_elemental"
+  },
+  {
+    "name": "monsterClericConjure Fire Elemental",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericconjure_fire_elemental"
+  },
+  {
+    "name": "monsterClericContinual Light",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcontinual_light"
+  },
+  {
+    "name": "monsterClericCure Blindness",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcure_blindness"
+  },
+  {
+    "name": "monsterClericCure Critical Wounds",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcure_critical_wounds"
+  },
+  {
+    "name": "monsterClericCure Disease",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcure_disease"
+  },
+  {
+    "name": "monsterClericCure Light Wounds",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcure_light_wounds"
+  },
+  {
+    "name": "monsterClericCure Serious Wounds",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcure_serious_wounds"
+  },
+  {
+    "name": "monsterClericCurse",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericcurse"
+  },
+  {
+    "name": "monsterClericDestruction",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdestruction"
+  },
+  {
+    "name": "monsterClericDetect Charm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdetect_charm"
+  },
+  {
+    "name": "monsterClericDetect Evil",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdetect_evil"
+  },
+  {
+    "name": "monsterClericDetect Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdetect_magic"
+  },
+  {
+    "name": "monsterClericDispel Evil",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdispel_evil"
+  },
+  {
+    "name": "monsterClericDispel Good",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdispel_good"
+  },
+  {
+    "name": "monsterClericDispel Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericdispel_magic"
+  },
+  {
+    "name": "monsterClericEndure Cold",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericendure_cold"
+  },
+  {
+    "name": "monsterClericEndure Heat",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericendure_heat"
+  },
+  {
+    "name": "monsterClericEnergy Drain",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericenergy_drain"
+  },
+  {
+    "name": "monsterClericEntangle",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericentangle"
+  },
+  {
+    "name": "monsterClericFaerie Fire",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericfaerie_fire"
+  },
+  {
+    "name": "monsterClericFind Traps",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericfind_traps"
+  },
+  {
+    "name": "monsterClericFire Storm",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericfire_storm"
+  },
+  {
+    "name": "monsterClericFlame Blade",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericflame_blade"
+  },
+  {
+    "name": "monsterClericFlame Strike",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericflame_strike"
+  },
+  {
+    "name": "monsterClericGiant Insect",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericgiant_insect"
+  },
+  {
+    "name": "monsterClericHarm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericharm"
+  },
+  {
+    "name": "monsterClericHeal",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericheal"
+  },
+  {
+    "name": "monsterClericHold Animal",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclerichold_animal"
+  },
+  {
+    "name": "monsterClericHold Person",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclerichold_person"
+  },
+  {
+    "name": "monsterClericHoly Word",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericholy_word"
+  },
+  {
+    "name": "monsterClericInsect Plague",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericinsect_plague"
+  },
+  {
+    "name": "monsterClericInvisibility to Animals",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericinvisibility_to_animals"
+  },
+  {
+    "name": "monsterClericNeutralize Poison",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericneutralize_poison"
+  },
+  {
+    "name": "monsterClericPoison",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericpoison"
+  },
+  {
+    "name": "monsterClericPrayer",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprayer"
+  },
+  {
+    "name": "monsterClericProtection From Evil 10' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprotection_from_evil_10_radius"
+  },
+  {
+    "name": "monsterClericProtection From Evil",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprotection_from_evil"
+  },
+  {
+    "name": "monsterClericProtection From Fire",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprotection_from_fire"
+  },
+  {
+    "name": "monsterClericProtection From Good 10' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprotection_from_good_10_radius"
+  },
+  {
+    "name": "monsterClericProtection From Good",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprotection_from_good"
+  },
+  {
+    "name": "monsterClericProtection from Lightning",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericprotection_from_lightning"
+  },
+  {
+    "name": "monsterClericRaise Dead",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericraise_dead"
+  },
+  {
+    "name": "monsterClericRemove Curse",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericremove_curse"
+  },
+  {
+    "name": "monsterClericRemove Fear",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericremove_fear"
+  },
+  {
+    "name": "monsterClericResist Cold",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericresist_cold"
+  },
+  {
+    "name": "monsterClericResist Fire",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericresist_fire"
+  },
+  {
+    "name": "monsterClericRestoration",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericrestoration"
+  },
+  {
+    "name": "monsterClericResurrection",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericresurrection"
+  },
+  {
+    "name": "monsterClericShillelagh",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericshillelagh"
+  },
+  {
+    "name": "monsterClericSilence 15' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericsilence_15_radius"
+  },
+  {
+    "name": "monsterClericSlay Living",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericslay_living"
+  },
+  {
+    "name": "monsterClericSlow Poison",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericslow_poison"
+  },
+  {
+    "name": "monsterClericSnake Charm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericsnake_charm"
+  },
+  {
+    "name": "monsterClericSpeak with Animals",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericspeak_with_animals"
+  },
+  {
+    "name": "monsterClericSpeak With Dead",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericspeak_with_dead"
+  },
+  {
+    "name": "monsterClericSpiritual Hammer",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericspiritual_hammer"
+  },
+  {
+    "name": "monsterClericSticks to Snakes",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericsticks_to_snakes"
+  },
+  {
+    "name": "monsterClericSymbol Of Fear",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericsymbol_of_fear"
+  },
+  {
+    "name": "monsterClericSymbol Of Pain",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericsymbol_of_pain"
+  },
+  {
+    "name": "monsterClericSymbol",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericsymbol"
+  },
+  {
+    "name": "monsterClericTransmute Rock To Mud",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclerictransmute_rock_to_mud"
+  },
+  {
+    "name": "monsterClericTrue Seeing",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclerictrue_seeing"
+  },
+  {
+    "name": "monsterClericUnholy Word",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterclericunholy_word"
+  },
+  {
+    "name": "monsterMageAnimate Dead",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageanimate_dead"
+  },
+  {
+    "name": "monsterMageAnti-magic Shell",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageanti_magic_shell"
+  },
+  {
+    "name": "monsterMageArmor",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagearmor"
+  },
+  {
+    "name": "monsterMageBanishment",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagebanishment"
+  },
+  {
+    "name": "monsterMageBestow Curse",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagebestow_curse"
+  },
+  {
+    "name": "monsterMageBigby's Clenched Fist",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagebigby_s_clenched_fist"
+  },
+  {
+    "name": "monsterMageBigby's Grasping Hand",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagebigby_s_grasping_hand"
+  },
+  {
+    "name": "monsterMageBinding",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagebinding"
+  },
+  {
+    "name": "monsterMageBlink",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageblink"
+  },
+  {
+    "name": "monsterMageBlur",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageblur"
+  },
+  {
+    "name": "monsterMageBurning Hands",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageburning_hands"
+  },
+  {
+    "name": "monsterMageChain Lightning",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagechain_lightning"
+  },
+  {
+    "name": "monsterMageChaos",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagechaos"
+  },
+  {
+    "name": "monsterMageCharm Monster",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecharm_monster"
+  },
+  {
+    "name": "monsterMageCharm Person",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecharm_person"
+  },
+  {
+    "name": "monsterMageCharm Plants",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecharm_plants"
+  },
+  {
+    "name": "monsterMageChill Touch",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagechill_touch"
+  },
+  {
+    "name": "monsterMageChoke",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagechoke"
+  },
+  {
+    "name": "monsterMageCloudkill",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecloudkill"
+  },
+  {
+    "name": "monsterMageColor Spray",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecolor_spray"
+  },
+  {
+    "name": "monsterMageCone Of Cold",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecone_of_cold"
+  },
+  {
+    "name": "monsterMageConfusion",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageconfusion"
+  },
+  {
+    "name": "monsterMageConjure Air Elemental",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageconjure_air_elemental"
+  },
+  {
+    "name": "monsterMageConjure Animals",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageconjure_animals"
+  },
+  {
+    "name": "monsterMageConjure Earth Elemental",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageconjure_earth_elemental"
+  },
+  {
+    "name": "monsterMageConjure Fire Elemental",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageconjure_fire_elemental"
+  },
+  {
+    "name": "monsterMageConjure Water Elemental",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageconjure_water_elemental"
+  },
+  {
+    "name": "monsterMageContagion",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecontagion"
+  },
+  {
+    "name": "monsterMageContinual Light",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecontinual_light"
+  },
+  {
+    "name": "monsterMageControl Undead",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagecontrol_undead"
+  },
+  {
+    "name": "monsterMageDancing Lights",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d0+0",
+      "large": "1d0+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedancing_lights"
+  },
+  {
+    "name": "monsterMageDarkness 15' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedarkness_15_radius"
+  },
+  {
+    "name": "monsterMageDeath Spell",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedeath_spell"
+  },
+  {
+    "name": "monsterMageDelayed Blast Fireball",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedelayed_blast_fireball"
+  },
+  {
+    "name": "monsterMageDemi-shadow Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedemi_shadow_magic"
+  },
+  {
+    "name": "monsterMageDemi-Shadow Monsters",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedemi_shadow_monsters"
+  },
+  {
+    "name": "monsterMageDetect Evil",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedetect_evil"
+  },
+  {
+    "name": "monsterMageDetect Good",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedetect_good"
+  },
+  {
+    "name": "monsterMageDetect Invisibility",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedetect_invisibility"
+  },
+  {
+    "name": "monsterMageDetect Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedetect_magic"
+  },
+  {
+    "name": "monsterMageDetect Undead",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedetect_undead"
+  },
+  {
+    "name": "monsterMageDimension Door",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedimension_door"
+  },
+  {
+    "name": "monsterMageDisintegrate",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedisintegrate"
+  },
+  {
+    "name": "monsterMageDispel Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedispel_magic"
+  },
+  {
+    "name": "monsterMageDomination",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagedomination"
+  },
+  {
+    "name": "monsterMageEnergy Drain",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageenergy_drain"
+  },
+  {
+    "name": "monsterMageEnervation",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageenervation"
+  },
+  {
+    "name": "monsterMageEnlarge",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageenlarge"
+  },
+  {
+    "name": "monsterMageFear",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefear"
+  },
+  {
+    "name": "monsterMageFeeblemind",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefeeblemind"
+  },
+  {
+    "name": "monsterMageFinger of Death",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefinger_of_death"
+  },
+  {
+    "name": "monsterMageFire Shield",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefire_shield"
+  },
+  {
+    "name": "monsterMageFireball",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefireball"
+  },
+  {
+    "name": "monsterMageFlesh To Stone",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageflesh_to_stone"
+  },
+  {
+    "name": "monsterMageFog Cloud",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefog_cloud"
+  },
+  {
+    "name": "monsterMageFriends",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefriends"
+  },
+  {
+    "name": "monsterMageFumble",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagefumble"
+  },
+  {
+    "name": "monsterMageGaze Reflection",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagegaze_reflection"
+  },
+  {
+    "name": "monsterMageGeas",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagegeas"
+  },
+  {
+    "name": "monsterMageGlobe Of Invulnerability",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageglobe_of_invulnerability"
+  },
+  {
+    "name": "monsterMageHaste",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagehaste"
+  },
+  {
+    "name": "monsterMageHold Person",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagehold_person"
+  },
+  {
+    "name": "monsterMageHold Undead",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagehold_undead"
+  },
+  {
+    "name": "monsterMageHold Monster",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagehold_monster"
+  },
+  {
+    "name": "monsterMageIce Storm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageice_storm"
+  },
+  {
+    "name": "monsterMageImprisonment",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageimprisonment"
+  },
+  {
+    "name": "monsterMageImproved Invisibility",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageimproved_invisibility"
+  },
+  {
+    "name": "monsterMageIncendiary Cloud",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageincendiary_cloud"
+  },
+  {
+    "name": "monsterMageInvisibility 10' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageinvisibility_10_radius"
+  },
+  {
+    "name": "monsterMageInvisibility",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageinvisibility"
+  },
+  {
+    "name": "monsterMageInvisible Stalker",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageinvisible_stalker"
+  },
+  {
+    "name": "monsterMageKnock",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageknock"
+  },
+  {
+    "name": "monsterMageKnow Alignment",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageknow_alignment"
+  },
+  {
+    "name": "monsterMageLight",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagelight"
+  },
+  {
+    "name": "monsterMageLightning Bolt",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagelightning_bolt"
+  },
+  {
+    "name": "monsterMageMagic Missile",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemagic_missile"
+  },
+  {
+    "name": "monsterMageMass Charm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemass_charm"
+  },
+  {
+    "name": "monsterMageMass Invisibility",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemass_invisibility"
+  },
+  {
+    "name": "monsterMageMass Suggestion",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemass_suggestion"
+  },
+  {
+    "name": "monsterMageMassmorph",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemassmorph"
+  },
+  {
+    "name": "monsterMageMelf's Acid Arrow",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemelf_s_acid_arrow"
+  },
+  {
+    "name": "monsterMageMeteor Swarm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemeteor_swarm"
+  },
+  {
+    "name": "monsterMageMind Blank",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemind_blank"
+  },
+  {
+    "name": "monsterMageMinor Globe Of Invulnerability",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageminor_globe_of_invulnerability"
+  },
+  {
+    "name": "monsterMageMirror Image",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemirror_image"
+  },
+  {
+    "name": "monsterMageMordenkainen's Sword",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemordenkainen_s_sword"
+  },
+  {
+    "name": "monsterMageMummy Touch",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemummy_touch"
+  },
+  {
+    "name": "monsterMageOtto's Irresistible Dance",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageotto_s_irresistible_dance"
+  },
+  {
+    "name": "monsterMagePhantasmal Killer",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagephantasmal_killer"
+  },
+  {
+    "name": "monsterMagePlane Shift",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageplane_shift"
+  },
+  {
+    "name": "monsterMagePower Word Blind",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagepower_word_blind"
+  },
+  {
+    "name": "monsterMagePower Word Kill",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagepower_word_kill"
+  },
+  {
+    "name": "monsterMagePower Word Stun",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagepower_word_stun"
+  },
+  {
+    "name": "monsterMagePrismatic Spray",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageprismatic_spray"
+  },
+  {
+    "name": "monsterMageProtection From Evil 10' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageprotection_from_evil_10_radius"
+  },
+  {
+    "name": "monsterMageProtection From Evil",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageprotection_from_evil"
+  },
+  {
+    "name": "monsterMageProtection From Good 10' Radius",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageprotection_from_good_10_radius"
+  },
+  {
+    "name": "monsterMageProtection From Good",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageprotection_from_good"
+  },
+  {
+    "name": "monsterMageProtection From Normal Missiles",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageprotection_from_normal_missiles"
+  },
+  {
+    "name": "monsterMagePyrotechnics",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagepyrotechnics"
+  },
+  {
+    "name": "monsterMageRay Of Enfeeblement",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageray_of_enfeeblement"
+  },
+  {
+    "name": "monsterMageRead Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageread_magic"
+  },
+  {
+    "name": "monsterMageReduce",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagereduce"
+  },
+  {
+    "name": "monsterMageRegenerate",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageregenerate"
+  },
+  {
+    "name": "monsterMageRemove Curse",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageremove_curse"
+  },
+  {
+    "name": "monsterMageRestoration",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagerestoration"
+  },
+  {
+    "name": "monsterMageScare",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagescare"
+  },
+  {
+    "name": "monsterMageSerten's Spell Immunity",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageserten_s_spell_immunity"
+  },
+  {
+    "name": "monsterMageShades",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshades"
+  },
+  {
+    "name": "monsterMageShadow Door",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshadow_door"
+  },
+  {
+    "name": "monsterMageShadow Form",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshadow_form"
+  },
+  {
+    "name": "monsterMageShadow Magic",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshadow_magic"
+  },
+  {
+    "name": "monsterMageShadow Monsters",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshadow_monsters"
+  },
+  {
+    "name": "monsterMageShield",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshield"
+  },
+  {
+    "name": "monsterMageShocking Grasp",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageshocking_grasp"
+  },
+  {
+    "name": "monsterMageSleep",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagesleep"
+  },
+  {
+    "name": "monsterMageSlow",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageslow"
+  },
+  {
+    "name": "monsterMageSpell Turnnig",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagespell_turnnig"
+  },
+  {
+    "name": "monsterMageStinking Cloud",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagestinking_cloud"
+  },
+  {
+    "name": "monsterMageStone to Flesh",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagestone_to_flesh"
+  },
+  {
+    "name": "monsterMageStoneskin",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagestoneskin"
+  },
+  {
+    "name": "monsterMageStrength",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagestrength"
+  },
+  {
+    "name": "monsterMageSuggestion",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagesuggestion"
+  },
+  {
+    "name": "monsterMageSummon Shadow",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagesummon_shadow"
+  },
+  {
+    "name": "monsterMageTeleport Without Error",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageteleport_without_error"
+  },
+  {
+    "name": "monsterMageVampiric Touch",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagevampiric_touch"
+  },
+  {
+    "name": "monsterMageVanish",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagevanish"
+  },
+  {
+    "name": "monsterMageWall Of Fire",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagewall_of_fire"
+  },
+  {
+    "name": "monsterMageWall Of Fog",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagewall_of_fog"
+  },
+  {
+    "name": "monsterMageWall Of Force",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagewall_of_force"
+  },
+  {
+    "name": "monsterMageWall Of Ice",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagewall_of_ice"
+  },
+  {
+    "name": "monsterMageWall Of Stone",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagewall_of_stone"
+  },
+  {
+    "name": "monsterMageWeb",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermageweb"
+  },
+  {
+    "name": "monsterMageMonster Summoning I",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_i"
+  },
+  {
+    "name": "monsterMageMonster Summoning II",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_ii"
+  },
+  {
+    "name": "monsterMageMonster Summoning III",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_iii"
+  },
+  {
+    "name": "monsterMageMonster Summoning IV",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_iv"
+  },
+  {
+    "name": "monsterMageMonster Summoning V",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_v"
+  },
+  {
+    "name": "monsterMageMonster Summoning VI",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_vi"
+  },
+  {
+    "name": "monsterMageMonster Summoning VII",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermagemonster_summoning_vii"
+  },
+  {
+    "name": "Fire Giant's Long Sword",
+    "cost": "15 po",
+    "weight": 4,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d5+0",
+      "large": "2d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "fire_giant_s_long_sword"
+  },
+  {
+    "name": "Fog Giant's Club",
+    "cost": "0 po",
+    "weight": 50,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "3d6+0",
+      "large": "3d6+0"
+    },
+    "category": "arremesso",
+    "id": "fog_giant_s_club"
+  },
+  {
+    "name": "Fomorian's Club",
+    "cost": "0 po",
+    "weight": 25,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "2d6+0",
+      "large": "2d3+0"
+    },
+    "category": "arremesso",
+    "id": "fomorian_s_club"
+  },
+  {
+    "name": "Frost Giant's Battle Axe",
+    "cost": "0 po",
+    "weight": 75,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d8+0",
+      "large": "1d8+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "frost_giant_s_battle_axe"
+  },
+  {
+    "name": "monsterBeholderCharm",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterbeholdercharm"
+  },
+  {
+    "name": "monsterBeholderFear",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterbeholderfear"
+  },
+  {
+    "name": "monsterBeholderFleshToStone",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterbeholderfleshtostone"
+  },
+  {
+    "name": "monsterBeholderSleep",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterbeholdersleep"
+  },
+  {
+    "name": "monsterBeholderSlow",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterbeholderslow"
+  },
+  {
+    "name": "monsterDjinniWhirlwind",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdjinniwhirlwind"
+  },
+  {
+    "name": "monsterDracoliskBreath",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdracoliskbreath"
+  },
+  {
+    "name": "monsterDracoliskPetrifyGaze",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdracoliskpetrifygaze"
+  },
+  {
+    "name": "monsterDragonBreathAcid",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathacid"
+  },
+  {
+    "name": "monsterDragonBreathCold",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathcold"
+  },
+  {
+    "name": "monsterDragonBreathColdSilver",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathcoldsilver"
+  },
+  {
+    "name": "monsterDragonBreathFearGas",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathfeargas"
+  },
+  {
+    "name": "monsterDragonBreathFire",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathfire"
+  },
+  {
+    "name": "monsterDragonBreathLightning",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathlightning"
+  },
+  {
+    "name": "monsterDragonBreathParalysis",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathparalysis"
+  },
+  {
+    "name": "monsterDragonBreathPoison",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathpoison"
+  },
+  {
+    "name": "monsterDragonBreathSleepGas",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathsleepgas"
+  },
+  {
+    "name": "monsterDragonBreathSlowGas",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterdragonbreathslowgas"
+  },
+  {
+    "name": "monsterGorgonBreath",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstergorgonbreath"
+  },
+  {
+    "name": "monsterHellHoundBreath",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterhellhoundbreath"
+  },
+  {
+    "name": "monsterMaridWaterJet",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermaridwaterjet"
+  },
+  {
+    "name": "monsterMedusaPetrifyGaze",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermedusapetrifygaze"
+  },
+  {
+    "name": "monsterMindBlast",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermindblast"
+  },
+  {
+    "name": "monsterMindFlayerMindBlast",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermindflayermindblast"
+  },
+  {
+    "name": "monsterModronCure1HP",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermodroncure1hp"
+  },
+  {
+    "name": "monsterModronHeal",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monstermodronheal"
+  },
+  {
+    "name": "monsterOgreMageColdRay",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterogremagecoldray"
+  },
+  {
+    "name": "monsterOgreMageInvisibility",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterogremageinvisibility"
+  },
+  {
+    "name": "monsterPentadroneParalysisGas",
+    "cost": "0",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d2+0",
+      "large": "1d2+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterpentadroneparalysisgas"
+  },
+  {
+    "name": "monsterPoisonCloud",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterpoisoncloud"
+  },
+  {
+    "name": "monsterPyroliskImmolationGaze",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterpyroliskimmolationgaze"
+  },
+  {
+    "name": "monsterStormGiantLightningBolt",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterstormgiantlightningbolt"
+  },
+  {
+    "name": "monsterWinterWolfBreath",
+    "cost": "0 po",
+    "weight": 0,
+    "size": "M",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "corpo-a-corpo",
+    "id": "monsterwinterwolfbreath"
+  },
+  {
+    "name": "Tail Spike",
+    "cost": "0 po",
+    "weight": 0.5,
+    "size": "S",
+    "type": "Corte",
+    "speed_factor": 0,
+    "damage": {
+      "small_medium": "1d6+0",
+      "large": "1d6+0"
+    },
+    "category": "arremesso",
+    "id": "tail_spike"
+  }
+]

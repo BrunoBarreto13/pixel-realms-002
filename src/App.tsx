@@ -10,6 +10,7 @@ import Library from "./pages/dashboard/library";
 import GameTable from "./pages/dashboard/GameTable";
 import Settings from "./pages/dashboard/Settings";
 import MasterScreen from "./pages/dashboard/MasterScreen";
+import HealthCheck from "./pages/dashboard/HealthCheck";
 
 const App = () => (
   <div className="font-pixel">
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="game-table" element={<GameTable />} />
         <Route path="settings" element={<Settings />} />
         <Route path="master-screen" element={<MasterScreen />} />
+        <Route path="health-check" element={<HealthCheck />} />
       </Route>
 
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

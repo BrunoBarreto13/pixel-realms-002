@@ -100,7 +100,7 @@
       {
         "name": "Espada Longa",
         "cost": "15 po",
-        "weight": 2,
+        "weight": 4,
         "size": "M",
         "type": "Corte",
         "speed_factor": 5,
@@ -109,6 +109,246 @@
           "large": "1d12"
         },
         "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Espada Curta",
+        "cost": "8 po",
+        "weight": 3,
+        "size": "S",
+        "type": "Corte",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d6", "large": "1d8" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Espada Bastarda",
+        "cost": "25 po",
+        "weight": 7,
+        "size": "M",
+        "type": "Corte",
+        "speed_factor": 6,
+        "damage": { "small_medium": "2d4", "large": "2d8" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Espadão (Duas Mãos)",
+        "cost": "50 po",
+        "weight": 15,
+        "size": "L",
+        "type": "Corte",
+        "speed_factor": 10,
+        "damage": { "small_medium": "1d10", "large": "3d6" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Cimitarra",
+        "cost": "15 po",
+        "weight": 3,
+        "size": "M",
+        "type": "Corte",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d8", "large": "1d8" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Sabre",
+        "cost": "10 po",
+        "weight": 3,
+        "size": "M",
+        "type": "Corte",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d6", "large": "1d8" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Adaga",
+        "cost": "2 po",
+        "weight": 1,
+        "size": "S",
+        "type": "Perfuração",
+        "speed_factor": 2,
+        "damage": { "small_medium": "1d4", "large": "1d3" },
+        "category": "arremesso"
+      },
+      {
+        "name": "Machado de Mão",
+        "cost": "5 po",
+        "weight": 5,
+        "size": "M",
+        "type": "Corte",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d6", "large": "1d4" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Machado de Batalha",
+        "cost": "10 po",
+        "weight": 7,
+        "size": "M",
+        "type": "Corte",
+        "speed_factor": 7,
+        "damage": { "small_medium": "1d8", "large": "1d8" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Lança",
+        "cost": "1 po",
+        "weight": 5,
+        "size": "M",
+        "type": "Perfuração",
+        "speed_factor": 6,
+        "damage": { "small_medium": "1d6", "large": "1d8" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Pique",
+        "cost": "5 po",
+        "weight": 12,
+        "size": "L",
+        "type": "Perfuração",
+        "speed_factor": 13,
+        "damage": { "small_medium": "1d6", "large": "2d6" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Alabarda",
+        "cost": "10 po",
+        "weight": 15,
+        "size": "L",
+        "type": "Corte",
+        "speed_factor": 9,
+        "damage": { "small_medium": "1d10", "large": "2d6" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Maça",
+        "cost": "8 po",
+        "weight": 6,
+        "size": "M",
+        "type": "Impacto",
+        "speed_factor": 7,
+        "damage": { "small_medium": "1d6", "large": "1d6" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Mangual",
+        "cost": "8 po",
+        "weight": 6,
+        "size": "M",
+        "type": "Impacto",
+        "speed_factor": 8,
+        "damage": { "small_medium": "1d6", "large": "2d4" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Estrela da Manhã",
+        "cost": "10 po",
+        "weight": 8,
+        "size": "M",
+        "type": "Impacto",
+        "speed_factor": 7,
+        "damage": { "small_medium": "2d4", "large": "2d4" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Martelo de Guerra",
+        "cost": "8 po",
+        "weight": 6,
+        "size": "M",
+        "type": "Impacto",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d4+1", "large": "1d4" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Clava",
+        "cost": "1 po",
+        "weight": 3,
+        "size": "M",
+        "type": "Impacto",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d6", "large": "1d3" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Cajado",
+        "cost": "1 po",
+        "weight": 5,
+        "size": "L",
+        "type": "Impacto",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d6", "large": "2d4" },
+        "category": "corpo-a-corpo"
+      },
+      {
+        "name": "Arco Curto",
+        "cost": "30 po",
+        "weight": 2,
+        "size": "M",
+        "type": "Perfuração",
+        "speed_factor": 7,
+        "damage": { "small_medium": "1d6", "large": "1d6" },
+        "category": "a-distancia"
+      },
+      {
+        "name": "Arco Longo",
+        "cost": "75 po",
+        "weight": 3,
+        "size": "L",
+        "type": "Perfuração",
+        "speed_factor": 8,
+        "damage": { "small_medium": "1d8", "large": "1d8" },
+        "category": "a-distancia"
+      },
+      {
+        "name": "Besta Leve",
+        "cost": "35 po",
+        "weight": 7,
+        "size": "M",
+        "type": "Perfuração",
+        "speed_factor": 7,
+        "damage": { "small_medium": "1d6", "large": "1d6" },
+        "category": "a-distancia"
+      },
+      {
+        "name": "Besta Pesada",
+        "cost": "50 po",
+        "weight": 14,
+        "size": "L",
+        "type": "Perfuração",
+        "speed_factor": 10,
+        "damage": { "small_medium": "1d8", "large": "1d8" },
+        "category": "a-distancia"
+      },
+      {
+        "name": "Funda",
+        "cost": "1 po",
+        "weight": 0,
+        "size": "S",
+        "type": "Impacto",
+        "speed_factor": 6,
+        "damage": { "small_medium": "1d4", "large": "1d4" },
+        "category": "a-distancia"
+      },
+      {
+        "name": "Dardo",
+        "cost": "5 pp",
+        "weight": 0.25,
+        "size": "S",
+        "type": "Perfuração",
+        "speed_factor": 2,
+        "damage": { "small_medium": "1d3", "large": "1d2" },
+        "category": "arremesso"
+      },
+      {
+        "name": "Azagaia",
+        "cost": "1 po",
+        "weight": 2,
+        "size": "M",
+        "type": "Perfuração",
+        "speed_factor": 4,
+        "damage": { "small_medium": "1d6", "large": "1d4" },
+        "category": "arremesso"
       }
     ],
     "armor": [

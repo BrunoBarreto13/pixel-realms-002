@@ -1,0 +1,58 @@
+{
+  "classes": [
+    {
+      "name": "Guerreiro",
+      "grupo": "Homens-de-Armas",
+      "requisitos": "Nenhum requisito especial.",
+      "habilidades": "Melhor progresso de THAC0; uso de todas as armas e armaduras."
+    },
+    {
+      "name": "Paladino",
+      "grupo": "Homens-de-Armas",
+      "requisitos": "Força 12, Carisma 13; alinhamento Leal e Bom.",
+      "habilidades": "Imunidade a doenças; curar; proteção; detectar mal; virar mortos-vivos."
+    },
+    {
+      "name": "Ranger",
+      "grupo": "Homens-de-Armas",
+      "requisitos": "Força 13, Destreza 13, Sabedoria 14; alinhamento Bom.",
+      "habilidades": "Inimigo predileto; rastreamento; combate em duas armas sem penalidade com armadura leve."
+    },
+    {
+      "name": "Mago",
+      "grupo": "Arcano",
+      "requisitos": "Inteligência 9+.",
+      "habilidades": "Livro de feitiços; aprende e lança magias arcanas."
+    },
+    {
+      "name": "Especialista (Mago)",
+      "grupo": "Arcano",
+      "requisitos": "Inteligência 9+; especialização em uma escola; proibições em escolas opostas.",
+      "habilidades": "Slots adicionais e bônus em sua escola; restrições de escolas oponentes."
+    },
+    {
+      "name": "Clérigo",
+      "grupo": "Sacerdote",
+      "requisitos": "Sabedoria 9+.",
+      "habilidades": "Vira/afasta mortos-vivos; lança magias divinas; restrições de armas."
+    },
+    {
+      "name": "Druida",
+      "grupo": "Sacerdote",
+      "requisitos": "Sabedoria 12, Carisma 15; alinhamento Neutro.",
+      "habilidades": "Magias divinas da natureza; mudar de forma em níveis altos; restrições de armas e armaduras."
+    },
+    {
+      "name": "Ladrão",
+      "grupo": "Rogue",
+      "requisitos": "Destreza 9+.",
+      "habilidades": "Habilidades de ladrão (furtividade, abrir fechaduras, perceber armadilhas, etc.)."
+    },
+    {
+      "name": "Bardo",
+      "grupo": "Rogue",
+      "requisitos": "Destreza 12, Carisma 15.",
+      "habilidades": "Música e encantamento; algumas habilidades de ladrão; magias arcanas limitadas."
+    }
+  ]
+}

@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+ 
+# Local environment and large external data
+.env
+AD-D-Core-master/
+2e_databases_for_Dungeon_Craft-main/
