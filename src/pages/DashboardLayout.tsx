@@ -8,15 +8,6 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import useSound from "@/hooks/useSound";
-import { PixelHomeIcon } from "@/components/icons/PixelHomeIcon";
-import { PixelDicesIcon } from "@/components/icons/PixelDicesIcon";
-import { PixelScrollTextIcon } from "@/components/icons/PixelScrollTextIcon";
-import { PixelShieldIcon } from "@/components/icons/PixelShieldIcon";
-import { PixelLogOutIcon } from "@/components/icons/PixelLogOutIcon";
-import { PixelBookOpenIcon } from "@/components/icons/PixelBookOpenIcon";
-import { PixelChevronRightIcon } from "@/components/icons/PixelChevronRightIcon";
-import { PixelBookMarkedIcon } from "@/components/icons/PixelBookMarkedIcon";
-import { PixelSettingsIcon } from "@/components/icons/PixelSettingsIcon";
 
 const DashboardLayout = () => {
   const navigate = useNavigate();
@@ -32,18 +23,18 @@ const DashboardLayout = () => {
   }, [user, loading, navigate]);
 
   const allMenuItems = [
-    { id: "/dashboard", label: "Início", icon: PixelHomeIcon },
+    { id: "/dashboard", label: "Início", icon: "🏰" },
     {
       id: "campaign",
       label: "Campanha",
-      icon: PixelBookOpenIcon,
+      icon: "📖",
       children: [
-        { id: "/dashboard/game-table", label: "Mesa de jogo", icon: PixelDicesIcon },
-        { id: "/dashboard/library", label: "Biblioteca", icon: PixelBookMarkedIcon },
+        { id: "/dashboard/game-table", label: "Mesa de jogo", icon: "🎲" },
+        { id: "/dashboard/library", label: "Biblioteca", icon: "📚" },
       ],
     },
-    { id: "/dashboard/character-sheet", label: "Ficha do Jogador", icon: PixelScrollTextIcon },
-    { id: "/dashboard/master-screen", label: "Divisória do Mestre", icon: PixelShieldIcon, masterOnly: true },
+    { id: "/dashboard/character-sheet", label: "Ficha do Jogador", icon: "📜" },
+    { id: "/dashboard/master-screen", label: "Divisória do Mestre", icon: "🛡️", masterOnly: true },
   ];
 
   useEffect(() => {
@@ -86,7 +77,7 @@ const DashboardLayout = () => {
     );
   }
 
-  const NavButton = ({ id, label, icon: Icon, isActive, onClick, hasChildren = false, isOpen = false }) => (
+  const NavButton = ({ id, label, icon, isActive, onClick, hasChildren = false, isOpen = false }) => (
     <button 
       onClick={onClick}
       className={cn(
@@ -97,10 +88,10 @@ const DashboardLayout = () => {
       )}
     >
       <div className="flex items-center gap-3">
-        <Icon className="h-4 w-4 text-menu-button-text" />
+        <span className="text-lg">{icon}</span>
         <span>{label}</span>
       </div>
-      {hasChildren && <PixelChevronRightIcon className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-90' : ''}`} />}
+      {hasChildren && <span className={cn("transition-transform", isOpen ? 'rotate-90' : '')}>▶️</span>}
     </button>
   );
 
@@ -160,7 +151,7 @@ const DashboardLayout = () => {
             <NavButton 
               id="/dashboard/settings"
               label="Configurações"
-              icon={PixelSettingsIcon}
+              icon="⚙️"
               isActive={location.pathname.startsWith("/dashboard/settings")}
               onClick={() => handleSectionChange("/dashboard/settings")}
             />
@@ -168,7 +159,7 @@ const DashboardLayout = () => {
               onClick={handleLogout} 
               className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-destructive text-destructive-foreground border-[#7f1d1d] hover:bg-destructive/90"
             >
-              <PixelLogOutIcon className="h-4 w-4 text-destructive-foreground" />
+              <span className="text-lg">🚪</span>
               <span>SAIR</span>
             </button>
           </div>
