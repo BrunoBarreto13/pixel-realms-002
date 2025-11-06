@@ -31,7 +31,7 @@ const Page = ({ pageIndex }: { pageIndex: number }) => {
         key={pageIndex}
         src={imgSrc}
         alt={`Página ${pageIndex + 1} do Livro do Jogador`}
-        className="w-full h-auto object-contain"
+        className="h-full w-auto object-contain"
         onError={(e) => {
           const target = e.target as HTMLImageElement;
           target.style.display = 'none';
@@ -124,14 +124,14 @@ const BookViewer = ({ onBack }: BookViewerProps) => {
 
       <div 
         ref={imageContainerRef}
-        className="bg-black pixel-border-inset p-1 sm:p-2 max-h-[calc(100vh-24rem)] overflow-auto"
+        className="bg-black pixel-border-inset p-1 sm:p-2 h-[calc(100vh-24rem)] overflow-auto"
       >
         <div 
-          className="flex justify-center items-start transition-transform duration-200 w-full"
+          className="flex justify-center items-start transition-transform duration-200 w-full h-full"
           style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}
         >
           <div className={cn(
-            "grid grid-cols-2 gap-2 w-full",
+            "grid grid-cols-2 gap-2 w-full h-full",
             isCover && "grid-cols-1 max-w-[50%]"
           )}>
             {isCover ? (
