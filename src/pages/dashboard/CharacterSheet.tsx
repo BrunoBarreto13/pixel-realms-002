@@ -165,13 +165,28 @@ const CharacterSheet = () => {
     }
 
     const file = event.target.files[0];
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}.${fileExt}`;
-    const filePath = `${user.id}/${fileName}`;
+    
+    // Verificar se o arquivo é uma imagem válida
+    const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+    if (!validTypes.includes(file.type)) {
+        toast({ title: "Erro", description: "Formato de arquivo inválido. Use PNG, JPG ou GIF.", variant: "destructive" });
+        return;
+    }
+
+    // Verificar tamanho do arquivo (máximo 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+        toast({ title: "Erro", description: "Arquivo muito grande. Máximo 5MB.", variant: "destructive" });
+        return;
+    }
 
     toast({ title: "Enviando avatar...", description: "Aguarde um momento." });
 
     try {
+        // Tentar fazer upload para o Supabase Storage
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Date.now()}.${fileExt}`;
+        const filePath = `${user.id}/${fileName}`;
+
         const { error: uploadError } = await supabase.storage
             .from('avatars')
             .upload(filePath, file, {
@@ -180,6 +195,19 @@ const CharacterSheet = () => {
             });
 
         if (uploadError) {
+            // Se o bucket não existir, usar solução temporária
+            if (uploadError.message.includes('Bucket not found') || uploadError.message.includes('avatars')) {
+                console.warn('Bucket de avatares não encontrado, usando solução temporária');
+                
+                // Criar URL temporária para a imagem
+                const tempUrl = URL.createObjectURL(file);
+                setCharacter(prev => ({ ...prev, avatarUrl: tempUrl }));
+                toast({ 
+                    title: "Avatar carregado localmente", 
+                    description: "O avatar será temporário até que o bucket seja configurado." 
+                });
+                return;
+            }
             throw uploadError;
         }
 
@@ -195,7 +223,12 @@ const CharacterSheet = () => {
         toast({ title: "Sucesso!", description: "Avatar atualizado." });
 
     } catch (error: any) {
-        toast({ title: "Erro no Upload", description: error.message, variant: "destructive" });
+        console.error('Erro no upload:', error);
+        toast({ 
+            title: "Erro no Upload", 
+            description: error.message || "Erro ao fazer upload do avatar", 
+            variant: "destructive" 
+        });
     }
   };
 

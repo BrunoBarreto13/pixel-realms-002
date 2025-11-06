@@ -21,7 +21,18 @@ export const PHB_RACES: Race[] = handbookData.races.map(race => {
 
 export const PHB_CLASSES: CharacterClass[] = handbookData.classes.map(cls => ({
   ...cls,
-  value: cls.name.toLowerCase().replace(/ /g, '_'),
+  // Mapear nomes em PT-BR para IDs internos usados nas regras (EN)
+  value: ({
+    'Guerreiro': 'fighter',
+    'Paladino': 'paladin',
+    'Ranger': 'ranger',
+    'Mago': 'wizard',
+    'Especialista (Mago)': 'wizard',
+    'Clérigo': 'cleric',
+    'Druida': 'druid',
+    'Ladrão': 'thief',
+    'Bardo': 'bard',
+  } as Record<string, string>)[cls.name] || cls.name.toLowerCase().replace(/ /g, '_'),
 }));
 
 const equipment = handbookData.equipment;

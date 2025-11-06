@@ -31,8 +31,36 @@
       "hit_die": 10
     },
     {
+      "name": "Paladino",
+      "hit_die": 10
+    },
+    {
+      "name": "Ranger",
+      "hit_die": 10
+    },
+    {
       "name": "Mago",
       "hit_die": 4
+    },
+    {
+      "name": "Especialista (Mago)",
+      "hit_die": 4
+    },
+    {
+      "name": "Clérigo",
+      "hit_die": 8
+    },
+    {
+      "name": "Druida",
+      "hit_die": 8
+    },
+    {
+      "name": "Ladrão",
+      "hit_die": 6
+    },
+    {
+      "name": "Bardo",
+      "hit_die": 6
     }
   ],
   "spells": {

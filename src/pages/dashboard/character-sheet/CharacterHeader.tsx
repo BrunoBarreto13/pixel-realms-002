@@ -33,7 +33,16 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit, races, c
             style={{ cursor: isEditing ? 'pointer' : 'default' }}
           >
             {character.avatarUrl ? (
-              <img src={character.avatarUrl} alt={character.name} className="w-full h-full object-cover" />
+              <img 
+                src={character.avatarUrl} 
+                alt={character.name} 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  console.error('Erro ao carregar avatar:', character.avatarUrl);
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                }}
+              />
             ) : (
               <User className="w-12 h-12 text-muted-foreground" />
             )}
