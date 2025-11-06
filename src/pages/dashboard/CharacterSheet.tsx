@@ -16,59 +16,96 @@ import { NotesTab } from "./character-sheet/NotesTab";
 import { ArmamentModal } from "./character-sheet/ArmamentModal";
 import { PHB_RACES, PHB_CLASSES, PHB_ARMOR_LIST, PHB_SHIELD_LIST, PHB_HELM_LIST, PHB_WEAPONS } from "@/lib/players-handbook";
 import { supabase } from "@/integrations/supabase/client";
+import { Tables } from "@/integrations/supabase/types";
+
+// Estado inicial da ficha
+const initialCharacterState: Character = {
+  name: "",
+  playerName: "",
+  race: "",
+  class: "",
+  level: 1,
+  avatarUrl: null,
+  attributes: {
+    strength: 10,
+    strengthPercentile: 0,
+    dexterity: 10,
+    constitution: 10,
+    intelligence: 10,
+    wisdom: 10,
+    charisma: 10,
+  },
+  hp: 1,
+  maxHp: 1,
+  equipment: { armor: null, shield: null, helm: null },
+  initiative: 0,
+  savingThrows: { poison: 0, petrification: 0, rod: 0, breath: 0, spell: 0 },
+  alignment: "",
+  hair: "",
+  eyes: "",
+  weight: "",
+  height: "",
+  age: 20,
+  color: "#4789c7",
+  armaments: [],
+  generalSkills: [],
+  languages: [],
+};
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
 const CharacterSheet = () => {
   const { toast } = useToast();
-  const { profile, isMaster, user } = useAuth();
-  const [character, setCharacter] = useState<Character>({
-    name: "",
-    playerName: "",
-    race: "",
-    class: "",
-    level: 1,
-    avatarUrl: null,
-    attributes: {
-      strength: 10,
-      strengthPercentile: 0,
-      dexterity: 10,
-      constitution: 10,
-      intelligence: 10,
-      wisdom: 10,
-      charisma: 10,
-    },
-    hp: 0,
-    maxHp: 0,
-    equipment: { armor: null, shield: null, helm: null },
-    initiative: 0,
-    savingThrows: { poison: 0, petrification: 0, rod: 0, breath: 0, spell: 0 }, // Will be calculated
-    alignment: "",
-    hair: "",
-    eyes: "",
-    weight: "",
-    height: "",
-    age: 20,
-    color: "#4789c7",
-    armaments: [],
-    generalSkills: [],
-    languages: [],
-  });
-
-  const [isEditing, setIsEditing] = useState(true);
+  const { profile, isMaster, user, loading: authLoading } = useAuth();
+  const [character, setCharacter] = useState<Character>(initialCharacterState);
+  const [characterId, setCharacterId] = useState<string | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [dataLoading, setDataLoading] = useState(true);
   const [damageInput, setDamageInput] = useState("");
   const [isArmamentModalOpen, setIsArmamentModalOpen] = useState(false);
   const [editingArmamentIndex, setEditingArmamentIndex] = useState<number | null>(null);
 
+  // --- DATA FETCHING ---
   useEffect(() => {
-    if (profile) {
-      setCharacter(prev => ({
-        ...prev,
-        name: isMaster ? "" : profile.character_or_campaign || "",
-        playerName: profile.name || "",
-      }));
-    }
-  }, [profile, isMaster]);
+    if (authLoading || !user) return;
+
+    const fetchCharacter = async () => {
+      setDataLoading(true);
+      
+      // Por enquanto, vamos buscar a primeira ficha associada ao usuário logado (Mestre ou Jogador)
+      const { data, error } = await supabase
+        .from('characters')
+        .select('*')
+        .eq('user_id', user.id)
+        .limit(1)
+        .single();
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 = No rows found
+        console.error("Error fetching character:", error);
+        toast({ title: "Erro ao carregar ficha", description: error.message, variant: "destructive" });
+      }
+
+      if (data) {
+        setCharacterId(data.id);
+        // Garantir que character_data é um objeto Character válido
+        const loadedCharacter = data.character_data as unknown as Character;
+        setCharacter({ ...initialCharacterState, ...loadedCharacter });
+        setIsEditing(false); // Começa não editável se já existe
+      } else {
+        // Se não houver ficha, inicializa com dados do perfil
+        setCharacter(prev => ({
+          ...initialCharacterState,
+          playerName: profile?.full_name || "",
+          name: profile?.character_name || "",
+          avatarUrl: profile?.avatar_url || null,
+        }));
+        setIsEditing(true); // Começa editável se for a primeira vez
+      }
+      setDataLoading(false);
+    };
+
+    fetchCharacter();
+  }, [user, authLoading, profile]);
 
   // --- DERIVED STATS & BONUSES ---
   const strengthBonuses = useMemo(() => Rules.getStrengthBonuses(character.attributes.strength, character.attributes.strengthPercentile), [character.attributes.strength, character.attributes.strengthPercentile]);
@@ -156,33 +193,20 @@ const CharacterSheet = () => {
 
   // --- HANDLERS ---
   const handleAvatarUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files || event.target.files.length === 0) {
+    if (!event.target.files || event.target.files.length === 0 || !user) {
       return;
-    }
-    if (!user) {
-        toast({ title: "Erro", description: "Você precisa estar logado para fazer upload.", variant: "destructive" });
-        return;
     }
 
     const file = event.target.files[0];
-    
-    // Verificar se o arquivo é uma imagem válida
     const validTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
-    if (!validTypes.includes(file.type)) {
-        toast({ title: "Erro", description: "Formato de arquivo inválido. Use PNG, JPG ou GIF.", variant: "destructive" });
-        return;
-    }
-
-    // Verificar tamanho do arquivo (máximo 5MB)
-    if (file.size > 5 * 1024 * 1024) {
-        toast({ title: "Erro", description: "Arquivo muito grande. Máximo 5MB.", variant: "destructive" });
+    if (!validTypes.includes(file.type) || file.size > 5 * 1024 * 1024) {
+        toast({ title: "Erro", description: "Arquivo inválido ou muito grande (máx 5MB).", variant: "destructive" });
         return;
     }
 
     toast({ title: "Enviando avatar...", description: "Aguarde um momento." });
 
     try {
-        // Tentar fazer upload para o Supabase Storage
         const fileExt = file.name.split('.').pop();
         const fileName = `${Date.now()}.${fileExt}`;
         const filePath = `${user.id}/${fileName}`;
@@ -191,23 +215,10 @@ const CharacterSheet = () => {
             .from('avatars')
             .upload(filePath, file, {
               cacheControl: '3600',
-              upsert: false
+              upsert: true // Usar upsert para sobrescrever se o nome for o mesmo
             });
 
         if (uploadError) {
-            // Se o bucket não existir, usar solução temporária
-            if (uploadError.message.includes('Bucket not found') || uploadError.message.includes('avatars')) {
-                console.warn('Bucket de avatares não encontrado, usando solução temporária');
-                
-                // Criar URL temporária para a imagem
-                const tempUrl = URL.createObjectURL(file);
-                setCharacter(prev => ({ ...prev, avatarUrl: tempUrl }));
-                toast({ 
-                    title: "Avatar carregado localmente", 
-                    description: "O avatar será temporário até que o bucket seja configurado." 
-                });
-                return;
-            }
             throw uploadError;
         }
 
@@ -232,13 +243,56 @@ const CharacterSheet = () => {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (!user) {
+      toast({ title: "Erro", description: "Usuário não autenticado.", variant: "destructive" });
+      return;
+    }
     if (!character.name || !character.race || !character.class) {
       toast({ title: "Campos obrigatórios", description: "Preencha nome, raça e classe", variant: "destructive" });
       return;
     }
-    setIsEditing(false);
-    toast({ title: "Personagem salvo!", description: `${character.name} foi salvo com sucesso.` });
+
+    const characterDataToSave: Tables<'characters'>['Insert'] = {
+      user_id: user.id,
+      character_name: character.name,
+      player_name: character.playerName,
+      level: character.level,
+      campaign_name: profile?.campaign_name || null,
+      character_data: character as unknown as Json,
+    };
+
+    try {
+      if (characterId) {
+        // Update existing character
+        const { error } = await supabase
+          .from('characters')
+          .update(characterDataToSave)
+          .eq('id', characterId);
+        
+        if (error) throw error;
+        toast({ title: "Ficha atualizada!", description: `${character.name} foi salvo com sucesso.` });
+      } else {
+        // Insert new character
+        const { data, error } = await supabase
+          .from('characters')
+          .insert(characterDataToSave)
+          .select('id')
+          .single();
+        
+        if (error) throw error;
+        setCharacterId(data.id);
+        toast({ title: "Ficha salva!", description: `${character.name} foi criado com sucesso.` });
+      }
+      setIsEditing(false);
+    } catch (error: any) {
+      console.error("Error saving character:", error);
+      toast({ 
+        title: "Erro ao salvar ficha", 
+        description: error.message || "Ocorreu um erro ao salvar o personagem.", 
+        variant: "destructive" 
+      });
+    }
   };
 
   const handleCalculateHP = () => {
@@ -260,7 +314,7 @@ const CharacterSheet = () => {
   const handleApplyDamage = () => {
     const damage = parseInt(damageInput);
     if (!isNaN(damage)) {
-      setCharacter(prev => ({ ...prev, hp: prev.hp - damage }));
+      setCharacter(prev => ({ ...prev, hp: Math.max(0, prev.hp - damage) }));
       setDamageInput("");
     }
   };
@@ -336,6 +390,16 @@ const CharacterSheet = () => {
     updated[index] = value;
     setCharacter(prev => ({ ...prev, languages: updated }));
   };
+
+  if (authLoading || dataLoading) {
+    return (
+      <PagePanel title="Ficha do Jogador">
+        <div className="text-center py-12">
+          <p className="font-pixel text-sm text-muted-foreground">CARREGANDO FICHA...</p>
+        </div>
+      </PagePanel>
+    );
+  }
 
   return (
     <PagePanel title="Ficha do Jogador">

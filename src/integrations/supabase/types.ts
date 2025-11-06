@@ -14,29 +14,134 @@ export type Database = {
   }
   public: {
     Tables: {
-      profiles: {
+      characters: {
         Row: {
-          character_or_campaign: string | null
-          created_at: string
+          campaign_name: string | null
+          character_data: Json
+          character_name: string
+          created_at: string | null
           id: string
-          name: string
-          updated_at: string
+          level: number | null
+          player_name: string
+          updated_at: string | null
+          user_id: string
         }
         Insert: {
-          character_or_campaign?: string | null
-          created_at?: string
-          id: string
-          name: string
-          updated_at?: string
+          campaign_name?: string | null
+          character_data: Json
+          character_name: string
+          created_at?: string | null
+          id?: string
+          level?: number | null
+          player_name: string
+          updated_at?: string | null
+          user_id: string
         }
         Update: {
-          character_or_campaign?: string | null
-          created_at?: string
+          campaign_name?: string | null
+          character_data?: Json
+          character_name?: string
+          created_at?: string | null
           id?: string
-          name?: string
-          updated_at?: string
+          level?: number | null
+          player_name?: string
+          updated_at?: string | null
+          user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "characters_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dice_rolls: {
+        Row: {
+          campaign_name: string
+          created_at: string | null
+          id: string
+          roll_breakdown: string | null
+          roll_description: string | null
+          roll_notation: string
+          roll_result: number
+          roller_avatar_url: string | null
+          roller_name: string
+          user_id: string
+        }
+        Insert: {
+          campaign_name: string
+          created_at?: string | null
+          id?: string
+          roll_breakdown?: string | null
+          roll_description?: string | null
+          roll_notation: string
+          roll_result: number
+          roller_avatar_url?: string | null
+          roller_name: string
+          user_id: string
+        }
+        Update: {
+          campaign_name?: string
+          created_at?: string | null
+          id?: string
+          roll_breakdown?: string | null
+          roll_description?: string | null
+          roll_notation?: string
+          roll_result?: number
+          roller_avatar_url?: string | null
+          roller_name?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dice_rolls_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          campaign_name: string | null
+          character_name: string | null
+          full_name: string | null
+          id: string
+          role: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          campaign_name?: string | null
+          character_name?: string | null
+          full_name?: string | null
+          id: string
+          role?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          campaign_name?: string | null
+          character_name?: string | null
+          full_name?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -57,7 +162,15 @@ export type Database = {
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "user_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
@@ -70,6 +183,10 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      handle_new_user: {
+        Args: Record<PropertyKey, never>
+        Returns: unknown
       }
     }
     Enums: {
