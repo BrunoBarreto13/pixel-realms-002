@@ -166,7 +166,7 @@ const DashboardLayout = () => {
             />
             <button 
               onClick={handleLogout} 
-              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-destructive text-destructive-foreground border-destructive/80 hover:bg-destructive/90"
+              className="w-full flex items-center gap-3 p-3 font-pixel text-xs uppercase transition-all text-left rounded-lg border-2 bg-destructive text-destructive-foreground border-[#7f1d1d] hover:bg-destructive/90"
             >
               <PixelLogOutIcon className="h-4 w-4 text-destructive-foreground" />
               <span>SAIR</span>
