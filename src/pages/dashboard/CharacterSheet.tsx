@@ -362,7 +362,7 @@ const CharacterSheet = () => {
 
         <Tabs defaultValue="info" className="w-full">
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
-            <TabsTrigger value="info" className={tabTriggerClasses}>Informações</TabsTrigger>
+            <TabsTrigger value="info" className={tabTriggerClasses}>Info</TabsTrigger>
             <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
             
             {/* Nova Aba: Habilidades de Classe */}
