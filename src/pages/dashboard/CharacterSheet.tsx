@@ -364,37 +364,21 @@ const CharacterSheet = () => {
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
             <TabsTrigger value="info" className={tabTriggerClasses}>Info</TabsTrigger>
             <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
-            
-            {/* Nova Aba: Habilidades de Classe */}
-            <TabsTrigger value="class-features" className={tabTriggerClasses}>Habilidades</TabsTrigger>
-            
-            {/* Nova Aba: Perícias */}
             <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
-            
             <TabsTrigger value="combat" className={tabTriggerClasses}>Combate</TabsTrigger>
-            
             {(classFeatures?.arcaneSpells || classFeatures?.divineSpells) && (
               <TabsTrigger value="spells" className={tabTriggerClasses}>Magias</TabsTrigger>
             )}
-            
             <TabsTrigger value="inventory" className={tabTriggerClasses}>Inventário</TabsTrigger>
             <TabsTrigger value="notes" className={tabTriggerClasses}>Notas</TabsTrigger>
+            <TabsTrigger value="class-features" className={tabTriggerClasses}>Habilidades</TabsTrigger>
           </TabsList>
 
           <div className="rpg-panel relative">
             <TabsContent value="info"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} onLevelChange={handleLevelChange} races={PHB_RACES} classes={PHB_CLASSES} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
             
-            {/* Conteúdo da Aba Habilidades de Classe */}
-            <TabsContent value="class-features">
-              <ClassFeaturesTab 
-                character={character} 
-                isEditing={isEditing} 
-                classFeatures={classFeatures}
-              />
-            </TabsContent>
-            
-            {/* Conteúdo da Aba Perícias */}
+            {/* Conteúdo da Aba Perícias (Nova Posição) */}
             <TabsContent value="skills">
               <SkillsTab
                 character={character}
@@ -419,11 +403,22 @@ const CharacterSheet = () => {
             </TabsContent>
 
             <TabsContent value="combat"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
+            
             {(classFeatures?.arcaneSpells || classFeatures?.divineSpells) && (
               <TabsContent value="spells"><SpellsTab character={character} /></TabsContent>
             )}
+            
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="notes"><NotesTab character={character} setCharacter={setCharacter} /></TabsContent>
+            
+            {/* Conteúdo da Aba Habilidades de Classe (Nova Posição) */}
+            <TabsContent value="class-features">
+              <ClassFeaturesTab 
+                character={character} 
+                isEditing={isEditing} 
+                classFeatures={classFeatures}
+              />
+            </TabsContent>
           </div>
         </Tabs>
       </div>
