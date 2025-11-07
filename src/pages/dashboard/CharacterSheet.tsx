@@ -10,7 +10,8 @@ import { Character, Armament, GeneralSkill, calculateProficiencyPoints, proficie
 import { CharacterHeader } from "./character-sheet/CharacterHeader";
 import { InfoTab } from "./character-sheet/InfoTab";
 import { AttributesTab } from "./character-sheet/AttributesTab";
-import { ClassAbilitiesTab } from "./character-sheet/ClassAbilitiesTab";
+import { ClassFeaturesTab } from "./character-sheet/ClassFeaturesTab"; // Renamed import
+import { SkillsTab } from "./character-sheet/SkillsTab"; // New import
 import { CombatTab } from "./character-sheet/CombatTab";
 import { InventoryTab } from "./character-sheet/InventoryTab";
 import { SpellsTab } from "./character-sheet/SpellsTab";
@@ -363,11 +364,19 @@ const CharacterSheet = () => {
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
             <TabsTrigger value="info" className={tabTriggerClasses}>Informações</TabsTrigger>
             <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
-            <TabsTrigger value="abilities" className={tabTriggerClasses}>Habilidades</TabsTrigger>
+            
+            {/* Nova Aba: Habilidades de Classe */}
+            <TabsTrigger value="class-features" className={tabTriggerClasses}>Habilidades</TabsTrigger>
+            
+            {/* Nova Aba: Perícias */}
+            <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
+            
             <TabsTrigger value="combat" className={tabTriggerClasses}>Combate</TabsTrigger>
+            
             {(classFeatures?.arcaneSpells || classFeatures?.divineSpells) && (
               <TabsTrigger value="spells" className={tabTriggerClasses}>Magias</TabsTrigger>
             )}
+            
             <TabsTrigger value="inventory" className={tabTriggerClasses}>Inventário</TabsTrigger>
             <TabsTrigger value="notes" className={tabTriggerClasses}>Notas</TabsTrigger>
           </TabsList>
@@ -375,7 +384,40 @@ const CharacterSheet = () => {
           <div className="rpg-panel relative">
             <TabsContent value="info"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} onLevelChange={handleLevelChange} races={PHB_RACES} classes={PHB_CLASSES} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
-            <TabsContent value="abilities"><ClassAbilitiesTab character={character} setCharacter={setCharacter} isEditing={isEditing} classFeatures={classFeatures} totalWeaponProficiencyPoints={totalWeaponProficiencyPoints} usedWeaponProficiencyPoints={usedWeaponProficiencyPoints} proficiencyRuleText={proficiencyRuleText} onAddArmament={handleAddArmamentClick} onEditArmament={handleEditArmamentClick} onRemoveArmament={handleRemoveArmament} onAddSkill={handleAddSkill} onRemoveSkill={handleRemoveSkill} onSkillChange={handleSkillChange} automaticLanguages={automaticLanguages} remainingLanguageSlots={remainingLanguageSlots} onAddLanguage={handleAddLanguage} onRemoveLanguage={handleRemoveLanguage} onLanguageChange={handleLanguageChange} totalGeneralSkillPoints={totalGeneralSkillPoints} usedGeneralSkillPoints={usedGeneralSkillPoints} /></TabsContent>
+            
+            {/* Conteúdo da Aba Habilidades de Classe */}
+            <TabsContent value="class-features">
+              <ClassFeaturesTab 
+                character={character} 
+                isEditing={isEditing} 
+                classFeatures={classFeatures}
+              />
+            </TabsContent>
+            
+            {/* Conteúdo da Aba Perícias */}
+            <TabsContent value="skills">
+              <SkillsTab
+                character={character}
+                isEditing={isEditing}
+                totalWeaponProficiencyPoints={totalWeaponProficiencyPoints}
+                usedWeaponProficiencyPoints={usedWeaponProficiencyPoints}
+                proficiencyRuleText={proficiencyRuleText}
+                onAddArmament={handleAddArmamentClick}
+                onEditArmament={handleEditArmamentClick}
+                onRemoveArmament={handleRemoveArmament}
+                onAddSkill={handleAddSkill}
+                onRemoveSkill={handleRemoveSkill}
+                onSkillChange={handleSkillChange}
+                automaticLanguages={automaticLanguages}
+                remainingLanguageSlots={remainingLanguageSlots}
+                onAddLanguage={handleAddLanguage}
+                onRemoveLanguage={handleRemoveLanguage}
+                onLanguageChange={handleLanguageChange}
+                totalGeneralSkillPoints={totalGeneralSkillPoints}
+                usedGeneralSkillPoints={usedGeneralSkillPoints}
+              />
+            </TabsContent>
+
             <TabsContent value="combat"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
             {(classFeatures?.arcaneSpells || classFeatures?.divineSpells) && (
               <TabsContent value="spells"><SpellsTab character={character} /></TabsContent>
