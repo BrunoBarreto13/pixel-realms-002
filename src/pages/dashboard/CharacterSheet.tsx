@@ -7,11 +7,10 @@ import { initializeCharacterByClass, updateCharacterLevel } from "@/lib/characte
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
 import { Character, Armament, GeneralSkill, calculateProficiencyPoints, proficiencyConfig } from "./character-sheet/types";
-import { CharacterHeader } from "./character-sheet/CharacterHeader";
-import { InfoTab } from "./character-sheet/InfoTab";
+import CharacterInfoPanel from "./character-sheet/CharacterInfoPanel"; // Novo componente
 import { AttributesTab } from "./character-sheet/AttributesTab";
-import { ClassFeaturesTab } from "./character-sheet/ClassFeaturesTab"; // Renamed import
-import { SkillsTab } from "./character-sheet/SkillsTab"; // New import
+import { ClassFeaturesTab } from "./character-sheet/ClassFeaturesTab";
+import { SkillsTab } from "./character-sheet/SkillsTab";
 import { CombatTab } from "./character-sheet/CombatTab";
 import { InventoryTab } from "./character-sheet/InventoryTab";
 import { SpellsTab } from "./character-sheet/SpellsTab";
@@ -58,6 +57,7 @@ const initialCharacterState: Character = {
   scrolls: [], // Novo
   coins: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 }, // Novo
   notes: { general: "", history: "", magicItems: "", potions: "", jewels: "" }, // Novo
+  experience: { current: 0, forNextLevel: 2000 }, // Adicionando XP ao estado inicial
 };
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
@@ -97,7 +97,12 @@ const CharacterSheet = () => {
         setCharacterId(data.id);
         const loadedCharacter = data.character_data as unknown as Character;
         // Merge loaded data with initial state to ensure new fields exist
-        setCharacter({ ...initialCharacterState, ...loadedCharacter, notes: { ...initialCharacterState.notes, ...loadedCharacter.notes } });
+        setCharacter({ 
+          ...initialCharacterState, 
+          ...loadedCharacter, 
+          notes: { ...initialCharacterState.notes, ...loadedCharacter.notes },
+          experience: { ...initialCharacterState.experience, ...loadedCharacter.experience } // Merge XP
+        });
         setIsEditing(false);
       } else {
         setCharacter(prev => ({
@@ -204,7 +209,7 @@ const CharacterSheet = () => {
     toast({ title: "Enviando avatar...", description: "Aguarde um momento." });
     try {
         const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`;
         const filePath = `${user.id}/${fileName}`;
         const { error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file, { cacheControl: '3600', upsert: true });
         if (uploadError) throw uploadError;
@@ -356,19 +361,22 @@ const CharacterSheet = () => {
   return (
     <PagePanel title="Ficha do Jogador">
       <div className="space-y-6 max-w-5xl mx-auto">
-        <CharacterHeader 
+        {/* Novo Painel de Informações (Substitui CharacterHeader e InfoTab) */}
+        <CharacterInfoPanel
           character={character} 
+          setCharacter={setCharacter} 
           isEditing={isEditing} 
           onSave={handleSave} 
           onEdit={() => setIsEditing(true)}
           races={PHB_RACES}
           classes={PHB_CLASSES}
           onAvatarUpload={handleAvatarUpload}
+          onCalculateHP={handleCalculateHP}
+          onLevelChange={handleLevelChange}
         />
 
-        <Tabs defaultValue="info" className="w-full">
+        <Tabs defaultValue="attributes" className="w-full">
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
-            <TabsTrigger value="info" className={tabTriggerClasses}>Info</TabsTrigger>
             <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
             <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
             <TabsTrigger value="combat" className={tabTriggerClasses}>Combate</TabsTrigger>
@@ -381,10 +389,9 @@ const CharacterSheet = () => {
           </TabsList>
 
           <div className="rpg-panel relative">
-            <TabsContent value="info"><InfoTab character={character} setCharacter={setCharacter} isEditing={isEditing} onCalculateHP={handleCalculateHP} onLevelChange={handleLevelChange} races={PHB_RACES} classes={PHB_CLASSES} /></TabsContent>
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
             
-            {/* Conteúdo da Aba Perícias (Nova Posição) */}
+            {/* Conteúdo da Aba Perícias */}
             <TabsContent value="skills">
               <SkillsTab
                 character={character}
@@ -417,7 +424,7 @@ const CharacterSheet = () => {
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="notes"><NotesTab character={character} setCharacter={setCharacter} /></TabsContent>
             
-            {/* Conteúdo da Aba Habilidades de Classe (Nova Posição) */}
+            {/* Conteúdo da Aba Habilidades de Classe */}
             <TabsContent value="class-features">
               <ClassFeaturesTab 
                 character={character} 

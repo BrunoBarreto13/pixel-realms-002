@@ -188,6 +188,16 @@ export interface Coinage {
   platinum: number;
 }
 
+export interface Follower {
+  name: string;
+  level: number;
+  thac0: number;
+  ac: number;
+  hp: number;
+  movement: string;
+  notes: string;
+}
+
 export interface Character {
   name: string;
   playerName: string;
@@ -212,6 +222,9 @@ export interface Character {
   generalSkills: GeneralSkill[];
   languages: string[];
 
+  // New core fields
+  experience: Experience;
+
   // New optional fields
   thiefSkills?: ThiefSkills;
   spellSlots?: SpellSlots;
@@ -230,7 +243,7 @@ export interface Character {
   scrolls: string[]; // SEÇÃO 16: PERGAMINHOS
   coins: Coinage; // SEÇÃO 13: DINHEIRO
   
-  // Notes (used for Magic Items, Potions, Jewels, General, History)
+  // Notes (used for Magic Items, Potions, Jewels, General, History, Allies, Animals)
   notes: Record<string, string>;
 }
 
