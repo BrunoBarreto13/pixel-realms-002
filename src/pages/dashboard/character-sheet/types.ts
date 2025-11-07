@@ -71,7 +71,7 @@ export interface Armament extends Weapon {
   bonus_ataque?: number;
   bonus_dano?: number;
   observacoes?: string;
-  munition?: number;
+  num_ataques?: string;
 }
 
 export interface GeneralSkill {
@@ -85,6 +85,107 @@ export interface Equipment {
   armor: string | null;
   shield: string | null;
   helm: string | null;
+}
+
+export interface ThiefSkillDetail {
+  base: number;
+  modifiers: number;
+  total: number;
+}
+
+export interface ThiefSkills {
+  pickPockets: ThiefSkillDetail;
+  openLocks: ThiefSkillDetail;
+  findRemoveTraps: ThiefSkillDetail;
+  moveSilently: ThiefSkillDetail;
+  hideInShadows: ThiefSkillDetail;
+  detectNoise: ThiefSkillDetail;
+  climbWalls: ThiefSkillDetail;
+  readLanguages: ThiefSkillDetail;
+}
+
+export interface SpellSlotInfo {
+  current: number;
+  max: number;
+}
+
+export interface SpellSlots {
+  level1: SpellSlotInfo;
+  level2: SpellSlotInfo;
+  level3: SpellSlotInfo;
+  level4: SpellSlotInfo;
+  level5: SpellSlotInfo;
+  level6: SpellSlotInfo;
+  level7: SpellSlotInfo;
+  level8?: SpellSlotInfo;
+  level9?: SpellSlotInfo;
+}
+
+export interface TurningTable {
+  skeleton: number;
+  zombie: number;
+  ghoul: number;
+  shadow: number;
+  wight: number;
+  ghast: number;
+  wraith: number;
+  mummy: number;
+  spectre: number;
+  vampire: number;
+  ghost: number;
+  lich: number;
+  special: number;
+}
+
+export interface Experience {
+  current: number;
+  forNextLevel: number;
+}
+
+export interface RacialAbility {
+  name: string;
+  description: string;
+  passive: boolean;
+  usesPerDay?: number;
+}
+
+export interface ClassAbility {
+  name: string;
+  description: string;
+  levelRequired: number;
+  passive: boolean;
+}
+
+export interface TrackingAbility {
+  baseChance: number;
+  terrainModifier: number;
+  conditionsModifier: number;
+  total: number;
+}
+
+export interface BardAbilities {
+  music: {
+    counterSong: boolean;
+    fascinateCreatures: boolean;
+    inspireCourage: {
+      bonus: number;
+      duration: string;
+    };
+  };
+  lore: {
+    baseChance: number;
+  };
+  influence: {
+    reactionBonus: number;
+  };
+}
+
+export interface Coinage {
+  copper: number;
+  silver: number;
+  electrum: number;
+  gold: number;
+  platinum: number;
 }
 
 export interface Character {
@@ -110,6 +211,24 @@ export interface Character {
   armaments: Armament[];
   generalSkills: GeneralSkill[];
   languages: string[];
+
+  // New optional fields
+  thiefSkills?: ThiefSkills;
+  spellSlots?: SpellSlots;
+  preparedSpells?: Spell[];
+  knownSpells?: Spell[];
+  spellSchool?: string;
+  turningTable?: TurningTable;
+  trackingAbility?: TrackingAbility;
+  enemyType?: string;
+  bardAbilities?: BardAbilities;
+  racialAbilities?: RacialAbility[];
+  classAbilities?: ClassAbility[];
+  experience?: Experience;
+  inventory?: string[];
+  scrolls?: string[];
+  coins?: Coinage;
+  notes?: Record<string, string>;
 }
 
 export const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {
