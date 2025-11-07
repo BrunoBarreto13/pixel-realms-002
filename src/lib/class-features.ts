@@ -1,5 +1,6 @@
 export interface ClassFeatures {
   thiefSkills?: boolean;
+  backstab?: boolean;
   arcaneSpells?: boolean;
   divineSpells?: boolean;
   spellSchools?: boolean;
@@ -15,8 +16,8 @@ export const CLASS_FEATURES: Record<string, ClassFeatures> = {
   wizard: { arcaneSpells: true, spellSchools: true },
   cleric: { divineSpells: true, turningUndead: true },
   druid: { divineSpells: true },
-  thief: { thiefSkills: true },
-  bard: { thiefSkills: true, arcaneSpells: true, bardSkills: true },
+  thief: { thiefSkills: true, backstab: true },
+  bard: { thiefSkills: true, arcaneSpells: true, bardSkills: true, backstab: true },
 };
 
 export const getClassFeatures = (className: string): ClassFeatures | null => {

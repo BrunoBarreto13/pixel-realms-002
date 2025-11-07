@@ -10,11 +10,12 @@ interface InfoTabProps {
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   isEditing: boolean;
   onCalculateHP: () => void;
+  onLevelChange: (newLevel: number) => void;
   races: Race[];
   classes: CharacterClass[];
 }
 
-export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, races, classes }: InfoTabProps) => {
+export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, onLevelChange, races, classes }: InfoTabProps) => {
   return (
     <div className="mt-0 space-y-6">
       <div className="flex items-center justify-between mb-4">
@@ -27,9 +28,9 @@ export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, rac
         <div className="flex flex-col gap-2">
           <Label className="font-pixel text-xs text-foreground">Nível</Label>
           <div className="flex items-center gap-2">
-            <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.max(1, character.level - 1) })} disabled={!isEditing}><Minus className="h-4 w-4" /></PixelButton>
-            <input type="number" value={character.level} onChange={(e) => setCharacter({ ...character, level: parseInt(e.target.value) || 1 })} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground" min={1} max={20} disabled={!isEditing} />
-            <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.min(20, character.level + 1) })} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
+            <PixelButton size="icon" variant="outline" onClick={() => onLevelChange(Math.max(1, character.level - 1))} disabled={!isEditing}><Minus className="h-4 w-4" /></PixelButton>
+            <input type="number" value={character.level} onChange={(e) => onLevelChange(parseInt(e.target.value) || 1)} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground" min={1} max={20} disabled={!isEditing} />
+            <PixelButton size="icon" variant="outline" onClick={() => onLevelChange(Math.min(20, character.level + 1))} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
           </div>
         </div>
         <div className="flex flex-col gap-2">
