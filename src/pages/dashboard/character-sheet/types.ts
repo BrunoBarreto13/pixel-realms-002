@@ -224,11 +224,14 @@ export interface Character {
   bardAbilities?: BardAbilities;
   racialAbilities?: RacialAbility[];
   classAbilities?: ClassAbility[];
-  experience?: Experience;
-  inventory?: string[];
-  scrolls?: string[];
-  coins?: Coinage;
-  notes?: Record<string, string>;
+  
+  // Inventory and Money
+  inventory: string[]; // SEÇÃO 12: EQUIPAMENTO
+  scrolls: string[]; // SEÇÃO 16: PERGAMINHOS
+  coins: Coinage; // SEÇÃO 13: DINHEIRO
+  
+  // Notes (used for Magic Items, Potions, Jewels, General, History)
+  notes: Record<string, string>;
 }
 
 export const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {

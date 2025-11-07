@@ -54,6 +54,10 @@ const initialCharacterState: Character = {
   armaments: [],
   generalSkills: [],
   languages: [],
+  inventory: [], // Novo
+  scrolls: [], // Novo
+  coins: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 }, // Novo
+  notes: { general: "", history: "", magicItems: "", potions: "", jewels: "" }, // Novo
 };
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
@@ -92,7 +96,8 @@ const CharacterSheet = () => {
       if (data) {
         setCharacterId(data.id);
         const loadedCharacter = data.character_data as unknown as Character;
-        setCharacter({ ...initialCharacterState, ...loadedCharacter });
+        // Merge loaded data with initial state to ensure new fields exist
+        setCharacter({ ...initialCharacterState, ...loadedCharacter, notes: { ...initialCharacterState.notes, ...loadedCharacter.notes } });
         setIsEditing(false);
       } else {
         setCharacter(prev => ({
@@ -157,6 +162,7 @@ const CharacterSheet = () => {
     const equippedHelm = PHB_HELM_LIST.find(h => h.id === helm);
     if (equippedHelm) weight += equippedHelm.weight;
     character.armaments.forEach(weapon => { weight += weapon.weight; });
+    // TODO: Adicionar peso do inventário, moedas, etc.
     return weight;
   }, [character.equipment, character.armaments]);
 
