@@ -222,23 +222,11 @@ const ClassInfoSection = ({ character }: { character: Character }) => {
   return (
     <div className="p-4 space-y-3 bg-muted/30 pixel-border"> {/* Changed to a div with styling */}
       <h3 className="font-pixel text-sm text-primary pixel-text-shadow">Informações da Classe: {classData?.name || '---'}</h3>
-      <div className="grid grid-cols-2 gap-4 text-center text-xs"> {/* Compacted grid */}
-        <div className="bg-input p-2 pixel-border">
-          <Label className="font-pixel text-[10px] text-muted-foreground block">Dado de Vida</Label>
-          <p className="font-pixel text-sm text-primary font-bold mt-1">{hitDie ? `d${hitDie}` : '---'}</p>
-        </div>
-        <div className="bg-input p-2 pixel-border">
-          <Label className="font-pixel text-[10px] text-muted-foreground block">TACO Base</Label>
-          <p className="font-pixel text-sm text-primary font-bold mt-1">{thac0}</p>
-        </div>
-        <div className="col-span-2 bg-input p-2 pixel-border">
-          <Label className="font-pixel text-[10px] text-muted-foreground block">Requisitos Primários</Label>
-          <p className="font-pixel text-sm text-primary font-bold mt-1">{requirements?.join(', ') || 'Nenhum'}</p>
-        </div>
-        <div className="col-span-2 bg-input p-2 pixel-border">
-          <Label className="font-pixel text-[10px] text-muted-foreground block">Alinhamento Permitido</Label>
-          <p className="font-pixel text-sm text-primary font-bold mt-1">{alignment}</p>
-        </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <InfoDetailCard label="Dado de Vida" value={hitDie ? `d${hitDie}` : '---'} />
+        <InfoDetailCard label="TACO Base" value={thac0} />
+        <InfoDetailCard label="Requisitos Primários" value={requirements?.join(', ') || 'Nenhum'} />
+        <InfoDetailCard label="Alinhamento Permitido" value={alignment} />
       </div>
     </div>
   );
@@ -299,14 +287,14 @@ const CharacterInfoPanel = ({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <User className="w-16 h-16 text-muted-foreground" /> {/* Smaller icon */}
+              <User className="w-16 h-16 text-muted-foreground" /> 
             )}
             {isEditing && (
               <div 
                 className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
                 onClick={handleAvatarClick}
               >
-                <Upload className="w-8 h-8 text-white" /> {/* Smaller icon */}
+                <Upload className="w-8 h-8 text-white" /> 
               </div>
             )}
             <input
