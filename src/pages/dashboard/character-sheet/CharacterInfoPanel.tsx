@@ -1,7 +1,7 @@
 import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
 import { User, Save, Edit, Minus, Plus, Upload } from "lucide-react";
-import { Character, Race, CharacterClass, Experience, SavingThrows } from "./types"; // Added SavingThrows
+import { Character, Race, CharacterClass, Experience } from "./types";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
@@ -102,6 +102,149 @@ const ColorPicker = ({ value, onChange, disabled }: { value: string, onChange: (
   );
 };
 
+const XPSection = ({ experience, isEditing, setCharacter }: { experience: Experience, isEditing: boolean, setCharacter: React.Dispatch<React.SetStateAction<Character>> }) => {
+  const currentXP = experience.current;
+  const nextLevelXP = experience.forNextLevel;
+  const requiredXP = Math.max(0, nextLevelXP - currentXP);
+  const progress = nextLevelXP > 0 ? Math.min(100, (currentXP / nextLevelXP) * 100) : 0;
+
+  const handleXPChange = (value: string) => {
+    setCharacter(prev => ({
+      ...prev,
+      experience: {
+        ...prev.experience!,
+        current: parseInt(value) || 0,
+      }
+    }));
+  };
+
+  return (
+    <PixelPanel className="p-4 space-y-3">
+      <h3 className="font-pixel text-sm text-accent pixel-text-shadow">Pontos de Experiência</h3>
+      <div className="mb-3 flex justify-between text-xs">
+        <div>
+          <span className="text-muted-foreground">XP Atual: </span>
+          <span className="font-bold text-foreground">
+            {isEditing ? (
+              <input 
+                type="number" 
+                value={currentXP} 
+                onChange={(e) => handleXPChange(e.target.value)} 
+                className="w-20 border-none bg-transparent p-0 text-xs text-foreground focus:ring-0"
+                disabled={!isEditing}
+              />
+            ) : (
+              currentXP.toLocaleString('pt-BR')
+            )}
+          </span>
+        </div>
+        <div>
+          <span className="text-muted-foreground">Próximo Nível: </span>
+          <span className="font-bold text-primary">{nextLevelXP.toLocaleString('pt-BR')}</span>
+        </div>
+      </div>
+      
+      <div className="space-y-1">
+        <Progress value={progress} className="h-4 bg-black pixel-border-inset" indicatorClassName="bg-accent" />
+        <p className="text-center text-[10px] text-muted-foreground">Faltam {requiredXP.toLocaleString('pt-BR')} XP para o próximo nível</p>
+      </div>
+    </PixelPanel>
+  );
+};
+
+const HPSection = ({ character, onCalculateHP, isEditing, setCharacter }: { character: Character, onCalculateHP: () => void, isEditing: boolean, setCharacter: React.Dispatch<React.SetStateAction<Character>> }) => {
+  const currentHP = character.hp;
+  const maxHP = character.maxHp;
+  const hpPercent = maxHP > 0 ? Math.min(100, (currentHP / maxHP) * 100) : 0;
+
+  const handleHPChange = (value: string) => {
+    setCharacter(prev => ({
+      ...prev,
+      hp: parseInt(value) || 0,
+    }));
+  };
+  
+  const handleMaxHPChange = (value: string) => {
+    setCharacter(prev => ({
+      ...prev,
+      maxHp: parseInt(value) || 0,
+    }));
+  };
+
+  return (
+    <PixelPanel className="p-4 space-y-3">
+      <div className="flex justify-between items-center">
+        <h3 className="font-pixel text-sm text-hp-red pixel-text-shadow">Pontos de Vida (HP)</h3>
+        {isEditing && (
+          <PixelButton size="sm" variant="secondary" onClick={onCalculateHP}>
+            CALCULAR MAX
+          </PixelButton>
+        )}
+      </div>
+      
+      <div className="mb-3 flex items-center justify-between">
+        <span className="text-xs text-muted-foreground">Atual / Máximo</span>
+        <div className="flex items-baseline">
+          <input 
+            className="w-16 border-none bg-transparent p-0 text-right text-3xl font-bold text-hp-red focus:ring-0 disabled:opacity-100" 
+            type="number" 
+            value={currentHP}
+            onChange={(e) => handleHPChange(e.target.value)}
+            disabled={!isEditing}
+          />
+          <span className="text-xl font-bold text-muted-foreground"> / </span>
+          <input 
+            className="w-16 border-none bg-transparent p-0 text-left text-3xl font-bold text-primary focus:ring-0 disabled:opacity-100" 
+            type="number" 
+            value={maxHP}
+            onChange={(e) => handleMaxHPChange(e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+      </div>
+      
+      <div className="w-full">
+        <Progress value={hpPercent} className="h-4 bg-black pixel-border-inset" indicatorClassName={cn("bg-hp-red", hpPercent < 25 && "bg-destructive")} />
+      </div>
+    </PixelPanel>
+  );
+};
+
+const ClassInfoSection = ({ character }: { character: Character }) => {
+  const classData = PHB_CLASSES.find(c => c.value === character.class);
+  const classDetail = PHB_CLASS_DETAILS_PTBR.find(d => d.name === classData?.name);
+  const hitDie = classData?.hit_die;
+  const thac0 = Rules.getThac0(character.class, character.level);
+  
+  const requirements = classDetail?.requisitos.split(';').map(r => r.trim()).filter(r => r !== 'Nenhum requisito especial.');
+  const alignment = classDetail?.requisitos.includes('alinhamento') ? classDetail.requisitos.split('alinhamento')[1].trim().replace('.', '') : 'Qualquer';
+
+  return (
+    <div className="p-4 space-y-3 bg-muted/30 pixel-border"> {/* Changed to a div with styling */}
+      <h3 className="font-pixel text-sm text-primary pixel-text-shadow">Informações da Classe: {classData?.name || '---'}</h3>
+      <div className="grid grid-cols-2 gap-4 text-center text-xs"> {/* Compacted grid */}
+        <div className="bg-input p-2 pixel-border">
+          <Label className="font-pixel text-[10px] text-muted-foreground block">Dado de Vida</Label>
+          <p className="font-pixel text-sm text-primary font-bold mt-1">{hitDie ? `d${hitDie}` : '---'}</p>
+        </div>
+        <div className="bg-input p-2 pixel-border">
+          <Label className="font-pixel text-[10px] text-muted-foreground block">TACO Base</Label>
+          <p className="font-pixel text-sm text-primary font-bold mt-1">{thac0}</p>
+        </div>
+        <div className="col-span-2 bg-input p-2 pixel-border">
+          <Label className="font-pixel text-[10px] text-muted-foreground block">Requisitos Primários</Label>
+          <p className="font-pixel text-sm text-primary font-bold mt-1">{requirements?.join(', ') || 'Nenhum'}</p>
+        </div>
+        <div className="col-span-2 bg-input p-2 pixel-border">
+          <Label className="font-pixel text-[10px] text-muted-foreground block">Alinhamento Permitido</Label>
+          <p className="font-pixel text-sm text-primary font-bold mt-1">{alignment}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
 const CharacterInfoPanel = ({
   character,
   setCharacter,
@@ -134,7 +277,7 @@ const CharacterInfoPanel = ({
     setCharacter(prev => ({ ...prev, [field]: value }));
   };
 
-  // HP and XP calculations
+  // HP and XP calculations for quick display
   const currentHP = character.hp;
   const maxHP = character.maxHp;
   const hpPercent = maxHP > 0 ? Math.min(100, (currentHP / maxHP) * 100) : 0;
@@ -144,17 +287,11 @@ const CharacterInfoPanel = ({
   const requiredXP = Math.max(0, nextLevelXP - currentXP);
   const xpProgress = nextLevelXP > 0 ? Math.min(100, (currentXP / nextLevelXP) * 100) : 0;
 
-  const classData = PHB_CLASSES.find(c => c.value === character.class);
-  const classDetail = PHB_CLASS_DETAILS_PTBR.find(d => d.name === classData?.name);
-  const hitDie = classData?.hit_die;
-  const alignmentAllowed = classDetail?.requisitos.includes('alinhamento') ? classDetail.requisitos.split('alinhamento')[1].trim().replace('.', '') : 'Qualquer';
-
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-      {/* Left Column: Unified Profile Card */}
-      <div className="lg:col-span-1 flex flex-col gap-6">
-        <PixelPanel className="flex flex-col items-center p-6 space-y-4">
-          <div className="relative w-48 h-48 pixel-border bg-muted/50 flex items-center justify-center flex-shrink-0">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
+      {/* Left Column: Unified Profile Card (Sidebar-like) */}
+      <PixelPanel className="lg:col-span-1 flex flex-col items-center p-4 space-y-4 h-full overflow-y-auto"> {/* Reduced padding, added overflow */}
+        <div className="relative w-32 h-32 pixel-border bg-muted/50 flex items-center justify-center flex-shrink-0"> {/* Smaller avatar */}
             {character.avatarUrl ? (
               <img 
                 src={character.avatarUrl} 
@@ -162,14 +299,14 @@ const CharacterInfoPanel = ({
                 className="w-full h-full object-cover"
               />
             ) : (
-              <User className="w-24 h-24 text-muted-foreground" />
+              <User className="w-16 h-16 text-muted-foreground" /> {/* Smaller icon */}
             )}
             {isEditing && (
               <div 
                 className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity cursor-pointer"
                 onClick={handleAvatarClick}
               >
-                <Upload className="w-10 h-10 text-white" />
+                <Upload className="w-8 h-8 text-white" /> {/* Smaller icon */}
               </div>
             )}
             <input
@@ -182,11 +319,23 @@ const CharacterInfoPanel = ({
           </div>
           
           <div className="text-center w-full">
-            <h2 className="font-pixel text-2xl font-bold text-foreground">{character.name || "Nome do Personagem"}</h2>
-            <p className="font-pixel text-sm text-muted-foreground">
+            <PixelInput 
+              value={character.name} 
+              onChange={(e) => handleInputChange('name', e.target.value)} 
+              disabled={!isEditing} 
+              placeholder="Nome do Personagem"
+              className="h-8 text-center text-xl font-bold bg-transparent border-none focus:ring-0"
+            />
+            <p className="font-pixel text-xs text-muted-foreground">
               {character.race || "Raça"} • {character.class || "Classe"} • Nível {character.level}
             </p>
-            <p className="font-pixel text-xs text-muted-foreground mt-1">Jogador: {character.playerName || "Nome do Jogador"}</p>
+            <PixelInput 
+              value={character.playerName} 
+              onChange={(e) => handleInputChange('playerName', e.target.value)} 
+              disabled={!isEditing} 
+              placeholder="Nome do Jogador"
+              className="h-6 text-center text-xs text-muted-foreground bg-transparent border-none focus:ring-0"
+            />
           </div>
 
           {/* Quick Stats: HP, CA, THAC0 */}
@@ -215,8 +364,13 @@ const CharacterInfoPanel = ({
             <p className="text-center text-[10px] text-muted-foreground">Faltam {requiredXP.toLocaleString('pt-BR')} XP para o próximo nível</p>
           </div>
 
-          {/* Action Buttons */}
-          <div className="w-full flex flex-col gap-2 mt-4">
+          {/* Class Info Section (integrated into left panel) */}
+          {character.class && (
+            <ClassInfoSection character={character} />
+          )}
+
+          {/* Action Buttons (sticky at bottom) */}
+          <div className="w-full flex flex-col gap-2 mt-4 sticky bottom-0 bg-card pt-4 border-t-2 border-border">
             {!isEditing ? (
               <PixelButton onClick={onEdit} variant="outline" className="flex items-center justify-center gap-2 flex-1">
                 <Edit className="h-4 w-4" />
@@ -236,21 +390,7 @@ const CharacterInfoPanel = ({
           </div>
         </PixelPanel>
 
-        {/* Class Info Section (moved here for quick overview) */}
-        {character.class && (
-          <PixelPanel className="p-4 space-y-3">
-            <h3 className="font-pixel text-sm text-primary pixel-text-shadow">Informações da Classe: {classData?.name || '---'}</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              <InfoDetailCard label="Dado de Vida" value={hitDie ? `d${hitDie}` : '---'} />
-              <InfoDetailCard label="TACO Base" value={calculatedThac0} />
-              <InfoDetailCard label="Requisitos Primários" value={classDetail?.requisitos.split(';').map(r => r.trim()).filter(r => r !== 'Nenhum requisito especial.').join(', ') || 'Nenhum'} />
-              <InfoDetailCard label="Alinhamento Permitido" value={alignmentAllowed} />
-            </div>
-          </PixelPanel>
-        )}
-      </div>
-
-      {/* Right Columns: Basic Info, HP, XP (now separate panels) */}
+      {/* Right Columns: Basic Info, HP, XP (separate editable panels) */}
       <div className="lg:col-span-3 flex flex-col gap-6">
         
         {/* Painel de Informações Básicas (Editable fields) */}
@@ -361,74 +501,11 @@ const CharacterInfoPanel = ({
         </PixelPanel>
 
         {/* HP Section (Editable fields) */}
-        <PixelPanel className="p-4 space-y-3">
-          <div className="flex justify-between items-center">
-            <h3 className="font-pixel text-sm text-hp-red pixel-text-shadow">Pontos de Vida (HP)</h3>
-            {isEditing && (
-              <PixelButton size="sm" variant="secondary" onClick={onCalculateHP}>
-                CALCULAR MAX
-              </PixelButton>
-            )}
-          </div>
-
-          <div className="mb-3 flex items-center justify-between">
-            <span className="text-xs text-muted-foreground">Atual / Máximo</span>
-            <div className="flex items-baseline">
-              <input
-                className="w-16 border-none bg-transparent p-0 text-right text-3xl font-bold text-hp-red focus:ring-0 disabled:opacity-100"
-                type="number"
-                value={currentHP}
-                onChange={(e) => setCharacter(prev => ({ ...prev, hp: parseInt(e.target.value) || 0 }))}
-                disabled={!isEditing}
-              />
-              <span className="text-xl font-bold text-muted-foreground"> / </span>
-              <input
-                className="w-16 border-none bg-transparent p-0 text-left text-3xl font-bold text-primary focus:ring-0 disabled:opacity-100"
-                type="number"
-                value={maxHP}
-                onChange={(e) => setCharacter(prev => ({ ...prev, maxHp: parseInt(e.target.value) || 0 }))}
-                disabled={!isEditing}
-              />
-            </div>
-          </div>
-
-          <div className="w-full">
-            <Progress value={hpPercent} className="h-4 bg-black pixel-border-inset" indicatorClassName={cn("bg-hp-red", hpPercent < 25 && "bg-destructive")} />
-          </div>
-        </PixelPanel>
-
+        <HPSection character={character} onCalculateHP={onCalculateHP} isEditing={isEditing} setCharacter={setCharacter} />
+        
         {/* XP Section (Editable fields) */}
         {character.experience && (
-          <PixelPanel className="p-4 space-y-3">
-            <h3 className="font-pixel text-sm text-accent pixel-text-shadow">Pontos de Experiência</h3>
-            <div className="mb-3 flex justify-between text-xs">
-              <div>
-                <span className="text-muted-foreground">XP Atual: </span>
-                <span className="font-bold text-foreground">
-                  {isEditing ? (
-                    <input
-                      type="number"
-                      value={currentXP}
-                      onChange={(e) => setCharacter(prev => ({ ...prev, experience: { ...prev.experience!, current: parseInt(e.target.value) || 0 } }))}
-                      className="w-20 border-none bg-transparent p-0 text-xs text-foreground focus:ring-0"
-                      disabled={!isEditing}
-                    />
-                  ) : (
-                    currentXP.toLocaleString('pt-BR')
-                  )}
-                </span>
-              </div>
-              <div>
-                <span className="text-muted-foreground">Próximo Nível: </span>
-                <span className="font-bold text-primary">{nextLevelXP.toLocaleString('pt-BR')}</span>
-              </div>
-            </div>
-
-            <div className="space-y-1">
-              <Progress value={xpProgress} className="h-4 bg-black pixel-border-inset" indicatorClassName="bg-accent" />
-              <p className="text-center text-[10px] text-muted-foreground">Faltam {requiredXP.toLocaleString('pt-BR')} XP para o próximo nível</p>
-            </div>
-          </PixelPanel>
+          <XPSection experience={character.experience} isEditing={isEditing} setCharacter={setCharacter} />
         )}
       </div>
     </div>
