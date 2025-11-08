@@ -7,8 +7,8 @@ import { initializeCharacterByClass, updateCharacterLevel } from "@/lib/characte
 import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
 import { Character, Armament, GeneralSkill, calculateProficiencyPoints, proficiencyConfig } from "./character-sheet/types";
-import CharacterInfoPanel from "./character-sheet/CharacterInfoPanel"; // Novo componente
-import InfoTab from "./character-sheet/InfoTab"; // Importando a nova aba Info
+import CharacterInfoPanel from "./character-sheet/CharacterInfoPanel";
+import InfoTab from "./character-sheet/InfoTab";
 import { AttributesTab } from "./character-sheet/AttributesTab";
 import { ClassFeaturesTab } from "./character-sheet/ClassFeaturesTab";
 import { SkillsTab } from "./character-sheet/SkillsTab";
@@ -54,11 +54,11 @@ const initialCharacterState: Character = {
   armaments: [],
   generalSkills: [],
   languages: [],
-  inventory: [], // Novo
-  scrolls: [], // Novo
-  coins: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 }, // Novo
-  notes: { general: "", history: "", magicItems: "", potions: "", jewels: "" }, // Novo
-  experience: { current: 0, forNextLevel: 2000 }, // Adicionando XP ao estado inicial
+  inventory: [],
+  scrolls: [],
+  coins: { copper: 0, silver: 0, electrum: 0, gold: 0, platinum: 0 },
+  notes: { general: "", history: "", magicItems: "", potions: "", jewels: "" },
+  experience: { current: 0, forNextLevel: 2000 },
 };
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
@@ -102,7 +102,7 @@ const CharacterSheet = () => {
           ...initialCharacterState, 
           ...loadedCharacter, 
           notes: { ...initialCharacterState.notes, ...loadedCharacter.notes },
-          experience: { ...initialCharacterState.experience, ...loadedCharacter.experience } // Merge XP
+          experience: { ...initialCharacterState.experience, ...loadedCharacter.experience }
         });
         setIsEditing(false);
       } else {
@@ -362,7 +362,6 @@ const CharacterSheet = () => {
   return (
     <PagePanel title="Ficha do Jogador">
       <div className="space-y-6 max-w-5xl mx-auto">
-        {/* Novo Painel de Informações (Substitui CharacterHeader e InfoTab) */}
         <CharacterInfoPanel
           character={character} 
           setCharacter={setCharacter} 
@@ -374,11 +373,15 @@ const CharacterSheet = () => {
           onAvatarUpload={handleAvatarUpload}
           onCalculateHP={handleCalculateHP}
           onLevelChange={handleLevelChange}
+          strengthBonuses={strengthBonuses}
+          dexterityBonuses={dexterityBonuses}
+          calculatedCaDetails={calculatedCaDetails}
+          calculatedThac0={calculatedThac0}
         />
 
-        <Tabs defaultValue="info" className="w-full"> {/* Default to new 'info' tab */}
+        <Tabs defaultValue="info" className="w-full">
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
-            <TabsTrigger value="info" className={tabTriggerClasses}>Info</TabsTrigger> {/* New Info Tab */}
+            <TabsTrigger value="info" className={tabTriggerClasses}>Info</TabsTrigger>
             <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
             <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
             <TabsTrigger value="combat" className={tabTriggerClasses}>Combate</TabsTrigger>
@@ -391,7 +394,6 @@ const CharacterSheet = () => {
           </TabsList>
 
           <div className="rpg-panel relative">
-            {/* Content for new Info Tab */}
             <TabsContent value="info">
               <InfoTab
                 character={character}
@@ -409,7 +411,6 @@ const CharacterSheet = () => {
 
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
             
-            {/* Conteúdo da Aba Perícias */}
             <TabsContent value="skills">
               <SkillsTab
                 character={character}
@@ -442,7 +443,6 @@ const CharacterSheet = () => {
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="notes"><NotesTab character={character} setCharacter={setCharacter} /></TabsContent>
             
-            {/* Conteúdo da Aba Habilidades de Classe */}
             <TabsContent value="class-features">
               <ClassFeaturesTab 
                 character={character} 
