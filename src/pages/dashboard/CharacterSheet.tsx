@@ -8,6 +8,7 @@ import PagePanel from "@/components/PagePanel";
 import { useAuth } from "@/hooks/useAuth";
 import { Character, Armament, GeneralSkill, calculateProficiencyPoints, proficiencyConfig } from "./character-sheet/types";
 import CharacterInfoPanel from "./character-sheet/CharacterInfoPanel"; // Novo componente
+import InfoTab from "./character-sheet/InfoTab"; // Importando a nova aba Info
 import { AttributesTab } from "./character-sheet/AttributesTab";
 import { ClassFeaturesTab } from "./character-sheet/ClassFeaturesTab";
 import { SkillsTab } from "./character-sheet/SkillsTab";
@@ -375,8 +376,9 @@ const CharacterSheet = () => {
           onLevelChange={handleLevelChange}
         />
 
-        <Tabs defaultValue="attributes" className="w-full">
+        <Tabs defaultValue="info" className="w-full"> {/* Default to new 'info' tab */}
           <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto">
+            <TabsTrigger value="info" className={tabTriggerClasses}>Info</TabsTrigger> {/* New Info Tab */}
             <TabsTrigger value="attributes" className={tabTriggerClasses}>Atributos</TabsTrigger>
             <TabsTrigger value="skills" className={tabTriggerClasses}>Perícias</TabsTrigger>
             <TabsTrigger value="combat" className={tabTriggerClasses}>Combate</TabsTrigger>
@@ -389,6 +391,22 @@ const CharacterSheet = () => {
           </TabsList>
 
           <div className="rpg-panel relative">
+            {/* Content for new Info Tab */}
+            <TabsContent value="info">
+              <InfoTab
+                character={character}
+                strengthBonuses={strengthBonuses}
+                dexterityBonuses={dexterityBonuses}
+                constitutionBonuses={constitutionBonuses}
+                intelligenceBonuses={intelligenceBonuses}
+                wisdomBonuses={wisdomBonuses}
+                charismaBonuses={charismaBonuses}
+                calculatedCaDetails={calculatedCaDetails}
+                calculatedThac0={calculatedThac0}
+                calculatedSaves={calculatedSaves}
+              />
+            </TabsContent>
+
             <TabsContent value="attributes"><AttributesTab character={character} setCharacter={setCharacter} isEditing={isEditing} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} constitutionBonuses={constitutionBonuses} intelligenceBonuses={intelligenceBonuses} wisdomBonuses={wisdomBonuses} charismaBonuses={charismaBonuses} /></TabsContent>
             
             {/* Conteúdo da Aba Perícias */}
