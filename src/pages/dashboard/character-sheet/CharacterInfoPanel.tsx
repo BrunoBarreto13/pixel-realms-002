@@ -1,6 +1,6 @@
 import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
-import { User, Save, Edit, Minus, Plus } from "lucide-react";
+import { User, Save, Edit, Minus, Plus, Upload } from "lucide-react"; // Adicionado Upload aqui
 import { Character, Race, CharacterClass, Experience } from "./types";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
