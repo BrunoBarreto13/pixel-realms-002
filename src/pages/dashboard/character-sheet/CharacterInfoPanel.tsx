@@ -222,7 +222,7 @@ const ClassInfoSection = ({ character }: { character: Character }) => {
   return (
     <div className="p-4 space-y-3 bg-muted/30 pixel-border"> {/* Changed to a div with styling */}
       <h3 className="font-pixel text-sm text-primary pixel-text-shadow">Informações da Classe: {classData?.name || '---'}</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs">
         <InfoDetailCard label="Dado de Vida" value={hitDie ? `d${hitDie}` : '---'} />
         <InfoDetailCard label="TACO Base" value={thac0} />
         <InfoDetailCard label="Requisitos Primários" value={requirements?.join(', ') || 'Nenhum'} />
