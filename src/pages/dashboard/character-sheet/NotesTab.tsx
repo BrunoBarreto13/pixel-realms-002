@@ -5,6 +5,7 @@ import { PixelButton } from "@/components/PixelButton";
 import { Plus, Trash2 } from "lucide-react";
 import { PixelInput } from "@/components/PixelInput";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 interface NotesTabProps {
   character: Character;
@@ -26,6 +27,13 @@ interface Follower {
 const initialFollower: Follower = {
   name: "", level: 1, thac0: 20, ac: 10, hp: 1, movement: "9m", notes: ""
 };
+
+const InfoDetailCard = ({ label, value }: { label: string, value: string | number }) => (
+  <div className="bg-card/50 p-2 pixel-border text-center">
+    <Label className="font-pixel text-[10px] text-muted-foreground block">{label}</Label>
+    <p className="font-pixel text-xs text-foreground font-bold mt-1">{value}</p>
+  </div>
+);
 
 const FollowerSection = ({ title, followers, isEditing, setFollowers }: { title: string, followers: Follower[], isEditing: boolean, setFollowers: (f: Follower[]) => void }) => {
   const handleAdd = () => {
@@ -103,17 +111,11 @@ const FollowerSection = ({ title, followers, isEditing, setFollowers }: { title:
   );
 };
 
-const InfoDetailCard = ({ label, value }: { label: string, value: string | number }) => (
-  <div className="bg-card/50 p-2 pixel-border text-center">
-    <Label className="font-pixel text-[10px] text-muted-foreground block">{label}</Label>
-    <p className="font-pixel text-xs text-foreground font-bold mt-1">{value}</p>
-  </div>
-);
-
 // --- Componente Principal ---
 
 export const NotesTab = ({ character, setCharacter }: NotesTabProps) => {
-  const isEditing = true; // Assume editing is controlled by the main sheet state
+  // Assume editing is controlled by the main sheet state, but we need to pass it down
+  const isEditing = true; 
 
   const handleNotesChange = (key: 'general' | 'history', value: string) => {
     setCharacter(prev => ({
@@ -139,65 +141,78 @@ export const NotesTab = ({ character, setCharacter }: NotesTabProps) => {
   const getFollowers = (key: 'followers' | 'animals'): Follower[] => {
     try {
       const data = character.notes?.[key];
-      return data ? JSON.parse(data) : [];
-    } catch {
+      // Ensure data is treated as string before parsing
+      return data && typeof data === 'string' ? JSON.parse(data) : [];
+    } catch (e) {
+      console.error(`Error parsing ${key} data:`, e);
       return [];
     }
   };
+  
+  const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
+
 
   return (
     <div className="mt-0">
       <Tabs defaultValue="history">
         <TabsList className="flex flex-wrap gap-1 bg-transparent p-0 h-auto mb-4">
-          <TabsTrigger value="history" className="font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10">Histórico</TabsTrigger>
-          <TabsTrigger value="general" className="font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10">Geral</TabsTrigger>
-          <TabsTrigger value="allies" className="font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10">Aliados</TabsTrigger>
-          <TabsTrigger value="animals" className="font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10">Animais</TabsTrigger>
+          <TabsTrigger value="history" className={tabTriggerClasses}>Histórico</TabsTrigger>
+          <TabsTrigger value="general" className={tabTriggerClasses}>Geral</TabsTrigger>
+          <TabsTrigger value="allies" className={tabTriggerClasses}>Aliados</TabsTrigger>
+          <TabsTrigger value="animals" className={tabTriggerClasses}>Animais</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="history">
-          <PixelPanel>
-            <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">HISTÓRICO DO PERSONAGEM</h3>
-            <textarea 
-              className="w-full min-h-[400px] pixel-border bg-input p-4 font-pixel text-xs resize-y" 
-              placeholder="Escreva a história do seu personagem..."
-              value={character.notes?.history || ''}
-              onChange={(e) => handleNotesChange('history', e.target.value)}
-              disabled={!isEditing}
+        <div className="rpg-panel relative p-0 border-none shadow-none bg-transparent">
+          <TabsContent value="history">
+            <PixelPanel>
+              <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">HISTÓRICO DO PERSONAGEM</h3>
+              <textarea 
+                className={cn(
+                  "w-full min-h-[400px] pixel-border bg-input p-4 font-pixel text-xs resize-y",
+                  !isEditing && "opacity-70 cursor-default"
+                )}
+                placeholder="Escreva a história do seu personagem..."
+                value={character.notes?.history || ''}
+                onChange={(e) => handleNotesChange('history', e.target.value)}
+                disabled={!isEditing}
+              />
+            </PixelPanel>
+          </TabsContent>
+
+          <TabsContent value="general">
+            <PixelPanel>
+              <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ANOTAÇÕES GERAIS</h3>
+              <textarea 
+                className={cn(
+                  "w-full min-h-[400px] pixel-border bg-input p-4 font-pixel text-xs resize-y",
+                  !isEditing && "opacity-70 cursor-default"
+                )}
+                placeholder="Anotações diversas, objetivos, diário..."
+                value={character.notes?.general || ''}
+                onChange={(e) => handleNotesChange('general', e.target.value)}
+                disabled={!isEditing}
+              />
+            </PixelPanel>
+          </TabsContent>
+
+          <TabsContent value="allies">
+            <FollowerSection 
+              title="ALIADOS OU SEGUIDORES" 
+              followers={getFollowers('followers')} 
+              isEditing={isEditing} 
+              setFollowers={handleFollowersChange} 
             />
-          </PixelPanel>
-        </TabsContent>
+          </TabsContent>
 
-        <TabsContent value="general">
-          <PixelPanel>
-            <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">ANOTAÇÕES GERAIS</h3>
-            <textarea 
-              className="w-full min-h-[400px] pixel-border bg-input p-4 font-pixel text-xs resize-y" 
-              placeholder="Anotações diversas, objetivos, diário..."
-              value={character.notes?.general || ''}
-              onChange={(e) => handleNotesChange('general', e.target.value)}
-              disabled={!isEditing}
+          <TabsContent value="animals">
+            <FollowerSection 
+              title="ANIMAIS" 
+              followers={getFollowers('animals')} 
+              isEditing={isEditing} 
+              setFollowers={handleAnimalsChange} 
             />
-          </PixelPanel>
-        </TabsContent>
-
-        <TabsContent value="allies">
-          <FollowerSection 
-            title="ALIADOS OU SEGUIDORES" 
-            followers={getFollowers('followers')} 
-            isEditing={isEditing} 
-            setFollowers={handleFollowersChange} 
-          />
-        </TabsContent>
-
-        <TabsContent value="animals">
-          <FollowerSection 
-            title="ANIMAIS" 
-            followers={getFollowers('animals')} 
-            isEditing={isEditing} 
-            setFollowers={handleAnimalsChange} 
-          />
-        </TabsContent>
+          </TabsContent>
+        </div>
       </Tabs>
     </div>
   );

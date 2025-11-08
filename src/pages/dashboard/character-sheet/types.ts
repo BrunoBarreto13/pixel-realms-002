@@ -244,7 +244,15 @@ export interface Character {
   coins: Coinage; // SEÇÃO 13: DINHEIRO
   
   // Notes (used for Magic Items, Potions, Jewels, General, History, Allies, Animals)
-  notes: Record<string, string>;
+  notes: {
+    general: string;
+    history: string;
+    magicItems: string;
+    potions: string;
+    jewels: string;
+    followers?: string; // JSON string of Follower[]
+    animals?: string; // JSON string of Follower[]
+  };
 }
 
 export const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {
