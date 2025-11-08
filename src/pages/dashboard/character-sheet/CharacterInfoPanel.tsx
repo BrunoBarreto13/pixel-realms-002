@@ -1,6 +1,6 @@
 import { PixelPanel } from "@/components/PixelPanel";
 import { PixelButton } from "@/components/PixelButton";
-import { User, Save, Edit, Minus, Plus, Upload } from "lucide-react"; // Adicionado Upload aqui
+import { User, Save, Edit, Minus, Plus, Upload } from "lucide-react";
 import { Character, Race, CharacterClass, Experience } from "./types";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
@@ -38,7 +38,7 @@ const InfoInput = ({ label, value, onChange, disabled, type = 'text', className,
       type={type}
       value={value}
       onChange={onChange}
-      disabled={!disabled} // Invertendo a lógica para usar 'disabled' do PixelInput
+      disabled={!disabled}
       placeholder={placeholder}
       className="h-8 px-2 py-0 text-xs bg-input border-2 border-border focus:ring-0"
     />
@@ -202,29 +202,6 @@ const HPSection = ({ character, onCalculateHP, isEditing, setCharacter }: { char
   );
 };
 
-const ClassInfoSection = ({ character }: { character: Character }) => {
-  const classData = PHB_CLASSES.find(c => c.value === character.class);
-  const classDetail = PHB_CLASS_DETAILS_PTBR.find(d => d.name === classData?.name);
-  const hitDie = classData?.hit_die;
-  const thac0 = Rules.getThac0(character.class, character.level);
-  
-  const requirements = classDetail?.requisitos.split(';').map(r => r.trim()).filter(r => r !== 'Nenhum requisito especial.');
-  const alignment = classDetail?.requisitos.includes('alinhamento') ? classDetail.requisitos.split('alinhamento')[1].trim().replace('.', '') : 'Qualquer';
-
-  return (
-    <PixelPanel className="p-4 space-y-3">
-      <h3 className="font-pixel text-sm text-primary pixel-text-shadow">Informações da Classe: {classData?.name || '---'}</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-        <InfoDetailCard label="Dado de Vida" value={hitDie ? `d${hitDie}` : '---'} />
-        <InfoDetailCard label="TACO Base" value={thac0} />
-        <InfoDetailCard label="Requisitos Primários" value={requirements?.join(', ') || 'Nenhum'} />
-        <InfoDetailCard label="Alinhamento Permitido" value={alignment} />
-      </div>
-    </PixelPanel>
-  );
-};
-
-
 const CharacterInfoPanel = ({
   character,
   setCharacter,
@@ -255,7 +232,7 @@ const CharacterInfoPanel = ({
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-      {/* Left Column: Avatar and Class Info */}
+      {/* Left Column: Avatar and Name Info */}
       <div className="lg:col-span-1 flex flex-col gap-6">
         <PixelPanel className="flex flex-col items-center p-6 space-y-4">
           <div className="relative w-32 h-32 pixel-border bg-muted/50 flex items-center justify-center flex-shrink-0">
@@ -316,11 +293,6 @@ const CharacterInfoPanel = ({
             )}
           </div>
         </PixelPanel>
-        
-        {/* Class Info Section */}
-        {character.class && (
-          <ClassInfoSection character={character} />
-        )}
       </div>
 
       {/* Right Columns: Basic Info, HP, XP */}
