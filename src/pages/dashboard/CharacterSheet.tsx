@@ -19,12 +19,18 @@ import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
 import { CharacterSchema } from "@/lib/schemas/adnd"; // Import the Zod schema
 
-// Estado inicial da ficha, agora derivado do schema Zod
-const initialCharacterState: Character = CharacterSchema.parse({
-  name: "",
-  playerName: "",
-  race: "",
-  class: "",
+// Define um objeto base com valores padrão que satisfazem as validações Zod
+const baseValidCharacter: Omit<Character, 'experience' | 'savingThrows' | 'armaments' | 'generalSkills' | 'languages'> & {
+  experience?: Character['experience'];
+  savingThrows?: Character['savingThrows'];
+  armaments?: Character['armaments'];
+  generalSkills?: Character['generalSkills'];
+  languages?: Character['languages'];
+} = {
+  name: "Novo Aventureiro",
+  playerName: "Jogador",
+  race: PHB_RACES[0]?.value || "humano", // Usa a primeira raça disponível como padrão
+  class: PHB_CLASSES[0]?.value || "guerreiro", // Usa a primeira classe disponível como padrão
   level: 1,
   avatarUrl: null,
   attributes: {
@@ -40,19 +46,17 @@ const initialCharacterState: Character = CharacterSchema.parse({
   maxHp: 1,
   equipment: { armor: null, shield: null, helm: null },
   initiative: 0,
-  savingThrows: { poison: 0, petrification: 0, rod: 0, breath: 0, spell: 0 },
-  alignment: "",
-  hair: "",
-  eyes: "",
-  weight: "",
-  height: "",
+  alignment: "Neutro",
+  hair: "Castanho",
+  eyes: "Castanhos",
+  weight: "70 kg",
+  height: "1.75 m",
   age: 20,
   color: "#4789c7",
-  armaments: [],
-  generalSkills: [],
-  languages: [],
-  experience: { current: 0, forNextLevel: 0 },
-});
+};
+
+// Estado inicial da ficha, agora derivado do schema Zod com valores padrão
+const initialCharacterState: Character = CharacterSchema.parse(baseValidCharacter);
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
@@ -103,9 +107,9 @@ const CharacterSheet = () => {
         // Se não houver ficha, inicializa com dados do perfil
         setCharacter(prev => ({
           ...initialCharacterState,
-          playerName: profile?.full_name || "",
-          name: profile?.character_name || "",
-          avatarUrl: profile?.avatar_url || null,
+          playerName: profile?.full_name || initialCharacterState.playerName,
+          name: profile?.character_name || initialCharacterState.name,
+          avatarUrl: profile?.avatar_url || initialCharacterState.avatarUrl,
         }));
         setIsEditing(true); // Começa editável se for a primeira vez
       }
