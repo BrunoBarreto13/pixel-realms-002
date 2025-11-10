@@ -161,4 +161,5 @@ export const CharacterSchema = z.object({
   generalSkills: z.array(GeneralSkillSchema).optional().default([]),
   languages: z.array(z.string()).optional().default([]),
   experience: ExperienceSchema.optional().default({ current: 0, forNextLevel: 0 }),
+  notes: z.string().optional().default(""), // Adicionado campo de notas
 });

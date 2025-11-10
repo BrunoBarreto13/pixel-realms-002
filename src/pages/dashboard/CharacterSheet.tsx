@@ -20,12 +20,13 @@ import { Tables } from "@/integrations/supabase/types";
 import { CharacterSchema } from "@/lib/schemas/adnd"; // Import the Zod schema
 
 // Define um objeto base com valores padrão que satisfazem as validações Zod
-const baseValidCharacter: Omit<Character, 'experience' | 'savingThrows' | 'armaments' | 'generalSkills' | 'languages'> & {
+const baseValidCharacter: Omit<Character, 'experience' | 'savingThrows' | 'armaments' | 'generalSkills' | 'languages' | 'notes'> & {
   experience?: Character['experience'];
   savingThrows?: Character['savingThrows'];
   armaments?: Character['armaments'];
   generalSkills?: Character['generalSkills'];
   languages?: Character['languages'];
+  notes?: Character['notes'];
 } = {
   name: "Novo Aventureiro",
   playerName: "Jogador",
@@ -220,7 +221,7 @@ const CharacterSheet = () => {
 
     try {
         const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}.${fileExt}`;
+        const fileName = `${user.id}/${Date.now()}.${fileExt}`; // Usar user.id no caminho para evitar conflitos
         const filePath = `${user.id}/${fileName}`;
 
         const { error: uploadError } = await supabase.storage
@@ -473,7 +474,7 @@ const CharacterSheet = () => {
             <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={onRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>
-            <TabsContent value="notes"><NotesTab /></TabsContent>
+            <TabsContent value="notes"><NotesTab character={character} setCharacter={setCharacter} isEditing={isEditing} onSave={handleSave} /></TabsContent>
           </div>
         </Tabs>
       </div>
