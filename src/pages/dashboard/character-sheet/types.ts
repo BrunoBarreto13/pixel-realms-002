@@ -1,117 +1,34 @@
-export interface Spell {
-  name: string;
-  level: number;
-  school: string;
-  range: string;
-  duration: string;
-  area_of_effect: string;
-  components: string;
-  casting_time: string;
-  saving_throw: string;
-  description: string;
-  class: 'wizard' | 'priest';
-}
+import { z } from "zod";
+import {
+  SpellSchema,
+  RaceSchema,
+  CharacterClassSchema,
+  WeaponSchema,
+  ArmorSchema,
+  AttributesSchema,
+  SavingThrowsSchema,
+  ArmamentSchema,
+  GeneralSkillSchema,
+  EquipmentSlotSchema,
+  ExperienceSchema,
+  CharacterSchema,
+} from "@/lib/schemas/adnd";
 
-export interface Race {
-  name: string;
-  value: string;
-  ability_modifiers: { [key: string]: number };
-  racial_language?: string;
-}
+// Export Zod types
+export type Spell = z.infer<typeof SpellSchema>;
+export type Race = z.infer<typeof RaceSchema>;
+export type CharacterClass = z.infer<typeof CharacterClassSchema>;
+export type Weapon = z.infer<typeof WeaponSchema>;
+export type Armor = z.infer<typeof ArmorSchema>;
+export type Attributes = z.infer<typeof AttributesSchema>;
+export type SavingThrows = z.infer<typeof SavingThrowsSchema>;
+export type Armament = z.infer<typeof ArmamentSchema>;
+export type GeneralSkill = z.infer<typeof GeneralSkillSchema>;
+export type Equipment = z.infer<typeof EquipmentSlotSchema>;
+export type Experience = z.infer<typeof ExperienceSchema>;
+export type Character = z.infer<typeof CharacterSchema>;
 
-export interface CharacterClass {
-  name: string;
-  value: string;
-  hit_die: number;
-}
-
-export interface Weapon {
-  name: string;
-  cost: string;
-  weight: number;
-  size: 'S' | 'M' | 'L';
-  type: string;
-  speed_factor: number;
-  damage: {
-    small_medium: string;
-    large: string;
-  };
-  category: 'corpo-a-corpo' | 'a-distancia' | 'arremesso';
-  id: string;
-}
-
-export interface Armor {
-  name: string;
-  cost: string;
-  weight: number;
-  armor_class: number;
-  id: string;
-  type: 'Armadura' | 'Escudo' | 'Elmo';
-}
-
-export interface Attributes {
-  strength: number;
-  strengthPercentile: number;
-  dexterity: number;
-  constitution: number;
-  intelligence: number;
-  wisdom: number;
-  charisma: number;
-}
-
-export interface SavingThrows {
-  poison: number;
-  petrification: number;
-  rod: number;
-  breath: number;
-  spell: number;
-}
-
-export interface Armament extends Weapon {
-  bonus_ataque?: number;
-  bonus_dano?: number;
-  observacoes?: string;
-  munition?: number;
-}
-
-export interface GeneralSkill {
-  name: string;
-  points: number;
-  ability: 'strength' | 'dexterity' | 'constitution' | 'intelligence' | 'wisdom' | 'charisma' | '';
-  modifier: number;
-}
-
-export interface Equipment {
-  armor: string | null;
-  shield: string | null;
-  helm: string | null;
-}
-
-export interface Character {
-  name: string;
-  playerName: string;
-  race: string;
-  class: string;
-  level: number;
-  avatarUrl: string | null;
-  attributes: Attributes;
-  hp: number;
-  maxHp: number;
-  equipment: Equipment;
-  initiative: number;
-  savingThrows: SavingThrows;
-  alignment: string;
-  hair: string;
-  eyes: string;
-  weight: string;
-  height: string;
-  age: number;
-  color: string;
-  armaments: Armament[];
-  generalSkills: GeneralSkill[];
-  languages: string[];
-}
-
+// Existing proficiency config (can be moved into CharacterClassSchema later if desired)
 export const proficiencyConfig: { [key: string]: { initial: number; progression: number } } = {
   fighter: { initial: 4, progression: 3 },
   paladin: { initial: 4, progression: 3 },

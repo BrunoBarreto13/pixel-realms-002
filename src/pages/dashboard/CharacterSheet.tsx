@@ -17,9 +17,10 @@ import { ArmamentModal } from "./character-sheet/ArmamentModal";
 import { PHB_RACES, PHB_CLASSES, PHB_ARMOR_LIST, PHB_SHIELD_LIST, PHB_HELM_LIST, PHB_WEAPONS } from "@/lib/players-handbook";
 import { supabase } from "@/integrations/supabase/client";
 import { Tables } from "@/integrations/supabase/types";
+import { CharacterSchema } from "@/lib/schemas/adnd"; // Import the Zod schema
 
-// Estado inicial da ficha
-const initialCharacterState: Character = {
+// Estado inicial da ficha, agora derivado do schema Zod
+const initialCharacterState: Character = CharacterSchema.parse({
   name: "",
   playerName: "",
   race: "",
@@ -50,7 +51,8 @@ const initialCharacterState: Character = {
   armaments: [],
   generalSkills: [],
   languages: [],
-};
+  experience: { current: 0, forNextLevel: 0 },
+});
 
 const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
@@ -87,9 +89,15 @@ const CharacterSheet = () => {
 
       if (data) {
         setCharacterId(data.id);
-        // Garantir que character_data é um objeto Character válido
-        const loadedCharacter = data.character_data as unknown as Character;
-        setCharacter({ ...initialCharacterState, ...loadedCharacter });
+        // Validar e parsear os dados do personagem com o schema Zod
+        const parsedCharacter = CharacterSchema.safeParse(data.character_data);
+        if (parsedCharacter.success) {
+          setCharacter(parsedCharacter.data);
+        } else {
+          console.error("Erro de validação do schema Zod ao carregar personagem:", parsedCharacter.error);
+          toast({ title: "Erro de dados", description: "A ficha carregada possui um formato inválido.", variant: "destructive" });
+          setCharacter(initialCharacterState); // Fallback para estado inicial
+        }
         setIsEditing(false); // Começa não editável se já existe
       } else {
         // Se não houver ficha, inicializa com dados do perfil
@@ -248,8 +256,16 @@ const CharacterSheet = () => {
       toast({ title: "Erro", description: "Usuário não autenticado.", variant: "destructive" });
       return;
     }
-    if (!character.name || !character.race || !character.class) {
-      toast({ title: "Campos obrigatórios", description: "Preencha nome, raça e classe", variant: "destructive" });
+    
+    // Validate character data before saving
+    const validationResult = CharacterSchema.safeParse(character);
+    if (!validationResult.success) {
+      console.error("Erro de validação ao salvar personagem:", validationResult.error);
+      toast({ 
+        title: "Erro de validação", 
+        description: "Por favor, corrija os dados da ficha antes de salvar.", 
+        variant: "destructive" 
+      });
       return;
     }
 
@@ -259,7 +275,7 @@ const CharacterSheet = () => {
       player_name: character.playerName,
       level: character.level,
       campaign_name: profile?.campaign_name || null,
-      character_data: character as unknown as Json,
+      character_data: validationResult.data as unknown as Json, // Use validated data
     };
 
     try {
