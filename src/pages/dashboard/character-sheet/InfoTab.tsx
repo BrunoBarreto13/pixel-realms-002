@@ -1,176 +1,69 @@
-import { Character, Experience, SavingThrows } from "./types";
-import { PixelPanel } from "@/components/PixelPanel";
+import { PixelInput } from "@/components/PixelInput";
+import { PixelButton } from "@/components/PixelButton";
 import { Label } from "@/components/ui/label";
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Minus, Plus } from "lucide-react";
+import { Character, Race, CharacterClass } from "./types";
 
 interface InfoTabProps {
   character: Character;
-  strengthBonuses: any;
-  dexterityBonuses: any;
-  constitutionBonuses: any;
-  intelligenceBonuses: any;
-  wisdomBonuses: any;
-  charismaBonuses: any;
-  calculatedCaDetails: {
-    ca_base: number;
-    ajustes: { fonte: string; valor: number; item?: string }[];
-    ca_final: number;
-  };
-  calculatedThac0: number;
-  calculatedSaves: SavingThrows;
+  setCharacter: React.Dispatch<React.SetStateAction<Character>>;
+  isEditing: boolean;
+  onCalculateHP: () => void;
+  races: Race[];
+  classes: CharacterClass[];
 }
 
-const InfoDetailCard = ({ label, value, className }: { label: string, value: string | number, className?: string }) => (
-  <div className={cn("bg-input p-3 pixel-border text-center", className)}>
-    <Label className="font-pixel text-[10px] text-muted-foreground block">{label}</Label>
-    <p className="font-pixel text-sm text-primary font-bold mt-1">{value}</p>
-  </div>
-);
-
-const InfoTab = ({
-  character,
-  strengthBonuses,
-  dexterityBonuses,
-  constitutionBonuses,
-  intelligenceBonuses,
-  wisdomBonuses,
-  charismaBonuses,
-  calculatedCaDetails,
-  calculatedThac0,
-  calculatedSaves,
-}: InfoTabProps) => {
-  const hpPercent = character.maxHp > 0 ? Math.min(100, (character.hp / character.maxHp) * 100) : 0;
-  const xpProgress = character.experience.forNextLevel > 0 ? Math.min(100, (character.experience.current / character.experience.forNextLevel) * 100) : 0;
-
+export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, races, classes }: InfoTabProps) => {
   return (
     <div className="mt-0 space-y-6">
-      {/* Character Overview */}
-      <PixelPanel className="p-4 space-y-4">
-        <h3 className="font-pixel text-sm text-accent pixel-text-shadow">Visão Geral do Personagem</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Nome</Label>
-            <p className="font-bold text-foreground">{character.name}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Jogador</Label>
-            <p className="font-bold text-foreground">{character.playerName}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Raça</Label>
-            <p className="font-bold text-foreground">{character.race}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Classe</Label>
-            <p className="font-bold text-foreground">{character.class}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Nível</Label>
-            <p className="font-bold text-foreground">{character.level}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Tendência</Label>
-            <p className="font-bold text-foreground">{character.alignment}</p>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="font-pixel text-sm text-accent pixel-text-shadow">INFORMAÇÕES BÁSICAS</h3>
+        <PixelButton onClick={onCalculateHP} size="sm" variant="secondary">Calcular HP</PixelButton>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <PixelInput label="Nome do Personagem" value={character.name} onChange={(e) => setCharacter({ ...character, name: e.target.value })} disabled={!isEditing} />
+        <PixelInput label="Nome do Jogador" value={character.playerName} onChange={(e) => setCharacter({ ...character, playerName: e.target.value })} disabled={!isEditing} />
+        <div className="flex flex-col gap-2">
+          <Label className="font-pixel text-xs text-foreground">Nível</Label>
+          <div className="flex items-center gap-2">
+            <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.max(1, character.level - 1) })} disabled={!isEditing}><Minus className="h-4 w-4" /></PixelButton>
+            <input type="number" value={character.level} onChange={(e) => setCharacter({ ...character, level: parseInt(e.target.value) || 1 })} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground" min={1} max={20} disabled={!isEditing} />
+            <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.min(20, character.level + 1) })} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
           </div>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* HP Summary */}
-          <div className="bg-input p-3 pixel-border-inset space-y-2">
-            <div className="flex justify-between items-baseline text-xs">
-              <Label className="font-pixel text-hp-red">PV</Label>
-              <span className={cn("text-foreground/80", hpPercent < 25 && "text-destructive")}>{character.hp}/{character.maxHp}</span>
-            </div>
-            <Progress value={hpPercent} className="h-3 bg-black pixel-border-inset" indicatorClassName={cn("bg-hp-red", hpPercent < 25 && "bg-destructive")} />
-          </div>
-          {/* XP Summary */}
-          <div className="bg-input p-3 pixel-border-inset space-y-2">
-            <div className="flex justify-between items-baseline text-xs">
-              <Label className="font-pixel text-accent">XP</Label>
-              <span className="text-foreground/80">{character.experience.current}/{character.experience.forNextLevel}</span>
-            </div>
-            <Progress value={xpProgress} className="h-3 bg-black pixel-border-inset" indicatorClassName="bg-accent" />
+        <div className="flex flex-col gap-2">
+          <Label className="font-pixel text-xs text-foreground">Raça</Label>
+          <Select value={character.race} onValueChange={(value) => setCharacter({ ...character, race: value })} disabled={!isEditing}>
+            <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12"><SelectValue placeholder="Selecione..." /></SelectTrigger>
+            <SelectContent className="bg-card border-2 border-border z-50">
+              {races.map(race => <SelectItem key={race.value} value={race.value} className="font-pixel text-xs">{race.name}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex flex-col gap-2">
+          <Label className="font-pixel text-xs text-foreground">Classe</Label>
+          <Select value={character.class} onValueChange={(value) => setCharacter({ ...character, class: value })} disabled={!isEditing}>
+            <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12"><SelectValue placeholder="Selecione..." /></SelectTrigger>
+            <SelectContent className="bg-card border-2 border-border z-50">
+              {classes.map(cls => <SelectItem key={cls.value} value={cls.value} className="font-pixel text-xs">{cls.name}</SelectItem>)}
+            </SelectContent>
+          </Select>
+        </div>
+        <PixelInput label="Tendência" value={character.alignment} onChange={(e) => setCharacter({ ...character, alignment: e.target.value })} disabled={!isEditing} />
+        <PixelInput label="Idade" type="number" value={character.age} onChange={(e) => setCharacter({ ...character, age: parseInt(e.target.value) || 0 })} disabled={!isEditing} />
+        <PixelInput label="Altura" value={character.height} onChange={(e) => setCharacter({ ...character, height: e.target.value })} disabled={!isEditing} />
+        <PixelInput label="Peso" value={character.weight} onChange={(e) => setCharacter({ ...character, weight: e.target.value })} disabled={!isEditing} />
+        <PixelInput label="Cabelos" value={character.hair} onChange={(e) => setCharacter({ ...character, hair: e.target.value })} disabled={!isEditing} />
+        <PixelInput label="Olhos" value={character.eyes} onChange={(e) => setCharacter({ ...character, eyes: e.target.value })} disabled={!isEditing} />
+        <div className="flex flex-col gap-2">
+          <Label className="font-pixel text-xs text-foreground">Cor do Jogador</Label>
+          <div className="flex items-center gap-2">
+            <input type="color" value={character.color} onChange={(e) => setCharacter({ ...character, color: e.target.value })} disabled={!isEditing} className="w-12 h-12 p-1 bg-input pixel-border cursor-pointer disabled:cursor-not-allowed" />
+            <span className="font-pixel text-xs text-muted-foreground">Cor para o chat</span>
           </div>
         </div>
-      </PixelPanel>
-
-      {/* Attributes Summary */}
-      <PixelPanel className="p-4 space-y-4">
-        <h3 className="font-pixel text-sm text-accent pixel-text-shadow">Atributos</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-xs">
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Força</Label>
-            <p className="font-bold text-foreground">{character.attributes.strength}</p>
-            <p className="text-[10px] text-accent">Acerto: {strengthBonuses.hit > 0 ? '+' : ''}{strengthBonuses.hit}</p>
-            <p className="text-[10px] text-accent">Dano: {strengthBonuses.dmg > 0 ? '+' : ''}{strengthBonuses.dmg}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Destreza</Label>
-            <p className="font-bold text-foreground">{character.attributes.dexterity}</p>
-            <p className="text-[10px] text-accent">CA: {dexterityBonuses.defense > 0 ? '+' : ''}{dexterityBonuses.defense}</p>
-            <p className="text-[10px] text-accent">Projétil: {dexterityBonuses.missile > 0 ? '+' : ''}{dexterityBonuses.missile}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Constituição</Label>
-            <p className="font-bold text-foreground">{character.attributes.constitution}</p>
-            <p className="text-[10px] text-accent">PV/Nível: {constitutionBonuses.hp > 0 ? '+' : ''}{constitutionBonuses.hp}</p>
-            <p className="text-[10px] text-accent">Choque: {constitutionBonuses.shock}%</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Inteligência</Label>
-            <p className="font-bold text-foreground">{character.attributes.intelligence}</p>
-            <p className="text-[10px] text-accent">Línguas: {intelligenceBonuses.languages}</p>
-            <p className="text-[10px] text-accent">Max Magias: {intelligenceBonuses.maxSpells}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Sabedoria</Label>
-            <p className="font-bold text-foreground">{character.attributes.wisdom}</p>
-            <p className="text-[10px] text-accent">Def. Mágica: {wisdomBonuses.magicDef > 0 ? '+' : ''}{wisdomBonuses.magicDef}</p>
-            <p className="text-[10px] text-accent">Magias Extras: {wisdomBonuses.bonusSpells.length > 0 ? wisdomBonuses.bonusSpells.join(', ') : 'Nenhum'}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Carisma</Label>
-            <p className="font-bold text-foreground">{character.attributes.charisma}</p>
-            <p className="text-[10px] text-accent">Reação: {charismaBonuses.reaction > 0 ? '+' : ''}{charismaBonuses.reaction}</p>
-            <p className="text-[10px] text-accent">Lealdade: {charismaBonuses.loyalty > 0 ? '+' : ''}{charismaBonuses.loyalty}</p>
-          </div>
-        </div>
-      </PixelPanel>
-
-      {/* Combat & Saves Summary */}
-      <PixelPanel className="p-4 space-y-4">
-        <h3 className="font-pixel text-sm text-accent pixel-text-shadow">Combate e Testes de Resistência</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-xs">
-          <InfoDetailCard label="CA" value={calculatedCaDetails.ca_final} />
-          <InfoDetailCard label="THAC0" value={calculatedThac0} />
-          <InfoDetailCard label="Iniciativa" value={character.initiative} />
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-center font-pixel text-xs mt-4">
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Paral./Veneno</Label>
-            <p className="text-lg text-primary">{calculatedSaves.poison}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Petrif./Polim.</Label>
-            <p className="text-lg text-primary">{calculatedSaves.petrification}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Bastão/Varinha</Label>
-            <p className="text-lg text-primary">{calculatedSaves.rod}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Sopro de Dragão</Label>
-            <p className="text-lg text-primary">{calculatedSaves.breath}</p>
-          </div>
-          <div className="bg-input p-2 pixel-border-inset">
-            <Label className="text-muted-foreground">Magia</Label>
-            <p className="text-lg text-primary">{calculatedSaves.spell}</p>
-          </div>
-        </div>
-      </PixelPanel>
+      </div>
     </div>
   );
 };
-
-export default InfoTab;
