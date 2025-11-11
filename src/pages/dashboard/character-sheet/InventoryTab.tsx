@@ -48,10 +48,10 @@ export const InventoryTab = ({
               onValueChange={(value) => handleEquipmentChange('armor', value)}
               disabled={!isEditing}
             >
-              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12">
+              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12 rounded-lg">
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
-              <SelectContent className="bg-card border-2 border-border z-50">
+              <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
                 {armorList.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
               </SelectContent>
             </Select>
@@ -63,10 +63,10 @@ export const InventoryTab = ({
               onValueChange={(value) => handleEquipmentChange('shield', value)}
               disabled={!isEditing}
             >
-              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12">
+              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12 rounded-lg">
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
-              <SelectContent className="bg-card border-2 border-border z-50">
+              <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
                 {shieldList.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
               </SelectContent>
             </Select>
@@ -78,10 +78,10 @@ export const InventoryTab = ({
               onValueChange={(value) => handleEquipmentChange('helm', value)}
               disabled={!isEditing}
             >
-              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12">
+              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12 rounded-lg">
                 <SelectValue placeholder="Selecione..." />
               </SelectTrigger>
-              <SelectContent className="bg-card border-2 border-border z-50">
+              <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
                 {helmList.map(item => <SelectItem key={item.id} value={item.id} className="font-pixel text-xs">{item.name}</SelectItem>)}
               </SelectContent>
             </Select>
@@ -90,7 +90,7 @@ export const InventoryTab = ({
       </div>
       <div>
         <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">CARGA</h3>
-        <div className="bg-muted/30 p-4 pixel-border text-center">
+        <div className="bg-muted/30 p-4 pixel-border text-center rounded-lg">
           <Label className="font-pixel text-xs text-muted-foreground">Peso Carregado / Permitido</Label>
           <p className={cn("font-pixel text-lg mt-2", isOverburdened ? "text-destructive" : "text-primary")}>
             {totalWeight.toFixed(1)} / {allowedWeight} kg

@@ -65,7 +65,7 @@ export const SkillsTab = ({
             <Plus className="h-4 w-4" /> Adicionar Idioma
           </PixelButton>
         </div>
-        <div className="bg-muted/30 p-4 pixel-border space-y-4">
+        <div className="bg-muted/30 p-4 pixel-border space-y-4 rounded-lg">
           <div>
             <Label className="font-pixel text-xs text-muted-foreground">Idiomas Automáticos</Label>
             <p className="font-pixel text-xs text-foreground mt-1">{automaticLanguages.join(', ')}</p>
@@ -103,7 +103,7 @@ export const SkillsTab = ({
             <Plus className="h-4 w-4" /> Adicionar Perícia
           </PixelButton>
         </div>
-        <div className="bg-muted/30 p-4 pixel-border mb-4 space-y-2">
+        <div className="bg-muted/30 p-4 pixel-border mb-4 space-y-2 rounded-lg">
           <div className="flex justify-between items-center font-pixel text-xs">
             <Label>Pontos de Perícia com Armas</Label>
             <span className="text-accent font-bold">{usedWeaponProficiencyPoints} / {totalWeaponProficiencyPoints}</span>
@@ -112,7 +112,7 @@ export const SkillsTab = ({
         </div>
         <div className="space-y-4">
           {character.armaments.map((weapon, index) => (
-            <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-muted/30 p-4 pixel-border">
+            <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-muted/30 p-4 pixel-border rounded-lg">
               <PixelInput label="Nome da Arma" value={weapon.name} disabled />
               <PixelInput label="Dano" value={weapon.damage.small_medium} disabled />
               <div className="md:col-span-2 flex gap-4 items-end">
@@ -140,7 +140,7 @@ export const SkillsTab = ({
             <Plus className="h-4 w-4" /> Adicionar Perícia
           </PixelButton>
         </div>
-        <div className="bg-muted/30 p-4 pixel-border mb-4 space-y-2">
+        <div className="bg-muted/30 p-4 pixel-border mb-4 space-y-2 rounded-lg">
           <div className="flex justify-between items-center font-pixel text-xs">
             <Label>Pontos de Perícia Geral</Label>
             <span className="text-accent font-bold">{usedGeneralSkillPoints} / {totalGeneralSkillPoints}</span>
@@ -154,15 +154,15 @@ export const SkillsTab = ({
               : 'N/A';
 
             return (
-              <div key={index} className="bg-muted/30 p-4 pixel-border space-y-4">
+              <div key={index} className="bg-muted/30 p-4 pixel-border space-y-4 rounded-lg">
                 <div className="grid grid-cols-2 md:grid-cols-12 gap-4 items-end">
                   <div className="col-span-2 md:col-span-6"><PixelInput label="Nome da Perícia" value={skill.name} onChange={(e) => onSkillChange(index, 'name', e.target.value)} disabled={!isEditing} /></div>
                   <div className="col-span-1"><PixelInput label="Pontos" type="number" value={skill.points} onChange={(e) => onSkillChange(index, 'points', parseInt(e.target.value) || 0)} disabled={!isEditing} /></div>
                   <div className="col-span-2">
                     <Label className="font-pixel text-xs text-foreground">Habilidade</Label>
                     <Select value={skill.ability} onValueChange={(value) => onSkillChange(index, 'ability', value)} disabled={!isEditing}>
-                      <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-10 mt-2"><SelectValue placeholder="Selecione..." /></SelectTrigger>
-                      <SelectContent className="bg-card border-2 border-border z-50">
+                      <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-10 mt-2 rounded-lg"><SelectValue placeholder="Selecione..." /></SelectTrigger>
+                      <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
                         {abilityOptions.map(opt => <SelectItem key={opt.value} value={opt.value} className="font-pixel text-xs">{opt.label}</SelectItem>)}
                       </SelectContent>
                     </Select>

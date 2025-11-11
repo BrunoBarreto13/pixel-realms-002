@@ -33,7 +33,7 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit, races, c
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-4 flex-1">
           <div
-            className="relative w-20 h-20 pixel-border bg-muted/50 flex items-center justify-center group"
+            className="relative w-20 h-20 pixel-border bg-muted/50 flex items-center justify-center group rounded-lg"
             onClick={handleAvatarClick}
             style={{ cursor: isEditing ? 'pointer' : 'default' }}
           >
@@ -41,7 +41,7 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit, races, c
               <img 
                 src={character.avatarUrl} 
                 alt={character.name} 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-lg"
                 onError={(e) => {
                   console.error('Erro ao carregar avatar:', character.avatarUrl);
                   e.currentTarget.style.display = 'none';
@@ -52,7 +52,7 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit, races, c
               <User className="w-12 h-12 text-muted-foreground" />
             )}
             {isEditing && (
-              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-lg">
                 <Upload className="w-8 h-8 text-white" />
               </div>
             )}
@@ -77,9 +77,9 @@ export const CharacterHeader = ({ character, isEditing, onSave, onEdit, races, c
                 <span className="text-hp-red font-bold">PONTOS DE VIDA</span>
                 <span className={cn("text-foreground/80", hpPercent < 25 && "text-destructive")}>{currentHP}/{maxHP}</span>
               </div>
-              <div className="w-full h-4 bg-black pixel-border-inset p-0.5">
+              <div className="w-full h-4 bg-black pixel-border-inset p-0.5 rounded-lg">
                 <div 
-                  className="bg-hp-red h-full transition-all duration-500" 
+                  className="bg-hp-red h-full transition-all duration-500 rounded-lg" 
                   style={{ width: `${hpPercent}%` }}
                 ></div>
               </div>

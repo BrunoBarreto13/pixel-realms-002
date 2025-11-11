@@ -62,7 +62,7 @@ const ActionsAndDicePanel = () => {
               type="number"
               value={diceQuantity}
               onChange={(e) => setDiceQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-              className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center"
+              className="w-16 h-8 pixel-border bg-input px-2 font-pixel text-xs text-center rounded-lg"
               min="1"
             />
           </div>

@@ -48,10 +48,10 @@ const SpellListView = ({ spells, title, onBack }: SpellListViewProps) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <Select value={levelFilter} onValueChange={setLevelFilter}>
-            <SelectTrigger className="pixel-border bg-card/50 backdrop-blur-sm font-pixel text-xs h-12">
+            <SelectTrigger className="pixel-border bg-card/50 backdrop-blur-sm font-pixel text-xs h-12 rounded-lg">
               <SelectValue placeholder="Filtrar por círculo..." />
             </SelectTrigger>
-            <SelectContent className="bg-card border-2 border-border z-50">
+            <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
               <SelectItem value="all" className="font-pixel text-xs">Todos os Círculos</SelectItem>
               {spellLevels.map(level => (
                 <SelectItem key={level} value={String(level)} className="font-pixel text-xs">
@@ -64,7 +64,7 @@ const SpellListView = ({ spells, title, onBack }: SpellListViewProps) => {
 
         <Accordion type="single" collapsible className="w-full space-y-2">
           {filteredSpells.map((spell) => (
-            <AccordionItem key={spell.name} value={spell.name} className="pixel-border bg-card/80 backdrop-blur-sm">
+            <AccordionItem key={spell.name} value={spell.name} className="pixel-border bg-card/80 backdrop-blur-sm rounded-lg">
               <AccordionTrigger className="font-pixel text-xs p-4 hover:no-underline">
                 <div className="flex justify-between w-full pr-4">
                   <span>{spell.name}</span>

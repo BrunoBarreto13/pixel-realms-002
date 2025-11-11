@@ -67,10 +67,10 @@ export const ArmamentModal = ({ isOpen, onClose, onSave, armament, weaponList }:
           <div className="flex flex-col gap-2">
             <Label className="font-pixel text-xs text-foreground">Arma Base</Label>
             <Select onValueChange={handleBaseWeaponChange} value={currentArmament.id}>
-              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12">
+              <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12 rounded-lg">
                 <SelectValue placeholder="Selecione uma arma base..." />
               </SelectTrigger>
-              <SelectContent className="bg-card border-2 border-border z-50">
+              <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
                 {weaponList.map(w => <SelectItem key={w.id} value={w.id} className="font-pixel text-xs">{w.name}</SelectItem>)}
               </SelectContent>
             </Select>
@@ -100,7 +100,7 @@ export const ArmamentModal = ({ isOpen, onClose, onSave, armament, weaponList }:
             <textarea
               value={currentArmament.observacoes || ''}
               onChange={(e) => handleInputChange('observacoes', e.target.value)}
-              className="w-full min-h-[80px] pixel-border bg-input p-2 font-pixel text-xs resize-y"
+              className="w-full min-h-[80px] pixel-border bg-input p-2 font-pixel text-xs resize-y rounded-lg"
               placeholder="Ex: +2 de dano contra mortos-vivos"
             />
           </div>

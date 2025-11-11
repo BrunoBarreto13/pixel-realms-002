@@ -28,13 +28,13 @@ const GameChat = () => {
       <div className="mt-auto">
         <div className="flex gap-2">
           <input 
-            className="flex-1 bg-card text-foreground placeholder:text-foreground/50 p-3 pixel-border-inset border-none focus:ring-0 text-xs" 
+            className="flex-1 bg-card text-foreground placeholder:text-foreground/50 p-3 pixel-border-inset border-none focus:ring-0 text-xs rounded-lg" 
             placeholder="Digite uma mensagem..." 
             type="text"
           />
           <button 
             aria-label="Enviar mensagem" 
-            className="p-3 bg-primary text-primary-foreground pixel-border aspect-square flex items-center justify-center"
+            className="p-3 bg-primary text-primary-foreground pixel-border aspect-square flex items-center justify-center rounded-lg"
           >
             <Send className="h-5 w-5" />
           </button>

@@ -28,7 +28,7 @@ export const NotesTab = ({ character, setCharacter, isEditing, onSave }: NotesTa
         </PixelButton>
       </div>
       <textarea 
-        className="w-full min-h-[200px] pixel-border bg-input p-4 font-pixel text-xs resize-none disabled:opacity-70" 
+        className="w-full min-h-[200px] pixel-border bg-input p-4 font-pixel text-xs resize-none disabled:opacity-70 rounded-lg" 
         placeholder="Escreva suas anotações sobre o personagem..." 
         value={character.notes}
         onChange={handleNotesChange}

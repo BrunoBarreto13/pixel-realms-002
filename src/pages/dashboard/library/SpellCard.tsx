@@ -14,7 +14,7 @@ const SpellDetailItem = ({ label, value }: { label: string; value: string }) => 
 
 export const SpellCard = ({ spell }: SpellCardProps) => {
   return (
-    <div className="bg-muted/30 p-4 pixel-border space-y-4">
+    <div className="bg-muted/30 p-4 pixel-border space-y-4 rounded-lg">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <SpellDetailItem label="Escola" value={spell.school} />
         <SpellDetailItem label="Alcance" value={spell.range} />

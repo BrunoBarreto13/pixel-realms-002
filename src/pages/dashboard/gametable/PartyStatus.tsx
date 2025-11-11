@@ -35,11 +35,11 @@ const PartyStatus = () => {
 
           return (
             <div key={member.id} className="flex items-center gap-3">
-              <div className="w-12 h-12 pixel-border bg-black flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 pixel-border bg-black flex items-center justify-center flex-shrink-0 rounded-lg">
                 {member.character_data.avatarUrl ? (
                   <img 
                     alt={`Pixel art portrait of ${member.character_name}.`} 
-                    className="w-full h-full object-cover" 
+                    className="w-full h-full object-cover rounded-lg" 
                     src={member.character_data.avatarUrl} 
                   />
                 ) : (
@@ -55,9 +55,9 @@ const PartyStatus = () => {
                   <span className="text-hp-red font-bold">PV</span>
                   <span className={cn("text-foreground/80", hpPercent < 25 && "text-destructive")}>{hp}/{maxHp}</span>
                 </div>
-                <div className="w-full h-4 bg-black pixel-border-inset p-0.5">
+                <div className="w-full h-4 bg-black pixel-border-inset p-0.5 rounded-lg">
                   <div 
-                    className={cn("h-full transition-all duration-500", hpPercent < 25 ? "bg-destructive" : "bg-hp-red")} 
+                    className={cn("h-full transition-all duration-500 rounded-lg", hpPercent < 25 ? "bg-destructive" : "bg-hp-red")} 
                     style={{ width: `${hpPercent}%` }}
                   ></div>
                 </div>

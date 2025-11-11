@@ -28,15 +28,15 @@ export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, rac
           <Label className="font-pixel text-xs text-foreground">Nível</Label>
           <div className="flex items-center gap-2">
             <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.max(1, character.level - 1) })} disabled={!isEditing}><Minus className="h-4 w-4" /></PixelButton>
-            <input type="number" value={character.level} onChange={(e) => setCharacter({ ...character, level: parseInt(e.target.value) || 1 })} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground" min={1} max={20} disabled={!isEditing} />
+            <input type="number" value={character.level} onChange={(e) => setCharacter({ ...character, level: parseInt(e.target.value) || 1 })} className="flex h-12 w-full pixel-border bg-input backdrop-blur-sm px-3 py-2 font-pixel text-xs text-center text-foreground rounded-lg" min={1} max={20} disabled={!isEditing} />
             <PixelButton size="icon" variant="outline" onClick={() => setCharacter({ ...character, level: Math.min(20, character.level + 1) })} disabled={!isEditing}><Plus className="h-4 w-4" /></PixelButton>
           </div>
         </div>
         <div className="flex flex-col gap-2">
           <Label className="font-pixel text-xs text-foreground">Raça</Label>
           <Select value={character.race} onValueChange={(value) => setCharacter({ ...character, race: value })} disabled={!isEditing}>
-            <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12"><SelectValue placeholder="Selecione..." /></SelectTrigger>
-            <SelectContent className="bg-card border-2 border-border z-50">
+            <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12 rounded-lg"><SelectValue placeholder="Selecione..." /></SelectTrigger>
+            <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
               {races.map(race => <SelectItem key={race.value} value={race.value} className="font-pixel text-xs">{race.name}</SelectItem>)}
             </SelectContent>
           </Select>
@@ -44,8 +44,8 @@ export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, rac
         <div className="flex flex-col gap-2">
           <Label className="font-pixel text-xs text-foreground">Classe</Label>
           <Select value={character.class} onValueChange={(value) => setCharacter({ ...character, class: value })} disabled={!isEditing}>
-            <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12"><SelectValue placeholder="Selecione..." /></SelectTrigger>
-            <SelectContent className="bg-card border-2 border-border z-50">
+            <SelectTrigger className="pixel-border bg-input backdrop-blur-sm font-pixel text-xs h-12 rounded-lg"><SelectValue placeholder="Selecione..." /></SelectTrigger>
+            <SelectContent className="bg-card border-2 border-border z-50 rounded-lg">
               {classes.map(cls => <SelectItem key={cls.value} value={cls.value} className="font-pixel text-xs">{cls.name}</SelectItem>)}
             </SelectContent>
           </Select>
@@ -59,7 +59,7 @@ export const InfoTab = ({ character, setCharacter, isEditing, onCalculateHP, rac
         <div className="flex flex-col gap-2">
           <Label className="font-pixel text-xs text-foreground">Cor do Jogador</Label>
           <div className="flex items-center gap-2">
-            <input type="color" value={character.color} onChange={(e) => setCharacter({ ...character, color: e.target.value })} disabled={!isEditing} className="w-12 h-12 p-1 bg-input pixel-border cursor-pointer disabled:cursor-not-allowed" />
+            <input type="color" value={character.color} onChange={(e) => setCharacter({ ...character, color: e.target.value })} disabled={!isEditing} className="w-12 h-12 p-1 bg-input pixel-border cursor-pointer disabled:cursor-not-allowed rounded-lg" />
             <span className="font-pixel text-xs text-muted-foreground">Cor para o chat</span>
           </div>
         </div>

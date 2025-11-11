@@ -57,12 +57,12 @@ export const CombatTab = ({
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger asChild>
-                <div className="bg-input p-4 pixel-border text-center cursor-help">
+                <div className="bg-input p-4 pixel-border text-center cursor-help rounded-lg">
                   <Label className="font-pixel text-xs text-secondary mb-2 block">CA</Label>
                   <div className="w-full h-12 flex items-center justify-center font-pixel text-lg text-accent">{calculatedCaDetails.ca_final}</div>
                 </div>
               </TooltipTrigger>
-              <TooltipContent className="bg-card border-2 border-border font-pixel text-xs">
+              <TooltipContent className="bg-card border-2 border-border font-pixel text-xs rounded-lg">
                 <p>Base: {calculatedCaDetails.ca_base}</p>
                 {calculatedCaDetails.ajustes.map((adj, i) => (
                   <p key={i}>{adj.fonte} ({adj.item || 'Bônus'}): {adj.valor > 0 ? `+${adj.valor}` : adj.valor}</p>
@@ -70,14 +70,14 @@ export const CombatTab = ({
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-          <div className="bg-input p-4 pixel-border text-center">
+          <div className="bg-input p-4 pixel-border text-center rounded-lg">
             <Label className="font-pixel text-xs text-secondary mb-2 block">THAC0 Base</Label>
             <div className="w-full h-12 flex items-center justify-center font-pixel text-lg text-primary">{calculatedThac0}</div>
           </div>
-          <div className="bg-input p-4 pixel-border text-center">
+          <div className="bg-input p-4 pixel-border text-center rounded-lg">
             <Label className="font-pixel text-xs text-secondary mb-2 block">HP</Label>
             <div className="flex items-center justify-center gap-1">
-              <input type="number" value={character.hp} onChange={(e) => setCharacter({ ...character, hp: parseInt(e.target.value) || 0 })} className="w-16 h-12 pixel-border bg-input px-1 font-pixel text-sm text-center text-destructive" />
+              <input type="number" value={character.hp} onChange={(e) => setCharacter({ ...character, hp: parseInt(e.target.value) || 0 })} className="w-16 h-12 pixel-border bg-input px-1 font-pixel text-sm text-center text-destructive rounded-lg" />
               <span className="font-pixel text-foreground">/</span>
               <span className="font-pixel text-lg text-primary">{character.maxHp || 0}</span>
             </div>
@@ -92,23 +92,23 @@ export const CombatTab = ({
       <div className="bg-muted/30 p-4 pixel-border">
         <h3 className="font-pixel text-sm text-accent pixel-text-shadow mb-4">JOGADAS DE PROTEÇÃO</h3>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-center font-pixel text-xs">
-          <div className="bg-input p-2 pixel-border">
+          <div className="bg-input p-2 pixel-border rounded-lg">
             <p className="text-muted-foreground">Paral./Veneno</p>
             <p className="text-lg text-primary">{calculatedSaves.poison}</p>
           </div>
-          <div className="bg-input p-2 pixel-border">
+          <div className="bg-input p-2 pixel-border rounded-lg">
             <p className="text-muted-foreground">Petrif./Polim.</p>
             <p className="text-lg text-primary">{calculatedSaves.petrification}</p>
           </div>
-          <div className="bg-input p-2 pixel-border">
+          <div className="bg-input p-2 pixel-border rounded-lg">
             <p className="text-muted-foreground">Bastão/Varinha</p>
             <p className="text-lg text-primary">{calculatedSaves.rod}</p>
           </div>
-          <div className="bg-input p-2 pixel-border">
+          <div className="bg-input p-2 pixel-border rounded-lg">
             <p className="text-muted-foreground">Sopro de Dragão</p>
             <p className="text-lg text-primary">{calculatedSaves.breath}</p>
           </div>
-          <div className="bg-input p-2 pixel-border">
+          <div className="bg-input p-2 pixel-border rounded-lg">
             <p className="text-muted-foreground">Magia</p>
             <p className="text-lg text-primary">{calculatedSaves.spell}</p>
           </div>
@@ -125,7 +125,7 @@ export const CombatTab = ({
             const damageString = `${weapon.damage.small_medium}${damageBonus > 0 ? `+${damageBonus}` : damageBonus < 0 ? damageBonus : ''}`;
 
             return (
-              <div key={index} className="bg-input p-3 pixel-border grid grid-cols-3 md:grid-cols-5 gap-x-4 gap-y-2 items-center text-xs">
+              <div key={index} className="bg-input p-3 pixel-border grid grid-cols-3 md:grid-cols-5 gap-x-4 gap-y-2 items-center text-xs rounded-lg">
                 <p className="col-span-3 md:col-span-1 font-bold text-foreground">{weapon.name}</p>
                 <p><span className="text-muted-foreground">THAC0:</span> {finalThac0}</p>
                 <p><span className="text-muted-foreground">Dano:</span> {damageString}</p>

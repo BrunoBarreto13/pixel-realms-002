@@ -24,14 +24,14 @@ const MasterScreen = () => {
 
   return (
     <PagePanel title="Divisória do Mestre">
-      <div className="rpg-panel space-y-4">
+      <div className="rpg-panel space-y-4 rounded-lg">
         {/* Main Campaign Collapsible */}
         <Collapsible 
           open={openMenus.includes('campaign')} 
           onOpenChange={() => toggleMenu('campaign')}
         >
           <CollapsibleTrigger asChild>
-            <button className="w-full flex items-center justify-between text-left bg-card p-4 pixel-border cursor-pointer hover:bg-muted/30 transition-colors">
+            <button className="w-full flex items-center justify-between text-left bg-card p-4 pixel-border cursor-pointer hover:bg-muted/30 transition-colors rounded-lg">
               <div className="flex items-center gap-3">
                 <BookOpen className="h-5 w-5 text-accent" />
                 <span className="font-pixel text-lg text-accent">{campaignName}</span>
@@ -43,7 +43,7 @@ const MasterScreen = () => {
             {/* Sub-collapsible: Personagens */}
             <Collapsible open={openMenus.includes('characters')} onOpenChange={() => toggleMenu('characters')}>
               <CollapsibleTrigger asChild>
-                <button className="w-full flex items-center justify-between text-left bg-muted/30 p-3 pixel-border cursor-pointer hover:bg-muted/50 transition-colors">
+                <button className="w-full flex items-center justify-between text-left bg-muted/30 p-3 pixel-border cursor-pointer hover:bg-muted/50 transition-colors rounded-lg">
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4" />
                     <span className="font-pixel text-sm">Personagens</span>
@@ -60,7 +60,7 @@ const MasterScreen = () => {
             {/* Sub-collapsible: Mundo e Aventuras */}
             <Collapsible open={openMenus.includes('world')} onOpenChange={() => toggleMenu('world')}>
               <CollapsibleTrigger asChild>
-                <button className="w-full flex items-center justify-between text-left bg-muted/30 p-3 pixel-border cursor-pointer hover:bg-muted/50 transition-colors">
+                <button className="w-full flex items-center justify-between text-left bg-muted/30 p-3 pixel-border cursor-pointer hover:bg-muted/50 transition-colors rounded-lg">
                   <div className="flex items-center gap-2">
                     <Skull className="h-4 w-4" />
                     <span className="font-pixel text-sm">Mundo e Aventuras</span>
@@ -77,7 +77,7 @@ const MasterScreen = () => {
             {/* Sub-collapsible: Sessões */}
             <Collapsible open={openMenus.includes('session')} onOpenChange={() => toggleMenu('session')}>
               <CollapsibleTrigger asChild>
-                <button className="w-full flex items-center justify-between text-left bg-muted/30 p-3 pixel-border cursor-pointer hover:bg-muted/50 transition-colors">
+                <button className="w-full flex items-center justify-between text-left bg-muted/30 p-3 pixel-border cursor-pointer hover:bg-muted/50 transition-colors rounded-lg">
                   <div className="flex items-center gap-2">
                     <Notebook className="h-4 w-4" />
                     <span className="font-pixel text-sm">Sessões</span>
@@ -97,7 +97,7 @@ const MasterScreen = () => {
         {/* Other Collapsibles */}
         <Collapsible disabled>
           <CollapsibleTrigger asChild>
-            <button className="w-full flex items-center justify-between text-left bg-muted/30 p-4 pixel-border cursor-not-allowed opacity-50">
+            <button className="w-full flex items-center justify-between text-left bg-muted/30 p-4 pixel-border cursor-not-allowed opacity-50 rounded-lg">
               <div className="flex items-center gap-3">
                 <Bot className="h-5 w-5" />
                 <span className="font-pixel text-lg">NPCs</span>
@@ -108,7 +108,7 @@ const MasterScreen = () => {
         </Collapsible>
         <Collapsible disabled>
           <CollapsibleTrigger asChild>
-            <button className="w-full flex items-center justify-between text-left bg-muted/30 p-4 pixel-border cursor-not-allowed opacity-50">
+            <button className="w-full flex items-center justify-between text-left bg-muted/30 p-4 pixel-border cursor-not-allowed opacity-50 rounded-lg">
               <div className="flex items-center gap-3">
                 <Ghost className="h-5 w-5" />
                 <span className="font-pixel text-lg">Monstros</span>
@@ -119,7 +119,7 @@ const MasterScreen = () => {
         </Collapsible>
         <Collapsible disabled>
           <CollapsibleTrigger asChild>
-            <button className="w-full flex items-center justify-between text-left bg-muted/30 p-4 pixel-border cursor-not-allowed opacity-50">
+            <button className="w-full flex items-center justify-between text-left bg-muted/30 p-4 pixel-border cursor-not-allowed opacity-50 rounded-lg">
               <div className="flex items-center gap-3">
                 <ScrollText className="h-5 w-5" />
                 <span className="font-pixel text-lg">Notas da Sessão</span>

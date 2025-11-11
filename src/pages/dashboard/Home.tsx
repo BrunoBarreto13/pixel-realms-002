@@ -11,13 +11,13 @@ const CharacterCard = ({ character }: { character: any }) => {
     : 0;
 
   return (
-    <div className="bg-muted/30 p-3 pixel-border flex items-center gap-3">
-      <div className="w-12 h-12 pixel-border bg-black flex items-center justify-center flex-shrink-0">
+    <div className="bg-muted/30 p-3 pixel-border flex items-center gap-3 rounded-lg">
+      <div className="w-12 h-12 pixel-border bg-black flex items-center justify-center flex-shrink-0 rounded-lg">
         {character.character_data.avatarUrl ? (
           <img 
             src={character.character_data.avatarUrl} 
             alt={character.character_name} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg"
           />
         ) : (
           <User className="w-6 h-6 text-muted-foreground" />
@@ -30,9 +30,9 @@ const CharacterCard = ({ character }: { character: any }) => {
           <span className="text-hp-red font-bold">PV</span>
           <span className="text-foreground/80">Lvl {character.level}</span>
         </div>
-        <div className="w-full h-3 bg-black pixel-border-inset p-0.5">
+        <div className="w-full h-3 bg-black pixel-border-inset p-0.5 rounded-lg">
           <div 
-            className={cn("bg-hp-red h-full transition-all duration-500", hpPercent < 25 && "bg-destructive")} 
+            className={cn("bg-hp-red h-full transition-all duration-500 rounded-lg", hpPercent < 25 && "bg-destructive")} 
             style={{ width: `${hpPercent}%` }}
           ></div>
         </div>
