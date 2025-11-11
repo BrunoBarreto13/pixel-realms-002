@@ -1,3 +1,4 @@
+import React from "react"; // Adicionado: Importação do React
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
