@@ -66,7 +66,7 @@
 
   .rpg-panel {
     padding: 1.5rem;
-    background-color: hsl(var(--card) / 0.3); /* Ajustado para 30% de opacidade */
+    background-color: hsl(var(--card) / 0.5); /* Ajustado para 50% de opacidade */
     border: 12px solid;
     border-image-slice: 8;
     border-image-width: 12px;
