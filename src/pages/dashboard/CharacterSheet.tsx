@@ -59,7 +59,7 @@ const baseValidCharacter: Omit<Character, 'experience' | 'savingThrows' | 'armam
 // Estado inicial da ficha, agora derivado do schema Zod com valores padrão
 const initialCharacterState: Character = CharacterSchema.parse(baseValidCharacter);
 
-const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-none shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
+const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10"; // Alterado rounded-none para rounded-lg
 
 const CharacterSheet = () => {
   const { toast } = useToast();
@@ -471,7 +471,7 @@ const CharacterSheet = () => {
                 usedGeneralSkillPoints={usedGeneralSkillPoints}
               />
             </TabsContent>
-            <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={handleApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
+            <TabsContent value="combate"><CombatTab character={character} setCharacter={setCharacter} calculatedCaDetails={calculatedCaDetails} calculatedThac0={calculatedThac0} calculatedSaves={calculatedSaves} damageInput={damageInput} setDamageInput={setDamageInput} onApplyDamage={onApplyDamage} onRoll={handleRoll} strengthBonuses={strengthBonuses} dexterityBonuses={dexterityBonuses} /></TabsContent>
             <TabsContent value="inventory"><InventoryTab character={character} setCharacter={setCharacter} isEditing={isEditing} totalWeight={totalWeight} allowedWeight={strengthBonuses.weight} armorList={PHB_ARMOR_LIST} shieldList={PHB_SHIELD_LIST} helmList={PHB_HELM_LIST} /></TabsContent>
             <TabsContent value="spells"><SpellsTab /></TabsContent>
             <TabsContent value="notes"><NotesTab character={character} setCharacter={setCharacter} isEditing={isEditing} onSave={handleSave} /></TabsContent>
