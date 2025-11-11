@@ -59,7 +59,7 @@ const baseValidCharacter: Omit<Character, 'experience' | 'savingThrows' | 'armam
 // Estado inicial da ficha, agora derivado do schema Zod com valores padrão
 const initialCharacterState: Character = CharacterSchema.parse(baseValidCharacter);
 
-const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-t-lg shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
+const tabTriggerClasses = "font-pixel text-xs uppercase px-4 py-2 border-4 border-border bg-secondary text-secondary-foreground rounded-none shadow-none data-[state=active]:bg-card data-[state=active]:text-foreground data-[state=active]:border-b-card data-[state=active]:-mb-[4px] z-10";
 
 const CharacterSheet = () => {
   const { toast } = useToast();
@@ -262,7 +262,7 @@ const CharacterSheet = () => {
       return;
     }
     
-    // Validate character data before saving
+    // Validar character data before saving
     const validationResult = CharacterSchema.safeParse(character);
     if (!validationResult.success) {
       console.error("Erro de validação ao salvar personagem:", validationResult.error);

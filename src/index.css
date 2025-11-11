@@ -74,6 +74,13 @@
     border-image-source: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="%235a452a"><path d="M0,0 h8 v8 h-8 z M16,0 h8 v8 h-8 z M0,16 h8 v8 h-8 z M16,16 h8 v8 h-8 z" /></g><g fill="%238c6d46"><path d="M8,0 h8 v8 h-8 z M0,8 h8 v8 h-8 z M16,8 h8 v8 h-8 z M8,16 h8 v8 h-8 z" /></g><g fill="%234a3822"><path d="M8,8 h8 v8 h-8 z" /></g></svg>');
   }
 
+  .rpg-sidebar {
+    background-color: hsl(var(--card)); /* Base color */
+    border-right: 4px solid hsl(var(--border));
+    background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="8" height="8"><g fill="%234a3822"><path d="M0,0 h4 v4 h-4 z M4,4 h4 v4 h-4 z" /></g><g fill="%235a452a"><path d="M4,0 h4 v4 h-4 z M0,4 h4 v4 h-4 z" /></g></svg>');
+    background-repeat: repeat;
+  }
+
   .rpg-main-content {
     @apply p-8;
     background-color: hsl(var(--card));

@@ -99,7 +99,7 @@ const DashboardLayout = () => {
     <div className={cn("min-h-screen w-full flex", location.pathname.startsWith('/dashboard/game-table') ? 'game-table-background' : 'game-background')}>
       <div className="w-full flex bg-background/80 backdrop-blur-sm shadow-2xl">
         {/* Sidebar */}
-        <aside className="w-64 bg-parchment flex flex-col p-4 border-r-4 border-parchment-border">
+        <aside className="w-64 rpg-sidebar flex flex-col p-4">
           <div className="p-6">
             <h1 className="font-pixel text-2xl text-[#FDE306] pixel-text-shadow text-center">PIXEL<br/>REALMS</h1>
           </div>
