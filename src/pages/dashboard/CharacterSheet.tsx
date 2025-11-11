@@ -424,7 +424,7 @@ const CharacterSheet = () => {
 
   return (
     <PagePanel title="Ficha do Jogador">
-      <div className="space-y-6 max-w-5xl mx-auto">
+      <div className="space-y-6 w-full"> {/* Removido max-w-5xl mx-auto */}
         <CharacterHeader 
           character={character} 
           isEditing={isEditing} 
